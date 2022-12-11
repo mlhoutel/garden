@@ -1,0 +1,150 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url(./prism-dracula.css);
+
+article {
+
+    h1 {
+        text-align: center;
+        font-weight: 500;
+        font-size: 2.8em;
+    }
+
+    h2 {
+        font-weight: 500;
+        font-size: 1.9em;
+    }
+
+    h3 {
+        font-weight: 500;
+        font-size: 1.5em;
+    }
+
+    h4 {
+        font-weight: 400;
+        font-size: 1.4em;
+    }
+
+    h5 {
+        font-weight: 400;
+        font-size: 1.3em;
+    }
+
+    h6 {
+        font-weight: 400;
+        font-size: 1.2em;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        @apply font-serif pt-4;
+    }
+
+    strong {
+        font-weight: 500;
+    }
+
+    p {
+        font-weight: 300;
+        padding-top: 20px;
+    }
+
+    blockquote {
+        @apply m-3 px-3 border-l-4 border-orange;
+    }
+
+    blockquote p {
+        padding: 5px 0px;
+    }
+
+    ul {
+        list-style-type: disc;
+        margin-left: 20px;
+    }
+
+    ol {
+        list-style-type: decimal;
+        margin-left: 20px;
+    }
+
+    li,
+    li p {
+        font-weight: 400;
+        margin: 0px;
+        padding: 0px;
+    }
+
+    table,
+    table th,
+    table td {
+        padding: 5px 20px;
+        border-collapse: collapse;
+        border: 1px solid rgb(174, 174, 174, 0.5);
+    }
+
+    table tr:nth-child(odd) {
+        background-color: rgb(243, 243, 243, 0.1);
+    }
+
+    th,
+    td {
+        padding: 0px 10px;
+    }
+
+    p a {
+        font-size: 0.9em;
+        font-style: italic;
+        border-bottom: 1px dotted #666;
+    }
+
+    img {
+        display: block;
+        margin: auto;
+    }
+
+    .jxgbox {
+        width: 500px;
+        height: 400px;
+        display: block;
+        margin: auto !important;
+    }
+
+    ul em,
+    ol em {
+        display: inline-flex;
+    }
+
+    em {
+        display: block;
+        font-style: italic;
+        font-weight: 300;
+        font-size: 0.9em;
+        margin: auto;
+        text-align: center;
+    }
+
+    sup {}
+
+    .footnotes {
+        margin-top: 50px;
+        padding: 20px;
+    }
+
+    .footnotes * {
+        font-weight: 200;
+        font-size: 0.95em;
+        color: #666;
+    }
+
+    details {
+        margin: 20px 0px 10px 0px;
+        color: #666;
+    }
+
+}
