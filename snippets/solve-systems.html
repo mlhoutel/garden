@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" href="/garden/favicon/favicon.png" />
+		<meta http-equiv="content-security-policy" content="">
+		<link href="/garden/_app/immutable/assets/_layout-3cd4ed45.css" rel="stylesheet">
+		<link rel="modulepreload" href="/garden/_app/immutable/start-13c47096.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/index-2e2fe841.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/singletons-ae7dcc5c.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/paths-21093871.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/preload-helper-41c905a7.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/components/pages/_layout.svelte-7804cf29.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/ScrollTo-33ea659a.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/modules/pages/_layout.js-9cbb603b.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/_layout-da46b06b.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/components/pages/snippets/_layout.svelte-a35d2be0.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/components/pages/snippets/_slug_/_page.svelte-26e80596.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/BreadCrumbs-5d55fa5f.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/stores-4dc06837.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/modules/pages/snippets/_slug_/_page.js-edfc18e4.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/dynamic-import-helper-be004503.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/_page-1e665417.js"><!-- HEAD_svelte-7y44jt_START --><link rel="icon" href="/garden/favicon/favicon.png"><!-- HEAD_svelte-7y44jt_END -->
+	</head>
+	<body>
+		<div id="svelte">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+
+
+
+<body class="background-primary"><nav class="background-tertiary flex items-center justify-between flex-wrap"><a href="/garden/"><div class="flex items-center flex-shrink-0 background-secondary px-5 py-2 absolute w-[100px] left-[-6px] top-0 skewed z-30"><img src="/garden/logos/sumblack.svg" alt="logo" class="h-8 anti-skewed">
+
+			<div class="absolute left-[55px] top-3 pl-5 flex"><div class="background-dark h-8 w-1 mx-0.5"></div>
+				<div class="background-dark h-8 w-2 mx-0.5"></div></div></div></a>
+
+	<div class="background-dark w-full absolute top-3 h-9 skewed left-[-20px] z-20"><div class="ml-[125px] anti-skewed pt-1 overflow-hidden"><a href="/garden/posts" class="font-serif px-1">Posts</a><a href="/garden/sheets" class="font-serif px-1">Sheets</a><a href="/garden/snippets" class="font-serif px-1">Snippets</a><a href="/garden/projects" class="font-serif px-1">Projects</a><a href="/garden/about" class="font-serif px-1">About</a></div></div>
+
+	<div class="absolute top-3 right-4 h-9 inline-flex bg-grey text-white skewed z-30"><button class="flex items-center h-auto w-12 anti-skewed"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" class="h-6"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg></button></div>
+
+	<div class="w-full block pt-12"></div></nav>
+
+	<main><main class="px-3 pt-16 pb-10"><article><div class="inline-flex items-center space-x-1"><span><a href="/garden" class="underline">garden</a> /
+        </span><span><a href="/garden/#snippets" class="underline">snippets</a> /
+        </span><span><a href="/garden/#snippets/#solve" class="underline">solve</a> /
+        </span><span>systems
+        </span></div>
+
+  <h1>System</h1>
+  <h2 id="gaussian"><a href="#gaussian">Gaussian</a></h2>
+<pre class="language-js"><!-- HTML_TAG_START --><code class="language-js"><span class="token comment">// https://en.wikipedia.org/wiki/Gaussian_elimination</span>
+<span class="token comment">// Gauss elimination (Direct method)</span>
+<span class="token comment">// 1. Triangulation of the square matrix A with b</span>
+<span class="token comment">// 2. Backward substitution to obtain the values of x</span>
+
+<span class="token function-variable function">gauss</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter"><span class="token constant">A</span><span class="token punctuation">,</span> b</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    <span class="token punctuation">[</span><span class="token constant">A</span><span class="token punctuation">,</span> b<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">triangulation</span><span class="token punctuation">(</span><span class="token constant">A</span><span class="token punctuation">,</span> b<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> <span class="token function">subsitution</span><span class="token punctuation">(</span><span class="token constant">A</span><span class="token punctuation">,</span> b<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// Transformation into a superior triangular matrix</span>
+<span class="token function-variable function">triangulation</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter"><span class="token constant">A</span><span class="token punctuation">,</span> b</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">const</span> n <span class="token operator">=</span> <span class="token constant">A</span><span class="token punctuation">.</span>length
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> k <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> k <span class="token operator">&lt;</span> n <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span> k<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>Math<span class="token punctuation">.</span><span class="token function">abs</span><span class="token punctuation">(</span><span class="token constant">A</span><span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token number">0.00001</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">throw</span> <span class="token string">"Triangulation is not possible with this matrix"</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> k <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">const</span> m <span class="token operator">=</span> <span class="token constant">A</span><span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>k<span class="token punctuation">]</span> <span class="token operator">/</span> <span class="token constant">A</span><span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">[</span>k<span class="token punctuation">]</span>
+            b<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> b<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">-</span> m <span class="token operator">*</span> b<span class="token punctuation">[</span>k<span class="token punctuation">]</span>
+            <span class="token constant">A</span><span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>k<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span>
+
+            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> j <span class="token operator">=</span> k <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                <span class="token constant">A</span><span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">-=</span> m <span class="token operator">*</span> <span class="token constant">A</span><span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">return</span> <span class="token punctuation">[</span><span class="token constant">A</span><span class="token punctuation">,</span> b<span class="token punctuation">]</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// Retrograde substitution</span>
+<span class="token function-variable function">subsitution</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter"><span class="token constant">A</span><span class="token punctuation">,</span> b</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">const</span> n <span class="token operator">=</span> <span class="token constant">A</span><span class="token punctuation">.</span>length
+    <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Array</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">fill</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">const</span> j <span class="token operator">=</span> n <span class="token operator">-</span> i <span class="token operator">-</span> <span class="token number">1</span>
+        x<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> b<span class="token punctuation">[</span>j<span class="token punctuation">]</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> k <span class="token operator">=</span> j <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span> k <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> k<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            x<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">-=</span> <span class="token constant">A</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">[</span>k<span class="token punctuation">]</span> <span class="token operator">*</span> x<span class="token punctuation">[</span>k<span class="token punctuation">]</span>
+        <span class="token punctuation">&#125;</span>
+        x<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">/=</span> <span class="token constant">A</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">return</span> x
+<span class="token punctuation">&#125;</span>
+
+
+<span class="token keyword">const</span> <span class="token constant">A</span> <span class="token operator">=</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0.4</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span>
+<span class="token punctuation">]</span>
+
+<span class="token keyword">const</span> b <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">24</span><span class="token punctuation">,</span> <span class="token number">14</span><span class="token punctuation">,</span> <span class="token number">152</span><span class="token punctuation">]</span>
+
+<span class="token comment">// [ 11.999999999999993, 5.000000000000013, 6.999999999999992 ]</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">gauss</span><span class="token punctuation">(</span><span class="token constant">A</span><span class="token punctuation">,</span> b<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token comment">/*
+A = [
+    [ 1, 1, 1 ],
+    [ 0, -0.6, -1 ],
+    [ 0, 0, -0.6... ]
+] 
+
+b = [ 24, -10, -4.6... ]
+
+x = [ 12.0, 5.0, 7.0 ]
+*/</span></code><!-- HTML_TAG_END --></pre>
+<h2 id="jacobi"><a href="#jacobi">Jacobi</a></h2>
+<pre class="language-js"><!-- HTML_TAG_START --><code class="language-js"><span class="token comment">// https://en.wikipedia.org/wiki/Jacobi_method</span>
+<span class="token comment">// Jacobi method (Iterative method)</span>
+<span class="token comment">// We know that the method works if the diagonal of the matrix A is strictly dominant</span>
+<span class="token comment">// => Don't hesitate to tweak the matrix to reach this configuration</span>
+
+<span class="token function-variable function">jacobi</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter"><span class="token constant">A</span><span class="token punctuation">,</span> b<span class="token punctuation">,</span> x0<span class="token punctuation">,</span> epsilon</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">let</span> diff <span class="token operator">=</span> epsilon <span class="token operator">+</span> <span class="token number">1</span>
+    <span class="token keyword">let</span> x <span class="token operator">=</span> x0 <span class="token comment">// initial value</span>
+
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>diff <span class="token operator">></span> epsilon<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">const</span> temp_x <span class="token operator">=</span> x
+        x <span class="token operator">=</span> <span class="token function">iter</span><span class="token punctuation">(</span><span class="token constant">A</span><span class="token punctuation">,</span> b<span class="token punctuation">,</span> x<span class="token punctuation">)</span>
+
+        diff_x_temp <span class="token operator">=</span> x<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">_<span class="token punctuation">,</span> i</span><span class="token punctuation">)</span> <span class="token operator">=></span> x<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">-</span> temp_x<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+        <span class="token comment">// https://en.wikipedia.org/wiki/Uniform_norm</span>
+        diff <span class="token operator">=</span> Math<span class="token punctuation">.</span><span class="token function">max</span><span class="token punctuation">(</span><span class="token operator">...</span>diff_x_temp<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span>Math<span class="token punctuation">.</span>abs<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">return</span> x
+<span class="token punctuation">&#125;</span>
+
+<span class="token function-variable function">iter</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter"><span class="token constant">A</span><span class="token punctuation">,</span> b<span class="token punctuation">,</span> x</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">const</span> n <span class="token operator">=</span> <span class="token constant">A</span><span class="token punctuation">.</span>length
+    <span class="token keyword">let</span> x1 <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token operator">...</span>x<span class="token punctuation">]</span> <span class="token comment">// copy values</span>
+
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        x1<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> b<span class="token punctuation">[</span>i<span class="token punctuation">]</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>j <span class="token operator">!=</span> i<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                x1<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">-=</span> <span class="token constant">A</span><span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">*</span> x<span class="token punctuation">[</span>j<span class="token punctuation">]</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+        x1<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">/=</span> <span class="token constant">A</span><span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>i<span class="token punctuation">]</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">return</span> x1
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// With strictly doinant diagonal</span>
+<span class="token keyword">const</span> <span class="token constant">A</span> <span class="token operator">=</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">]</span>
+<span class="token punctuation">]</span>
+
+<span class="token keyword">const</span> b <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">]</span>
+
+<span class="token comment">// [ 1.999969482421875, 1.999969482421875, 1.999969482421875 ]</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">jacobi</span><span class="token punctuation">(</span><span class="token constant">A</span><span class="token punctuation">,</span> b<span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token number">0.0001</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token comment">/*
+A = [
+    [4, -1, 0],
+    [-1, 4, -1],
+    [0, -1, 4]
+] 
+
+b = [6, 4, 6]
+
+x = [ 2, 2, 2 ]
+*/</span></code><!-- HTML_TAG_END --></pre>
+<h2 id="siedel"><a href="#siedel">Siedel</a></h2>
+<pre class="language-js"><!-- HTML_TAG_START --><code class="language-js"><span class="token comment">// https://en.wikipedia.org/wiki/Gauss%E2%80%93Seidel_method</span>
+<span class="token comment">//We know that the Gauss-Seidel method converges twice as fast as the Jacobi method</span>
+<span class="token comment">// if the matrix A is strictly dominant diagonal</span>
+
+<span class="token function-variable function">siedel</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter"><span class="token constant">A</span><span class="token punctuation">,</span> b<span class="token punctuation">,</span> x0<span class="token punctuation">,</span> epsilon</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">let</span> diff <span class="token operator">=</span> epsilon <span class="token operator">+</span> <span class="token number">1</span>
+    <span class="token keyword">let</span> x <span class="token operator">=</span> x0 <span class="token comment">// initial value</span>
+
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>diff <span class="token operator">></span> epsilon<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">const</span> temp_x <span class="token operator">=</span> x
+        x <span class="token operator">=</span> <span class="token function">iter</span><span class="token punctuation">(</span><span class="token constant">A</span><span class="token punctuation">,</span> b<span class="token punctuation">,</span> x<span class="token punctuation">)</span>
+
+        diff_x_temp <span class="token operator">=</span> x<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">_<span class="token punctuation">,</span> i</span><span class="token punctuation">)</span> <span class="token operator">=></span> x<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">-</span> temp_x<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+        <span class="token comment">// https://en.wikipedia.org/wiki/Uniform_norm</span>
+        diff <span class="token operator">=</span> Math<span class="token punctuation">.</span><span class="token function">max</span><span class="token punctuation">(</span><span class="token operator">...</span>diff_x_temp<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span>Math<span class="token punctuation">.</span>abs<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">return</span> x
+<span class="token punctuation">&#125;</span>
+
+<span class="token function-variable function">iter</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter"><span class="token constant">A</span><span class="token punctuation">,</span> b<span class="token punctuation">,</span> x</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">const</span> n <span class="token operator">=</span> <span class="token constant">A</span><span class="token punctuation">.</span>length
+    <span class="token keyword">let</span> x1 <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token operator">...</span>x<span class="token punctuation">]</span> <span class="token comment">// copy values</span>
+
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        x1<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> b<span class="token punctuation">[</span>i<span class="token punctuation">]</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>j <span class="token operator">></span> i<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                x1<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">-=</span> <span class="token constant">A</span><span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">*</span> x<span class="token punctuation">[</span>j<span class="token punctuation">]</span>
+            <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>j <span class="token operator">&lt;</span> i<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                x1<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">-=</span> <span class="token constant">A</span><span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">*</span> x1<span class="token punctuation">[</span>j<span class="token punctuation">]</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+        x1<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">/=</span> <span class="token constant">A</span><span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>i<span class="token punctuation">]</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">return</span> x1
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// With strictly doinant diagonal</span>
+<span class="token keyword">const</span> <span class="token constant">A</span> <span class="token operator">=</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0.4</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span>
+<span class="token punctuation">]</span>
+
+<span class="token keyword">const</span> b <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">24</span><span class="token punctuation">,</span> <span class="token number">14</span><span class="token punctuation">,</span> <span class="token number">152</span><span class="token punctuation">]</span>
+
+<span class="token comment">// [ 12, 5, 7 ]</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">siedel</span><span class="token punctuation">(</span><span class="token constant">A</span><span class="token punctuation">,</span> b<span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token number">0.0001</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token comment">/*
+A = [
+    [1, 1, 1],
+    [1, 0.4, 0],
+    [10, 5, 1]
+]
+
+b = [24, 14, 152]
+
+x = [ 12, 5, 7 ]
+*/</span></code><!-- HTML_TAG_END --></pre>
+  
+  <div class="inline-flex items-center space-x-1"><span><a href="/garden" class="underline">garden</a> /
+        </span><span><a href="/garden/#snippets" class="underline">snippets</a> /
+        </span><span><a href="/garden/#snippets/#solve" class="underline">solve</a> /
+        </span><span>systems
+        </span></div></article></main></main>
+
+	
+<div class="background-tertiary w-full bottom-0 h-[200px] p-5 pointer-events-auto"><div class="flex justify-center">©2022</div></div>
+
+</body>
+
+
+		<script type="module" data-sveltekit-hydrate="y2wiax">
+			import { start } from "/garden/_app/immutable/start-13c47096.js";
+
+			start({
+				env: {},
+				paths: {"base":"/garden","assets":"/garden"},
+				target: document.querySelector('[data-sveltekit-hydrate="y2wiax"]').parentNode,
+				version: "1672939407002",
+				hydrate: {
+					node_ids: [0, 4, 13],
+					data: [null,null,null],
+					form: null
+				}
+			});
+		</script>
+	</div>
+	</body>
+</html>

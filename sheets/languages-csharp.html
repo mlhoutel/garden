@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" href="/garden/favicon/favicon.png" />
+		<meta http-equiv="content-security-policy" content="">
+		<link href="/garden/_app/immutable/assets/_layout-3cd4ed45.css" rel="stylesheet">
+		<link rel="modulepreload" href="/garden/_app/immutable/start-13c47096.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/index-2e2fe841.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/singletons-ae7dcc5c.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/paths-21093871.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/preload-helper-41c905a7.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/components/pages/_layout.svelte-7804cf29.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/ScrollTo-33ea659a.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/modules/pages/_layout.js-9cbb603b.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/_layout-da46b06b.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/components/pages/sheets/_layout.svelte-a35d2be0.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/components/pages/sheets/_slug_/_page.svelte-26e80596.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/BreadCrumbs-5d55fa5f.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/stores-4dc06837.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/modules/pages/sheets/_slug_/_page.js-a5fb3fd0.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/dynamic-import-helper-be004503.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/_page-6e48664e.js"><!-- HEAD_svelte-7y44jt_START --><link rel="icon" href="/garden/favicon/favicon.png"><!-- HEAD_svelte-7y44jt_END -->
+	</head>
+	<body>
+		<div id="svelte">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+
+
+
+<body class="background-primary"><nav class="background-tertiary flex items-center justify-between flex-wrap"><a href="/garden/"><div class="flex items-center flex-shrink-0 background-secondary px-5 py-2 absolute w-[100px] left-[-6px] top-0 skewed z-30"><img src="/garden/logos/sumblack.svg" alt="logo" class="h-8 anti-skewed">
+
+			<div class="absolute left-[55px] top-3 pl-5 flex"><div class="background-dark h-8 w-1 mx-0.5"></div>
+				<div class="background-dark h-8 w-2 mx-0.5"></div></div></div></a>
+
+	<div class="background-dark w-full absolute top-3 h-9 skewed left-[-20px] z-20"><div class="ml-[125px] anti-skewed pt-1 overflow-hidden"><a href="/garden/posts" class="font-serif px-1">Posts</a><a href="/garden/sheets" class="font-serif px-1">Sheets</a><a href="/garden/snippets" class="font-serif px-1">Snippets</a><a href="/garden/projects" class="font-serif px-1">Projects</a><a href="/garden/about" class="font-serif px-1">About</a></div></div>
+
+	<div class="absolute top-3 right-4 h-9 inline-flex bg-grey text-white skewed z-30"><button class="flex items-center h-auto w-12 anti-skewed"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" class="h-6"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg></button></div>
+
+	<div class="w-full block pt-12"></div></nav>
+
+	<main><main class="px-3 pt-16 pb-10"><article><div class="inline-flex items-center space-x-1"><span><a href="/garden" class="underline">garden</a> /
+        </span><span><a href="/garden/#sheets" class="underline">sheets</a> /
+        </span><span><a href="/garden/#sheets/#languages" class="underline">languages</a> /
+        </span><span>csharp
+        </span></div>
+
+  <h1>C#</h1>
+  <h2 id="cheat-sheets"><a href="#cheat-sheets">Cheat Sheets</a></h2>
+<h3 id="usefull-informations"><a href="#usefull-informations">Usefull Informations</a></h3>
+<blockquote><p><strong>Official Documentation:</strong> <a href="https://docs.microsoft.com/en-us/dotnet/csharp/" rel="nofollow">MicrosoftCsharp</a></p></blockquote>
+<p><strong>About Csharp</strong></p>
+<ul><li><strong>Type of Language:</strong> Procedural, Object-Oriented </li>
+<li><strong>Born in:</strong> 2000</li>
+<li><strong>Caracteristics:</strong> Microsoft plateforms language</li>
+<li><strong>Popularity:</strong> 6.5% (4th) <a href="http://pypl.github.io/PYPL.html" rel="nofollow">src</a></li>
+<li><strong>Usefull for:</strong> software, mobile, web api…</li></ul>
+<h3 id="types-and-variables"><a href="#types-and-variables">Types and Variables</a></h3>
+<p><strong>PRIMITIVES</strong></p>
+<table><thead><tr class="header"><th>Name</th>
+<th>Expression</th>
+<th>Size</th>
+<th>Min</th>
+<th>Max</th></tr></thead>
+<tbody><tr><td>Boolean</td>
+<td><code>$foo = true;</code></td>
+<td><code>1 bits</code></td>
+<td>0 (false)</td>
+<td>1 (true)</td></tr>
+<tr><td>Int</td>
+<td><code>$foo = 1234;</code></td>
+<td><code>32+ bits</code></td>
+<td>-9.223e+15</td>
+<td>9.223e+15</td></tr>
+<tr><td>Float</td>
+<td><code>$foo = 1234;</code></td>
+<td><code>32+ bits</code></td>
+<td>-9.223e+15</td>
+<td>9.223e+15</td></tr>
+<tr><td>Double</td>
+<td><code>$foo = 1234;</code></td>
+<td><code>32+ bits</code></td>
+<td>-9.223e+15</td>
+<td>9.223e+15</td></tr></tbody></table>
+<p><strong>COMPLEX</strong></p>
+<table><thead><tr class="header"><th>Name</th>
+<th>Expression</th>
+<th>Size</th>
+<th>Min</th>
+<th>Max</th></tr></thead>
+<tbody><tr><td>DateTime</td>
+<td><code>$foo = true;</code></td>
+<td><code>1 bits</code></td>
+<td>0 (false)</td>
+<td>1 (true)</td></tr>
+<tr><td>Point</td>
+<td><code>$foo = 1234;</code></td>
+<td><code>32+ bits</code></td>
+<td>-9.223e+15</td>
+<td>9.223e+15</td></tr></tbody></table>
+<p><strong>CONVERSION</strong></p>
+<pre class="language-csharp"><!-- HTML_TAG_START --><code class="language-csharp"><span class="token class-name">Char</span> A <span class="token operator">=</span> Char<span class="token punctuation">.</span><span class="token function">Parse</span><span class="token punctuation">(</span><span class="token keyword">string</span> <span class="token string">"A"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token class-name">Char</span> output<span class="token punctuation">;</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span>Char<span class="token punctuation">.</span><span class="token function">TryParse</span><span class="token punctuation">(</span><span class="token keyword">string</span> <span class="token string">"A"</span><span class="token punctuation">,</span> <span class="token keyword">out</span> output<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+<span class="token comment">// Action</span>
+<span class="token punctuation">&#125;</span></code><!-- HTML_TAG_END --></pre>
+<h3 id="input-output"><a href="#input-output">Input Output</a></h3>
+<pre class="language-csharp"><!-- HTML_TAG_START --><code class="language-csharp"><span class="token keyword">using</span> <span class="token namespace">System<span class="token punctuation">.</span>Console</span><span class="token punctuation">;</span>
+
+<span class="token class-name">String</span> name <span class="token operator">=</span> Console<span class="token punctuation">.</span><span class="token function">ReadLine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token class-name">Char</span> key <span class="token operator">=</span> Console<span class="token punctuation">.</span><span class="token function">ReadKey</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span><span class="token string">"Hello"</span> <span class="token operator">+</span> name<span class="token punctuation">)</span><span class="token punctuation">;</span></code><!-- HTML_TAG_END --></pre>
+<h3 id="variables-tests-and-loops"><a href="#variables-tests-and-loops">Variables, Tests and Loops</a></h3>
+<pre class="language-csharp"><!-- HTML_TAG_START --><code class="language-csharp"><span class="token keyword">const</span> <span class="token class-name">INT32</span> MAJORITY <span class="token operator">=</span> <span class="token number">18</span><span class="token punctuation">;</span></code><!-- HTML_TAG_END --></pre>
+<h3 id="random-numbers"><a href="#random-numbers">Random numbers</a></h3>
+<h3 id="arrays"><a href="#arrays">Arrays</a></h3>
+<p><strong>STRINGS</strong></p>
+<pre class="language-csharp"><!-- HTML_TAG_START --><code class="language-csharp"><span class="token class-name">String</span> animal <span class="token operator">=</span> <span class="token string">"Alpine newt"</span><span class="token punctuation">;</span>
+animal<span class="token punctuation">.</span>Length<span class="token punctuation">;</span> <span class="token comment">// 11</span>
+animal<span class="token punctuation">.</span>Chars<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment">// 'A'</span>
+animal<span class="token punctuation">.</span>ToLower<span class="token punctuation">;</span> <span class="token comment">// "alpine newt"</span>
+animal<span class="token punctuation">.</span>ToUpper<span class="token punctuation">;</span> <span class="token comment">// "ALPINE NEWT"</span>
+animal<span class="token punctuation">.</span><span class="token function">Trim</span><span class="token punctuation">(</span><span class="token string">"A"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// "lpine newt"</span></code><!-- HTML_TAG_END --></pre>
+<p><strong>ARRAYS</strong></p>
+<pre class="language-csharp"><!-- HTML_TAG_START --><code class="language-csharp"><span class="token class-name">String<span class="token punctuation">[</span><span class="token punctuation">]</span></span> days <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">String<span class="token punctuation">[</span><span class="token punctuation">]</span></span> <span class="token punctuation">&#123;</span> <span class="token string">"Monday"</span><span class="token punctuation">,</span> <span class="token string">"Tuesday"</span><span class="token punctuation">,</span> <span class="token string">"Wednesday"</span><span class="token punctuation">,</span> <span class="token string">"Thursday"</span><span class="token punctuation">,</span> <span class="token string">"Friday"</span><span class="token punctuation">,</span> <span class="token string">"Saturday"</span><span class="token punctuation">,</span> <span class="token string">"Sunday"</span> <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token keyword">foreach</span> <span class="token punctuation">(</span><span class="token class-name">String</span> day <span class="token keyword">in</span> days<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span>day<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">int</span></span> i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> i<span class="token operator">&lt;</span>days<span class="token punctuation">.</span>Length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span>days<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+Array<span class="token punctuation">.</span><span class="token function">IndexOf</span><span class="token punctuation">(</span>days<span class="token punctuation">,</span> <span class="token string">"Wednesday"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 2 (first occurency)</span>
+Array<span class="token punctuation">.</span><span class="token function">LastIndexOf</span><span class="token punctuation">(</span>days<span class="token punctuation">,</span> <span class="token string">"Wednesday"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 2 (last occurency)</span>
+Array<span class="token punctuation">.</span><span class="token function">Reverse</span><span class="token punctuation">(</span>days<span class="token punctuation">)</span><span class="token punctuation">;</span>
+Array<span class="token punctuation">.</span><span class="token function">Sort</span><span class="token punctuation">(</span>days<span class="token punctuation">)</span><span class="token punctuation">;</span></code><!-- HTML_TAG_END --></pre>
+<p><strong>LISTS</strong></p>
+<pre class="language-csharp"><!-- HTML_TAG_START --><code class="language-csharp"><span class="token class-name">List <span class="token punctuation">&lt;</span>String<span class="token punctuation">></span></span> names <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">List<span class="token punctuation">&lt;</span>String<span class="token punctuation">></span></span> <span class="token punctuation">&#123;</span> <span class="token comment">/* ... */</span> <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token keyword">foreach</span> <span class="token punctuation">(</span><span class="token class-name">String</span> name <span class="token keyword">in</span> names<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+name <span class="token operator">=</span> name <span class="token operator">+</span> <span class="token string">"s"</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">int</span></span> i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> i<span class="token operator">&lt;</span>names<span class="token punctuation">.</span>Count<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+names<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> names<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token string">"s"</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+names<span class="token punctuation">.</span><span class="token function">IndexOf</span><span class="token punctuation">(</span><span class="token string">"value"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+names<span class="token punctuation">.</span><span class="token function">LastIndexOf</span><span class="token punctuation">(</span><span class="token string">"value"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+names<span class="token punctuation">.</span><span class="token function">Reverse</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+names<span class="token punctuation">.</span><span class="token function">Sort</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+names<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token string">"value"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+names<span class="token punctuation">.</span><span class="token function">Insert</span><span class="token punctuation">(</span>index<span class="token punctuation">,</span> <span class="token string">"value"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+names<span class="token punctuation">.</span><span class="token function">RemoveAt</span><span class="token punctuation">(</span>index<span class="token punctuation">)</span><span class="token punctuation">;</span></code><!-- HTML_TAG_END --></pre>
+<p><strong>DATE</strong></p>
+<pre class="language-csharp"><!-- HTML_TAG_START --><code class="language-csharp"><span class="token class-name"><span class="token keyword">string</span></span> date <span class="token operator">=</span> <span class="token string">"01/01/2000"</span><span class="token punctuation">;</span>
+<span class="token class-name">DateTime</span> dateA <span class="token operator">=</span> DateTime<span class="token punctuation">.</span><span class="token function">Parse</span><span class="token punctuation">(</span>date<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token class-name">DateTime</span> dateB <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">DateTime</span><span class="token punctuation">(</span><span class="token number">2017</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">30</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code><!-- HTML_TAG_END --></pre>
+<h3 id="functions"><a href="#functions">Functions</a></h3>
+<h3 id="classes-and-properties"><a href="#classes-and-properties">Classes and Properties</a></h3>
+<p><strong>METHODS AND CONSTRUCTOR</strong></p>
+<pre class="language-csharp"><!-- HTML_TAG_START --><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Person</span> <span class="token punctuation">&#123;</span>
+<span class="token comment">/* private Property */</span>
+<span class="token keyword">private</span> <span class="token class-name"><span class="token keyword">string</span></span> name<span class="token punctuation">;</span>
+<span class="token keyword">private</span> <span class="token class-name">DateTime</span> born<span class="token punctuation">;</span>
+
+	<span class="token comment">/* Public Property */</span>
+<span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">string</span></span> Name <span class="token punctuation">&#123;</span>
+	<span class="token keyword">get</span> <span class="token operator">=></span> <span class="token keyword">this</span><span class="token punctuation">.</span>name<span class="token punctuation">;</span>
+	<span class="token keyword">set</span> <span class="token punctuation">&#123;</span>
+		<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">value</span> <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> 
+			<span class="token keyword">throw</span><span class="token punctuation">.</span><span class="token function">newArgumentException</span><span class="token punctuation">(</span><span class="token string">"Name can't be null"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+		<span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+			<span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> <span class="token keyword">value</span><span class="token punctuation">;</span>
+		<span class="token punctuation">&#125;</span>
+	<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+	<span class="token comment">/* Public Constructor */</span>
+<span class="token keyword">public</span> <span class="token function">Person</span><span class="token punctuation">(</span><span class="token class-name">String</span> pName<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> 
+	Name <span class="token operator">=</span> pName<span class="token punctuation">;</span>
+	<span class="token keyword">this</span><span class="token punctuation">.</span>born <span class="token operator">=</span> DateTime<span class="token punctuation">.</span>Now<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+	<span class="token comment">/* Method Definition */</span>
+<span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">int</span></span> <span class="token function">GetAge</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token class-name"><span class="token keyword">int</span></span> Age <span class="token operator">=</span> DateTime<span class="token punctuation">.</span>Now<span class="token punctuation">.</span>Year <span class="token operator">-</span> born<span class="token punctuation">.</span>Year<span class="token punctuation">;</span>
+	<span class="token keyword">if</span> <span class="token punctuation">(</span>born<span class="token punctuation">.</span>Month <span class="token operator">></span> DateTime<span class="token punctuation">.</span>Now<span class="token punctuation">.</span>Month<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> 
+		Age<span class="token operator">-=</span><span class="token number">1</span><span class="token punctuation">;</span> 
+	<span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>born<span class="token punctuation">.</span>Month <span class="token operator">></span> DateTime<span class="token punctuation">.</span>Now<span class="token punctuation">.</span>Month<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+		<span class="token keyword">if</span> <span class="token punctuation">(</span>born<span class="token punctuation">.</span>Day <span class="token operator">></span> DateTime<span class="token punctuation">.</span>Now<span class="token punctuation">.</span>Day<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> 
+			Age<span class="token operator">-=</span><span class="token number">1</span><span class="token punctuation">;</span>
+		<span class="token punctuation">&#125;</span>
+	<span class="token punctuation">&#125;</span>
+	<span class="token keyword">return</span> Age<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+	<span class="token comment">/* Method Overload */</span>
+<span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token return-type class-name"><span class="token keyword">string</span></span> <span class="token function">ToString</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">return</span> <span class="token string">"&#92;nName: "</span> <span class="token operator">+</span> Name<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+	<span class="token comment">/* Redifine Operators*/</span>
+
+	<span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token return-type class-name"><span class="token keyword">bool</span></span> Equals <span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">object</span></span> person<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">if</span> <span class="token punctuation">(</span>person <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span> <span class="token punctuation">&#125;</span>
+	<span class="token keyword">if</span> <span class="token punctuation">(</span>person<span class="token punctuation">.</span><span class="token function">GetType</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">GetType</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span> <span class="token punctuation">&#125;</span>
+	<span class="token class-name">Person</span> p <span class="token operator">=</span> person <span class="token keyword">as</span> <span class="token class-name">Person</span><span class="token punctuation">;</span>
+	<span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>Name <span class="token operator">==</span> p<span class="token punctuation">.</span>Name<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+	<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">bool</span> <span class="token keyword">operator</span> <span class="token operator">==</span><span class="token punctuation">(</span><span class="token class-name">Person</span> a<span class="token punctuation">,</span> <span class="token class-name">Person</span> b<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">return</span> a<span class="token punctuation">.</span><span class="token function">Equals</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+	<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">bool</span> <span class="token keyword">operator</span> <span class="token operator">!=</span><span class="token punctuation">(</span><span class="token class-name">Person</span> a<span class="token punctuation">,</span> <span class="token class-name">Person</span> b<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">return</span> <span class="token operator">!</span><span class="token punctuation">(</span>a <span class="token operator">==</span> b<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">/* Class Instanciation */</span>
+<span class="token keyword">static</span> <span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">Main</span><span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span></span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+
+<span class="token class-name">Person</span> person <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">Person</span><span class="token punctuation">(</span><span class="token string">"Name"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+person<span class="token punctuation">.</span><span class="token function">ToString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code><!-- HTML_TAG_END --></pre>
+<p><strong>DEFAULT METHODS</strong></p>
+<ul><li><code>object.ToString();</code></li>
+<li><code>object.Equals(object);</code></li>
+<li><code>object.GetHashCode();</code></li></ul>
+<p><strong>ABSTRACT CLASS</strong></p>
+<blockquote><p>An <code>Abstract Classes</code> cannot be instantiated, but can be very useful
+by creating different classes that inherit its properties to be sure
+of their homogeneity, and then be able to store them in common tables
+per instance.</p></blockquote>
+<pre class="language-csharp"><!-- HTML_TAG_START --><code class="language-csharp"><span class="token keyword">abstract</span> <span class="token keyword">class</span> <span class="token class-name">Shape</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token return-type class-name"><span class="token keyword">int</span></span> <span class="token function">GetArea</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Square</span> <span class="token punctuation">:</span> <span class="token type-list"><span class="token class-name">Shape</span></span> <span class="token punctuation">&#123;</span>
+	<span class="token class-name"><span class="token keyword">int</span></span> side<span class="token punctuation">;</span>
+	<span class="token keyword">public</span> <span class="token function">Square</span><span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">int</span></span> nSide<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> side <span class="token operator">=</span> nSide<span class="token punctuation">;</span> <span class="token punctuation">&#125;</span>
+	<span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token return-type class-name"><span class="token keyword">int</span></span> <span class="token function">GetArea</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token keyword">return</span> side <span class="token operator">*</span> side<span class="token punctuation">;</span> <span class="token punctuation">&#125;</span> 
+
+	<span class="token keyword">static</span> <span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">Main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+		<span class="token class-name">Square</span> square <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">Square</span><span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span><span class="token string">"Area of the square: "</span> <span class="token operator">+</span>  square<span class="token punctuation">.</span><span class="token function">GetArea</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Circle</span> <span class="token punctuation">:</span> <span class="token type-list"><span class="token class-name">Shape</span></span> <span class="token punctuation">&#123;</span>
+	<span class="token class-name"><span class="token keyword">int</span></span> radius<span class="token punctuation">;</span>
+	<span class="token keyword">public</span> <span class="token function">Circle</span><span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">int</span></span> nRadius<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> radius <span class="token operator">=</span> nRadius<span class="token punctuation">;</span> <span class="token punctuation">&#125;</span>
+	<span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token return-type class-name"><span class="token keyword">int</span></span> <span class="token function">GetArea</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token keyword">return</span> <span class="token number">3.14159265</span> <span class="token operator">*</span> radius <span class="token operator">*</span> radius<span class="token punctuation">;</span> <span class="token punctuation">&#125;</span> 
+
+	<span class="token keyword">static</span> <span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">Main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+		<span class="token class-name">Square</span> square <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">Square</span><span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span><span class="token string">"Area of the square: "</span> <span class="token operator">+</span>  square<span class="token punctuation">.</span><span class="token function">GetArea</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">/* Class Instanciation */</span>
+<span class="token keyword">static</span> <span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">Main</span><span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span></span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+
+	<span class="token class-name">List<span class="token punctuation">&lt;</span>Shape<span class="token punctuation">></span></span> shapes <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">List<span class="token punctuation">&lt;</span>Shape<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">/* Array of the Abstract class, which of course will not contain any Shape, but Squares and Circles... */</span>
+	shapes<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token constructor-invocation class-name">Square</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	shapes<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token constructor-invocation class-name">Circle</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+	<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">int</span></span> i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> shapes<span class="token punctuation">.</span>Count<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+		Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span>shapes<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">GetArea</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">/* We can now call the method of the abstract class for every derivative instanciated */</span>
+	<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code><!-- HTML_TAG_END --></pre>
+<p>INTERFACES</p>
+<blockquote><p>TODO</p></blockquote>
+<h3 id="test-unit"><a href="#test-unit">Test Unit</a></h3>
+<pre class="language-csharp"><!-- HTML_TAG_START --><code class="language-csharp"><span class="token keyword">using</span> <span class="token namespace">projectName</span><span class="token punctuation">;</span>
+
+<span class="token keyword">namespace</span> <span class="token namespace">UnitTestNameProject</span> <span class="token punctuation">&#123;</span>
+
+	<span class="token punctuation">[</span><span class="token class-name">Test</span> Class<span class="token punctuation">]</span>
+	<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">UnitTestClass</span> <span class="token punctuation">&#123;</span>
+
+		<span class="token punctuation">[</span><span class="token class-name">Test</span> Method<span class="token punctuation">]</span>
+		<span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">TestMethod</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+			<span class="token class-name">Object</span> obj <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">Object</span><span class="token punctuation">(</span> <span class="token comment">/* ...*/</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token class-name"><span class="token keyword">int</span></span> <span class="token keyword">value</span> <span class="token operator">=</span> <span class="token number">42</span><span class="token punctuation">;</span> <span class="token comment">// Theorical result</span>
+			Assert<span class="token punctuation">.</span><span class="token function">Equals</span><span class="token punctuation">(</span><span class="token keyword">value</span><span class="token punctuation">,</span> obj<span class="token punctuation">.</span><span class="token function">Method</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token punctuation">&#125;</span>
+	<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">/* Factorisation */</span>
+<span class="token punctuation">[</span><span class="token attribute"><span class="token class-name">TestInitialize</span><span class="token attribute-arguments"><span class="token punctuation">(</span><span class="token punctuation">)</span></span></span><span class="token punctuation">]</span>
+<span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">init</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+<span class="token class-name">Object</span> obj <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">Object</span><span class="token punctuation">(</span> <span class="token comment">/* ...*/</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code><!-- HTML_TAG_END --></pre>
+<p>ASSERTIONS</p>
+<p>:   </p>
+<pre class="language-csharp"><!-- HTML_TAG_START --><code class="language-csharp"><span class="token comment">/* Values Assertion */</span>
+Assert<span class="token punctuation">.</span><span class="token function">Equals</span><span class="token punctuation">(</span>valueA<span class="token punctuation">,</span> valueB<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+Assert<span class="token punctuation">.</span><span class="token function">IsTrue</span><span class="token punctuation">(</span><span class="token comment">/* ... */</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+Assert<span class="token punctuation">.</span><span class="token function">IsFalse</span><span class="token punctuation">(</span><span class="token comment">/* ... */</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+Assert<span class="token punctuation">.</span><span class="token function">Null</span><span class="token punctuation">(</span><span class="token comment">/* ... */</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+Assert<span class="token punctuation">.</span><span class="token function">IsNotNull</span><span class="token punctuation">(</span><span class="token comment">/* ... */</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">/* Instances Comparison */</span>
+Assert<span class="token punctuation">.</span><span class="token function">AreEqual</span><span class="token punctuation">(</span>A<span class="token punctuation">,</span> B<span class="token punctuation">)</span><span class="token punctuation">;</span> 
+Assert<span class="token punctuation">.</span><span class="token function">AreNotEqual</span><span class="token punctuation">(</span>A<span class="token punctuation">,</span> B<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+Assert<span class="token punctuation">.</span><span class="token function">AreSame</span><span class="token punctuation">(</span>A<span class="token punctuation">,</span> B<span class="token punctuation">)</span><span class="token punctuation">;</span>
+Assert<span class="token punctuation">.</span><span class="token function">AreNotSame</span><span class="token punctuation">(</span>A<span class="token punctuation">,</span> B<span class="token punctuation">)</span><span class="token punctuation">;</span></code><!-- HTML_TAG_END --></pre>
+<h3 id="enumerators"><a href="#enumerators">Enumerators</a></h3>
+<pre class="language-csharp"><!-- HTML_TAG_START --><code class="language-csharp">COSTS <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name"><span class="token keyword">double</span><span class="token punctuation">[</span><span class="token punctuation">]</span></span> <span class="token punctuation">&#123;</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">,</span> <span class="token number">30</span> <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token keyword">public</span> <span class="token keyword">enum</span> <span class="token class-name">grade</span> <span class="token punctuation">&#123;</span> A <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> B <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">,</span> C <span class="token operator">=</span> <span class="token number">2</span> <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token class-name"><span class="token keyword">int</span></span> vGrade <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span><span class="token keyword">this</span><span class="token punctuation">.</span>Grade<span class="token punctuation">;</span>
+cost <span class="token operator">=</span> COSTS<span class="token punctuation">[</span>vGrade<span class="token punctuation">]</span></code><!-- HTML_TAG_END --></pre>
+<h2 id="xaml"><a href="#xaml">XAML</a></h2>
+<p><strong>GUI DESIGN</strong></p>
+<p>The GUI Design is defined in App.xaml</p>
+<pre class="language-xml"><!-- HTML_TAG_START --><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Window</span> <span class="token attr-name">Title</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Windows Title<span class="token punctuation">"</span></span> <span class="token attr-name">Width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>640<span class="token punctuation">"</span></span> <span class="token attr-name">Height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>480<span class="token punctuation">"</span></span> <span class="token attr-name">MinWidth</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>400<span class="token punctuation">"</span></span> <span class="token attr-name">MaxWidth</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>800<span class="token punctuation">"</span></span> <span class="token attr-name">ResizeMode</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>NoResize<span class="token punctuation">"</span></span> <span class="token attr-name">WindowsStartupLocation</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>CenterScreen<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Grid</span><span class="token punctuation">></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Grid.ColumnDefinition</span> <span class="token punctuation">/></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ColumnDefinition</span> <span class="token attr-name">Width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>330<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span> <span class="token comment">&lt;!-- Fixed Width --></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ColumnDefinition</span> <span class="token attr-name">Width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>*<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span> <span class="token comment">&lt;!-- Auto Width --></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>Grid.ColumnDefinition</span><span class="token punctuation">></span></span>
+
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Menu</span><span class="token punctuation">></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>MenuItem</span> <span class="token attr-name">Header</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>_Menu<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+			<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>MenuItem</span> <span class="token attr-name">Header</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>_SubMenu<span class="token punctuation">"</span></span> <span class="token attr-name">Click</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>SubMenuFunction<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>MenuItem</span><span class="token punctuation">></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>Menu</span><span class="token punctuation">></span></span>
+
+	<span class="token comment">&lt;!-- GUI Definition --></span>
+
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Button</span> <span class="token attr-name"><span class="token namespace">x:</span>Name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Code_Name<span class="token punctuation">"</span></span> <span class="token attr-name">Content</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token punctuation">"</span></span> <span class="token attr-name">HorizontalAlignment</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>left<span class="token punctuation">"</span></span> <span class="token attr-name">Height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>200<span class="token punctuation">"</span></span> <span class="token attr-name">Margin</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>0,0,0,0<span class="token punctuation">"</span></span> <span class="token attr-name">Grid.Column</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>0<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>Grid</span><span class="token punctuation">></span></span></code><!-- HTML_TAG_END --></pre>
+<p><strong>BACK</strong></p>
+<p>The Code-Behin of the GUI is defined in the App.xaml.cs</p>
+<pre class="language-csharp"><!-- HTML_TAG_START --><code class="language-csharp"><span class="token keyword">public</span> <span class="token function">MainPage</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token function">InitializeComponent</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+	<span class="token comment">/* Generate a Button Grid */</span>
+	<span class="token keyword">private</span> <span class="token class-name">Button<span class="token punctuation">[</span><span class="token punctuation">,</span><span class="token punctuation">]</span></span> ButtonGrid<span class="token punctuation">;</span>
+
+	<span class="token class-name"><span class="token keyword">int</span></span> GridHeight <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
+	<span class="token class-name"><span class="token keyword">int</span></span> GridWidth <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
+
+	<span class="token keyword">this</span><span class="token punctuation">.</span>ButtonGrid <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">Button</span><span class="token punctuation">[</span>GridWidth<span class="token punctuation">,</span> GridHeight<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+	grille <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">Grid</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	grille<span class="token punctuation">.</span>Width <span class="token operator">=</span> <span class="token number">300</span><span class="token punctuation">;</span>
+	grid<span class="token punctuation">.</span>HorizontalAlignment <span class="token operator">=</span> HorizontalAlignment<span class="token punctuation">.</span>Left<span class="token punctuation">;</span>
+	grid<span class="token punctuation">.</span>VerticalAlignment <span class="token operator">=</span> VerticalAlignment<span class="token punctuation">.</span>Top<span class="token punctuation">;</span>
+
+	<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">int</span></span> i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> GridWidth<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+		<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">int</span></span> j<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span> GridHeight<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+			<span class="token keyword">this</span><span class="token punctuation">.</span>ButtonGrid<span class="token punctuation">[</span>i<span class="token punctuation">,</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">Button</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token keyword">this</span><span class="token punctuation">.</span>ButtonGrid<span class="token punctuation">[</span>i<span class="token punctuation">,</span>j<span class="token punctuation">]</span><span class="token punctuation">.</span>Margin <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">Thickness</span> <span class="token punctuation">(</span><span class="token number">5</span> <span class="token operator">+</span> <span class="token number">32</span><span class="token operator">*</span>i<span class="token punctuation">,</span> <span class="token number">20</span> <span class="token operator">+</span> <span class="token number">32</span><span class="token operator">*</span>j<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+			Grid<span class="token punctuation">.</span><span class="token function">SetRow</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>ButtonGrid<span class="token punctuation">[</span>i<span class="token punctuation">,</span>j<span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token keyword">this</span><span class="token punctuation">.</span>grid<span class="token punctuation">.</span>Childre<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>ButtonGrid<span class="token punctuation">[</span>i<span class="token punctuation">,</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token punctuation">&#125;</span>
+	<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code><!-- HTML_TAG_END --></pre>
+<p><strong>CUSTOM POPUP</strong></p>
+<pre class="language-csharp"><!-- HTML_TAG_START --><code class="language-csharp"><span class="token keyword">public</span> <span class="token function">MyPopup</span><span class="token punctuation">(</span><span class="token class-name">String</span> text<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+   	<span class="token function">InitializeComponent</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+   	texte<span class="token punctuation">.</span>Text <span class="token operator">=</span> text<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token class-name">MyPopup</span> popup <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">MyPopup</span><span class="token punctuation">(</span><span class="token string">"text"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+popup<span class="token punctuation">.</span><span class="token function">ShowDialog</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+popup<span class="token punctuation">.</span><span class="token function">Close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token class-name">String</span> popupName <span class="token operator">=</span> popup<span class="token punctuation">.</span>Name<span class="token punctuation">;</span>
+
+MessageBox<span class="token punctuation">.</span><span class="token function">Show</span><span class="token punctuation">(</span><span class="token string">"text"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+System<span class="token punctuation">.</span>Windows<span class="token punctuation">.</span>Application<span class="token punctuation">.</span>Current<span class="token punctuation">.</span><span class="token function">Shutdown</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code><!-- HTML_TAG_END --></pre>
+<blockquote><p>TODO</p></blockquote>
+<h2 id="mvvm-light"><a href="#mvvm-light">MVVM Light</a></h2>
+<blockquote><p>TODO</p></blockquote>
+<h2 id="api"><a href="#api">API</a></h2>
+<blockquote><p>TODO</p></blockquote>
+  
+  <div class="inline-flex items-center space-x-1"><span><a href="/garden" class="underline">garden</a> /
+        </span><span><a href="/garden/#sheets" class="underline">sheets</a> /
+        </span><span><a href="/garden/#sheets/#languages" class="underline">languages</a> /
+        </span><span>csharp
+        </span></div></article></main></main>
+
+	
+<div class="background-tertiary w-full bottom-0 h-[200px] p-5 pointer-events-auto"><div class="flex justify-center">©2022</div></div>
+
+</body>
+
+
+		<script type="module" data-sveltekit-hydrate="dt92co">
+			import { start } from "/garden/_app/immutable/start-13c47096.js";
+
+			start({
+				env: {},
+				paths: {"base":"/garden","assets":"/garden"},
+				target: document.querySelector('[data-sveltekit-hydrate="dt92co"]').parentNode,
+				version: "1672939407002",
+				hydrate: {
+					node_ids: [0, 3, 11],
+					data: [null,null,null],
+					form: null
+				}
+			});
+		</script>
+	</div>
+	</body>
+</html>

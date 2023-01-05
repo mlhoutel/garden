@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" href="/garden/favicon/favicon.png" />
+		<meta http-equiv="content-security-policy" content="">
+		<link href="/garden/_app/immutable/assets/_layout-3cd4ed45.css" rel="stylesheet">
+		<link rel="modulepreload" href="/garden/_app/immutable/start-13c47096.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/index-2e2fe841.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/singletons-ae7dcc5c.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/paths-21093871.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/preload-helper-41c905a7.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/components/pages/_layout.svelte-7804cf29.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/ScrollTo-33ea659a.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/modules/pages/_layout.js-9cbb603b.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/_layout-da46b06b.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/components/pages/sheets/_layout.svelte-a35d2be0.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/components/pages/sheets/_slug_/_page.svelte-26e80596.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/BreadCrumbs-5d55fa5f.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/stores-4dc06837.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/modules/pages/sheets/_slug_/_page.js-a5fb3fd0.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/dynamic-import-helper-be004503.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/_page-6e48664e.js"><!-- HEAD_svelte-7y44jt_START --><link rel="icon" href="/garden/favicon/favicon.png"><!-- HEAD_svelte-7y44jt_END -->
+	</head>
+	<body>
+		<div id="svelte">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+
+
+
+<body class="background-primary"><nav class="background-tertiary flex items-center justify-between flex-wrap"><a href="/garden/"><div class="flex items-center flex-shrink-0 background-secondary px-5 py-2 absolute w-[100px] left-[-6px] top-0 skewed z-30"><img src="/garden/logos/sumblack.svg" alt="logo" class="h-8 anti-skewed">
+
+			<div class="absolute left-[55px] top-3 pl-5 flex"><div class="background-dark h-8 w-1 mx-0.5"></div>
+				<div class="background-dark h-8 w-2 mx-0.5"></div></div></div></a>
+
+	<div class="background-dark w-full absolute top-3 h-9 skewed left-[-20px] z-20"><div class="ml-[125px] anti-skewed pt-1 overflow-hidden"><a href="/garden/posts" class="font-serif px-1">Posts</a><a href="/garden/sheets" class="font-serif px-1">Sheets</a><a href="/garden/snippets" class="font-serif px-1">Snippets</a><a href="/garden/projects" class="font-serif px-1">Projects</a><a href="/garden/about" class="font-serif px-1">About</a></div></div>
+
+	<div class="absolute top-3 right-4 h-9 inline-flex bg-grey text-white skewed z-30"><button class="flex items-center h-auto w-12 anti-skewed"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" class="h-6"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg></button></div>
+
+	<div class="w-full block pt-12"></div></nav>
+
+	<main><main class="px-3 pt-16 pb-10"><article><div class="inline-flex items-center space-x-1"><span><a href="/garden" class="underline">garden</a> /
+        </span><span><a href="/garden/#sheets" class="underline">sheets</a> /
+        </span><span><a href="/garden/#sheets/#computer" class="underline">computer</a> /
+        </span><span>fluent
+        </span></div>
+
+  <h1>Fluent Api</h1>
+  <h2 id="api-use"><a href="#api-use">Api use</a></h2>
+<p><strong>Main</strong></p>
+<pre class="language-java"><!-- HTML_TAG_START --><code class="language-java"><span class="token keyword">package</span> <span class="token namespace">windows</span><span class="token punctuation">;</span>
+
+<span class="token keyword">public</span> <span class="token keyword">final</span> <span class="token keyword">class</span> <span class="token class-name">Main</span> <span class="token punctuation">&#123;</span>
+
+	<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+		
+		<span class="token class-name">FrameBuilder</span> frameBuilder <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">FrameBuilder</span><span class="token punctuation">(</span><span class="token string">"A"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		
+		<span class="token class-name">Frame</span> frame <span class="token operator">=</span> frameBuilder
+			<span class="token punctuation">.</span><span class="token function">title</span><span class="token punctuation">(</span><span class="token string">"Frame A"</span><span class="token punctuation">)</span>
+			<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">)</span>
+			<span class="token punctuation">.</span><span class="token function">section</span><span class="token punctuation">(</span><span class="token string">"content"</span><span class="token punctuation">)</span>
+				<span class="token punctuation">.</span><span class="token function">section</span><span class="token punctuation">(</span><span class="token string">"header"</span><span class="token punctuation">)</span>
+					<span class="token punctuation">.</span><span class="token function">label</span><span class="token punctuation">(</span><span class="token string">"Hello"</span><span class="token punctuation">)</span>
+					<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+				<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+			<span class="token punctuation">.</span><span class="token function">section</span><span class="token punctuation">(</span><span class="token string">"body"</span><span class="token punctuation">)</span>
+				<span class="token punctuation">.</span><span class="token function">button</span><span class="token punctuation">(</span><span class="token string">"World!"</span><span class="token punctuation">)</span>
+				<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+			<span class="token punctuation">.</span><span class="token function">collect</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+		<span class="token class-name">String</span> generated <span class="token operator">=</span> frame<span class="token punctuation">.</span><span class="token function">execute</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+		<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Output generated code:"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>generated<span class="token punctuation">)</span><span class="token punctuation">;</span>		
+	<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code><!-- HTML_TAG_END --></pre>
+<h2 id="builders"><a href="#builders">Builders</a></h2>
+<p><strong>Frame builder</strong></p>
+<pre class="language-java"><!-- HTML_TAG_START --><code class="language-java"><span class="token keyword">package</span> <span class="token namespace">windows</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span><span class="token class-name">ArrayList</span></span><span class="token punctuation">;</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">FrameBuilder</span> <span class="token punctuation">&#123;</span>
+
+	<span class="token keyword">public</span> <span class="token class-name">String</span> name <span class="token operator">=</span> <span class="token string">""</span><span class="token punctuation">;</span>
+	<span class="token keyword">public</span> <span class="token class-name">ArrayList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">SectionBuilder</span><span class="token punctuation">&lt;</span><span class="token class-name">FrameBuilder</span><span class="token punctuation">></span><span class="token punctuation">></span></span> sections <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">SectionBuilder</span><span class="token punctuation">&lt;</span><span class="token class-name">FrameBuilder</span><span class="token punctuation">></span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+	<span class="token keyword">public</span> <span class="token class-name">String</span> title <span class="token operator">=</span> <span class="token string">""</span><span class="token punctuation">;</span>
+	<span class="token keyword">public</span> <span class="token keyword">int</span> width <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+	<span class="token keyword">public</span> <span class="token keyword">int</span> height <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+	
+	<span class="token keyword">public</span> <span class="token class-name">FrameBuilder</span><span class="token punctuation">(</span><span class="token class-name">String</span> name<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+		<span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> name<span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+	
+	<span class="token keyword">public</span> <span class="token class-name">FrameBuilder</span> <span class="token function">title</span><span class="token punctuation">(</span><span class="token class-name">String</span> title<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+		<span class="token keyword">this</span><span class="token punctuation">.</span>title <span class="token operator">=</span> title<span class="token punctuation">;</span>
+		<span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+	
+	<span class="token keyword">public</span> <span class="token class-name">FrameBuilder</span> <span class="token function">size</span><span class="token punctuation">(</span><span class="token keyword">int</span> width<span class="token punctuation">,</span> <span class="token keyword">int</span> height<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+		<span class="token keyword">this</span><span class="token punctuation">.</span>width <span class="token operator">=</span> width<span class="token punctuation">;</span>
+		<span class="token keyword">this</span><span class="token punctuation">.</span>height <span class="token operator">=</span> height<span class="token punctuation">;</span>
+		
+		<span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+	
+	<span class="token keyword">public</span> <span class="token class-name">SectionBuilder</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">FrameBuilder</span><span class="token punctuation">></span></span> <span class="token function">section</span><span class="token punctuation">(</span><span class="token class-name">String</span> label<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+		<span class="token class-name">SectionBuilder</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">FrameBuilder</span><span class="token punctuation">></span></span> sectionBuilder <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">SectionBuilder</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">FrameBuilder</span><span class="token punctuation">></span></span><span class="token punctuation">(</span>label<span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		
+		<span class="token keyword">this</span><span class="token punctuation">.</span>sections<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>sectionBuilder<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		
+		<span class="token keyword">return</span> sectionBuilder<span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+
+	<span class="token keyword">public</span> <span class="token class-name">Frame</span> <span class="token function">collect</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+		<span class="token class-name">Frame</span> f <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Frame</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>name<span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span>title<span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span>width<span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span>height<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		
+		<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">SectionBuilder</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">FrameBuilder</span><span class="token punctuation">></span></span> s <span class="token operator">:</span> <span class="token keyword">this</span><span class="token punctuation">.</span>sections<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+			f<span class="token punctuation">.</span><span class="token function">addSection</span><span class="token punctuation">(</span>s<span class="token punctuation">.</span><span class="token function">collect</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>name<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token punctuation">&#125;</span>
+		
+		<span class="token keyword">return</span> f<span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+	
+<span class="token punctuation">&#125;</span></code><!-- HTML_TAG_END --></pre>
+<p><strong>Section builder</strong></p>
+<pre class="language-java"><!-- HTML_TAG_START --><code class="language-java"><span class="token keyword">package</span> <span class="token namespace">windows</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span><span class="token class-name">ArrayList</span></span><span class="token punctuation">;</span>
+
+<span class="token comment">/**
+ * @param &lt;T> Pile of types
+ *  - FrameBuilder for root
+ *  - SectionBuilder&lt;...> for sub levels
+ *  
+ *  T = parent object
+ *  SectionBuilder&lt;T> = current type
+ *  SectionBuilder&lt;SectionBuilder&lt;T>> = sub sections type
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">SectionBuilder</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span> <span class="token punctuation">&#123;</span>
+
+	<span class="token keyword">public</span> <span class="token class-name">String</span> name <span class="token operator">=</span> <span class="token string">""</span><span class="token punctuation">;</span>
+	<span class="token keyword">public</span> <span class="token class-name">T</span> parent <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+	<span class="token keyword">public</span> <span class="token class-name">ArrayList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">SectionBuilder</span><span class="token punctuation">&lt;</span><span class="token class-name">SectionBuilder</span><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span><span class="token punctuation">></span><span class="token punctuation">></span></span> sections <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">SectionBuilder</span><span class="token punctuation">&lt;</span><span class="token class-name">SectionBuilder</span><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span><span class="token punctuation">></span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+	<span class="token keyword">public</span> <span class="token class-name">String</span> label<span class="token punctuation">;</span>
+	<span class="token keyword">public</span> <span class="token class-name">String</span> button<span class="token punctuation">;</span>
+	
+	<span class="token keyword">public</span> <span class="token class-name">SectionBuilder</span><span class="token punctuation">(</span><span class="token class-name">String</span> name<span class="token punctuation">,</span> <span class="token class-name">T</span> parent<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+		<span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> name<span class="token punctuation">;</span>
+		<span class="token keyword">this</span><span class="token punctuation">.</span>parent <span class="token operator">=</span> parent<span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+	
+	<span class="token keyword">public</span> <span class="token class-name">SectionBuilder</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span> <span class="token function">label</span><span class="token punctuation">(</span><span class="token class-name">String</span> label<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+		<span class="token keyword">this</span><span class="token punctuation">.</span>label <span class="token operator">=</span> label<span class="token punctuation">;</span>
+		<span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+	
+	<span class="token keyword">public</span> <span class="token class-name">SectionBuilder</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span> <span class="token function">button</span><span class="token punctuation">(</span><span class="token class-name">String</span> button<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+		<span class="token keyword">this</span><span class="token punctuation">.</span>button <span class="token operator">=</span> button<span class="token punctuation">;</span>
+		<span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+
+	<span class="token keyword">public</span> <span class="token class-name">SectionBuilder</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">SectionBuilder</span><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span><span class="token punctuation">></span></span> <span class="token function">section</span><span class="token punctuation">(</span><span class="token class-name">String</span> label<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+		<span class="token class-name">SectionBuilder</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">SectionBuilder</span><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span><span class="token punctuation">></span></span> sectionBuilder <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">SectionBuilder</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">SectionBuilder</span><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span><span class="token punctuation">></span></span><span class="token punctuation">(</span>label<span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		
+		<span class="token keyword">this</span><span class="token punctuation">.</span>sections<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>sectionBuilder<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		
+		<span class="token keyword">return</span> sectionBuilder<span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+	
+	<span class="token keyword">public</span> <span class="token class-name">T</span> <span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+		<span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>parent<span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+	
+	<span class="token keyword">public</span> <span class="token class-name">Section</span> <span class="token function">collect</span><span class="token punctuation">(</span><span class="token class-name">String</span> parentName<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+		<span class="token class-name">Section</span> f <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Section</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>label<span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span>button<span class="token punctuation">,</span> parentName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		
+		<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">SectionBuilder</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">SectionBuilder</span><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span><span class="token punctuation">></span></span> s <span class="token operator">:</span> <span class="token keyword">this</span><span class="token punctuation">.</span>sections<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+			f<span class="token punctuation">.</span><span class="token function">addSection</span><span class="token punctuation">(</span>s<span class="token punctuation">.</span><span class="token function">collect</span><span class="token punctuation">(</span>parentName<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token punctuation">&#125;</span>
+		
+		<span class="token keyword">return</span> f<span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code><!-- HTML_TAG_END --></pre>
+<h2 id="generators-objects"><a href="#generators-objects">Generators objects</a></h2>
+<p><strong>Frame</strong></p>
+<pre class="language-java"><!-- HTML_TAG_START --><code class="language-java"><span class="token keyword">package</span> <span class="token namespace">windows</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span><span class="token class-name">ArrayList</span></span><span class="token punctuation">;</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Frame</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">public</span> <span class="token class-name">String</span> name <span class="token operator">=</span> <span class="token string">""</span><span class="token punctuation">;</span>
+	<span class="token keyword">public</span> <span class="token class-name">String</span> title <span class="token operator">=</span> <span class="token string">""</span><span class="token punctuation">;</span>
+	<span class="token keyword">public</span> <span class="token keyword">int</span> width <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+	<span class="token keyword">public</span> <span class="token keyword">int</span> height <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+	<span class="token keyword">public</span> <span class="token class-name">ArrayList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Section</span><span class="token punctuation">></span></span> sections <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Section</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	
+	<span class="token keyword">public</span> <span class="token class-name">Frame</span><span class="token punctuation">(</span><span class="token class-name">String</span> name<span class="token punctuation">,</span> <span class="token class-name">String</span> title<span class="token punctuation">,</span> <span class="token keyword">int</span> width<span class="token punctuation">,</span> <span class="token keyword">int</span> height<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+		<span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> name<span class="token punctuation">;</span>
+		<span class="token keyword">this</span><span class="token punctuation">.</span>title <span class="token operator">=</span> title<span class="token punctuation">;</span>
+		<span class="token keyword">this</span><span class="token punctuation">.</span>width <span class="token operator">=</span> width<span class="token punctuation">;</span>
+		<span class="token keyword">this</span><span class="token punctuation">.</span>height <span class="token operator">=</span> height<span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+	
+	<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">addSection</span><span class="token punctuation">(</span><span class="token class-name">Section</span> s<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+		<span class="token keyword">this</span><span class="token punctuation">.</span>sections<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+
+	<span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">execute</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+		<span class="token class-name">String</span> program <span class="token operator">=</span> <span class="token string">"import javax.swing.JFrame;&#92;r&#92;n"</span>
+				<span class="token operator">+</span> <span class="token string">"import javax.swing.JLabel;&#92;r&#92;n"</span>
+				<span class="token operator">+</span> <span class="token string">"import javax.swing.JButton;&#92;r&#92;n"</span>
+				<span class="token operator">+</span> <span class="token string">"import javax.swing.SwingUtilities;&#92;r&#92;n"</span>
+				<span class="token operator">+</span> <span class="token string">"import java.awt.FlowLayout;&#92;r&#92;n"</span>
+				<span class="token operator">+</span> <span class="token string">"public class FrameApplication &#123;&#92;r&#92;n"</span>
+				<span class="token operator">+</span> <span class="token string">"public static void main(String[] args) &#123;&#92;r&#92;n"</span>
+				<span class="token operator">+</span> <span class="token string">"SwingUtilities.invokeLater(new Runnable() &#123;&#92;r&#92;n"</span>
+				<span class="token operator">+</span> <span class="token string">"public void run() &#123;&#92;r&#92;n"</span><span class="token punctuation">;</span>
+		
+		program <span class="token operator">+=</span> <span class="token string">"JFrame "</span> <span class="token operator">+</span> <span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">+</span> <span class="token string">" = new JFrame()&#92;r&#92;n"</span><span class="token punctuation">;</span>
+		program <span class="token operator">+=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">+</span> <span class="token string">".setLayout(new FlowLayout());&#92;r&#92;n"</span><span class="token punctuation">;</span>
+		program <span class="token operator">+=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">+</span> <span class="token string">".setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);&#92;r&#92;n"</span><span class="token punctuation">;</span>
+		program <span class="token operator">+=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">+</span> <span class="token string">".setTitle("</span> <span class="token operator">+</span> <span class="token keyword">this</span><span class="token punctuation">.</span>title <span class="token operator">+</span> <span class="token string">");&#92;r&#92;n"</span><span class="token punctuation">;</span>
+		program <span class="token operator">+=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">+</span> <span class="token string">".setSize("</span> <span class="token operator">+</span> <span class="token keyword">this</span><span class="token punctuation">.</span>width <span class="token operator">+</span> <span class="token string">", "</span> <span class="token operator">+</span> <span class="token keyword">this</span><span class="token punctuation">.</span>height <span class="token operator">+</span> <span class="token string">");&#92;r&#92;n"</span><span class="token punctuation">;</span>
+		
+		<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">Section</span> s <span class="token operator">:</span> <span class="token keyword">this</span><span class="token punctuation">.</span>sections<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+			program <span class="token operator">+=</span> s<span class="token punctuation">.</span><span class="token function">execute</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token punctuation">&#125;</span>
+		
+		program <span class="token operator">+=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">+</span> <span class="token string">".setVisible(true);&#92;r&#92;n"</span>
+				<span class="token operator">+</span> <span class="token string">"&#125;&#92;r&#92;n"</span>
+				<span class="token operator">+</span> <span class="token string">"&#125;);&#92;r&#92;n"</span>
+				<span class="token operator">+</span> <span class="token string">"&#125;&#92;r&#92;n"</span>
+				<span class="token operator">+</span> <span class="token string">"&#125;"</span><span class="token punctuation">;</span>
+		
+		<span class="token keyword">return</span> program<span class="token punctuation">;</span>
+		
+	<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code><!-- HTML_TAG_END --></pre>
+<p><strong>Section</strong></p>
+<pre class="language-java"><!-- HTML_TAG_START --><code class="language-java"><span class="token keyword">package</span> <span class="token namespace">windows</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span><span class="token class-name">ArrayList</span></span><span class="token punctuation">;</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Section</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">int</span> sectionId <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+	
+	<span class="token keyword">public</span> <span class="token class-name">String</span> id<span class="token punctuation">;</span> 
+	<span class="token keyword">public</span> <span class="token class-name">String</span> label<span class="token punctuation">;</span>
+	<span class="token keyword">public</span> <span class="token class-name">String</span> button<span class="token punctuation">;</span>
+	<span class="token keyword">public</span> <span class="token class-name">String</span> parentName<span class="token punctuation">;</span>
+	
+	<span class="token keyword">public</span> <span class="token class-name">ArrayList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Section</span><span class="token punctuation">></span></span> sections <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Section</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	
+	<span class="token keyword">public</span> <span class="token class-name">Section</span><span class="token punctuation">(</span><span class="token class-name">String</span> label<span class="token punctuation">,</span> <span class="token class-name">String</span> button<span class="token punctuation">,</span> <span class="token class-name">String</span> parentName<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+		<span class="token keyword">this</span><span class="token punctuation">.</span>id <span class="token operator">=</span> <span class="token class-name">Integer</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span>sectionId<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token keyword">this</span><span class="token punctuation">.</span>parentName <span class="token operator">=</span> parentName<span class="token punctuation">;</span>
+		<span class="token keyword">this</span><span class="token punctuation">.</span>label <span class="token operator">=</span> label<span class="token punctuation">;</span>
+		<span class="token keyword">this</span><span class="token punctuation">.</span>button <span class="token operator">=</span> button<span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+
+	<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">addSection</span><span class="token punctuation">(</span><span class="token class-name">Section</span> s<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+		<span class="token keyword">this</span><span class="token punctuation">.</span>sections<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+
+	<span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">execute</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+		<span class="token class-name">String</span> program <span class="token operator">=</span> <span class="token string">""</span><span class="token punctuation">;</span>
+		
+		<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>label <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+			<span class="token class-name">String</span> labelName <span class="token operator">=</span> <span class="token string">"label"</span> <span class="token operator">+</span> <span class="token keyword">this</span><span class="token punctuation">.</span>parentName <span class="token operator">+</span> <span class="token keyword">this</span><span class="token punctuation">.</span>id<span class="token punctuation">;</span>
+	
+			program <span class="token operator">+=</span> <span class="token string">"JLabel "</span> <span class="token operator">+</span> labelName <span class="token operator">+</span> <span class="token string">" = new JLabel();&#92;r&#92;n"</span>
+			 <span class="token operator">+</span> <span class="token keyword">this</span><span class="token punctuation">.</span>parentName <span class="token operator">+</span> <span class="token string">".add("</span> <span class="token operator">+</span> labelName <span class="token operator">+</span> <span class="token string">");&#92;r&#92;n"</span>
+			<span class="token operator">+</span> labelName <span class="token operator">+</span> <span class="token string">".setText(""</span> <span class="token operator">+</span> <span class="token keyword">this</span><span class="token punctuation">.</span>label <span class="token operator">+</span> <span class="token string">"");&#92;r&#92;n"</span><span class="token punctuation">;</span>
+		<span class="token punctuation">&#125;</span>
+
+		<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>button <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+			<span class="token class-name">String</span> buttonName <span class="token operator">=</span> <span class="token string">"button"</span> <span class="token operator">+</span> <span class="token keyword">this</span><span class="token punctuation">.</span>parentName <span class="token operator">+</span> <span class="token keyword">this</span><span class="token punctuation">.</span>id<span class="token punctuation">;</span>
+	
+			program <span class="token operator">+=</span> <span class="token string">"JButton "</span> <span class="token operator">+</span> buttonName <span class="token operator">+</span> <span class="token string">" = new JButton();&#92;r&#92;n"</span>
+			 <span class="token operator">+</span> <span class="token keyword">this</span><span class="token punctuation">.</span>parentName <span class="token operator">+</span> <span class="token string">".add("</span> <span class="token operator">+</span> buttonName <span class="token operator">+</span> <span class="token string">");&#92;r&#92;n"</span>
+			<span class="token operator">+</span> buttonName <span class="token operator">+</span> <span class="token string">".setText(""</span> <span class="token operator">+</span> <span class="token keyword">this</span><span class="token punctuation">.</span>button <span class="token operator">+</span> <span class="token string">"");&#92;r&#92;n"</span><span class="token punctuation">;</span>
+		<span class="token punctuation">&#125;</span>
+		
+		<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">Section</span> s <span class="token operator">:</span> <span class="token keyword">this</span><span class="token punctuation">.</span>sections<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+			program <span class="token operator">+=</span> s<span class="token punctuation">.</span><span class="token function">execute</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token punctuation">&#125;</span>
+		
+		<span class="token keyword">return</span> program<span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code><!-- HTML_TAG_END --></pre>
+  
+  <div class="inline-flex items-center space-x-1"><span><a href="/garden" class="underline">garden</a> /
+        </span><span><a href="/garden/#sheets" class="underline">sheets</a> /
+        </span><span><a href="/garden/#sheets/#computer" class="underline">computer</a> /
+        </span><span>fluent
+        </span></div></article></main></main>
+
+	
+<div class="background-tertiary w-full bottom-0 h-[200px] p-5 pointer-events-auto"><div class="flex justify-center">©2022</div></div>
+
+</body>
+
+
+		<script type="module" data-sveltekit-hydrate="50r66q">
+			import { start } from "/garden/_app/immutable/start-13c47096.js";
+
+			start({
+				env: {},
+				paths: {"base":"/garden","assets":"/garden"},
+				target: document.querySelector('[data-sveltekit-hydrate="50r66q"]').parentNode,
+				version: "1672939407002",
+				hydrate: {
+					node_ids: [0, 3, 11],
+					data: [null,null,null],
+					form: null
+				}
+			});
+		</script>
+	</div>
+	</body>
+</html>

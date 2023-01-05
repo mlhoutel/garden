@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" href="/garden/favicon/favicon.png" />
+		<meta http-equiv="content-security-policy" content="">
+		<link href="/garden/_app/immutable/assets/_layout-3cd4ed45.css" rel="stylesheet">
+		<link rel="modulepreload" href="/garden/_app/immutable/start-13c47096.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/index-2e2fe841.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/singletons-ae7dcc5c.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/paths-21093871.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/preload-helper-41c905a7.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/components/pages/_layout.svelte-7804cf29.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/ScrollTo-33ea659a.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/modules/pages/_layout.js-9cbb603b.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/_layout-da46b06b.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/components/pages/snippets/_layout.svelte-a35d2be0.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/components/pages/snippets/_slug_/_page.svelte-26e80596.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/BreadCrumbs-5d55fa5f.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/stores-4dc06837.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/modules/pages/snippets/_slug_/_page.js-edfc18e4.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/dynamic-import-helper-be004503.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/_page-1e665417.js"><!-- HEAD_svelte-7y44jt_START --><link rel="icon" href="/garden/favicon/favicon.png"><!-- HEAD_svelte-7y44jt_END -->
+	</head>
+	<body>
+		<div id="svelte">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+
+
+
+<body class="background-primary"><nav class="background-tertiary flex items-center justify-between flex-wrap"><a href="/garden/"><div class="flex items-center flex-shrink-0 background-secondary px-5 py-2 absolute w-[100px] left-[-6px] top-0 skewed z-30"><img src="/garden/logos/sumblack.svg" alt="logo" class="h-8 anti-skewed">
+
+			<div class="absolute left-[55px] top-3 pl-5 flex"><div class="background-dark h-8 w-1 mx-0.5"></div>
+				<div class="background-dark h-8 w-2 mx-0.5"></div></div></div></a>
+
+	<div class="background-dark w-full absolute top-3 h-9 skewed left-[-20px] z-20"><div class="ml-[125px] anti-skewed pt-1 overflow-hidden"><a href="/garden/posts" class="font-serif px-1">Posts</a><a href="/garden/sheets" class="font-serif px-1">Sheets</a><a href="/garden/snippets" class="font-serif px-1">Snippets</a><a href="/garden/projects" class="font-serif px-1">Projects</a><a href="/garden/about" class="font-serif px-1">About</a></div></div>
+
+	<div class="absolute top-3 right-4 h-9 inline-flex bg-grey text-white skewed z-30"><button class="flex items-center h-auto w-12 anti-skewed"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" class="h-6"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg></button></div>
+
+	<div class="w-full block pt-12"></div></nav>
+
+	<main><main class="px-3 pt-16 pb-10"><article><div class="inline-flex items-center space-x-1"><span><a href="/garden" class="underline">garden</a> /
+        </span><span><a href="/garden/#snippets" class="underline">snippets</a> /
+        </span><span><a href="/garden/#snippets/#tools" class="underline">tools</a> /
+        </span><span>benchmarking
+        </span></div>
+
+  <h1>Benchmarking</h1>
+  <h2 id="benchmark-demo"><a href="#benchmark-demo">Benchmark demo</a></h2>
+<pre class="language-js"><!-- HTML_TAG_START --><code class="language-js"><span class="token comment">/*
+JS SIMPLE BENCHMARKING - RUNNING IN WEB JS OR ON NODE SERVER
+TEST WITH A SIMPLE IMPLEMENTATION OF EUCLIDEAN GCD ALGORITHM
+*/</span>
+
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> window <span class="token operator">===</span> <span class="token string">'undefined'</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">var</span> <span class="token punctuation">&#123;</span> performance <span class="token punctuation">&#125;</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'perf_hooks'</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// in node</span>
+<span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// ================ /! Warning /! ================</span>
+    <span class="token comment">// reduced time precision (1ms) in Firefox 60</span>
+    <span class="token comment">// or with privacy.resistFingerprinting enabled</span>
+    <span class="token keyword">var</span> performance <span class="token operator">=</span> window<span class="token punctuation">.</span>performance<span class="token punctuation">;</span> <span class="token comment">// in web browser</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">const</span> gcd <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">a<span class="token punctuation">,</span> b</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">(</span>b <span class="token operator">===</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">?</span> a <span class="token operator">:</span> <span class="token function">gcd</span><span class="token punctuation">(</span>b<span class="token punctuation">,</span> a <span class="token operator">%</span> b<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token constant">PASS</span> <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> <span class="token constant">ITER</span> <span class="token operator">=</span> <span class="token number">10000000</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> <span class="token constant">MAX</span> <span class="token operator">=</span> <span class="token number">1000000000</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> <span class="token constant">ROUND</span> <span class="token operator">=</span> <span class="token number">100</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> passes <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token operator">...</span><span class="token function">Array</span><span class="token punctuation">(</span><span class="token constant">PASS</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">keys</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">i</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">const</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token operator">...</span><span class="token function">Array</span><span class="token punctuation">(</span><span class="token constant">ITER</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">keys</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> Math<span class="token punctuation">.</span><span class="token function">floor</span><span class="token punctuation">(</span>Math<span class="token punctuation">.</span><span class="token function">random</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token punctuation">(</span><span class="token constant">MAX</span> <span class="token operator">-</span> <span class="token constant">ROUND</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token constant">ROUND</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">const</span> start <span class="token operator">=</span> performance<span class="token punctuation">.</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> c_gcd <span class="token operator">=</span> arr<span class="token punctuation">.</span><span class="token function">reduce</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">acc<span class="token punctuation">,</span> val</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token function">gcd</span><span class="token punctuation">(</span>acc<span class="token punctuation">,</span> val<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> end <span class="token operator">=</span> performance<span class="token punctuation">.</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">const</span> time <span class="token operator">=</span> end <span class="token operator">-</span> start<span class="token punctuation">;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">&#96;</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span><span class="token constant">PASS</span><span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">: gcd = </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>c_gcd<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string"> (</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>time<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">ms)</span><span class="token template-punctuation string">&#96;</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> time<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> sum <span class="token operator">=</span> passes<span class="token punctuation">.</span><span class="token function">reduce</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">a<span class="token punctuation">,</span> b</span><span class="token punctuation">)</span> <span class="token operator">=></span> a <span class="token operator">+</span> b<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">&#96;</span><span class="token string">
+==========================================
+total duration: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>sum<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">ms
+mean duration: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>sum <span class="token operator">/</span> <span class="token constant">PASS</span><span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">ms
+max duration: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>Math<span class="token punctuation">.</span><span class="token function">max</span><span class="token punctuation">(</span><span class="token operator">...</span>passes<span class="token punctuation">)</span><span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">ms
+min duration: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>Math<span class="token punctuation">.</span><span class="token function">min</span><span class="token punctuation">(</span><span class="token operator">...</span>passes<span class="token punctuation">)</span><span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">ms
+mean gcd: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span><span class="token punctuation">(</span>sum <span class="token operator">/</span> <span class="token constant">PASS</span><span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token constant">ITER</span><span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">ms
+==========================================
+</span><span class="token template-punctuation string">&#96;</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">/*
+============ node v16.15.1 ============
+1/10: gcd = 100 (396.6382689997554ms)
+2/10: gcd = 100 (485.538164999336ms)
+3/10: gcd = 100 (519.4448899999261ms)
+4/10: gcd = 100 (495.69499099999666ms)
+5/10: gcd = 100 (438.1148039996624ms)
+6/10: gcd = 100 (423.10171699896455ms)
+7/10: gcd = 100 (492.2839640006423ms)
+8/10: gcd = 100 (425.25345399975777ms)
+9/10: gcd = 100 (424.4618050009012ms)
+10/10: gcd = 100 (425.43023999780416ms)
+==========================================
+total duration: 4525.9622989967465ms
+mean duration: 452.59622989967465ms
+max duration: 519.4448899999261ms
+min duration: 396.6382689997554ms
+mean gcd: 0.00004525962298996746ms
+==========================================
+*/</span></code><!-- HTML_TAG_END --></pre>
+  
+  <div class="inline-flex items-center space-x-1"><span><a href="/garden" class="underline">garden</a> /
+        </span><span><a href="/garden/#snippets" class="underline">snippets</a> /
+        </span><span><a href="/garden/#snippets/#tools" class="underline">tools</a> /
+        </span><span>benchmarking
+        </span></div></article></main></main>
+
+	
+<div class="background-tertiary w-full bottom-0 h-[200px] p-5 pointer-events-auto"><div class="flex justify-center">©2022</div></div>
+
+</body>
+
+
+		<script type="module" data-sveltekit-hydrate="1ap3g95">
+			import { start } from "/garden/_app/immutable/start-13c47096.js";
+
+			start({
+				env: {},
+				paths: {"base":"/garden","assets":"/garden"},
+				target: document.querySelector('[data-sveltekit-hydrate="1ap3g95"]').parentNode,
+				version: "1672939407002",
+				hydrate: {
+					node_ids: [0, 4, 13],
+					data: [null,null,null],
+					form: null
+				}
+			});
+		</script>
+	</div>
+	</body>
+</html>

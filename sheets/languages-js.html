@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" href="/garden/favicon/favicon.png" />
+		<meta http-equiv="content-security-policy" content="">
+		<link href="/garden/_app/immutable/assets/_layout-3cd4ed45.css" rel="stylesheet">
+		<link rel="modulepreload" href="/garden/_app/immutable/start-13c47096.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/index-2e2fe841.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/singletons-ae7dcc5c.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/paths-21093871.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/preload-helper-41c905a7.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/components/pages/_layout.svelte-7804cf29.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/ScrollTo-33ea659a.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/modules/pages/_layout.js-9cbb603b.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/_layout-da46b06b.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/components/pages/sheets/_layout.svelte-a35d2be0.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/components/pages/sheets/_slug_/_page.svelte-26e80596.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/BreadCrumbs-5d55fa5f.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/stores-4dc06837.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/modules/pages/sheets/_slug_/_page.js-a5fb3fd0.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/dynamic-import-helper-be004503.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/_page-6e48664e.js"><!-- HEAD_svelte-7y44jt_START --><link rel="icon" href="/garden/favicon/favicon.png"><!-- HEAD_svelte-7y44jt_END -->
+	</head>
+	<body>
+		<div id="svelte">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+
+
+
+<body class="background-primary"><nav class="background-tertiary flex items-center justify-between flex-wrap"><a href="/garden/"><div class="flex items-center flex-shrink-0 background-secondary px-5 py-2 absolute w-[100px] left-[-6px] top-0 skewed z-30"><img src="/garden/logos/sumblack.svg" alt="logo" class="h-8 anti-skewed">
+
+			<div class="absolute left-[55px] top-3 pl-5 flex"><div class="background-dark h-8 w-1 mx-0.5"></div>
+				<div class="background-dark h-8 w-2 mx-0.5"></div></div></div></a>
+
+	<div class="background-dark w-full absolute top-3 h-9 skewed left-[-20px] z-20"><div class="ml-[125px] anti-skewed pt-1 overflow-hidden"><a href="/garden/posts" class="font-serif px-1">Posts</a><a href="/garden/sheets" class="font-serif px-1">Sheets</a><a href="/garden/snippets" class="font-serif px-1">Snippets</a><a href="/garden/projects" class="font-serif px-1">Projects</a><a href="/garden/about" class="font-serif px-1">About</a></div></div>
+
+	<div class="absolute top-3 right-4 h-9 inline-flex bg-grey text-white skewed z-30"><button class="flex items-center h-auto w-12 anti-skewed"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" class="h-6"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg></button></div>
+
+	<div class="w-full block pt-12"></div></nav>
+
+	<main><main class="px-3 pt-16 pb-10"><article><div class="inline-flex items-center space-x-1"><span><a href="/garden" class="underline">garden</a> /
+        </span><span><a href="/garden/#sheets" class="underline">sheets</a> /
+        </span><span><a href="/garden/#sheets/#languages" class="underline">languages</a> /
+        </span><span>js
+        </span></div>
+
+  <h1>JavaScript</h1>
+  <h2 id="programming-in-js"><a href="#programming-in-js">Programming in JS</a></h2>
+<h3 id="first-program--webpage"><a href="#first-program--webpage">First Program : webpage</a></h3>
+<pre class="language-html"><!-- HTML_TAG_START --><code class="language-html"><span class="token doctype"><span class="token punctuation">&lt;!</span><span class="token doctype-tag">DOCTYPE</span> <span class="token name">html</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">charset</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>UTF-8<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">></span></span>Space Invader<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>stylesheet<span class="token punctuation">"</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>text/css<span class="token punctuation">"</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>style.css<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>text/javascript<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    /*
+        We must wait that the web page is fully loaded before beggining
+        to access and edit it's components (We wait DOMContentLoaded)
+    */
+    document.addEventListener("DOMContentLoaded", function() &#123;
+
+        /* 
+            We can read the elements in the page with selectors.
+            We store it into a variable with: let v = ...  
+        */
+        let body = document.querySelector("body")
+
+        /*
+            You can use console.log(...) to display text or objects 
+            in the web browser console (Ctrl + Shift + J for Chrome)
+        */
+        console.log("Document loaded")
+    &#125;)
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>text/css<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    * &#123;
+        padding: 0px;
+        margin: 0px;
+    &#125;
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span></code><!-- HTML_TAG_END --></pre>
+<h3 id="variables"><a href="#variables">Variables</a></h3>
+<p>JavaScript is Dynamically typed. There is ‘types’ but they are computed on the go, you cannot statically declare the type of a
+variable. That’s one of the reasons why JS is not a fast language.</p>
+<p>TypeScript has been created to fix this by enabling the declaration of the type, but it’s ony a pre-check, because in the end it’s also compiled in JS.</p>
+<pre class="language-js"><!-- HTML_TAG_START --><code class="language-js"><span class="token comment">/* Declare with LET */</span>
+<span class="token keyword">let</span> a <span class="token operator">=</span> <span class="token string">'A'</span> <span class="token comment">/* This is my default declaration for the variables */</span>
+<span class="token keyword">let</span> b <span class="token comment">/* You can also declare a variable without assigning it a value */</span>
+<span class="token keyword">let</span> c <span class="token operator">=</span> <span class="token number">15</span> <span class="token comment">/* The variable type is automaticly computed... */</span>
+c <span class="token operator">=</span> <span class="token string">'test'</span> <span class="token comment">/* ...but no problem for assigning it everithing, no parse needed*/</span>
+
+<span class="token comment">/* 
+    Let is a local definition, you can only access it in the current bloc.
+    To create global variables, just declare them outside the main bloc. 
+*/</span>
+<span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> 
+    <span class="token keyword">let</span> d <span class="token operator">=</span> <span class="token string">'my local variable'</span> 
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>d<span class="token punctuation">)</span> <span class="token comment">/* 'my local variable' : we are inside the bloc */</span> 
+<span class="token punctuation">&#125;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>d<span class="token punctuation">)</span> <span class="token comment">/* undefined : we are outside the bloc were d is defined */</span>
+
+<span class="token comment">/* Declare with VAR */</span>
+
+<span class="token comment">/* 
+    Var is the same as Let but it's permit to declare variables in the Global 
+    condext: it attach the var to the 'window' object instead of the bloc
+*/</span>
+<span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> 
+    <span class="token keyword">var</span> e <span class="token operator">=</span> <span class="token string">'my global variable'</span> 
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span> <span class="token comment">/* 'my global variable' */</span> 
+<span class="token punctuation">&#125;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span> <span class="token comment">/* 'my global variable' */</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>window<span class="token punctuation">.</span>e<span class="token punctuation">)</span> <span class="token comment">/* 'my global variable' */</span>
+
+<span class="token comment">/* Declare with CONST */</span>
+<span class="token keyword">const</span> <span class="token constant">NUMBER</span> <span class="token operator">=</span> <span class="token number">1</span> <span class="token comment">/* const must be defined when declarated and cannot be edited */</span></code><!-- HTML_TAG_END --></pre>
+<h3 id="console-log"><a href="#console-log">Console Log</a></h3>
+<p>Console log display the items passed by parameters</p>
+<pre class="language-js"><!-- HTML_TAG_START --><code class="language-js"><span class="token comment">/* Text */</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'test here'</span><span class="token punctuation">)</span> 
+
+<span class="token comment">/* Array */</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">&#123;</span> <span class="token literal-property property">id</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">'A'</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span> <span class="token literal-property property">id</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">'B'</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span> <span class="token literal-property property">id</span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">'C'</span><span class="token punctuation">&#125;</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span> <span class="token punctuation">[</span><span class="token punctuation">&#123;</span>…<span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span>…<span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span>…<span class="token punctuation">&#125;</span><span class="token punctuation">]</span>
+    <span class="token operator">></span> <span class="token number">0</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span><span class="token literal-property property">id</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"A"</span><span class="token punctuation">&#125;</span>
+    <span class="token operator">></span> <span class="token number">1</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span><span class="token literal-property property">id</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"B"</span><span class="token punctuation">&#125;</span>
+    <span class="token operator">></span> <span class="token number">2</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span><span class="token literal-property property">id</span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"C"</span><span class="token punctuation">&#125;</span>
+    <span class="token literal-property property">length</span><span class="token operator">:</span> <span class="token number">3</span>
+    <span class="token operator">></span> __proto__<span class="token operator">:</span> <span class="token function">Array</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>
+
+<span class="token comment">/* Text */</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'Insert %s here'</span><span class="token punctuation">,</span><span class="token string">'text'</span><span class="token punctuation">)</span>
+<span class="token comment">/*
+    You can interpolate values with flags:
+    %s (string)
+    %d (decimal)
+    %j (json)
+    %O (object with depth of 4)
+    %o (object with depth of 2)
+*/</span>
+
+console<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">/* For errors */</span>
+console<span class="token punctuation">.</span><span class="token function">dir</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">/* For directories */</span>
+<span class="token keyword">class</span> <span class="token class-name">Console</span> <span class="token comment">/* Create a console object */</span></code><!-- HTML_TAG_END --></pre>
+<h3 id="tests"><a href="#tests">Tests</a></h3>
+<pre class="language-js"><!-- HTML_TAG_START --><code class="language-js"><span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token comment">/* Condition */</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">/* Code */</span>
+<span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token comment">/* Condition */</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">/* Code */</span>
+<span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">/* Code */</span>
+<span class="token punctuation">&#125;</span></code><!-- HTML_TAG_END --></pre>
+<h3 id="loops"><a href="#loops">Loops</a></h3>
+<pre class="language-js"><!-- HTML_TAG_START --><code class="language-js"><span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">10</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">/* 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 */</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">do</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">/* Code */</span>
+<span class="token punctuation">&#125;</span> <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token comment">/* Condition */</span><span class="token punctuation">)</span>
+
+<span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token comment">/* Condition */</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">/* Code */</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">let</span> items <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'A'</span><span class="token punctuation">,</span><span class="token string">'B'</span><span class="token punctuation">,</span><span class="token string">'C'</span><span class="token punctuation">]</span>
+
+<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token keyword">in</span> items<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span> <span class="token comment">/* 0, 1, 2 */</span>
+    items<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token comment">/* A, B, C */</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token keyword">of</span> items<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span> <span class="token comment">/* A, B, C */</span>
+<span class="token punctuation">&#125;</span></code><!-- HTML_TAG_END --></pre>
+<h3 id="functions"><a href="#functions">Functions</a></h3>
+<pre class="language-js"><!-- HTML_TAG_START --><code class="language-js"><span class="token comment">/* Parameters with default values become optionnal */</span>
+<span class="token keyword">function</span> <span class="token function">print</span><span class="token punctuation">(</span><span class="token parameter">parameter <span class="token operator">=</span> <span class="token number">0</span></span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>parameter<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> <span class="token boolean">true</span> <span class="token comment">/* You can choose to return something or not */</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token function">print</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">/* 0 */</span>
+<span class="token function">print</span><span class="token punctuation">(</span><span class="token string">'test'</span><span class="token punctuation">)</span> <span class="token comment">/* 'test' */</span>
+
+<span class="token comment">/* You can also declare functions like this */</span>
+<span class="token keyword">let</span> <span class="token function-variable function">func</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token string">'test'</span> <span class="token comment">/* this function just return 'test' */</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">/* 'test' */</span>
+
+<span class="token keyword">let</span> <span class="token function-variable function">func</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">parameterA<span class="token punctuation">,</span> parameterB <span class="token operator">...</span></span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">/* Code */</span>
+<span class="token punctuation">&#125;</span></code><!-- HTML_TAG_END --></pre>
+<h3 id="selectors"><a href="#selectors">Selectors</a></h3>
+<pre class="language-js"><!-- HTML_TAG_START --><code class="language-js">console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>document<span class="token punctuation">)</span> <span class="token comment">/* reference all the informations on the current page */</span>
+
+<span class="token comment">/* Get elements with querySelector */</span>
+<span class="token keyword">let</span> body <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">"body"</span><span class="token punctuation">)</span> <span class="token comment">/* We select the html element body */</span> 
+document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">"#idObject"</span><span class="token punctuation">)</span> <span class="token comment">/* We cans select object like in css, with the id... */</span>
+document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">".classObject"</span><span class="token punctuation">)</span> <span class="token comment">/* ... and the class, but it only return the first */</span>
+document<span class="token punctuation">.</span><span class="token function">querySelectorAll</span><span class="token punctuation">(</span><span class="token string">".classObject"</span><span class="token punctuation">)</span> <span class="token comment">/* To get all items in an array, we use querySelectorAll */</span>
+
+<span class="token comment">/* Get elements with getElementById */</span>
+document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">'idObject'</span><span class="token punctuation">)</span> <span class="token comment">/* We can get the first*/</span>
+
+<span class="token comment">/* Get elements with getElementByClassName */</span>
+document<span class="token punctuation">.</span><span class="token function">getElementByClassName</span><span class="token punctuation">(</span><span class="token string">'classA classB ...'</span><span class="token punctuation">)</span> <span class="token comment">/* We get the array of all elements that have both classes */</span>
+document<span class="token punctuation">.</span><span class="token function">getElementByClassName</span><span class="token punctuation">(</span><span class="token string">'class'</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token comment">/* ... to get the first element of the list */</span></code><!-- HTML_TAG_END --></pre>
+<h3 id="events"><a href="#events">Events</a></h3>
+<pre class="language-js"><!-- HTML_TAG_START --><code class="language-js"><span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token comment">/* Code */</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token number">5000</span><span class="token punctuation">)</span> <span class="token comment">/* After 5000ms */</span>
+<span class="token function">setInterval</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token comment">/* Code */</span> <span class="token punctuation">&#125;</span> <span class="token number">3000</span><span class="token punctuation">)</span> <span class="token comment">/* Every 3000ms */</span>
+
+element<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'click'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">event</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token comment">/* Code */</span> <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+<span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token comment">/* Code */</span> <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">catch</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">error</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token comment">/* Code */</span> <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+<span class="token keyword">async</span> <span class="token keyword">function</span> <span class="token function">asynchrone</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> 
+    <span class="token keyword">let</span> value <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token comment">/* Code */</span> <span class="token punctuation">&#125;</span>
+    <span class="token keyword">return</span> value
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">try</span> <span class="token punctuation">&#123;</span> <span class="token comment">/* Code */</span> <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span>error<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token comment">/* Code */</span> <span class="token punctuation">&#125;</span></code><!-- HTML_TAG_END --></pre>
+<h2 id="typescript"><a href="#typescript">Typescript</a></h2>
+<blockquote><p>TODO</p></blockquote>
+<h2 id="ajax"><a href="#ajax">Ajax</a></h2>
+<pre class="language-js"><!-- HTML_TAG_START --><code class="language-js"><span class="token keyword">function</span> <span class="token function">Send</span><span class="token punctuation">(</span><span class="token parameter">url<span class="token punctuation">,</span> params<span class="token punctuation">,</span> callback</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">let</span> xhr <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">XMLHttpRequest</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    xhr<span class="token punctuation">.</span><span class="token function">open</span><span class="token punctuation">(</span><span class="token string">"POST"</span><span class="token punctuation">,</span> url<span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    xhr<span class="token punctuation">.</span>responseType <span class="token operator">=</span> <span class="token string">"json"</span><span class="token punctuation">;</span>
+    xhr<span class="token punctuation">.</span><span class="token function">setRequestHeader</span><span class="token punctuation">(</span><span class="token string">"Content-type"</span><span class="token punctuation">,</span> <span class="token string">"application/x-www-form-urlencoded"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    xhr<span class="token punctuation">.</span><span class="token function-variable function">onreadystatechange</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>xhr<span class="token punctuation">.</span>readyState <span class="token operator">===</span> XMLHttpRequest<span class="token punctuation">.</span><span class="token constant">DONE</span> <span class="token operator">&amp;&amp;</span> xhr<span class="token punctuation">.</span>status <span class="token operator">===</span> <span class="token number">200</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token function">callback</span><span class="token punctuation">(</span>xhr<span class="token punctuation">.</span>response<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">let</span> s <span class="token operator">=</span> <span class="token string">""</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> attr <span class="token keyword">in</span> params<span class="token punctuation">)</span> s <span class="token operator">+=</span> attr <span class="token operator">+</span> <span class="token string">"="</span> <span class="token operator">+</span> params<span class="token punctuation">[</span>attr<span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token string">"&amp;"</span><span class="token punctuation">;</span>
+    xhr<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">function</span> <span class="token function">Get</span><span class="token punctuation">(</span><span class="token parameter">url</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">resolve<span class="token punctuation">,</span> reject</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">let</span> xhr <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">XMLHttpRequest</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        xhr<span class="token punctuation">.</span><span class="token function">open</span><span class="token punctuation">(</span><span class="token string">'GET'</span><span class="token punctuation">,</span> url<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        xhr<span class="token punctuation">.</span><span class="token function-variable function">onload</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+
+            <span class="token keyword">let</span> data <span class="token operator">=</span> <span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span>xhr<span class="token punctuation">.</span>responseText<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token function">resolve</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span>
+            <span class="token comment">//console.log(data[0]);</span>
+        <span class="token punctuation">&#125;</span>
+        xhr<span class="token punctuation">.</span>onerror <span class="token operator">=</span> reject<span class="token punctuation">;</span>
+        xhr<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>		
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code><!-- HTML_TAG_END --></pre>
+<h2 id="p5"><a href="#p5">p5</a></h2>
+<blockquote><p>TODO</p></blockquote>
+<h2 id="nodejs"><a href="#nodejs">NodeJs</a></h2>
+<blockquote><p>“NodeJs is an open source cross-plateform back-end JavaScript
+Environment that execute javaScript outside a web browser. It was build
+in 2009 in JavaScript and in C/C++ where JavaScript was performing too
+slow. Node use V8 to compile JS source code to native machine code at
+runtime.</p></blockquote>
+<p>Download Node: <a href="https://nodejs.org/en/download/" rel="nofollow">https://nodejs.org/en/download/</a></p>
+<pre class="language-sh"><!-- HTML_TAG_START --><code class="language-sh"><span class="token function">node</span> <span class="token parameter variable">--version</span>
+
+<span class="token function">node</span>
+<span class="token operator">></span> <span class="token number">2</span> + <span class="token number">2</span>
+<span class="token number">4</span>
+<span class="token operator">></span> .help
+<span class="token operator">></span> .exit
+
+<span class="token function">node</span> file.js</code><!-- HTML_TAG_END --></pre>
+<p>Node Package Manager (npm)</p>
+<pre class="language-sh"><!-- HTML_TAG_START --><code class="language-sh"><span class="token function">npm</span> <span class="token function">install</span> package
+<span class="token function">npm</span> view package
+<span class="token function">npm</span> search package
+<span class="token function">npm</span> <span class="token builtin class-name">help</span>
+<span class="token function">npm</span> version
+<span class="token function">npm</span> list
+<span class="token function">npm</span> update /* update all packages */
+<span class="token function">npm</span> init /* Tool to initialize package.js */
+
+<span class="token function">npm</span> <span class="token builtin class-name">test</span>
+<span class="token function">npm</span> start
+<span class="token function">npm</span> run serve</code><!-- HTML_TAG_END --></pre>
+<p>Node Path System (path)</p>
+<pre class="language-js"><!-- HTML_TAG_START --><code class="language-js"><span class="token keyword">const</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'path'</span><span class="token punctuation">)</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'src'</span> <span class="token operator">+</span> path<span class="token punctuation">.</span>sep <span class="token operator">+</span> <span class="token string">'file'</span><span class="token punctuation">)</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token string">'src'</span><span class="token punctuation">,</span><span class="token string">'file'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+path<span class="token punctuation">.</span><span class="token function">basename</span><span class="token punctuation">(</span>path<span class="token punctuation">)</span> <span class="token comment">/* file name */</span>
+path<span class="token punctuation">.</span><span class="token function">dirname</span><span class="token punctuation">(</span>path<span class="token punctuation">)</span> <span class="token comment">/* folder name */</span>
+path<span class="token punctuation">.</span><span class="token function">extname</span><span class="token punctuation">(</span>path<span class="token punctuation">)</span> <span class="token comment">/* file extention */</span>
+path<span class="token punctuation">.</span><span class="token function">isAbsolute</span><span class="token punctuation">(</span>path<span class="token punctuation">)</span> <span class="token comment">/* false if relative */</span>
+path<span class="token punctuation">.</span><span class="token function">relative</span><span class="token punctuation">(</span>pathA<span class="token punctuation">,</span> pathB<span class="token punctuation">)</span> <span class="token comment">/* return relative path to go from A to B */</span>
+path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">'path'</span><span class="token punctuation">,</span>step<span class="token punctuation">,</span>step<span class="token punctuation">,</span><span class="token operator">...</span><span class="token punctuation">)</span> <span class="token comment">/* return the absolute path after completing the steps */</span></code><!-- HTML_TAG_END --></pre>
+<p>Node File System (fs)</p>
+<pre class="language-js"><!-- HTML_TAG_START --><code class="language-js"><span class="token keyword">const</span> fs <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'fs'</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'path'</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> filename <span class="token operator">=</span> path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> 'file"<span class="token punctuation">)</span> 
+<span class="token comment">/*
+    __dirname: current repertory
+    __filename: current file
+*/</span>
+
+fs<span class="token punctuation">.</span><span class="token function">readFile</span><span class="token punctuation">(</span>filename<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">err<span class="token punctuation">,</span> res</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">String</span><span class="token punctuation">(</span>res<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+fs<span class="token punctuation">.</span><span class="token function">readDir</span><span class="token punctuation">(</span>path<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">err<span class="token punctuation">,</span> res</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>res<span class="token punctuation">)</span> <span class="token comment">/* files and subfolders */</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+fs<span class="token punctuation">.</span><span class="token function">mkdir</span><span class="token punctuation">(</span>path<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">err</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span> <span class="token comment">/* make folder */</span>
+fs<span class="token punctuation">.</span><span class="token function">copyFile</span><span class="token punctuation">(</span>file<span class="token punctuation">,</span> path<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">err</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span> <span class="token comment">/* copy file */</span>
+fs<span class="token punctuation">.</span><span class="token function">rename</span><span class="token punctuation">(</span>file<span class="token punctuation">,</span> <span class="token keyword">new</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">err</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span> <span class="token comment">/* rename file/folder */</span>
+fs<span class="token punctuation">.</span><span class="token function">rmdir</span><span class="token punctuation">(</span>path<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">err</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span> <span class="token comment">/* remove folder if empty */</span>
+fs<span class="token punctuation">.</span><span class="token function">unlink</span><span class="token punctuation">(</span>path<span class="token punctuation">,</span> <span class="token keyword">new</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">err</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> <span class="token comment">/* remove file*/</span></code><!-- HTML_TAG_END --></pre>
+<p>Server HTTP (http)</p>
+<pre class="language-js"><!-- HTML_TAG_START --><code class="language-js"><span class="token keyword">const</span> http <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'http'</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> server <span class="token operator">=</span> http<span class="token punctuation">.</span><span class="token function">createServer</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+server<span class="token punctuation">.</span><span class="token function">listen</span><span class="token punctuation">(</span><span class="token number">4000</span><span class="token punctuation">,</span> <span class="token string">'localhost'</span><span class="token punctuation">)</span>
+
+server<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">'request'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span> res</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    res<span class="token punctuation">.</span><span class="token function">setHeader</span><span class="token punctuation">(</span><span class="token string">'Content-Type'</span><span class="token punctuation">,</span> <span class="token string">'text/html; charset=utf-8'</span><span class="token punctuation">)</span>
+
+    res<span class="token punctuation">.</span><span class="token function">write</span><span class="token punctuation">(</span><span class="token string">'Hello world'</span><span class="token punctuation">)</span>
+    res<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span></code><!-- HTML_TAG_END --></pre>
+<h2 id="jest"><a href="#jest">Jest</a></h2>
+<p>Unit Testing</p>
+<pre class="language-sh"><!-- HTML_TAG_START --><code class="language-sh"><span class="token function">npm</span> <span class="token function">install</span> jest --save-dev
+
+<span class="token function">mkdir</span> src/utils/__tests__
+<span class="token builtin class-name">cd</span> src/utils/__tests__
+echo.<span class="token operator">></span>Element.spec.js
+
+/* Run tests */
+<span class="token function">npm</span> <span class="token builtin class-name">test</span> <span class="token parameter variable">--coverage</span> </code><!-- HTML_TAG_END --></pre>
+<pre class="language-sh"><!-- HTML_TAG_START --><code class="language-sh">package.json
+
+<span class="token string">"scripts"</span><span class="token builtin class-name">:</span> <span class="token punctuation">&#123;</span>
+    <span class="token string">"test"</span><span class="token builtin class-name">:</span> <span class="token string">"jest"</span>
+<span class="token punctuation">&#125;</span>,
+<span class="token string">"jest"</span><span class="token builtin class-name">:</span> <span class="token punctuation">&#123;</span>
+    <span class="token string">"collectCoverage"</span><span class="token builtin class-name">:</span> true,
+<span class="token punctuation">&#125;</span></code><!-- HTML_TAG_END --></pre>
+<pre class="language-sh"><!-- HTML_TAG_START --><code class="language-sh">src
+└───test
+    ├───smoke
+    └───unit
+        ├───coverage
+        └───specs // <span class="token function">units</span> tests here</code><!-- HTML_TAG_END --></pre>
+<pre class="language-js"><!-- HTML_TAG_START --><code class="language-js"><span class="token keyword">import</span> Element <span class="token keyword">from</span> <span class="token string">'src/element'</span> <span class="token comment">/* With Babel*/</span>
+<span class="token keyword">const</span> Element <span class="token operator">=</span> <span class="token function">required</span><span class="token punctuation">(</span><span class="token string">'src/element'</span><span class="token punctuation">)</span> <span class="token comment">/* Without Babel*/</span>
+
+jest<span class="token punctuation">.</span><span class="token function">mock</span><span class="token punctuation">(</span><span class="token string">'library'</span><span class="token punctuation">)</span> <span class="token comment">/* if the element use an external library */</span>
+
+<span class="token comment">/* Describle contain one or more related tests */</span>
+<span class="token function">describle</span><span class="token punctuation">(</span><span class="token string">'description string'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+
+    <span class="token comment">/* Before each test */</span>
+    <span class="token function">beforeEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">/* Environment setup */</span>
+        process<span class="token punctuation">.</span>env <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+            <span class="token comment">/* Environment variables setup */</span>
+        <span class="token punctuation">&#125;</span>       
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+    <span class="token comment">/* After each test */</span>
+    <span class="token function">afterEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">/* Clean things */</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+    <span class="token comment">/* You then describle your tests with: test or it (alias) */</span>
+    <span class="token function">it</span><span class="token punctuation">(</span><span class="token string">'test description'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">/* Variables Setup */</span>
+        <span class="token keyword">const</span> input <span class="token operator">=</span> <span class="token punctuation">[</span>
+            <span class="token punctuation">&#123;</span> <span class="token literal-property property">id</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token literal-property property">name</span><span class="token operator">:</span><span class="token string">'A'</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span> 
+            <span class="token punctuation">&#123;</span> <span class="token literal-property property">id</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token literal-property property">name</span><span class="token operator">:</span><span class="token string">'B'</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span> 
+            <span class="token punctuation">&#123;</span> <span class="token literal-property property">id</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token literal-property property">name</span><span class="token operator">:</span><span class="token string">'C'</span> <span class="token punctuation">&#125;</span> 
+        <span class="token punctuation">]</span>
+        <span class="token keyword">const</span> output <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">&#123;</span> <span class="token literal-property property">id</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token literal-property property">name</span><span class="token operator">:</span><span class="token string">'B'</span> <span class="token punctuation">&#125;</span><span class="token punctuation">]</span>
+        <span class="token keyword">const</span> spy <span class="token operator">=</span> jest<span class="token punctuation">.</span><span class="token function">spyOn</span><span class="token punctuation">(</span>object<span class="token punctuation">,</span> <span class="token string">'function'</span><span class="token punctuation">)</span>
+
+        <span class="token comment">/* Function Test */</span>
+        <span class="token comment">// [...]</span>
+
+        <span class="token comment">/* Assertions */</span>
+        <span class="token function">expect</span><span class="token punctuation">(</span><span class="token comment">/*...*/</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toEquals</span><span class="token punctuation">(</span>output<span class="token punctuation">)</span> <span class="token comment">/* Result */</span>
+        <span class="token function">expect</span><span class="token punctuation">(</span>spy<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toHaveBeenCalledTimes</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token comment">/* Spy */</span>
+        <span class="token function">expect</span><span class="token punctuation">(</span><span class="token comment">/*...*/</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toMatch</span><span class="token punctuation">(</span>'Error"<span class="token punctuation">)</span> <span class="token comment">/* Errors */</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+    <span class="token function">it</span><span class="token punctuation">(</span><span class="token string">'async test description'</span><span class="token punctuation">,</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">/* Here we test with an async function */</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span></code><!-- HTML_TAG_END --></pre>
+<h3 id="cypress"><a href="#cypress">Cypress</a></h3>
+<p>Integration Testing</p>
+<pre class="language-js"><!-- HTML_TAG_START --><code class="language-js">install global cypress<span class="token operator">:</span> npm install <span class="token operator">-</span>g cypress
+
+cypress run <span class="token operator">-</span><span class="token constant">P</span> <span class="token punctuation">.</span> <span class="token operator">--</span>config video<span class="token operator">=</span><span class="token boolean">false</span> <span class="token operator">--</span>spec <span class="token string">'**/integration/test.spec.js'</span> <span class="token operator">-</span>b chrome
+cypress open <span class="token operator">-</span><span class="token constant">P</span> <span class="token punctuation">.</span></code><!-- HTML_TAG_END --></pre>
+<pre class="language-sh"><!-- HTML_TAG_START --><code class="language-sh">src
+└───cypress
+    ├───support
+    <span class="token operator">|</span>   ├───index.js
+    <span class="token operator">|</span>   └───commands.js
+    └───tests
+        ├───smoke
+        └───integration
+            └───test.spec.js // integration tests here</code><!-- HTML_TAG_END --></pre>
+<pre class="language-js"><!-- HTML_TAG_START --><code class="language-js">support<span class="token operator">/</span>index<span class="token punctuation">.</span>js
+
+Cypress<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">"window:before:load"</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">window</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">const</span> original <span class="token operator">=</span> window<span class="token punctuation">.</span><span class="token class-name">EventTarget</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>addEventListener
+
+    window<span class="token punctuation">.</span><span class="token class-name">EventTarget</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function-variable function">addEventListener</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>argument <span class="token operator">&amp;&amp;</span> argument<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">===</span> <span class="token string">"beforeunload"</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token keyword">return</span> <span class="token punctuation">&#125;</span>
+        <span class="token keyword">return</span> <span class="token function">original</span><span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> arguments<span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+
+    Objet<span class="token punctuation">.</span><span class="token function">defineProperty</span><span class="token punctuation">(</span>window<span class="token punctuation">,</span> <span class="token string">"beforeunload"</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span>
+        <span class="token function-variable function">get</span><span class="token operator">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+        <span class="token function-variable function">set</span><span class="token operator">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span></code><!-- HTML_TAG_END --></pre>
+<pre class="language-js"><!-- HTML_TAG_START --><code class="language-js">support<span class="token operator">/</span>commands<span class="token punctuation">.</span>js
+
+<span class="token comment">//&lt;button type="button" data-test="mybutton">Button&lt;/button></span>
+
+Cypress<span class="token punctuation">.</span>Commands<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">"SelectMyButton"</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> cy<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">'[data-test="mybutton"]'</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+Cypress<span class="token punctuation">.</span>Commands<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">"ClickMyButton"</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    cy<span class="token punctuation">.</span><span class="token function">SelectMyButton</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">click</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span></code><!-- HTML_TAG_END --></pre>
+<pre class="language-js"><!-- HTML_TAG_START --><code class="language-js">integration<span class="token operator">/</span>test<span class="token punctuation">.</span>spec<span class="token punctuation">.</span>js
+
+<span class="token function">describle</span><span class="token punctuation">(</span><span class="token string">"Tests description"</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+
+    <span class="token keyword">const</span> <span class="token constant">BUTTON_CLICKED</span> <span class="token operator">=</span> <span class="token string">"clicked"</span>
+
+    <span class="token function">beforeEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span> <span class="token comment">/* ... */</span> <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+    <span class="token function">afterEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span> <span class="token comment">/* ... */</span> <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+    <span class="token function">it</span><span class="token punctuation">(</span><span class="token string">"Test description"</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        cy<span class="token punctuation">.</span><span class="token function">ClickMyButton</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        cy<span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span><span class="token constant">BUTTON_CLICKED</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+    <span class="token comment">/* ... */</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span></code><!-- HTML_TAG_END --></pre>
+<h1 id="js-bundling"><a href="#js-bundling">JS-BUNDLING</a></h1>
+<h2 id="comparison"><a href="#comparison">Comparison</a></h2>
+<h3 id="for-cli-tools"><a href="#for-cli-tools">For CLI tools</a></h3>
+<table><thead><tr><th>Name</th>
+<th>Note</th>
+<th>Free license</th>
+<th>Mainained</th>
+<th>Binaries</th></tr></thead>
+<tbody><tr><td><a href="https://github.com/vercel/pkg" rel="nofollow">pkg</a></td>
+<td>Node bundler</td>
+<td>✅ MIT</td>
+<td>✅ Active</td>
+<td><a href="https://github.com/vercel/pkg-fetch#binary-compatibility" rel="nofollow">v18 x64-86</a></td></tr>
+<tr><td><a href="https://github.com/nexe/nexe" rel="nofollow">nexe</a></td>
+<td>Node bundler</td>
+<td>✅ MIT</td>
+<td>✅ Active</td>
+<td><a href="https://github.com/nexe/nexe/releases/tag/v3.3.3" rel="nofollow">v16 x64-86</a></td></tr>
+<tr><td><a href="https://github.com/igorklopov/enclose" rel="nofollow">enclose</a></td>
+<td>Node bundler</td>
+<td>❌ EULA</td>
+<td>❌   Deprecated</td>
+<td><a href="https://github.com/igorklopov/enclose#versions-of-nodejs" rel="nofollow">v6 x64</a></td></tr>
+<tr><td><a href="https://github.com/pmq20/node-packer" rel="nofollow">node-packer</a></td>
+<td>Node bundler</td>
+<td>✅ MIT</td>
+<td>❌  No (2y)</td>
+<td></td></tr>
+<tr><td><a href="https://github.com/denoland/deno" rel="nofollow">deno-build</a></td>
+<td>Deno compiler</td>
+<td>✅ MIT</td>
+<td>✅ Active</td>
+<td></td></tr></tbody></table>
+<h3 id="for-gui-tools"><a href="#for-gui-tools">For GUI tools</a></h3>
+<table><thead><tr><th>Name</th>
+<th>Note</th>
+<th>Free license</th>
+<th>Mainained</th>
+<th>Binaries</th></tr></thead>
+<tbody><tr><td><a href="https://github.com/nwjs/nw.js" rel="nofollow">nwjs</a></td>
+<td>Chromium bundler</td>
+<td>✅ MIT</td>
+<td>✅ Active</td>
+<td><a href="https://github.com/nwjs/nw.js#downloads" rel="nofollow">v18 x64-86</a></td></tr>
+<tr><td><a href="https://github.com/electron/electron" rel="nofollow">electron</a></td>
+<td>Chromuim bundler</td>
+<td>✅ MIT</td>
+<td>✅ Active</td>
+<td></td></tr>
+<tr><td><a href="https://github.com/tauri-apps/tauri" rel="nofollow">tauri</a></td>
+<td>Rust bundler</td>
+<td>✅ MIT</td>
+<td>✅  Active</td>
+<td></td></tr>
+<tr><td><a href="https://github.com/AppImage/appimagekit" rel="nofollow">app-image</a></td>
+<td>Packager</td>
+<td>✅ MIT</td>
+<td>✅  Active</td>
+<td></td></tr></tbody></table>
+<h2 id="pkg"><a href="#pkg">Pkg</a></h2>
+<ul><li><ol><li>Bundles the application with a custom v8 script compiler into a snapshot</li></ol></li>
+<li><ol start="2"><li>Downloads the node source (or a prebuilt binary)</li></ol></li>
+<li><ol start="3"><li>Applies arbitrary source patches</li></ol></li>
+<li><ol start="4"><li>Maybe compiles downloaded source</li></ol></li>
+<li><ol start="5"><li>Appends snapshotted output to the end of the binary</li></ol></li>
+<li><ol start="6"><li>Snapshot (cachedData from v8) is loaded/run when binary executes.</li></ol></li></ul>
+<p><em>from <a href="https://github.com/vercel/pkg/issues/42" rel="nofollow">https://github.com/vercel/pkg/issues/42</a></em></p>
+<blockquote><p>“Pkg hacked fs.* API’s dynamically in order to access in-package files, whereas Node.js Compiler leaves them alone and instead works on a deeper level via libsquash. Pkg uses JSON to store in-package files while Node.js Compiler uses the more sophisticated and widely used SquashFS as its data structure.”</p></blockquote>
+<p>pkg:</p>
+<ul><li>a lot of configuration possible (see <a href="https://github.com/vercel/pkg#usage" rel="nofollow">usage settings</a>)</li>
+<li>best support for distributed node binaries</li>
+<li>support multiple builds at a time</li>
+<li>configuration in json or by command line (see <a href="https://github.com/vercel/pkg#config" rel="nofollow">config</a>)</li>
+<li>option to build the node binaries ourself with <code>--build</code></li>
+<li>don’t work well with ES6 modules (use <code>require</code>) =&gt; or see <code>nexe</code></li></ul>
+<h3 id="file-system"><a href="#file-system">File System</a></h3>
+<p>“Hence, in order to make use of a file collected at packaging time (require a javascript file or serve an asset) you should take <code>__filename</code>, <code>__dirname</code>, <code>process.pkg.defaultEntrypoint</code> or <code>require.main.filename</code> as a base for your path calculations.</p>
+<p>For javascript files you can just require or require.resolve because they use current <code>__dirname</code> by default. For assets use <code>path.join(__dirname, ``&#39;../path/to/asset&#39;)</code>”
+<em>from <a href="https://github.com/vercel/pkg#snapshot-filesystem" rel="nofollow">https://github.com/vercel/pkg#snapshot-filesystem</a></em></p>
+<h3 id="node-binaries-fetcher"><a href="#node-binaries-fetcher">Node binaries fetcher</a></h3>
+<ul><li><a href="https://github.com/vercel/pkg-fetch" rel="nofollow">Node binaries fetcher (and distrib)</a></li>
+<li><a href="https://github.com/vercel/pkg#targets" rel="nofollow">Targets and build documentation</a></li></ul>
+<p>Supported:</p>
+<ul><li><code>alpine, linux, macox, windows (x32/64)</code></li>
+<li><code>node &lt;= v18</code></li></ul>
+<h3 id="details"><a href="#details">Details</a></h3>
+<p>Building in <code>DEBUG</code> mode:</p>
+<pre class="language-undefined"><!-- HTML_TAG_START --><code class="language-undefined">pkg -o dist/panorama.exe src/index.js --debug &gt; build_log.txt</code><!-- HTML_TAG_END --></pre>
+<p>[<strong><a href="https://cernbox.cern.ch/index.php/s/edFZJijSs1aV2Ic" rel="nofollow">cernbox build_log.txt</a></strong>]</p>
+<p><strong>1.1.</strong> Navigate dependandancies from the scipt input and add them to the queue</p>
+<pre class="language-undefined"><!-- HTML_TAG_START --><code class="language-undefined">[debug] Content of /home/user/Documents/Projects/panorama/node_modules/nodemon/package.json is added to queue.
+It was required from /home/user/Documents/Projects/panorama/src/index.js
+
+[debug] Bytecode of /home/user/Documents/Projects/panorama/node_modules/nodemon/lib/nodemon.js is added to queue.
+It was required from /home/user/Documents/Projects/panorama/src/index.js
+...</code><!-- HTML_TAG_END --></pre>
+<p><strong>1.2.</strong>  Resolve ambiguous paths</p>
+<pre class="language-undefined"><!-- HTML_TAG_START --><code class="language-undefined">[debug] Path.resolve(&#39;.&#39;) is ambiguous
+/home/user/Documents/Projects/panorama/src/system.js
+It resolves relatively to &#39;process.cwd&#39; by default, however
+you may want to use &#39;path.dirname(require.main.filename)&#39;</code><!-- HTML_TAG_END --></pre>
+<p><strong>1.3.</strong>  Directories and stats added to the VFS</p>
+<pre class="language-undefined"><!-- HTML_TAG_START --><code class="language-undefined">[debug] Directory /home/user/Documents/Projects/panorama/node_modules/jsdom/lib/jsdom/living is added to queue.</code><!-- HTML_TAG_END --></pre>
+<p><strong>1.4.</strong> Convert to bytecode and add </p>
+<pre class="language-undefined"><!-- HTML_TAG_START --><code class="language-undefined">[debug] The file was included as bytecode (no sources)
+/home/user/Documents/Projects/panorama/src/index.js
+
+The file was included as DISCLOSED code (with sources) 
+/home/user/Documents/Projects/panorama/node_modules/nodemon/package.json</code><!-- HTML_TAG_END --></pre>
+<p>“By default, your source code is precompiled to v8 bytecode before being written to the output file”
+<em>from <a href="https://github.com/vercel/pkg#bytecode-reproducibility" rel="nofollow">https://github.com/vercel/pkg#bytecode-reproducibility</a></em></p>
+<p><strong>1.5</strong> Merge required sources</p>
+<pre class="language-undefined"><!-- HTML_TAG_START --><code class="language-undefined">&gt; [debug] files &amp; folders deduped = 
+  index.js
+  inputs.js
+  system.js
+  parsing.js</code><!-- HTML_TAG_END --></pre>
+<p><strong>With config</strong></p>
+<pre class="language-undefined"><!-- HTML_TAG_START --><code class="language-undefined">[debug] Targets:
+  [
+  &#123;
+    &quot;nodeRange&quot;: &quot;node16&quot;,
+    &quot;platform&quot;: &quot;linux&quot;,
+    &quot;arch&quot;: &quot;x64&quot;,
+    &quot;output&quot;: &quot;/home/user/Documents/Projects/panorama/dist/panorama.exe&quot;,
+    &quot;forceBuild&quot;: false,
+    &quot;fabricator&quot;: &#123;
+      &quot;nodeRange&quot;: &quot;node16&quot;,
+      &quot;platform&quot;: &quot;linux&quot;,
+      &quot;arch&quot;: &quot;x64&quot;,
+      &quot;binaryPath&quot;: &quot;/home/user/.pkg-cache/v3.4/fetched-v16.16.0-linux-x64&quot;
+    &#125;,
+    &quot;binaryPath&quot;: &quot;/home/user/.pkg-cache/v3.4/fetched-v16.16.0-linux-x64&quot;
+  &#125;
+]</code><!-- HTML_TAG_END --></pre>
+<p><strong>Running the binary</strong></p>
+<p><code>DEBUG_PKG=1 ./panorama</code></p>
+<p>[<strong><a href="https://cernbox.cern.ch/index.php/s/4B7PMFGAR9qjCJk" rel="nofollow">cernbox run_log.txt</a></strong>]</p>
+<pre class="language-undefined"><!-- HTML_TAG_START --><code class="language-undefined">------------------------------- virtual file system
+/snapshot
+  panorama                                 8993610 
+    src                                      10864 
+      index.js                                1607 
+      inputs.js                               1992 
+      system.js                               2778 
+      parsing.js                              4487 
+    node_modules                           8993610 
+      nodemon                               125479 
+        package.json                          2189 
+        lib                                  85174 
+          nodemon.js                          8777 
+          version.js                          2465 
+          spawn.js                            1893 
+          monitor                            43382 
+            index.js                            82 
+            run.js                           16493 </code><!-- HTML_TAG_END --></pre>
+<p><strong>Building without including sources as bytecode</strong></p>
+<pre class="language-undefined"><!-- HTML_TAG_START --><code class="language-undefined">...
+--public             speed up and disclose the sources of top-level project
+--no-bytecode        skip bytecode generation and include source files as plain js
+...</code><!-- HTML_TAG_END --></pre>
+<p>“Specifying <code>--no-bytecode</code> will fail if there are any packages in your project that aren’t explicitly marked as public by the license in their package.json.”
+<em>from <a href="https://github.com/vercel/pkg#other-considerations" rel="nofollow">https://github.com/vercel/pkg#other-considerations</a></em></p>
+<h4 id="new-simple-js-project-specified-as-os-no-dependancies"><a href="#new-simple-js-project-specified-as-os-no-dependancies">New simple js project specified as OS (no dependancies)</a></h4>
+<p><em>index.js</em></p>
+<pre class="language-undefined"><!-- HTML_TAG_START --><code class="language-undefined">function main() &#123;
+    console.log(&quot;Hello world&quot;)
+&#125;
+
+main()</code><!-- HTML_TAG_END --></pre>
+<p><em>package.json</em></p>
+<pre class="language-undefined"><!-- HTML_TAG_START --><code class="language-undefined">&#123;
+  &quot;name&quot;: &quot;decompiled&quot;,
+  &quot;version&quot;: &quot;1.0.0&quot;,
+  &quot;description&quot;: &quot;&quot;,
+  &quot;main&quot;: &quot;index.js&quot;,
+  &quot;scripts&quot;: &#123;
+    &quot;test&quot;: &quot;node index.js&quot;,
+    &quot;build&quot;: &quot;pkg --public --no-bytecode index.js --debug -o dist/decompiled&quot;
+  &#125;,
+  &quot;author&quot;: &quot;&quot;,
+  &quot;license&quot;: &quot;ISC&quot;,
+  &quot;dependencies&quot;: &#123;
+    &quot;pkg&quot;: &quot;^5.8.0&quot;
+  &#125;
+&#125;</code><!-- HTML_TAG_END --></pre>
+<p><strong>/!\ MUST ADD BOTH <code>--no-bytecode</code> AND <code>--public</code></strong>
+otherwise <code>Error! --no-bytecode and no source breaks final executable</code>
+<em>see <a href="https://github.com/vercel/pkg/issues/1139" rel="nofollow">https://github.com/vercel/pkg/issues/1139</a></em></p>
+<p>… still not working</p>
+<p><img src="https://codimd.web.cern.ch/uploads/upload_5df2ef2a5ebde634ba2a0ecfb1331f2a.png" alt="screenshot"></p>
+<h4 id="some-readable-parts"><a href="#some-readable-parts">Some readable parts</a></h4>
+<p><img src="https://codimd.web.cern.ch/uploads/upload_3f686fde8d43f62b1e8fe7baaff084d7.png" alt="screenshot"></p>
+<p>from decompiled linux binaries</p>
+<ul><li><a href="https://cernbox.cern.ch/index.php/s/NMDb4wb8spG45VI" rel="nofollow">headers.js</a></li>
+<li><a href="https://cernbox.cern.ch/index.php/s/ivsyWmB0X22mAZ1" rel="nofollow">modules.json</a></li></ul>
+<table><thead><tr><th>?</th>
+<th>node binaries</th>
+<th>?</th>
+<th>?</th>
+<th>code ?</th>
+<th>modules</th></tr></thead>
+<tbody></tbody></table>
+<h2 id="nexe"><a href="#nexe">Nexe</a></h2>
+<ul><li><ol><li>Bundles the application if desired using webpack.</li></ol></li>
+<li><ol start="2"><li>Downloads node source (or a prebuilt binary)</li></ol></li>
+<li><ol start="3"><li>Adds your application bundle as a native module (like fs, http, path etc)</li></ol></li>
+<li><ol start="4"><li>Applies arbitrary source patches.</li></ol></li>
+<li><ol start="5"><li>Maybe compiles downloaded source</li></ol></li>
+<li><ol start="6"><li>Inserts bundle into pre-sized binary</li></ol></li>
+<li><ol start="7"><li>Code is run as main when executable is run (instead of the repl)</li></ol></li></ul>
+<p>Nexe does not support dynamic require because of its use of browserify, whereas Node.js Compiler supports all kinds of require including require.resolve.</p>
+<p><a href="https://github.com/nexe/nexe/issues/529" rel="nofollow">https://github.com/nexe/nexe/issues/529</a></p>
+<blockquote><p>Nexe is a tool for compiling node. You can apply arbitrary patches and build plugins for repeatable patterns to that end. ie. You could make a plugin and or patch for nexe that bypasses the nexe application bundler and uses the same approach as pkg.</p></blockquote>
+<p>Application Bundling (just different approaches):</p>
+<ul><li>nexe uses a virtual filesystem (similar to tools like asar for electron) and module analysis to include your applications files and dependencies</li>
+<li>pkg uses module analysis, and whitelists to create a V8 snapshot and load (“compile”) your application scripts.
+</li></ul>
+<p>Why use nexe ?</p>
+<ul><li>You need to have additional customizations to node (eg more builtin or native modules, C++ patches).</li>
+<li>You want to codesign the executable. By bypassing the built in bundler (with a patch) you can create an application executable that can be signed/verified.</li>
+<li>You want to add an icon (there are lots of ways to accomplish this, but code is usually the best way)</li>
+<li>You want to extend it (plugin or patch) to provide a repeatable system for creating a specific type of application. Eg. a windows service or linux daemon.</li>
+<li>Its hosted builds are created with 100% OSS.</li>
+<li>It allows the JS engine to recompile in the future if it made bad predictions for hot code paths. (since it uses unchanged source, vs a snapshot. (This point is less relevant with the newer interpreter features)</li>
+<li>It provides pre-built versions for any node version.</li></ul>
+<h2 id="enclose"><a href="#enclose">Enclose</a></h2>
+<p><a href="http://enclosejs.com/" rel="nofollow">http://enclosejs.com/</a></p>
+<ul><li><p>JavaScript code is transformed into native code at compile-time using V8 internal compiler. Hence, your sources are not required to execute the binary, and they are not packaged.</p></li>
+<li><p>Optimized native code can be generated only at run-time, using information collected at run-time. Without that information EncloseJS can generate only “unoptimized” code. It runs about 2x slower, than optimized one.</p></li>
+<li><p>Also, Node.js code is put inside the executable (along with your code) to support Node.js API for your application at run-time. This increases output file size.</p></li>
+<li><p>So, this is not that static compilation we used to know. But nevertheless you get fully functional binary without sources. Also, performance and file size overhead are vectors of future work.</p></li></ul>
+<h2 id="node-packer"><a href="#node-packer">Node-packer</a></h2>
+<p><a href="https://speakerdeck.com/pmq20/node-dot-js-compiler-compiling-your-node-dot-js-application-into-a-single-executable?slide=5" rel="nofollow">https://speakerdeck.com/pmq20/node-dot-js-compiler-compiling-your-node-dot-js-application-into-a-single-executable?slide=5</a></p>
+<h2 id="nwjs"><a href="#nwjs">Nwjs</a></h2>
+<p><a href="https://github.com/nwjs/nw.js/wiki/How-to-package-and-distribute-your-apps" rel="nofollow">https://github.com/nwjs/nw.js/wiki/How-to-package-and-distribute-your-apps</a></p>
+<p><a href="https://www.sitepoint.com/cross-platform-desktop-app-nw-js/" rel="nofollow">https://www.sitepoint.com/cross-platform-desktop-app-nw-js/</a></p>
+<p><a href="https://stackoverflow.com/questions/8173232/how-to-make-exe-files-from-a-node-js-app" rel="nofollow">https://stackoverflow.com/questions/8173232/how-to-make-exe-files-from-a-node-js-app</a></p>
+<ul><li><ol><li>Zip up all your files, with a package.json in the root</li></ol></li>
+<li><ol start="2"><li>Change the extension from .zip to .nw</li></ol></li>
+<li><ol start="3"><li>copy /b nw.exe+app.nw app.exe</li></ol></li></ul>
+<h2 id="electron"><a href="#electron">Electron</a></h2>
+<h3 id="asar"><a href="#asar">Asar</a></h3>
+<p>Asar uses JSON to store files information while Node.js Compiler uses SquashFS. Asar keeps the code archive and the executable separate while Node.js Compiler links all JavaScript source code together with the Node.js virtual machine and generates a single executable as the final product.</p>
+<h2 id="tauri"><a href="#tauri">Tauri</a></h2>
+<p><a href="https://github.com/tauri-apps/tauri" rel="nofollow">https://github.com/tauri-apps/tauri</a></p>
+<table><thead><tr><th>Detail</th>
+<th>Tauri</th>
+<th>Electron</th></tr></thead>
+<tbody><tr><td>Installer Size Linux</td>
+<td>3.1 MB</td>
+<td>52.1 MB</td></tr>
+<tr><td>Memory Consumption Linux</td>
+<td>180 MB</td>
+<td>462 MB</td></tr>
+<tr><td>Launch Time Linux</td>
+<td>0.39s</td>
+<td>0.80s</td></tr>
+<tr><td>Interface Service Provider</td>
+<td>WRY</td>
+<td>Chromium</td></tr>
+<tr><td>Backend Binding</td>
+<td>Rust</td>
+<td>Node.js (ECMAScript)</td></tr>
+<tr><td>Underlying Engine</td>
+<td>Rust</td>
+<td>V8 (C/C++)</td></tr>
+<tr><td>FLOSS</td>
+<td>Yes</td>
+<td>No</td></tr>
+<tr><td>Multithreading</td>
+<td>Yes</td>
+<td>Yes</td></tr>
+<tr><td>Bytecode Delivery</td>
+<td>Yes</td>
+<td>No</td></tr>
+<tr><td>Multiple Windows</td>
+<td>Yes</td>
+<td>Yes</td></tr>
+<tr><td>Auto Updater</td>
+<td>Yes</td>
+<td>Yes1</td></tr>
+<tr><td>Custom App Icon</td>
+<td>Yes</td>
+<td>Yes</td></tr>
+<tr><td>Windows Binary</td>
+<td>Yes</td>
+<td>Yes</td></tr>
+<tr><td>macOS Binary</td>
+<td>Yes</td>
+<td>Yes</td></tr>
+<tr><td>Linux Binary</td>
+<td>Yes</td>
+<td>Yes</td></tr>
+<tr><td>iOS Binary</td>
+<td>Soon</td>
+<td>No</td></tr>
+<tr><td>Android Binary</td>
+<td>Soon</td>
+<td>No</td></tr>
+<tr><td>Desktop Tray</td>
+<td>Yes</td>
+<td>Yes</td></tr>
+<tr><td>Sidecar Binaries</td>
+<td>Yes</td>
+<td>No</td></tr></tbody></table>
+<h2 id="deno-build"><a href="#deno-build">Deno-build</a></h2>
+<p><a href="https://deno.land/manual/tools/compiler" rel="nofollow">https://deno.land/manual/tools/compiler</a></p>
+<h2 id="appimage"><a href="#appimage">AppImage</a></h2>
+<p>AppImage supports only Linux with a kernel that supports SquashFS, while Node.js Compiler supports all three platforms of Linux, macOS and Windows, meanwhile without any special feature requirements from the kernel.</p>
+<p><a href="https://appimage.org/" rel="nofollow">https://appimage.org/</a></p>
+<p><a href="https://docs.appimage.org/introduction/motivation.html" rel="nofollow">https://docs.appimage.org/introduction/motivation.html</a></p>
+<p><a href="https://docs.appimage.org/introduction/software-overview.html#ref-appimagekit" rel="nofollow">https://docs.appimage.org/introduction/software-overview.html#ref-appimagekit</a></p>
+  
+  <div class="inline-flex items-center space-x-1"><span><a href="/garden" class="underline">garden</a> /
+        </span><span><a href="/garden/#sheets" class="underline">sheets</a> /
+        </span><span><a href="/garden/#sheets/#languages" class="underline">languages</a> /
+        </span><span>js
+        </span></div></article></main></main>
+
+	
+<div class="background-tertiary w-full bottom-0 h-[200px] p-5 pointer-events-auto"><div class="flex justify-center">©2022</div></div>
+
+</body>
+
+
+		<script type="module" data-sveltekit-hydrate="mg2p3e">
+			import { start } from "/garden/_app/immutable/start-13c47096.js";
+
+			start({
+				env: {},
+				paths: {"base":"/garden","assets":"/garden"},
+				target: document.querySelector('[data-sveltekit-hydrate="mg2p3e"]').parentNode,
+				version: "1672939407002",
+				hydrate: {
+					node_ids: [0, 3, 11],
+					data: [null,null,null],
+					form: null
+				}
+			});
+		</script>
+	</div>
+	</body>
+</html>

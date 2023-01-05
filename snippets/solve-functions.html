@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" href="/garden/favicon/favicon.png" />
+		<meta http-equiv="content-security-policy" content="">
+		<link href="/garden/_app/immutable/assets/_layout-3cd4ed45.css" rel="stylesheet">
+		<link rel="modulepreload" href="/garden/_app/immutable/start-13c47096.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/index-2e2fe841.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/singletons-ae7dcc5c.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/paths-21093871.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/preload-helper-41c905a7.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/components/pages/_layout.svelte-7804cf29.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/ScrollTo-33ea659a.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/modules/pages/_layout.js-9cbb603b.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/_layout-da46b06b.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/components/pages/snippets/_layout.svelte-a35d2be0.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/components/pages/snippets/_slug_/_page.svelte-26e80596.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/BreadCrumbs-5d55fa5f.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/stores-4dc06837.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/modules/pages/snippets/_slug_/_page.js-edfc18e4.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/dynamic-import-helper-be004503.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/_page-1e665417.js"><!-- HEAD_svelte-7y44jt_START --><link rel="icon" href="/garden/favicon/favicon.png"><!-- HEAD_svelte-7y44jt_END -->
+	</head>
+	<body>
+		<div id="svelte">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+
+
+
+<body class="background-primary"><nav class="background-tertiary flex items-center justify-between flex-wrap"><a href="/garden/"><div class="flex items-center flex-shrink-0 background-secondary px-5 py-2 absolute w-[100px] left-[-6px] top-0 skewed z-30"><img src="/garden/logos/sumblack.svg" alt="logo" class="h-8 anti-skewed">
+
+			<div class="absolute left-[55px] top-3 pl-5 flex"><div class="background-dark h-8 w-1 mx-0.5"></div>
+				<div class="background-dark h-8 w-2 mx-0.5"></div></div></div></a>
+
+	<div class="background-dark w-full absolute top-3 h-9 skewed left-[-20px] z-20"><div class="ml-[125px] anti-skewed pt-1 overflow-hidden"><a href="/garden/posts" class="font-serif px-1">Posts</a><a href="/garden/sheets" class="font-serif px-1">Sheets</a><a href="/garden/snippets" class="font-serif px-1">Snippets</a><a href="/garden/projects" class="font-serif px-1">Projects</a><a href="/garden/about" class="font-serif px-1">About</a></div></div>
+
+	<div class="absolute top-3 right-4 h-9 inline-flex bg-grey text-white skewed z-30"><button class="flex items-center h-auto w-12 anti-skewed"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" class="h-6"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg></button></div>
+
+	<div class="w-full block pt-12"></div></nav>
+
+	<main><main class="px-3 pt-16 pb-10"><article><div class="inline-flex items-center space-x-1"><span><a href="/garden" class="underline">garden</a> /
+        </span><span><a href="/garden/#snippets" class="underline">snippets</a> /
+        </span><span><a href="/garden/#snippets/#solve" class="underline">solve</a> /
+        </span><span>functions
+        </span></div>
+
+  <h1>Functions</h1>
+  <h2 id="dichotomy"><a href="#dichotomy">Dichotomy</a></h2>
+<pre class="language-js"><!-- HTML_TAG_START --><code class="language-js"><span class="token comment">// Dichotomic search: https://en.wikipedia.org/wiki/Dichotomic_search</span>
+
+<span class="token function-variable function">dichotomy</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">fn<span class="token punctuation">,</span> target<span class="token punctuation">,</span> start <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> end <span class="token operator">=</span> <span class="token number">10000</span><span class="token punctuation">,</span> delta <span class="token operator">=</span> <span class="token number">1</span></span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>start <span class="token operator">+</span> delta <span class="token operator">&lt;</span> end<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">const</span> center <span class="token operator">=</span> <span class="token punctuation">(</span>start <span class="token operator">+</span> end<span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token number">2</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">fn</span><span class="token punctuation">(</span>center<span class="token punctuation">)</span> <span class="token operator">></span> target<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            end <span class="token operator">=</span> center
+        <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+            start <span class="token operator">=</span> center
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">return</span> start
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// log(x) = 6.21516781 &lt;=> x = 500.166015625</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"log(x) = 6.21516781 &lt;=> x ="</span><span class="token punctuation">,</span> <span class="token function">dichotomy</span><span class="token punctuation">(</span>Math<span class="token punctuation">.</span>log<span class="token punctuation">,</span> <span class="token number">6.21516781</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token comment">// sin(x) = 45 &lt;=> x = 0.7853981633974483</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"sin(x) = 45 &lt;=> x ="</span><span class="token punctuation">,</span> <span class="token function">dichotomy</span><span class="token punctuation">(</span>Math<span class="token punctuation">.</span>sin<span class="token punctuation">,</span> <span class="token number">45</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> Math<span class="token punctuation">.</span><span class="token constant">PI</span> <span class="token operator">/</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token comment">// exp(x) = 7.38905609893065 &lt;=> x = 1.9999999995343387</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"exp(x) = 7.38905609893065 &lt;=> x ="</span><span class="token punctuation">,</span> <span class="token function">dichotomy</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">x</span><span class="token punctuation">)</span> <span class="token operator">=></span> Math<span class="token punctuation">.</span><span class="token function">exp</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">7.38905609893065</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">0.000000001</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code><!-- HTML_TAG_END --></pre>
+<h2 id="fixpoint"><a href="#fixpoint">Fixpoint</a></h2>
+<pre class="language-js"><!-- HTML_TAG_START --><code class="language-js"><span class="token comment">// Fixpoint : https://en.wikipedia.org/wiki/Fixed-point_iteration</span>
+
+<span class="token function-variable function">fixpoint</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">fn<span class="token punctuation">,</span> start<span class="token punctuation">,</span> delta</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">const</span> <span class="token constant">MAX_ITER</span> <span class="token operator">=</span> <span class="token number">10</span> <span class="token comment">// max number or iteration before stopping</span>
+
+    <span class="token function-variable function">iter</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">fx<span class="token punctuation">,</span> value<span class="token punctuation">,</span> delta<span class="token punctuation">,</span> c <span class="token operator">=</span> <span class="token number">0</span></span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>c <span class="token operator">></span> <span class="token constant">MAX_ITER</span><span class="token punctuation">)</span> <span class="token keyword">throw</span> <span class="token template-string"><span class="token template-punctuation string">&#96;</span><span class="token string">Method doesn't converges with the start at </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>start<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string"> in the allowed duration (</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span><span class="token constant">MAX_ITER</span><span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string"> iters)</span><span class="token template-punctuation string">&#96;</span></span>
+
+        <span class="token keyword">const</span> next <span class="token operator">=</span> <span class="token function">fx</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span>
+
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>Math<span class="token punctuation">.</span><span class="token function">abs</span><span class="token punctuation">(</span>value <span class="token operator">-</span> next<span class="token punctuation">)</span> <span class="token operator">&lt;</span> delta<span class="token punctuation">)</span> <span class="token keyword">return</span> value
+
+        <span class="token keyword">return</span> <span class="token function">iter</span><span class="token punctuation">(</span>fx<span class="token punctuation">,</span> next<span class="token punctuation">,</span> delta<span class="token punctuation">,</span> c <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token function-variable function">fx</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">x</span><span class="token punctuation">)</span> <span class="token operator">=></span> x <span class="token operator">+</span> <span class="token function">fn</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+
+    <span class="token keyword">return</span> <span class="token function">iter</span><span class="token punctuation">(</span>fx<span class="token punctuation">,</span> <span class="token function">fx</span><span class="token punctuation">(</span>start<span class="token punctuation">)</span><span class="token punctuation">,</span> delta<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// sin(x) = 0 &lt;=> x = 3.1415926520823465</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"sin(x) = 0 &lt;=> x ="</span><span class="token punctuation">,</span> <span class="token function">fixpoint</span><span class="token punctuation">(</span>Math<span class="token punctuation">.</span>sin<span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">0.0001</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token comment">// cos(x) = 0 &lt;=> x = 1.5707963255168476</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"cos(x) = 0 &lt;=> x ="</span><span class="token punctuation">,</span> <span class="token function">fixpoint</span><span class="token punctuation">(</span>Math<span class="token punctuation">.</span>cos<span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0.0001</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code><!-- HTML_TAG_END --></pre>
+<h2 id="gradient"><a href="#gradient">Gradient</a></h2>
+<pre class="language-js"><!-- HTML_TAG_START --><code class="language-js"><span class="token function-variable function">derivative</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">fn<span class="token punctuation">,</span> x<span class="token punctuation">,</span> delta</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">(</span><span class="token function">fn</span><span class="token punctuation">(</span>x <span class="token operator">+</span> delta<span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token function">fx</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">/</span> delta
+
+<span class="token function-variable function">taylor</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">fn<span class="token punctuation">,</span> x<span class="token punctuation">,</span> delta</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">(</span><span class="token function">fn</span><span class="token punctuation">(</span>x <span class="token operator">+</span> delta<span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token function">fx</span><span class="token punctuation">(</span>x <span class="token operator">-</span> delta<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token punctuation">(</span><span class="token number">2</span> <span class="token operator">*</span> delta<span class="token punctuation">)</span></code><!-- HTML_TAG_END --></pre>
+  
+  <div class="inline-flex items-center space-x-1"><span><a href="/garden" class="underline">garden</a> /
+        </span><span><a href="/garden/#snippets" class="underline">snippets</a> /
+        </span><span><a href="/garden/#snippets/#solve" class="underline">solve</a> /
+        </span><span>functions
+        </span></div></article></main></main>
+
+	
+<div class="background-tertiary w-full bottom-0 h-[200px] p-5 pointer-events-auto"><div class="flex justify-center">©2022</div></div>
+
+</body>
+
+
+		<script type="module" data-sveltekit-hydrate="1sh7low">
+			import { start } from "/garden/_app/immutable/start-13c47096.js";
+
+			start({
+				env: {},
+				paths: {"base":"/garden","assets":"/garden"},
+				target: document.querySelector('[data-sveltekit-hydrate="1sh7low"]').parentNode,
+				version: "1672939407002",
+				hydrate: {
+					node_ids: [0, 4, 13],
+					data: [null,null,null],
+					form: null
+				}
+			});
+		</script>
+	</div>
+	</body>
+</html>

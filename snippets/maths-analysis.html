@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" href="/garden/favicon/favicon.png" />
+		<meta http-equiv="content-security-policy" content="">
+		<link href="/garden/_app/immutable/assets/_layout-3cd4ed45.css" rel="stylesheet">
+		<link rel="modulepreload" href="/garden/_app/immutable/start-13c47096.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/index-2e2fe841.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/singletons-ae7dcc5c.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/paths-21093871.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/preload-helper-41c905a7.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/components/pages/_layout.svelte-7804cf29.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/ScrollTo-33ea659a.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/modules/pages/_layout.js-9cbb603b.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/_layout-da46b06b.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/components/pages/snippets/_layout.svelte-a35d2be0.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/components/pages/snippets/_slug_/_page.svelte-26e80596.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/BreadCrumbs-5d55fa5f.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/stores-4dc06837.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/modules/pages/snippets/_slug_/_page.js-edfc18e4.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/dynamic-import-helper-be004503.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/_page-1e665417.js"><!-- HEAD_svelte-7y44jt_START --><link rel="icon" href="/garden/favicon/favicon.png"><!-- HEAD_svelte-7y44jt_END -->
+	</head>
+	<body>
+		<div id="svelte">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+
+
+
+<body class="background-primary"><nav class="background-tertiary flex items-center justify-between flex-wrap"><a href="/garden/"><div class="flex items-center flex-shrink-0 background-secondary px-5 py-2 absolute w-[100px] left-[-6px] top-0 skewed z-30"><img src="/garden/logos/sumblack.svg" alt="logo" class="h-8 anti-skewed">
+
+			<div class="absolute left-[55px] top-3 pl-5 flex"><div class="background-dark h-8 w-1 mx-0.5"></div>
+				<div class="background-dark h-8 w-2 mx-0.5"></div></div></div></a>
+
+	<div class="background-dark w-full absolute top-3 h-9 skewed left-[-20px] z-20"><div class="ml-[125px] anti-skewed pt-1 overflow-hidden"><a href="/garden/posts" class="font-serif px-1">Posts</a><a href="/garden/sheets" class="font-serif px-1">Sheets</a><a href="/garden/snippets" class="font-serif px-1">Snippets</a><a href="/garden/projects" class="font-serif px-1">Projects</a><a href="/garden/about" class="font-serif px-1">About</a></div></div>
+
+	<div class="absolute top-3 right-4 h-9 inline-flex bg-grey text-white skewed z-30"><button class="flex items-center h-auto w-12 anti-skewed"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" class="h-6"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg></button></div>
+
+	<div class="w-full block pt-12"></div></nav>
+
+	<main><main class="px-3 pt-16 pb-10"><article><div class="inline-flex items-center space-x-1"><span><a href="/garden" class="underline">garden</a> /
+        </span><span><a href="/garden/#snippets" class="underline">snippets</a> /
+        </span><span><a href="/garden/#snippets/#maths" class="underline">maths</a> /
+        </span><span>analysis
+        </span></div>
+
+  <h1>Analysis</h1>
+  <h2 id="derivative"><a href="#derivative">Derivative</a></h2>
+<pre class="language-js"><!-- HTML_TAG_START --><code class="language-js"><span class="token constant">TODO</span></code><!-- HTML_TAG_END --></pre>
+<h2 id="factorial"><a href="#factorial">Factorial</a></h2>
+<pre class="language-js"><!-- HTML_TAG_START --><code class="language-js"><span class="token comment">// factorial : https://en.wikipedia.org/wiki/Factorial</span>
+<span class="token comment">// binomial coefficient : https://en.wikipedia.org/wiki/Binomial_coefficient</span>
+
+<span class="token function-variable function">factorial</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">n</span><span class="token punctuation">)</span> <span class="token operator">=></span> n <span class="token operator">==</span> <span class="token number">0</span> <span class="token operator">?</span> <span class="token number">1</span> <span class="token operator">:</span> n <span class="token operator">*</span> <span class="token function">factorial</span><span class="token punctuation">(</span>n<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
+<span class="token function-variable function">binomial</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">k<span class="token punctuation">,</span> n</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">let</span> a <span class="token operator">=</span> <span class="token number">1</span>
+    <span class="token keyword">let</span> b <span class="token operator">=</span> <span class="token number">1</span>
+
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>k <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        a <span class="token operator">*=</span> <span class="token punctuation">(</span>n <span class="token operator">-</span> k<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span>
+        b <span class="token operator">*=</span> k
+        k<span class="token operator">--</span>
+    <span class="token punctuation">&#125;</span>
+    
+    <span class="token keyword">return</span> a <span class="token operator">/</span> b
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// !3 = 6</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"!3 ="</span><span class="token punctuation">,</span> <span class="token function">factorial</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token comment">// !10 = 3628800</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"!10 ="</span><span class="token punctuation">,</span> <span class="token function">factorial</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token comment">// (10 20) = 184756</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"(10 20) ="</span><span class="token punctuation">,</span> <span class="token function">binomial</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token comment">// (3 7) = 35</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"(3 7) ="</span><span class="token punctuation">,</span> <span class="token function">binomial</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code><!-- HTML_TAG_END --></pre>
+<h2 id="modulo"><a href="#modulo">Modulo</a></h2>
+<pre class="language-js"><!-- HTML_TAG_START --><code class="language-js"><span class="token comment">// Positive modulo : https://en.wikipedia.org/wiki/Modulo_operation</span>
+<span class="token comment">// For every input I and N, we want to assert that the result of the modulo is a positive number.</span>
+
+<span class="token keyword">const</span> <span class="token constant">I</span> <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">62</span>
+<span class="token keyword">const</span> <span class="token constant">N</span> <span class="token operator">=</span> <span class="token number">34</span>
+
+<span class="token function-variable function">positive_modulo</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">i<span class="token punctuation">,</span> n</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">(</span>i <span class="token operator">%</span> n <span class="token operator">+</span> n<span class="token punctuation">)</span> <span class="token operator">%</span> n
+
+<span class="token comment">// mod = -28</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"mod ="</span><span class="token punctuation">,</span> <span class="token constant">I</span> <span class="token operator">%</span> <span class="token constant">N</span><span class="token punctuation">)</span>
+
+<span class="token comment">// pos = 6</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"pos ="</span><span class="token punctuation">,</span> <span class="token function">positive_modulo</span><span class="token punctuation">(</span><span class="token constant">I</span><span class="token punctuation">,</span> <span class="token constant">N</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code><!-- HTML_TAG_END --></pre>
+<h2 id="pgcd"><a href="#pgcd">PGCD</a></h2>
+<pre class="language-js"><!-- HTML_TAG_START --><code class="language-js"><span class="token comment">// pgcd : https://en.wikipedia.org/wiki/Greatest_common_divisor</span>
+<span class="token comment">// ppcm : https://en.wikipedia.org/wiki/Least_common_multiple</span>
+
+pgcd <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">a<span class="token punctuation">,</span> b</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">(</span>b <span class="token operator">===</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">?</span> a <span class="token operator">:</span> <span class="token function">pgcd</span><span class="token punctuation">(</span>b<span class="token punctuation">,</span> a <span class="token operator">%</span> b<span class="token punctuation">)</span><span class="token punctuation">)</span>
+ppcm <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">a<span class="token punctuation">,</span> b</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">(</span>a <span class="token operator">*</span> b<span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token function">pgcd</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token comment">// pgcd 25 10 = 5</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"pgcd 25 10 ="</span><span class="token punctuation">,</span> <span class="token function">pgcd</span><span class="token punctuation">(</span><span class="token number">25</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token comment">// ppcm 25 10 = 50</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"ppcm 25 10 ="</span><span class="token punctuation">,</span> <span class="token function">ppcm</span><span class="token punctuation">(</span><span class="token number">25</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token comment">// pgcd 25 30 10 15] = 5</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"pgcd 25 30 10 15] ="</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">25</span><span class="token punctuation">,</span> <span class="token number">30</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">15</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">reduce</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">acc<span class="token punctuation">,</span> val</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token function">pgcd</span><span class="token punctuation">(</span>acc<span class="token punctuation">,</span> val<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token comment">// ppcm 25 30 10 15 = 150</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"ppcm 25 30 10 15 ="</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">25</span><span class="token punctuation">,</span> <span class="token number">30</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">15</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">reduce</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">acc<span class="token punctuation">,</span> val</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token function">ppcm</span><span class="token punctuation">(</span>acc<span class="token punctuation">,</span> val<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code><!-- HTML_TAG_END --></pre>
+<h2 id="power"><a href="#power">Power</a></h2>
+<pre class="language-js"><!-- HTML_TAG_START --><code class="language-js"><span class="token comment">// Exponentiation : https://en.wikipedia.org/wiki/Exponentiation</span>
+
+<span class="token keyword">const</span> <span class="token constant">I</span> <span class="token operator">=</span> <span class="token number">12</span>
+<span class="token keyword">const</span> <span class="token constant">N</span> <span class="token operator">=</span> <span class="token number">7</span>
+
+<span class="token function-variable function">div</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">i<span class="token punctuation">,</span> n</span><span class="token punctuation">)</span> <span class="token operator">=></span> Math<span class="token punctuation">.</span><span class="token function">floor</span><span class="token punctuation">(</span>i <span class="token operator">/</span> n<span class="token punctuation">)</span> <span class="token comment">// integer division</span>
+
+<span class="token comment">// O(n) power function</span>
+<span class="token function-variable function">pow</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">i<span class="token punctuation">,</span> n</span><span class="token punctuation">)</span> <span class="token operator">=></span> n <span class="token operator">==</span> <span class="token number">0</span> <span class="token operator">?</span> <span class="token number">1</span> <span class="token operator">:</span> i <span class="token operator">*</span> <span class="token function">pow</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> n<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
+
+<span class="token comment">// O(log(n)) power function</span>
+<span class="token function-variable function">pow_opt</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">i<span class="token punctuation">,</span> n<span class="token punctuation">,</span> <span class="token constant">DIVIDER</span> <span class="token operator">=</span> <span class="token number">2</span></span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    <span class="token function-variable function">pow_rec</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">i<span class="token punctuation">,</span> n</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>n <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token keyword">return</span> i
+
+        <span class="token keyword">const</span> remain <span class="token operator">=</span> n <span class="token operator">%</span> <span class="token constant">DIVIDER</span>
+        <span class="token keyword">const</span> mult <span class="token operator">=</span> remain <span class="token operator">==</span> <span class="token number">0</span> <span class="token operator">?</span> <span class="token function">div</span><span class="token punctuation">(</span>n<span class="token punctuation">,</span> <span class="token constant">DIVIDER</span><span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">div</span><span class="token punctuation">(</span><span class="token punctuation">(</span>n <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token constant">DIVIDER</span><span class="token punctuation">)</span>
+        
+        <span class="token keyword">const</span> rec <span class="token operator">=</span> <span class="token function">pow_opt</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> mult<span class="token punctuation">)</span>
+        <span class="token keyword">let</span> val <span class="token operator">=</span> rec
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> x <span class="token operator">&lt;</span> <span class="token constant">DIVIDER</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span> x<span class="token operator">++</span><span class="token punctuation">)</span> val <span class="token operator">*=</span> rec
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> x <span class="token operator">&lt;</span> remain<span class="token punctuation">;</span> x<span class="token operator">++</span><span class="token punctuation">)</span> val <span class="token operator">*=</span> i
+    
+        <span class="token keyword">return</span> val
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>n <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token number">1</span>                <span class="token comment">// zero pow</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>n <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token function">pow_rec</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> n<span class="token punctuation">)</span>     <span class="token comment">// positive pow</span>
+    <span class="token keyword">return</span> <span class="token function">div</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token function">pow_rec</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> <span class="token operator">-</span>n<span class="token punctuation">)</span><span class="token punctuation">)</span>       <span class="token comment">// negative pow</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// 12^7 = 35831808</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"12^7 ="</span><span class="token punctuation">,</span> <span class="token function">pow</span><span class="token punctuation">(</span><span class="token constant">I</span><span class="token punctuation">,</span> <span class="token constant">N</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token comment">// 12^7 (2) = 35831808</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"12^7 (2) ="</span><span class="token punctuation">,</span> <span class="token function">pow_opt</span><span class="token punctuation">(</span><span class="token constant">I</span><span class="token punctuation">,</span> <span class="token constant">N</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token comment">// 12^7 (3) = 35831808</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"12^7 (3) ="</span><span class="token punctuation">,</span> <span class="token function">pow_opt</span><span class="token punctuation">(</span><span class="token constant">I</span><span class="token punctuation">,</span> <span class="token constant">N</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token comment">// 12^7 (4) = 35831808</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"12^7 (4) ="</span><span class="token punctuation">,</span> <span class="token function">pow_opt</span><span class="token punctuation">(</span><span class="token constant">I</span><span class="token punctuation">,</span> <span class="token constant">N</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code><!-- HTML_TAG_END --></pre>
+<h2 id="prime"><a href="#prime">Prime</a></h2>
+<pre class="language-js"><!-- HTML_TAG_START --><code class="language-js"><span class="token comment">// Prime factors: https://simple.wikipedia.org/wiki/Prime_factorization</span>
+<span class="token comment">// Crible primes: https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes</span>
+
+<span class="token function-variable function">factors</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">n</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">let</span> k <span class="token operator">=</span> <span class="token number">2</span>
+    <span class="token keyword">const</span> primes <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>k <span class="token operator">*</span> k <span class="token operator">&lt;=</span> n<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>n <span class="token operator">%</span> k <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            primes<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>k<span class="token punctuation">)</span>
+            n <span class="token operator">/=</span> k
+        <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+            k<span class="token operator">++</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>n <span class="token operator">></span> <span class="token number">1</span><span class="token punctuation">)</span> primes<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span>
+
+    <span class="token keyword">return</span> primes
+<span class="token punctuation">&#125;</span>
+
+<span class="token function-variable function">crible</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">max<span class="token punctuation">,</span> number <span class="token operator">=</span> <span class="token number">1000000</span></span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">const</span> primes <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>max <span class="token operator">>=</span> <span class="token number">2</span><span class="token punctuation">)</span> primes<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> p <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">;</span> p <span class="token operator">&lt;=</span> max <span class="token operator">&amp;&amp;</span> primes<span class="token punctuation">.</span>length <span class="token operator">&lt;</span> number<span class="token punctuation">;</span> p <span class="token operator">+=</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">let</span> prime <span class="token operator">=</span> <span class="token boolean">true</span>
+
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> pp <span class="token keyword">of</span> primes<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>p <span class="token operator">%</span> pp <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                prime <span class="token operator">=</span> <span class="token boolean">false</span>
+                <span class="token keyword">break</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>prime<span class="token punctuation">)</span> primes<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">return</span> primes
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// factors 120 = [ 2, 2, 2, 3, 5 ]</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"factors 120 ="</span><span class="token punctuation">,</span> <span class="token function">factors</span><span class="token punctuation">(</span><span class="token number">120</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token comment">// crible 1000 = [ 2, 3, 5, 7, 11, 13, ...]</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"crible 1000 ="</span><span class="token punctuation">,</span> <span class="token function">crible</span><span class="token punctuation">(</span><span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code><!-- HTML_TAG_END --></pre>
+  
+  <div class="inline-flex items-center space-x-1"><span><a href="/garden" class="underline">garden</a> /
+        </span><span><a href="/garden/#snippets" class="underline">snippets</a> /
+        </span><span><a href="/garden/#snippets/#maths" class="underline">maths</a> /
+        </span><span>analysis
+        </span></div></article></main></main>
+
+	
+<div class="background-tertiary w-full bottom-0 h-[200px] p-5 pointer-events-auto"><div class="flex justify-center">©2022</div></div>
+
+</body>
+
+
+		<script type="module" data-sveltekit-hydrate="2lz6sp">
+			import { start } from "/garden/_app/immutable/start-13c47096.js";
+
+			start({
+				env: {},
+				paths: {"base":"/garden","assets":"/garden"},
+				target: document.querySelector('[data-sveltekit-hydrate="2lz6sp"]').parentNode,
+				version: "1672939407002",
+				hydrate: {
+					node_ids: [0, 4, 13],
+					data: [null,null,null],
+					form: null
+				}
+			});
+		</script>
+	</div>
+	</body>
+</html>

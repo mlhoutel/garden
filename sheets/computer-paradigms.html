@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" href="/garden/favicon/favicon.png" />
+		<meta http-equiv="content-security-policy" content="">
+		<link href="/garden/_app/immutable/assets/_layout-3cd4ed45.css" rel="stylesheet">
+		<link rel="modulepreload" href="/garden/_app/immutable/start-13c47096.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/index-2e2fe841.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/singletons-ae7dcc5c.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/paths-21093871.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/preload-helper-41c905a7.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/components/pages/_layout.svelte-7804cf29.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/ScrollTo-33ea659a.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/modules/pages/_layout.js-9cbb603b.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/_layout-da46b06b.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/components/pages/sheets/_layout.svelte-a35d2be0.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/components/pages/sheets/_slug_/_page.svelte-26e80596.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/BreadCrumbs-5d55fa5f.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/stores-4dc06837.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/modules/pages/sheets/_slug_/_page.js-a5fb3fd0.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/dynamic-import-helper-be004503.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/_page-6e48664e.js"><!-- HEAD_svelte-7y44jt_START --><link rel="icon" href="/garden/favicon/favicon.png"><!-- HEAD_svelte-7y44jt_END -->
+	</head>
+	<body>
+		<div id="svelte">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+
+
+
+<body class="background-primary"><nav class="background-tertiary flex items-center justify-between flex-wrap"><a href="/garden/"><div class="flex items-center flex-shrink-0 background-secondary px-5 py-2 absolute w-[100px] left-[-6px] top-0 skewed z-30"><img src="/garden/logos/sumblack.svg" alt="logo" class="h-8 anti-skewed">
+
+			<div class="absolute left-[55px] top-3 pl-5 flex"><div class="background-dark h-8 w-1 mx-0.5"></div>
+				<div class="background-dark h-8 w-2 mx-0.5"></div></div></div></a>
+
+	<div class="background-dark w-full absolute top-3 h-9 skewed left-[-20px] z-20"><div class="ml-[125px] anti-skewed pt-1 overflow-hidden"><a href="/garden/posts" class="font-serif px-1">Posts</a><a href="/garden/sheets" class="font-serif px-1">Sheets</a><a href="/garden/snippets" class="font-serif px-1">Snippets</a><a href="/garden/projects" class="font-serif px-1">Projects</a><a href="/garden/about" class="font-serif px-1">About</a></div></div>
+
+	<div class="absolute top-3 right-4 h-9 inline-flex bg-grey text-white skewed z-30"><button class="flex items-center h-auto w-12 anti-skewed"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" class="h-6"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg></button></div>
+
+	<div class="w-full block pt-12"></div></nav>
+
+	<main><main class="px-3 pt-16 pb-10"><article><div class="inline-flex items-center space-x-1"><span><a href="/garden" class="underline">garden</a> /
+        </span><span><a href="/garden/#sheets" class="underline">sheets</a> /
+        </span><span><a href="/garden/#sheets/#computer" class="underline">computer</a> /
+        </span><span>paradigms
+        </span></div>
+
+  <h1>Data Structures and Programming Paradigms</h1>
+  <h2 id="modularity-and-typing"><a href="#modularity-and-typing">Modularity and Typing</a></h2>
+<h4 id="introduction"><a href="#introduction">Introduction</a></h4>
+<p>Evolution of the Languages towards an increasingly modular and abstract programming</p>
+<pre class="language-undefined"><!-- HTML_TAG_START --><code class="language-undefined">Assembly =&gt; C =&gt; C++ =&gt; Java =&gt; Js =&gt; Ts</code><!-- HTML_TAG_END --></pre>
+<h4 id="creating-a-new-type"><a href="#creating-a-new-type">Creating a new Type</a></h4>
+<p>Creating a new Type (TypeScript) : example of the Car</p>
+<p>Two points of view when defining a new type:</p>
+<ul><li><strong>Internal:</strong> How to build and manage the elements (how to build a car?)</li>
+<li><strong>External:</strong> How to use the instances of that element (how to drive a car?)</li></ul>
+<pre class="language-typescript"><!-- HTML_TAG_START --><code class="language-typescript">   	<span class="token comment">// Defining an impementation of a type différents Layers:</span>
+   <span class="token keyword">class</span> <span class="token class-name">Car</span> <span class="token punctuation">&#123;</span>
+   	<span class="token comment">/* Attributes (values, fields, properties) */</span>
+   	<span class="token keyword">private</span> <span class="token builtin">number</span> price
+   	<span class="token keyword">private</span> <span class="token builtin">string</span> brand
+   	<span class="token keyword">private</span> <span class="token builtin">string</span> plate
+
+   		<span class="token comment">/* Methods (Factories, Constructors, Accessors, Functions) */</span>
+
+   		<span class="token comment">/* Factories (Builders) */</span>
+   	<span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">// Multiple implementations with the overload</span>
+   	<span class="token function">constructor</span><span class="token punctuation">(</span>price<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">,</span> brand<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> plate<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+   		<span class="token keyword">this</span><span class="token punctuation">.</span>price <span class="token operator">=</span> price
+   		<span class="token keyword">this</span><span class="token punctuation">.</span>brand <span class="token operator">=</span> brand
+   		<span class="token keyword">this</span><span class="token punctuation">.</span>plate <span class="token operator">=</span> plate
+   	<span class="token punctuation">&#125;</span>
+   	<span class="token comment">// Garbage collection (ex: c++ ~destructor)</span>
+
+   		<span class="token comment">/* Constructors (Setters) */</span>
+   	<span class="token function">setPrice</span><span class="token punctuation">(</span>price <span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token keyword">this</span><span class="token punctuation">.</span>price <span class="token operator">=</span> price <span class="token punctuation">&#125;</span>
+   	<span class="token function">setBrand</span><span class="token punctuation">(</span>brand <span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token keyword">this</span><span class="token punctuation">.</span>brand <span class="token operator">=</span> brand <span class="token punctuation">&#125;</span>
+   	<span class="token function">setPlate</span><span class="token punctuation">(</span>plate <span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token keyword">this</span><span class="token punctuation">.</span>plate <span class="token operator">=</span> plate <span class="token punctuation">&#125;</span>
+
+   		<span class="token comment">/* Accessors (Getters) */</span>
+   	<span class="token function">getPrice</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token builtin">number</span> <span class="token punctuation">&#123;</span> <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>price <span class="token punctuation">&#125;</span>
+   	<span class="token function">getBrand</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token builtin">string</span> <span class="token punctuation">&#123;</span> <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>brand <span class="token punctuation">&#125;</span>
+   	<span class="token function">getPlate</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token builtin">string</span> <span class="token punctuation">&#123;</span> <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>plate <span class="token punctuation">&#125;</span>
+
+   		<span class="token comment">/* Functions */</span>
+   	<span class="token function">computeSomething</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">number</span> <span class="token punctuation">&#123;</span> <span class="token keyword">return</span> <span class="token number">0</span> <span class="token punctuation">&#125;</span>
+   <span class="token punctuation">&#125;</span></code><!-- HTML_TAG_END --></pre>
+<h4 id="data-persistence"><a href="#data-persistence">Data Persistence</a></h4>
+<p><strong>Immutability: Keep the initial state, each computation create a new object</strong></p>
+<ul><li><strong>Benefits:</strong> Permit to avoid errors due to the change of the object. For instance, if multiple entities can access the object at the same time, or if you just don\‘t want the state of the object to change.</li>
+<li><strong>DrawBack:</strong> Can be heavier on memory due to the initialisation of a new element for each change in the object state</li></ul>
+<pre class="language-typescript"><!-- HTML_TAG_START --><code class="language-typescript">   	<span class="token keyword">class</span> <span class="token class-name">ImmutableNumber</span> <span class="token punctuation">&#123;</span>
+   	<span class="token function">constructor</span><span class="token punctuation">(</span><span class="token keyword">private</span> value<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token punctuation">&#125;</span>
+
+   		<span class="token function">getValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token builtin">number</span> <span class="token punctuation">&#123;</span> <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>value <span class="token punctuation">&#125;</span>
+
+   		<span class="token function">plusNumber</span><span class="token punctuation">(</span>other<span class="token operator">:</span> ImmutableNumber<span class="token punctuation">)</span> <span class="token operator">:</span> ImmutableNumber <span class="token punctuation">&#123;</span>
+   		<span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">ImmutableNumber</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">getValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> other<span class="token punctuation">.</span><span class="token function">getValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+   	<span class="token punctuation">&#125;</span>
+
+   		<span class="token function">minusNumber</span><span class="token punctuation">(</span>other<span class="token operator">:</span> ImmutableNumber<span class="token punctuation">)</span> <span class="token operator">:</span> ImmutableNumber <span class="token punctuation">&#123;</span>
+   		<span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">ImmutableNumber</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">getValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> other<span class="token punctuation">.</span><span class="token function">getValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+   	<span class="token punctuation">&#125;</span>
+   <span class="token punctuation">&#125;</span> </code><!-- HTML_TAG_END --></pre>
+<p><strong>Mutability: The state of the object can change, allows to edit it</strong></p>
+<ul><li><strong>Benefits:</strong> Some case just need to have an object evolution.</li>
+<li><strong>DrawBack:</strong> Harder to manage the states, and riskier.</li></ul>
+<pre class="language-typescript"><!-- HTML_TAG_START --><code class="language-typescript">   	<span class="token keyword">class</span> <span class="token class-name">MutableNumber</span> <span class="token punctuation">&#123;</span>
+   	<span class="token function">constructor</span><span class="token punctuation">(</span><span class="token keyword">private</span> value<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token punctuation">&#125;</span>
+
+   		<span class="token function">getValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token builtin">number</span> <span class="token punctuation">&#123;</span> <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>value <span class="token punctuation">&#125;</span>
+   	<span class="token function">setValue</span><span class="token punctuation">(</span>value<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token keyword">this</span><span class="token punctuation">.</span>value <span class="token operator">=</span> value <span class="token punctuation">&#125;</span>
+
+   		<span class="token function">plusNumber</span><span class="token punctuation">(</span>other<span class="token operator">:</span> MutableNumber<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+   		<span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setValue</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">getValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> other<span class="token punctuation">.</span><span class="token function">getValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+   	<span class="token punctuation">&#125;</span>
+
+   		<span class="token function">minusNumber</span><span class="token punctuation">(</span>other<span class="token operator">:</span> MutableNumber<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+   		<span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setValue</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">getValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> other<span class="token punctuation">.</span><span class="token function">getValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+   	<span class="token punctuation">&#125;</span>
+   <span class="token punctuation">&#125;</span> </code><!-- HTML_TAG_END --></pre>
+<h4 id="hierarchy-aggregation-and-inheritance"><a href="#hierarchy-aggregation-and-inheritance">Hierarchy: Aggregation and Inheritance</a></h4>
+<p><strong>Aggregation (Has a X)</strong></p>
+<p>Code factorisation with the aggregation of the differents classes</p>
+<p>Multiples forms:</p>
+<ul><li><strong>Shared Aggregation</strong> (objects are independants)</li>
+<li><strong>Symbiosis</strong> (same life duration)</li></ul>
+<p>Example:</p>
+<pre class="language-typescript"><!-- HTML_TAG_START --><code class="language-typescript">   <span class="token keyword">class</span> <span class="token class-name">Driver</span> <span class="token punctuation">&#123;</span>
+   	<span class="token comment">/* Driver class implementation */</span>
+   <span class="token punctuation">&#125;</span>
+
+   <span class="token keyword">class</span> <span class="token class-name">Wheel</span> <span class="token punctuation">&#123;</span>
+   	<span class="token comment">/* Wheel class implementation */</span>
+   <span class="token punctuation">&#125;</span>
+
+   <span class="token keyword">class</span> <span class="token class-name">Frame</span> <span class="token punctuation">&#123;</span>
+   	<span class="token comment">/* Frame class implementation */</span>
+   <span class="token punctuation">&#125;</span>
+
+   <span class="token comment">/*
+   	The Car class is an example of the Aggregation:
+   	It HAS a driver, wheels and a frame
+   */</span>
+
+   <span class="token keyword">class</span> <span class="token class-name">Car</span> <span class="token punctuation">&#123;</span>
+   	<span class="token keyword">private</span> driver<span class="token operator">:</span> Driver
+   	<span class="token keyword">private</span> wheels<span class="token operator">:</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span>Wheel<span class="token operator">></span>
+   	<span class="token keyword">private</span> frame<span class="token operator">:</span> Frame
+
+   	<span class="token function">constructor</span><span class="token punctuation">(</span>driver<span class="token operator">:</span> Driver<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+   		<span class="token keyword">this</span><span class="token punctuation">.</span>driver <span class="token operator">=</span> driver
+   		<span class="token keyword">this</span><span class="token punctuation">.</span>wheels <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token keyword">new</span> <span class="token class-name">Wheel</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">Wheel</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">Wheel</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">Wheel</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+   		<span class="token keyword">this</span><span class="token punctuation">.</span>frame <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Frame</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+   	<span class="token punctuation">&#125;</span>
+
+   	<span class="token comment">/*
+   		With this exemples, we could also say thet these components
+   		don't have the same relation with the Car class:
+
+   		- The Wheels and the Frame seems pretty linked to the Car
+   		  In fact, we can see that they are only created in the Car constructor.
+   		  => We could say that the Car is in symbiosis with the Wheels and the Frame
+   		  ... but it's not realy true, the wheels could be changed, the car
+   		  would still be the same. The interpretation is realy specific to what you need
+
+   		- The Driver seems completely independant from the rest of the pieces. It is 
+   		passed by parameter in the constructor, and we can emit the supposition that
+   		the driver can be changed, for instance if he sells the car to another Driver
+   		=> We could say that the Driver is in a shared aggregation with the Car
+   	*/</span>
+   <span class="token punctuation">&#125;</span></code><!-- HTML_TAG_END --></pre>
+<p><strong>Inheritance (Is a X)</strong></p>
+<p>Polymorphism : Multiplicity of essences</p>
+<p>Data storage:</p>
+<ul><li><strong>Covariant</strong> (accept object that are more specialized)</li>
+<li><strong>Contravariant</strong> (don\‘t accept any more specialized object)</li></ul>
+<p>Example:</p>
+<pre class="language-typescript"><!-- HTML_TAG_START --><code class="language-typescript">   	<span class="token keyword">class</span> <span class="token class-name">Vehicle</span> <span class="token punctuation">&#123;</span>
+   	<span class="token keyword">private</span> driver<span class="token operator">:</span> Driver
+   	<span class="token keyword">private</span> wheels<span class="token operator">:</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span>Wheel<span class="token operator">></span>
+   	<span class="token keyword">private</span> frame<span class="token operator">:</span> Frame
+
+   		<span class="token comment">/* Vehicle implementation */</span>
+   <span class="token punctuation">&#125;</span>
+
+   	<span class="token comment">/* A Car IS a Vehicle, it will have the same attributes and methods... */</span>
+   <span class="token keyword">class</span> <span class="token class-name">Car</span> <span class="token keyword">extends</span> <span class="token class-name">Vehicle</span> <span class="token punctuation">&#123;</span>
+
+   		<span class="token comment">/* Car class implementation */</span>
+   <span class="token punctuation">&#125;</span>
+
+   	<span class="token comment">/* ... but moreover, it can implement new attributes and methods! */</span>
+   <span class="token keyword">class</span> <span class="token class-name">Truck</span> <span class="token keyword">extends</span> <span class="token class-name">Vehicle</span> <span class="token punctuation">&#123;</span>
+   	<span class="token keyword">private</span> trailer<span class="token operator">:</span> Trailer <span class="token comment">// The trailer is specific to the truck</span>
+
+   		<span class="token comment">/* Truck class implementation */</span>
+   <span class="token punctuation">&#125;</span>
+
+   	<span class="token comment">/* 
+   	We can see that the Polymorphism allows to store multiple childs 
+   	of the Car class in the same Array, that's really usefull 
+   */</span>
+   <span class="token keyword">let</span> MyVehicles<span class="token operator">:</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span>Vehicles<span class="token operator">></span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token keyword">new</span> <span class="token class-name">Car</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">Truck</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span></code><!-- HTML_TAG_END --></pre>
+<h4 id="layered-architectures"><a href="#layered-architectures">Layered architectures</a></h4>
+<p><strong>Universal architecture:</strong></p>
+<ul><li><em>Low Layer</em> (internal): accessors and builders</li>
+<li><em>High Layer</em> (external): services implemented using the low layer</li></ul>
+<p><strong>Factorisation Cases:</strong></p>
+<ul><li><em>Simple Inheritance:</em> descending aproach (factoring the bottom layer)</li>
+<li><em>Simple Inheritance:</em> ascending aproach (factoring the top layer)</li>
+<li><em>Multiple Inheritance:</em> independant bottom and top layers</li>
+<li><em>Agregation with Delegation:</em> composition of the top layer (inject dependances)</li></ul>
+<h4 id="other-concepts"><a href="#other-concepts">Other concepts</a></h4>
+  
+  <div class="inline-flex items-center space-x-1"><span><a href="/garden" class="underline">garden</a> /
+        </span><span><a href="/garden/#sheets" class="underline">sheets</a> /
+        </span><span><a href="/garden/#sheets/#computer" class="underline">computer</a> /
+        </span><span>paradigms
+        </span></div></article></main></main>
+
+	
+<div class="background-tertiary w-full bottom-0 h-[200px] p-5 pointer-events-auto"><div class="flex justify-center">©2022</div></div>
+
+</body>
+
+
+		<script type="module" data-sveltekit-hydrate="d2pr2o">
+			import { start } from "/garden/_app/immutable/start-13c47096.js";
+
+			start({
+				env: {},
+				paths: {"base":"/garden","assets":"/garden"},
+				target: document.querySelector('[data-sveltekit-hydrate="d2pr2o"]').parentNode,
+				version: "1672939407002",
+				hydrate: {
+					node_ids: [0, 3, 11],
+					data: [null,null,null],
+					form: null
+				}
+			});
+		</script>
+	</div>
+	</body>
+</html>

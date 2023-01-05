@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" href="/garden/favicon/favicon.png" />
+		<meta http-equiv="content-security-policy" content="">
+		<link href="/garden/_app/immutable/assets/_layout-3cd4ed45.css" rel="stylesheet">
+		<link rel="modulepreload" href="/garden/_app/immutable/start-13c47096.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/index-2e2fe841.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/singletons-ae7dcc5c.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/paths-21093871.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/preload-helper-41c905a7.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/components/pages/_layout.svelte-7804cf29.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/ScrollTo-33ea659a.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/modules/pages/_layout.js-9cbb603b.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/_layout-da46b06b.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/components/pages/sheets/_layout.svelte-a35d2be0.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/components/pages/sheets/_slug_/_page.svelte-26e80596.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/BreadCrumbs-5d55fa5f.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/stores-4dc06837.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/modules/pages/sheets/_slug_/_page.js-a5fb3fd0.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/dynamic-import-helper-be004503.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/_page-6e48664e.js"><!-- HEAD_svelte-7y44jt_START --><link rel="icon" href="/garden/favicon/favicon.png"><!-- HEAD_svelte-7y44jt_END -->
+	</head>
+	<body>
+		<div id="svelte">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+
+
+
+<body class="background-primary"><nav class="background-tertiary flex items-center justify-between flex-wrap"><a href="/garden/"><div class="flex items-center flex-shrink-0 background-secondary px-5 py-2 absolute w-[100px] left-[-6px] top-0 skewed z-30"><img src="/garden/logos/sumblack.svg" alt="logo" class="h-8 anti-skewed">
+
+			<div class="absolute left-[55px] top-3 pl-5 flex"><div class="background-dark h-8 w-1 mx-0.5"></div>
+				<div class="background-dark h-8 w-2 mx-0.5"></div></div></div></a>
+
+	<div class="background-dark w-full absolute top-3 h-9 skewed left-[-20px] z-20"><div class="ml-[125px] anti-skewed pt-1 overflow-hidden"><a href="/garden/posts" class="font-serif px-1">Posts</a><a href="/garden/sheets" class="font-serif px-1">Sheets</a><a href="/garden/snippets" class="font-serif px-1">Snippets</a><a href="/garden/projects" class="font-serif px-1">Projects</a><a href="/garden/about" class="font-serif px-1">About</a></div></div>
+
+	<div class="absolute top-3 right-4 h-9 inline-flex bg-grey text-white skewed z-30"><button class="flex items-center h-auto w-12 anti-skewed"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" class="h-6"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg></button></div>
+
+	<div class="w-full block pt-12"></div></nav>
+
+	<main><main class="px-3 pt-16 pb-10"><article><div class="inline-flex items-center space-x-1"><span><a href="/garden" class="underline">garden</a> /
+        </span><span><a href="/garden/#sheets" class="underline">sheets</a> /
+        </span><span><a href="/garden/#sheets/#computer" class="underline">computer</a> /
+        </span><span>sphinx
+        </span></div>
+
+  <h1>Sphinx</h1>
+  <h2 id="introduction"><a href="#introduction">Introduction</a></h2>
+<h2 id="setup"><a href="#setup">Setup</a></h2>
+<h3 id="installation-with-anaconda"><a href="#installation-with-anaconda">Installation with Anaconda</a></h3>
+<p><strong>Install Anaconda:</strong></p>
+<p><a href="https://docs.anaconda.com/anaconda/install/windows/" rel="nofollow">https://docs.anaconda.com/anaconda/install/windows/</a></p>
+<pre class="language-bash"><!-- HTML_TAG_START --><code class="language-bash">   $ conda create <span class="token parameter variable">-n</span> sphinx <span class="token assign-left variable">python</span><span class="token operator">=</span><span class="token number">3.7</span> <span class="token comment"># Create the env we will use for sphinx</span>
+   $ conda activate sphinx 			<span class="token comment"># Activate the env (reopen a new command if error)</span>
+   <span class="token punctuation">(</span>sphinx<span class="token punctuation">)</span> $ conda <span class="token function">install</span> sphinx 	<span class="token comment"># Install Sphinx from the package repository</span>
+
+   <span class="token comment"># Extentions (themes, converter, highligting etc)</span>
+   <span class="token punctuation">(</span>sphinx<span class="token punctuation">)</span> $ conda <span class="token function">install</span> <span class="token parameter variable">-c</span> anaconda recommonmark 		<span class="token comment"># If you want to use the .md language in addition to the .rst base one</span>
+   <span class="token punctuation">(</span>sphinx<span class="token punctuation">)</span> $ conda <span class="token function">install</span> <span class="token parameter variable">-c</span> anaconda sphinx_rtd_theme 	<span class="token comment"># Read The Doc theme is a cool theme to begin, see example at https://sphinx-rtd-theme.readthedocs.io/en/stable/</span>
+   <span class="token punctuation">(</span>sphinx<span class="token punctuation">)</span> $ conda <span class="token function">install</span> <span class="token parameter variable">-c</span> conda-forge nbsphinx		<span class="token comment"># If you want to have embedded notebooks into the documentation </span>
+   <span class="token punctuation">(</span>sphinx<span class="token punctuation">)</span> $ conda <span class="token function">install</span> <span class="token parameter variable">-c</span> conda-forge sphinx-copybutton <span class="token comment"># Add a copy button on the code blocks</span>
+
+   <span class="token punctuation">(</span>sphinx<span class="token punctuation">)</span> $ <span class="token function">mkdir</span> website_folder		<span class="token comment"># Create the website folder</span>
+   <span class="token punctuation">(</span>sphinx<span class="token punctuation">)</span> $ <span class="token builtin class-name">cd</span> website_folder		<span class="token comment"># Go into the folder</span>
+   <span class="token punctuation">(</span>sphinx<span class="token punctuation">)</span> $ sphinx-quickstart		<span class="token comment"># Initialize the website</span>
+
+   <span class="token punctuation">(</span>sphinx<span class="token punctuation">)</span> $ <span class="token function">make</span> html
+   <span class="token punctuation">(</span>sphinx<span class="token punctuation">)</span> $ start chrome _build/html/index.html</code><!-- HTML_TAG_END --></pre>
+<h3 id="website-setup"><a href="#website-setup">Website Setup</a></h3>
+<h4 id="source-folder"><a href="#source-folder">Source Folder</a></h4>
+<pre class="language-undefined"><!-- HTML_TAG_START --><code class="language-undefined">source                                          *Root*  
+├─── _static                                    *Ressource*
+│     ├─── main.js  
+│     ├─── style.css  
+│     ├─── image.png  
+│     ├─── favicon.ico  
+│     └─── logo.svg   
+├─── _templates                                 *Templates*
+│     └─── layout.html   
+├─── pages                                      *Pages*
+├─── conf.py                                    *Config*
+└─── index.rst                                  *Main Page*</code><!-- HTML_TAG_END --></pre>
+<h4 id="conf-file"><a href="#conf-file">Conf File</a></h4>
+<pre class="language-undefined"><!-- HTML_TAG_START --><code class="language-undefined">   # Configuration file for the Sphinx documentation builder.
+
+   /* ... */
+
+   # -- Project information -----------------------------------------------------
+
+   project = &#39;Project-Name&#39;
+   copyright = &#39;Copyright text&#39;
+   author = &#39;Author Name&#39;
+   release = &#39;1.0.0&#39;
+
+   /* ... */
+
+   # -- General configuration ---------------------------------------------------
+
+   extensions = [&#39;recommonmark&#39;,&#39;sphinx_rtd_theme&#39;,&#39;nbsphinx&#39;,&#39;sphinx_copybutton&#39;]
+   templates_path = [&#39;_templates&#39;]
+   exclude_patterns = []
+   html_theme = &#39;sphinx_rtd_theme&#39;
+   pygments_style = &#39;monokai&#39;
+
+   html_static_path = [&#39;_static&#39;]
+   html_css_files = [&#39;style.css&#39;]
+   html_js_files = [&#39;main.js&#39;]
+
+   html_title = &quot;Website Title&quot;
+   html_short_title = &quot;Title&quot;
+   html_logo = &quot;_static/logo.svg&quot;
+   html_favicon = &quot;_static/favicon.ico&quot;
+
+   html_show_sourcelink = False
+   html_theme_options = &#123;
+       &#39;logo_only&#39;: True,
+       &#39;prev_next_buttons_location&#39;: &#39;both&#39;
+   &#125;</code><!-- HTML_TAG_END --></pre>
+<h2 id="cheat-sheets"><a href="#cheat-sheets">Cheat Sheets</a></h2>
+<h3 id="restructuredtext-rst"><a href="#restructuredtext-rst">ReStructuredText (.rst)</a></h3>
+<pre class="language-rst"><!-- HTML_TAG_START --><code class="language-rst">   ============================
+   Main Title
+   ============================
+
+   Sub Title
+   ============================
+
+   Sub Sub Title
+   ----------------------------
+
+   Sub Sub Sub Title
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   :Title note:
+
+   .. contents:: Table of Contents
+   	:local:
+
+   	.. toctree::
+   	:maxdepth: 2
+   	:caption: Maths Tree
+
+   &#96;&#96;inline code&#96;&#96;
+
+   Code example::
+
+   	if (a == b) &#123; /* code */ &#125;
+
+   .. code-block::
+
+   	if (a == b) &#123; /* code */ &#125;
+
+   .. code-block:: c
+   	:linenos:
+   	:lines: 1, 3-5
+       :start-after: 3
+       :end-before: 5
+
+   	if (a == b) &#123; /* code */ &#125;
+
+   .. literalinclude:: file.c
+   	:language: c
+   	:linenos:
+
+   +---------------------+---------+---+
+   | 1                   | 2       | 3 |
+   +---------------------+---------+---+
+
+   +---------+---------+-----------+
+   | 1       | 2       | 3         |
+   +=========+=========+===========+
+   | 4                 | 5         |
+   +---------+---------+-----------+
+   | 6       | 7       | 10        |
+   +---------+---------+           |
+   | 8       | 9       |           |
+   +---------+---------+-----------+
+
+   .. csv-table:: a title
+      :header: &quot;1&quot;, &quot;2&quot;, &quot;3&quot;
+      :widths: 20, 20, 20
+
+      &quot;4&quot;, &quot;5&quot;, &quot;6&quot;
+      &quot;7&quot;, &quot;8&quot;, &quot;9&quot;
+
+   .. image:: image.jpg
+       :width: 200px
+       :align: center
+       :height: 100px
+       :alt: alternate text
+
+   .. figure:: image.jpg
+       :width: 200px
+       :align: center
+       :height: 100px
+       :alt: alternate text
+       :figclass: align-center
+
+       Caption text
+
+   	.. todo::
+   .. seealso:: Note
+   .. note:: Note
+   .. warning:: Note
+   .. Attention:: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+   .. Caution:: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+   .. DANGER:: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+   .. WARNING:: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+   .. Error:: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+   .. Hint:: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+   .. Important:: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+   .. Note:: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+   .. Tip:: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+
+   	.. admonition:: Custom Title
+
+   	    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+
+   	.. topic:: Title
+
+   		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+   	Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+   	uis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+   	Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+   	.. sidebar:: Sidebar Title
+   	:short: Sidebar short
+
+   		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+   	Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+   	uis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+   	Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+   	:download:&#96;download samplet.py &lt;sample.py&gt;&#96;
+   :math:&#96;alpha &gt; eta&#96;
+   .. math::
+
+   	n_&#123;mathrm&#123;offset&#125;&#125; = sum_&#123;k=0&#125;^&#123;N-1&#125; s_k n_k</code><!-- HTML_TAG_END --></pre>
+<h3 id="markdown"><a href="#markdown">Markdown</a></h3>
+<pre class="language-undefined"><!-- HTML_TAG_START --><code class="language-undefined">sphinx-quickstart
+
+pip install pypandoc
+
+import pypandoc output = pypandoc.convert_file(&#39;file.md&#39;, &#39;rst&#39;)
+
+with open(&quot;file.rst&quot;, &quot;w&quot;, encoding=&quot;utf-8&quot;) as f:
+   f.write(output)</code><!-- HTML_TAG_END --></pre>
+<h2 id="themes"><a href="#themes">Themes</a></h2>
+<h3 id="install-theme"><a href="#install-theme">Install Theme</a></h3>
+<blockquote><p>TODO</p></blockquote>
+<h3 id="edit-style"><a href="#edit-style">Edit Style</a></h3>
+<blockquote><p>TODO</p></blockquote>
+<h3 id="code-syntax-highlighting"><a href="#code-syntax-highlighting">Code Syntax Highlighting</a></h3>
+<p><a href="https://stackoverflow.com/questions/11315504/sphinx-list-of-supported-languages-for-highlighting" rel="nofollow">https://stackoverflow.com/questions/11315504/sphinx-list-of-supported-languages-for-highlighting</a></p>
+<pre class="language-undefined"><!-- HTML_TAG_START --><code class="language-undefined">pygmentize -L lexers</code><!-- HTML_TAG_END --></pre>
+<p><a href="https://docs.typo3.org/m/typo3/docs-how-to-document/master/en-us/WritingReST/Codeblocks.html" rel="nofollow">https://docs.typo3.org/m/typo3/docs-how-to-document/master/en-us/WritingReST/Codeblocks.html</a></p>
+<p><a href="https://pygments.org/docs/lexers/" rel="nofollow">https://pygments.org/docs/lexers/</a></p>
+<p><a href="https://stylishthemes.github.io/Syntax-Themes/pygments/" rel="nofollow">https://stylishthemes.github.io/Syntax-Themes/pygments/</a></p>
+<p><a href="https://nbsphinx.readthedocs.io/en/0.7.0/installation.html" rel="nofollow">https://nbsphinx.readthedocs.io/en/0.7.0/installation.html</a></p>
+  
+  <div class="inline-flex items-center space-x-1"><span><a href="/garden" class="underline">garden</a> /
+        </span><span><a href="/garden/#sheets" class="underline">sheets</a> /
+        </span><span><a href="/garden/#sheets/#computer" class="underline">computer</a> /
+        </span><span>sphinx
+        </span></div></article></main></main>
+
+	
+<div class="background-tertiary w-full bottom-0 h-[200px] p-5 pointer-events-auto"><div class="flex justify-center">©2022</div></div>
+
+</body>
+
+
+		<script type="module" data-sveltekit-hydrate="3xqd4r">
+			import { start } from "/garden/_app/immutable/start-13c47096.js";
+
+			start({
+				env: {},
+				paths: {"base":"/garden","assets":"/garden"},
+				target: document.querySelector('[data-sveltekit-hydrate="3xqd4r"]').parentNode,
+				version: "1672939407002",
+				hydrate: {
+					node_ids: [0, 3, 11],
+					data: [null,null,null],
+					form: null
+				}
+			});
+		</script>
+	</div>
+	</body>
+</html>
