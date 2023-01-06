@@ -1,6 +1,7 @@
 ---
 title: "Webrtc"
-short: ""
+short: "Real-time communication (RTC) over the web"
+topic: networking peer-to-peer
 ---
 
 ## Intro 

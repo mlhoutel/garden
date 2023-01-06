@@ -9,6 +9,8 @@
 @layer base {
 	html {
 		font-family: Inter, system-ui, sans-serif;
+		overflow-y: auto;
+		overflow-x: hidden;
 	}
 }
 
@@ -61,7 +63,7 @@
 	}
 
 	.pill {
-		@apply bg-black text-white dark:bg-orange dark:text-grey dark:font-bold font-thin text-sm m-1 p-[1px] px-3 rounded-full w-min flex justify-center items-center;
+		@apply bg-black text-white dark:bg-orange dark:text-grey dark:font-bold font-thin text-xs m-0.5 py-[1px] px-[10px] rounded-full w-min flex justify-center items-center;
 
 		white-space: nowrap;
 		overflow: hidden;

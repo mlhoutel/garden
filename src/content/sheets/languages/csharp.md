@@ -1,6 +1,7 @@
 ---
 title: "C#"
-short: ""
+short: "Object-oriented programming language developed by Microsoft as part of its .NET initiative."
+topic: programming-language compiled
 ---
 
 ## Cheat Sheets

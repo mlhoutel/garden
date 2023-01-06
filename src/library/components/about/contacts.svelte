@@ -63,7 +63,7 @@
 
 	<div class="flex flex-col lg:flex-row justify-center">
 		<div class="w-full lg:w-[700px] p-6">
-			<FalseWindow class="bg-black">
+			<FalseWindow>
 				<div class="code-snippet">
 					<pre>{#each getCode() as c}<code>{@html c}<br /></code>{/each}</pre>
 				</div>
@@ -102,9 +102,9 @@
 
 					<a
 						href="mailto:mlhoutel@gmail.com.com?subject={subject}&body={body}"
-						class="inline-flex bg-grey text-white text-lg font-semibold px-3 py-0.5 rounded-md items-center"
+						class="inline-flex bg-grey text-white text-sm font-semibold px-3 py-0.5 rounded-md items-center"
 					>
-						<Icon src={Mail} size="25px" class="mr-1" />
+						<Icon src={Mail} size="20px" class="mr-1" />
 						<div>Send</div>
 					</a>
 				</div>

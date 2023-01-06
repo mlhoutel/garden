@@ -1,5 +1,7 @@
 ---
 title: "Interpolation"
+short: Lagrange polynomial and splines
+topic: maths interpolation
 ---
 
 ## Lagrange

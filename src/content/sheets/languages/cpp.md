@@ -1,6 +1,7 @@
 ---
 title: "C++"
-short: ""
+short: "General-purpose programming language, developed as an extension of the C programming language."
+topic: programming-language compiled
 ---
 
 ## Introduction

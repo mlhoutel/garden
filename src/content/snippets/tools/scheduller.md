@@ -1,8 +1,10 @@
 ---
-title: "Scheduller"
+title: "Scheduler"
+short: Simple scheduler policies demo
+topic: scheduler visualisation
 ---
 
-## Scheduller demo
+## Scheduler demo
 
 ```js
 const Status = Object.freeze({
@@ -48,8 +50,8 @@ const Policy = Object.freeze({
     RR: "RR",      // Round Robin
 });
 
-// Preemptive scheduller
-class Scheduller {
+// Preemptive scheduler
+class Scheduler {
     constructor(tasks, policy, threads = 1) {
         tasks.forEach((t, i) => t.id = i);
 
@@ -134,10 +136,10 @@ class Scheduller {
     }
 }
 
-const FIFO = new Scheduller([new Task(10), new Task(5), new Task(10), new Task(7)], Policy.FIFO)
-const LIFO = new Scheduller([new Task(10), new Task(5), new Task(10), new Task(7)], Policy.LIFO)
-const SJF = new Scheduller([new Task(10), new Task(5), new Task(10), new Task(7)], Policy.SJF)
-const RR = new Scheduller([new Task(10), new Task(5), new Task(10), new Task(7)], Policy.RR)
+const FIFO = new Scheduler([new Task(10), new Task(5), new Task(10), new Task(7)], Policy.FIFO)
+const LIFO = new Scheduler([new Task(10), new Task(5), new Task(10), new Task(7)], Policy.LIFO)
+const SJF = new Scheduler([new Task(10), new Task(5), new Task(10), new Task(7)], Policy.SJF)
+const RR = new Scheduler([new Task(10), new Task(5), new Task(10), new Task(7)], Policy.RR)
 
 FIFO.Trace()
 LIFO.Trace()

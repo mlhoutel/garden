@@ -1,6 +1,7 @@
 ---
 title: "Vim & VS Code shortcuts"
-short: ""
+short: "Set of keyboard shortcuts to help users efficiently navigate and edit text"
+topic: shortcuts vs-code vim cmder
 ---
 
 ## VS Code

@@ -1,6 +1,6 @@
 <script>
-	import ProjectCard from '../global/projectCard.svelte';
-	import TechnoSelect from '../global/technoSelect.svelte';
+	import ProjectCard from '../global/ProjectCard.svelte';
+	import TechnoSelect from '../global/TechnoSelect.svelte';
 	import { scrollRef } from 'svelte-scrolling';
 
 	const projects = [

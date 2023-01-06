@@ -1,5 +1,7 @@
 ---
 title: "Analysis"
+short: Derivative, factorial, modulo and prime numbers
+topic: maths analysis
 ---
 
 ## Derivative

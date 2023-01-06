@@ -19,7 +19,7 @@
 
 {#if y > 50}
 	<button
-		class="z-30 fixed bottom-0 right-0 background-primary p-2 m-5 rounded-full"
+		class="z-30 fixed bottom-10 right-10 background-primary p-2 rounded-full"
 		style="box-shadow: rgba(0,0,0,0.5) 0px 3px 5px 0px;"
 		on:click={navigateTop}
 	>

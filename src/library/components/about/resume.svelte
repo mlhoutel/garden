@@ -10,7 +10,7 @@
 		LightningBolt,
 		Variable
 	} from '@steeze-ui/heroicons';
-	import TechnoPill from '../global/technoPill.svelte';
+	import TopicPill from '../global/TopicPill.svelte';
 	import { scrollRef } from 'svelte-scrolling';
 
 	const jobs = [
@@ -115,8 +115,8 @@
 								<p class="italic font-bold">{job.place}</p>
 
 								<div class="pills py-3">
-									{#each job.technos as tech}
-										<TechnoPill techno={tech} />
+									{#each job.technos as topic}
+										<TopicPill {topic} />
 									{/each}
 								</div>
 							</div>
