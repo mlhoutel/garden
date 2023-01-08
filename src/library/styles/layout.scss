@@ -90,11 +90,11 @@
 	}
 
 	.navbar-links {
-		@apply flex flex-col sm:inline-flex sm:flex-row;
+		@apply py-2 flex flex-col sm:inline-flex sm:flex-row;
 	}
 
 	.navbar-links li {
-		@apply py-2 px-5 text-white font-semibold;
+		@apply px-5 text-white font-medium;
 	}
 
 	.full-centered {

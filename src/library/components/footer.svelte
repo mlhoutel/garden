@@ -10,12 +10,12 @@
 	export function navigateTop() {
 		scrollTop();
 	}
+
+	const year = new Date().getFullYear()
+
 </script>
 
 <svelte:window bind:scrollY={y} />
-<div class="background-tertiary w-full bottom-0 h-[200px] p-5 pointer-events-auto">
-	<div class="flex justify-center">©2022</div>
-</div>
 
 {#if y > 50}
 	<button
@@ -26,3 +26,29 @@
 		<Icon src={ChevronUp} size="35px" />
 	</button>
 {/if}
+
+<div class="background-tertiary w-full bottom-0 py-10 px-5 pointer-events-auto">
+	<article class="flex margin-auto">
+		<div class="px-10">
+			<ul class="list-none underline">
+				<li><a href="{base}/">home</a></li>
+				<li><a href="{base}/posts">posts</a></li>
+				<li><a href="{base}/sheets">sheets</a></li>
+				<li><a href="{base}/snippets">snippets</a></li>
+				<li><a href="{base}/projects">projects</a></li>
+				<li><a href="{base}/portfolio">portfolio</a></li>
+			</ul>
+		</div>
+		<div class="px-10">
+			<h2 class="pt-0">About</h2>
+			<p>This website was made with sveltekit / tailwind / mdsvex</p>
+		</div>
+	</article>
+	
+	<div class="flex justify-center">
+		<a class="underline px-1" href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noreferrer">COPYLEFT</a>
+		<span>- {year} MAEL LHOUTELLIER -</span>
+		<a class="underline px-1" href="https://github.com/mlhoutel/garden" target="_blank" rel="noreferrer">SOURCE</a>
+	</div>
+</div>
+
