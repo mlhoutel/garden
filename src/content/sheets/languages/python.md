@@ -1,6 +1,7 @@
 ---
 title: "Python"
-short: ""
+short: "high-level, interpreted programming language usefull for scripting and data-analysis"
+topic: programming-language scripting
 ---
 
 ## Language

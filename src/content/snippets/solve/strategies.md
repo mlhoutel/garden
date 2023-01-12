@@ -1,5 +1,7 @@
 ---
-title: "Others"
+title: "Strategies"
+short: Bruteforce, Prefixsum and 2-SAT problem
+topic: maths solving-methods
 ---
 
 ## Bruteforce

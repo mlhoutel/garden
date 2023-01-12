@@ -1,38 +1,37 @@
 <script>
-export let data
+    import ContentList from "$components/lists/ContentList.svelte";
 
-const topics = Object.entries(data.tree)
+    export let data
 
-function escapedPath(path) { 
-    const index = path.lastIndexOf("/")
-    return path.slice(0, index) + "-" + path.slice(index+1)
-}
+    const topics = Object.entries(data.tree)
 
-function toUpper(text) {
-    return text.charAt(0).toUpperCase() + text.slice(1)
-}
+    function escapedPath(path) { 
+        const index = path.lastIndexOf("/")
+        return path.slice(0, index) + "-" + path.slice(index+1)
+    }
+
+    function toUpper(text) {
+        return text.charAt(0).toUpperCase() + text.slice(1)
+    }
+
+    // converted for ContentList component
+    const items = topics.map(([title, sheets]) => ({
+        label: toUpper(title),
+        items: Object.values(sheets).map((e) => ({
+            ...e,
+            path: escapedPath(e.path),
+            title: e.meta.title,
+            topic: e.meta.topic,
+            short: e.meta.short,
+        }))
+    }))
+
+    const label = "Go to sheet »"
+
 </script>
 
 <article>
-    <h1>Sheets</h1>
-
-    {#each topics as [title, topic]}
-
-        <h2 id={title} class="text-4xl font-bold tracking-widest p-2 pt-7">{toUpper(title)}</h2>
-
-        {#each Object.values(topic) as sheet}
-            <div class="p-2">
-                <a class="font-bold" href={escapedPath(sheet.path)}>{sheet.meta.title}</a>
-                <p class="pt-0 text-sm">
-                    {sheet.meta.short || "[No preview available]"}
-                    <br/>
-                    <a class="font-serif" href={escapedPath(sheet.path)}>Go to sheet »</a>
-                </p>
-            </div>
-        {/each}
-
-    {/each}
+  <h1>Sheets</h1>
+  
+  <ContentList {items} {label} />
 </article>
-
-
-

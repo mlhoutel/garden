@@ -33,8 +33,7 @@
 			{ label: "Posts", link: `${base}/posts` },
 			{ label: "Sheets", link: `${base}/sheets`},
 			{ label: "Snippets", link: `${base}/snippets`},
-			{ label: "Projects", link: `${base}/projects` },
-			{ label: "About", link: `${base}/about` }
+			{ label: "Projects", link: `${base}/projects` }
 		]
 	}
 </script>
@@ -54,9 +53,9 @@
 	</a>
 
 	<div class="background-dark w-full absolute top-3 h-9 skewed left-[-20px] z-20">
-		<div class="ml-[125px] anti-skewed pt-1 overflow-hidden">
+		<div class="anti-skewed pt-1 mt-10 md:ml-[125px] md:mt-0 overflow-hidden">
 			{#each getMenuItems() as item}
-				<a href={item.link} class="font-serif px-1">{item.label}</a>
+				<a href={item.link} class="background-primary md:background-dark font-serif px-1 w-[100%] md:w-5 block md:inline">{item.label}</a>
 			{/each}
 		</div>
 	</div>
@@ -73,3 +72,5 @@
 
 	<div class="w-full block pt-12" />
 </nav>
+
+<div class="w-full block h-[130px] md:h-0"></div>

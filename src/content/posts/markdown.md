@@ -1,6 +1,7 @@
 ---
 title: "Markdown"
 date: 2022-12-23
+topic: markdown demo styling
 short: Demonstration of the automatic markdown styling with custom theme
 ---
 

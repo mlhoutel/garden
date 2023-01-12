@@ -1,6 +1,7 @@
 ---
 title: "ASCII Table"
-short: ""
+short: "Mapping of characters as a series of binary digits to integers"
+topic: computer-science ascii
 ---
 
 <div style="overflow-x: auto">

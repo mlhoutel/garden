@@ -1,6 +1,7 @@
 ---
 title: "Java"
-short: ""
+short: "general-purpose object-oriented programming language, write once, run anywhere"
+topic: programming-language compiled
 ---
 
 ## JavaFx

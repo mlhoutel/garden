@@ -1,6 +1,7 @@
 ---
 title: "Languages Theory and Automatas"
-short: ""
+short: "Study of formal languages and automata as abstract models of computation used to design and analyze algorithms"
+topic: computer-science automatas
 ---
 
 ## Introduction

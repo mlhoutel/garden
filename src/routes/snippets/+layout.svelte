@@ -1,3 +1,3 @@
-<main class="px-3 pt-16 pb-10">
+<main class="px-3 pt-14 pb-10">
     <slot></slot>
 </main>

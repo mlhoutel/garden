@@ -1,6 +1,7 @@
 ---
-title: "Docker help sheet"
-short: ""
+title: "Docker container manager"
+short: "How to deploy and manage containerized applications"
+topic: computer-science docker
 ---
 
 ## Fast Help

@@ -1,5 +1,7 @@
+import { base } from '$app/paths';
+
 export const load = async ({ fetch }) => {
-	const response = await fetch(`api/sheets`);
+	const response = await fetch(`${base}/api/sheets`);
 	const sheets = await response.json();
 
 	// reconstruct file tree

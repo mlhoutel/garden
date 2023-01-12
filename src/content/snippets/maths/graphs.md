@@ -1,5 +1,7 @@
 ---
 title: "Graphs"
+short: Depth-first search, Breadth-first search, Tortoise and hare
+topic: maths graph-theory
 ---
 
 ## DFS

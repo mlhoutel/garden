@@ -1,5 +1,5 @@
 <script>
-	import TechnoPill from './technoPill.svelte';
+	import TopicPill from './TopicPill.svelte';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { Filter } from '@steeze-ui/heroicons';
 	import { createEventDispatcher } from 'svelte';
@@ -85,8 +85,8 @@
 
 <div class="w-[300px]">
 	<div class="pills">
-		{#each displaySelected as select}
-			<TechnoPill techno={select} on:click={selectClick} removable={true} />
+		{#each displaySelected as topic}
+			<TopicPill {topic} on:click={selectClick} removable={true} />
 		{/each}
 	</div>
 	<div class="select-search">

@@ -1,5 +1,7 @@
 ---
 title: "Functions"
+short: Dichotomy, Fixpoint method and Gradients
+topic: maths functions-solving
 ---
 
 ## Dichotomy

@@ -1,6 +1,7 @@
 ---
 title: "JavaScript"
-short: ""
+short: "High-level, dynamically-typed language, easy of use and flexible"
+topic: programming-language web
 ---
 
 ## Programming in JS

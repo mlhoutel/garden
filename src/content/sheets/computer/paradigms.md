@@ -1,6 +1,7 @@
 ---
 title: "Data Structures and Programming Paradigms"
-short: ""
+short: "Ways of organizing and storing data and approaches to writing and structuring code"
+topic: computer-science data-structures paradigms
 ---
 
 ## Modularity and Typing

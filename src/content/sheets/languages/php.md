@@ -1,6 +1,7 @@
 ---
 title: "PHP"
-short: ""
+short: "dynamically-typed, interpreted language for building server-side web applications"
+topic: programming-language web
 ---
 
 ## Cheat Sheets

@@ -1,5 +1,7 @@
 ---
 title: "Benchmarking"
+short: Benchmarking demo with a simple gcd algorithm
+topic: benchmarking
 ---
 
 ## Benchmark demo
