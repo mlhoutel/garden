@@ -20,7 +20,6 @@
         bounds.x2 = Math.round(bounds.x2 - bounds.x1 + OUTER_PADDING)
         bounds.y2 = Math.round(bounds.y2 - bounds.y1 + OUTER_PADDING)
 
-        console.log(bounds)
         return bounds
     }
 
