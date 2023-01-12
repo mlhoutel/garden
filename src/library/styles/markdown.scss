@@ -108,6 +108,10 @@ article {
         margin: auto;
     }
 
+    svg text {
+        @apply dark:fill-white;
+    }
+
     .jxgbox {
         width: 500px;
         height: 400px;

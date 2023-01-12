@@ -998,6 +998,56 @@ int main()
 }
 ```
 
+
+#### Stack & Heap
+
+```
+constexpr double pow(double x, long long n) noexcept {
+    if (n > 0) [[likely]]
+        return x * pow(x, n - 1);
+    else [[unlikely]]
+        return 1;
+}
+```
+
+**c style**
+
+```cpp
+struct MyStruct { };
+
+// on heap
+MyStruct* s = malloc(sizeof(struct MyStruct));
+
+// on stack
+MyStruct s = {};
+```
+
+**c++ style**
+
+```cpp
+class MyClass { };
+
+// on heap
+MyClass* c = new MyClass();
+
+// on stack
+MyClass c = MyClass();
+```
+
+#### By reference vs By copy
+
+```cpp
+// by copy
+int getIndex(MyClass a) {
+    return a.index;
+}
+
+// by ref (+ const)
+int getIndex(const &MyClass a) {
+    return a.index;
+}
+```
+
 #### Inheritances
 
 ```cpp
