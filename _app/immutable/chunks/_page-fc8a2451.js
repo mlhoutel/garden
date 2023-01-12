@@ -1,1 +1,0 @@
-const c=async({fetch:r})=>{const a=await(await r("api/sheets")).json();let s={};for(const o of a){const n=o.path.split("/").slice(1);let e=s;for(const[l,t]of n.entries())e[t]||(e[t]={}),l==n.length-1?e[t]=o:e=e[t]}return{tree:s}},p=Object.freeze(Object.defineProperty({__proto__:null,load:c},Symbol.toStringTag,{value:"Module"}));export{p as _,c as l};
