@@ -25,7 +25,7 @@
         <div class="p-5 text-xs columns-2 md:columns-5">
             {#each data.nodes.sort((a, b) => b.count - a.count) as node}
                 <div>
-                    <a href="#" class="underline">[ {node.count} ]</a> {node.label}
+                    <span class="underline">[ {node.count} ]</span> {node.label}
                 </div>
             {/each} 
         </div>
