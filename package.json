@@ -29,6 +29,7 @@
 		"rehype-slug": "^4.0.1",
 		"remark-math": "^2.0.1",
 		"sass": "^1.57.1",
+		"seedrandom": "^3.0.5",
 		"svelte": "^3.34.0",
 		"svelte-local-storage-store": "^0.3.2",
 		"svelte-preprocess": "^5.0.0",
