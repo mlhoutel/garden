@@ -1,22 +1,18 @@
-const wh = window.innerHeight;
-const ww = window.innerWidth;
+import { vec, RandomInt } from "$utils/projects/utils.js"
 
-let holders = [];
 let system = undefined;
 
-const V = {
+const Parameters = {
   DEBUG: false,
   STEP_GRAVITY: 0.1,
   CONSTRAINT_DAMPING: 0.5,
   CORPSE_SIZE: 10,
 };
 
-const A = {
+const Methods = {
   reset: {
-    label: "&#8634;",
-    function: () => {
-      reset();
-    },
+      label: "&#8634;",
+      function: () => { reset() },
   },
 };
 
@@ -40,35 +36,35 @@ class Body {
     this.cpos = this.cpos.plus(vel);
   }
 
-  Bounds() {
+  Bounds(p5) {
     const half = this.size / 2;
     if (this.cpos.y < half) {
       this.cpos.y = half + Math.abs(this.cpos.y);
-    } else if (this.cpos.y > wh - half) {
-      this.cpos.y = 2 * (wh - half) - this.cpos.y;
+    } else if (this.cpos.y > p5.height - half) {
+      this.cpos.y = 2 * (p5.height - half) - this.cpos.y;
     }
 
     if (this.cpos.x < half) {
       this.cpos.x = half + Math.abs(this.cpos.x);
-    } else if (this.cpos.x > ww - half) {
-      this.cpos.y = 2 * (ww - half) - this.cpos.x;
+    } else if (this.cpos.x > p5.width - half) {
+      this.cpos.y = 2 * (p5.width - half) - this.cpos.x;
     }
   }
 
   Gravity() {
-    this.cpos.y += V.STEP_GRAVITY;
+    this.cpos.y += Parameters.STEP_GRAVITY;
   }
 
-  Draw() {
-    fill(this.color);
-    stroke(this.color);
-    circle(this.cpos.x, this.cpos.y, this.size);
+  Draw(p5) {
+    p5.fill(this.color);
+    p5.stroke(this.color);
+    p5.circle(this.cpos.x, this.cpos.y, this.size);
   }
 
-  DrawDebug() {
+  DrawDebug(p5) {
     const vel = this.cpos.minus(this.lpos).times(10);
-    stroke([255, 0, 0]);
-    line(this.cpos.x, this.cpos.y, this.cpos.x + vel.x, this.cpos.y + vel.y); // Speed
+    p5.stroke([255, 0, 0]);
+    p5.line(this.cpos.x, this.cpos.y, this.cpos.x + vel.x, this.cpos.y + vel.y); // Speed
   }
 }
 
@@ -87,17 +83,17 @@ class Constraint {
     const norm = this.a.cpos.minus(this.b.cpos).divide(csize);
 
     this.a.cpos = this.a.cpos.minus(
-      norm.times(0.5 * diff * V.CONSTRAINT_DAMPING)
+      norm.times(0.5 * diff * Parameters.CONSTRAINT_DAMPING)
     );
     this.b.cpos = this.b.cpos.plus(
-      norm.times(0.5 * diff * V.CONSTRAINT_DAMPING)
+      norm.times(0.5 * diff * Parameters.CONSTRAINT_DAMPING)
     );
   }
 
-  Draw() {
-    fill(this.color);
-    stroke(this.color);
-    line(this.a.cpos.x, this.a.cpos.y, this.b.cpos.x, this.b.cpos.y);
+  Draw(p5) {
+    p5.fill(this.color);
+    p5.stroke(this.color);
+    p5.line(this.a.cpos.x, this.a.cpos.y, this.b.cpos.x, this.b.cpos.y);
   }
 }
 
@@ -107,10 +103,10 @@ class System {
     this.constraints = [];
   }
 
-  Step() {
+  Step(p5) {
     for (let body of this.bodies) {
       body.Gravity();
-      body.Bounds();
+      body.Bounds(p5);
       body.Step();
     }
 
@@ -119,20 +115,20 @@ class System {
     }
   }
 
-  Draw() {
-    strokeWeight(3);
+  Draw(p5) {
+    p5.strokeWeight(3);
 
     for (let body of this.bodies) {
-      body.Draw();
+      body.Draw(p5);
     }
 
     for (let constraint of this.constraints) {
-      constraint.Draw();
+      constraint.Draw(p5);
     }
 
-    if (V.DEBUG) {
+    if (Parameters.DEBUG) {
       for (let body of this.bodies) {
-        body.DrawDebug();
+        body.DrawDebug(p5);
       }
     }
   }
@@ -169,10 +165,10 @@ function Square(pos, size, color) {
 
   const s = {
     bodies: [
-      new Body(pos.minus(half), V.CORPSE_SIZE, color),
-      new Body(pos.minus(ihalf), V.CORPSE_SIZE, color),
-      new Body(pos.plus(half), V.CORPSE_SIZE, color),
-      new Body(pos.plus(ihalf), V.CORPSE_SIZE, color),
+      new Body(pos.minus(half), Parameters.CORPSE_SIZE, color),
+      new Body(pos.minus(ihalf), Parameters.CORPSE_SIZE, color),
+      new Body(pos.plus(half), Parameters.CORPSE_SIZE, color),
+      new Body(pos.plus(ihalf), Parameters.CORPSE_SIZE, color),
     ],
     constraints: [],
   };
@@ -208,7 +204,7 @@ function RopeSquare(pos, nrope, lrope) {
   for (let i = 0; i < nrope; i++) {
     Rope(
       s,
-      new Body(pos.minus(new vec(0, i * lrope)), V.CORPSE_SIZE, [0, 0, 0])
+      new Body(pos.minus(new vec(0, i * lrope)), Parameters.CORPSE_SIZE, [0, 0, 0])
     );
   }
 
@@ -227,7 +223,7 @@ function Grid(pos, points, sparse) {
       s.bodies.push(
         new Body(
           pos.plus(new vec(j * sparse, i * sparse)),
-          V.CORPSE_SIZE,
+          Parameters.CORPSE_SIZE,
           [0, 0, 0]
         )
       );
@@ -264,14 +260,14 @@ function Grid(pos, points, sparse) {
 function reset() {
   system = new System();
 
-  system.addStruct(RopeSquare(new vec(ww / 2, wh / 2), 10, 20));
+  system.addStruct(RopeSquare(new vec(1000 / 2, 1000 / 2), 10, 20));
 
   system.addStruct(Grid(new vec(100, 100), 10, 30));
 
   for (let i = 0; i < 5; i++) {
     system.addStruct(
       Square(
-        new vec(ww - 50 - i * 70, RandomInt(500)),
+        new vec(1000 - 50 - i * 70, RandomInt(500)),
         new vec(40, 40),
         [0, 0, 0]
       )
@@ -279,19 +275,4 @@ function reset() {
   }
 }
 
-function setup() {
-  createCanvas(ww, wh);
-  holders = inputs(V, A, A.reset.function);
-  A.reset.function();
-}
-
-function draw() {
-  background(255);
-
-  system.Step();
-  system.Draw();
-
-  inputsUpdate(V, holders);
-  labels(V); // draw labels
-  fps();
-}
+export { Parameters, Methods, system }

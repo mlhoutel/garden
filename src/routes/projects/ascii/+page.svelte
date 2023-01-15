@@ -1,6 +1,4 @@
 <script>
-    import "$styles/projects.css"
-
     let files;
     let gradient = "▓▓▒▒░░  ";
     let xscale = 10;
@@ -42,8 +40,6 @@
 
         // Generate Ascii image
         let ascii_buffer = ""
-
-        console.log(gradient.length)
 
         for (let y = Math.round(yscale / 2); y < height - yscale; y += yscale) {
             for (let x = Math.round(xscale / 2); x < width - xscale; x += xscale) {

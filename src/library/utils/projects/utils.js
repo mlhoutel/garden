@@ -30,7 +30,7 @@ function RandomInt(max) {
  *
  * @returns
  */
-function randomColor() {
+function RandomColor() {
   return [RandomInt(255), RandomInt(255), RandomInt(255)];
 }
 
@@ -113,3 +113,5 @@ class vec {
     return rotated.plus(from);
   }
 }
+
+export { RandomBetween, RandomInt, Random, RandomColor, vec }

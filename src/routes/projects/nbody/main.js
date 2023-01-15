@@ -1,9 +1,11 @@
+import { vec, Random, RandomColor } from "$utils/projects/utils.js"
+
 var paused = false;
 
 let holders = [];
 let system = undefined;
 
-const V = {
+const Parameters = {
   PARTICLES_NUMBER: 300,
   GRAVITY_CONSTANT: 4,
   LIGHT_SPEED: 6,
@@ -11,18 +13,18 @@ const V = {
   SPACE_RATIO: 10,
 };
 
-const A = {
+const Methods = {
   reset: {
     label: "&#8634;",
     function: () => {
       system = new System();
 
-      for (var i = 0; i < V.PARTICLES_NUMBER; i++) {
+      for (var i = 0; i < Parameters.PARTICLES_NUMBER; i++) {
         system.add(
           new Body(
-            Random(window.innerWidth) / V.SPACE_RATIO,
-            Random(window.innerHeight) / V.SPACE_RATIO,
-            randomColor()
+            Random(window.innerWidth) / Parameters.SPACE_RATIO,
+            Random(window.innerHeight) / Parameters.SPACE_RATIO,
+            RandomColor()
           )
         );
       }
@@ -32,9 +34,6 @@ const A = {
     label: "&#10074;&#10074;",
     function: () => {
       paused = !paused;
-      holders.buttons["pause"].elt.innerHTML = paused
-        ? "&#9658;"
-        : "&#10074;&#10074;";
     },
   },
 };
@@ -50,24 +49,24 @@ class Body {
   Step() {
     this.pos = this.pos.plus(this.vel);
 
-    while (this.trail.length > V.PATH_LENGTH) {
+    while (this.trail.length > Parameters.PATH_LENGTH) {
       this.trail.shift();
     }
 
     this.trail.push(this.pos);
   }
 
-  Draw() {
-    fill(this.color);
-    stroke(this.color);
-    point(this.pos.x * V.SPACE_RATIO, this.pos.y * V.SPACE_RATIO);
+  Draw(p5) {
+    p5.fill(this.color);
+    p5.stroke(this.color);
+    p5.point(this.pos.x * Parameters.SPACE_RATIO, this.pos.y * Parameters.SPACE_RATIO);
 
     for (var i = 0; i < this.trail.length - 1; i++) {
-      line(
-        this.trail[i].x * V.SPACE_RATIO,
-        this.trail[i].y * V.SPACE_RATIO,
-        this.trail[i + 1].x * V.SPACE_RATIO,
-        this.trail[i + 1].y * V.SPACE_RATIO
+      p5.line(
+        this.trail[i].x * Parameters.SPACE_RATIO,
+        this.trail[i].y * Parameters.SPACE_RATIO,
+        this.trail[i + 1].x * Parameters.SPACE_RATIO,
+        this.trail[i + 1].y * Parameters.SPACE_RATIO
       );
     }
   }
@@ -76,12 +75,12 @@ class Body {
     let diff_x = body.pos.x - this.pos.x;
     let diff_y = body.pos.y - this.pos.y;
 
-    let dist_2 = Math.pow(diff_x, 2) + Math.pow(diff_y, 2) + 10 / V.SPACE_RATIO;
+    let dist_2 = Math.pow(diff_x, 2) + Math.pow(diff_y, 2) + 10 / Parameters.SPACE_RATIO;
 
-    let tempLS = V.LIGHT_SPEED * 100000000; // 2,998 * 10e+8
-    let tempG = V.GRAVITY_CONSTANT; //6.7 * 10e-11
+    let tempLS = Parameters.LIGHT_SPEED * 100000000; // 2,998 * 10e+8
+    let tempG = Parameters.GRAVITY_CONSTANT; //6.7 * 10e-11
 
-    let force = tempG * (0.01 / dist_2); // V.GRAVITY_CONSTANT * (ma * mb)/(r^2)
+    let force = tempG * (0.01 / dist_2); // Parameters.GRAVITY_CONSTANT * (ma * mb)/(r^2)
 
     if (force > tempLS) {
       force = tempLS;
@@ -115,11 +114,11 @@ class System {
     }
   }
 
-  Draw() {
-    strokeWeight(3);
+  Draw(p5) {
+    p5.strokeWeight(3);
 
     for (var i = 0; i < this.bodies.length; i++) {
-      this.bodies[i].Draw();
+      this.bodies[i].Draw(p5);
     }
   }
 
@@ -128,20 +127,4 @@ class System {
   }
 }
 
-function setup() {
-  createCanvas(window.innerWidth, window.innerHeight);
-
-  holders = inputs(V, A, A.reset.function);
-  A.reset.function();
-}
-
-function draw() {
-  background(255);
-
-  system.Step();
-  system.Draw();
-
-  inputsUpdate(V, holders);
-  labels(V);
-  fps();
-}
+export { Parameters, Methods, system }
