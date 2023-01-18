@@ -10,8 +10,11 @@ export const load = async ({ fetch }) => {
 
 	const snippets_response = await fetch(`${base}/api/snippets`);
 	const snippets = await snippets_response.json();
+	
+	const projects_response = await fetch(`${base}/api/projects`);
+	const projects = await projects_response.json();
 
-	const topics = [...posts, ...sheets, ...snippets].map((s) => s.meta.topic?.split(' ') || []);
+	const topics = [...posts, ...sheets, ...snippets, ...projects].map((s) => s.meta.topic?.split(' ') || []);
 
 	const { nodes, edges } = makeGraph(topics);
 

@@ -1,31 +1,18 @@
-import { vec, RandomInt } from "$utils/projects/utils.js"
+import { vec, RandomInt } from "$utils/projects.js"
 
-let system = undefined;
-
-const Parameters = {
-  DEBUG: false,
-  STEP_GRAVITY: 0.1,
-  CONSTRAINT_DAMPING: 0.5,
-  CORPSE_SIZE: 10,
-};
-
-const Methods = {
-  reset: {
-      label: "&#8634;",
-      function: () => { reset() },
-  },
-};
+const CORPSE_SIZE = 10
+const CONSTRAINT_DAMPING = 0.5
+const GRAVITY = 0.1
 
 class Body {
-  constructor(pos, size, color) {
+  constructor(pos, size) {
     this.cpos = pos;
     this.lpos = pos;
     this.static = false;
     this.size = size;
-    this.color = color;
   }
 
-  Step() {
+  step() {
     if (this.static) {
       this.cpos = this.lpos;
       return;
@@ -36,100 +23,65 @@ class Body {
     this.cpos = this.cpos.plus(vel);
   }
 
-  Bounds(p5) {
+  bounds(size) {
     const half = this.size / 2;
     if (this.cpos.y < half) {
       this.cpos.y = half + Math.abs(this.cpos.y);
-    } else if (this.cpos.y > p5.height - half) {
-      this.cpos.y = 2 * (p5.height - half) - this.cpos.y;
+    } else if (this.cpos.y > size.y - half) {
+      this.cpos.y = 2 * (size.y - half) - this.cpos.y;
     }
 
     if (this.cpos.x < half) {
       this.cpos.x = half + Math.abs(this.cpos.x);
-    } else if (this.cpos.x > p5.width - half) {
-      this.cpos.y = 2 * (p5.width - half) - this.cpos.x;
+    } else if (this.cpos.x > size.x - half) {
+      this.cpos.y = 2 * (size.x - half) - this.cpos.x;
     }
   }
 
-  Gravity() {
-    this.cpos.y += Parameters.STEP_GRAVITY;
-  }
-
-  Draw(p5) {
-    p5.fill(this.color);
-    p5.stroke(this.color);
-    p5.circle(this.cpos.x, this.cpos.y, this.size);
-  }
-
-  DrawDebug(p5) {
-    const vel = this.cpos.minus(this.lpos).times(10);
-    p5.stroke([255, 0, 0]);
-    p5.line(this.cpos.x, this.cpos.y, this.cpos.x + vel.x, this.cpos.y + vel.y); // Speed
+  gravity() {
+    this.cpos.y += GRAVITY;
   }
 }
 
 class Constraint {
-  constructor(a, b, color) {
+  constructor(a, b) {
     this.a = a;
     this.b = b;
 
     this.size = this.a.cpos.minus(this.b.cpos).length();
-    this.color = color;
   }
 
-  Step() {
+  step() {
     const csize = this.a.cpos.minus(this.b.cpos).length();
     const diff = csize - this.size;
     const norm = this.a.cpos.minus(this.b.cpos).divide(csize);
 
     this.a.cpos = this.a.cpos.minus(
-      norm.times(0.5 * diff * Parameters.CONSTRAINT_DAMPING)
+      norm.times(0.5 * diff * CONSTRAINT_DAMPING)
     );
     this.b.cpos = this.b.cpos.plus(
-      norm.times(0.5 * diff * Parameters.CONSTRAINT_DAMPING)
+      norm.times(0.5 * diff * CONSTRAINT_DAMPING)
     );
   }
 
-  Draw(p5) {
-    p5.fill(this.color);
-    p5.stroke(this.color);
-    p5.line(this.a.cpos.x, this.a.cpos.y, this.b.cpos.x, this.b.cpos.y);
-  }
 }
 
 class System {
-  constructor() {
+  constructor(size) {
     this.bodies = [];
     this.constraints = [];
+    this.size = size
   }
 
-  Step(p5) {
+  step() {
     for (let body of this.bodies) {
-      body.Gravity();
-      body.Bounds(p5);
-      body.Step();
+      body.gravity();
+      body.bounds(this.size);
+      body.step();
     }
 
     for (let constraint of this.constraints) {
-      constraint.Step();
-    }
-  }
-
-  Draw(p5) {
-    p5.strokeWeight(3);
-
-    for (let body of this.bodies) {
-      body.Draw(p5);
-    }
-
-    for (let constraint of this.constraints) {
-      constraint.Draw(p5);
-    }
-
-    if (Parameters.DEBUG) {
-      for (let body of this.bodies) {
-        body.DrawDebug(p5);
-      }
+      constraint.step();
     }
   }
 
@@ -159,23 +111,23 @@ class System {
  * @param {*} color
  * @returns
  */
-function Square(pos, size, color) {
+function Square(pos, size) {
   const half = size.divide(2);
   const ihalf = new vec(-half.y, half.x);
 
   const s = {
     bodies: [
-      new Body(pos.minus(half), Parameters.CORPSE_SIZE, color),
-      new Body(pos.minus(ihalf), Parameters.CORPSE_SIZE, color),
-      new Body(pos.plus(half), Parameters.CORPSE_SIZE, color),
-      new Body(pos.plus(ihalf), Parameters.CORPSE_SIZE, color),
+      new Body(pos.minus(half), CORPSE_SIZE),
+      new Body(pos.minus(ihalf), CORPSE_SIZE),
+      new Body(pos.plus(half), CORPSE_SIZE),
+      new Body(pos.plus(ihalf), CORPSE_SIZE),
     ],
     constraints: [],
   };
 
   for (let i = 0; i < s.bodies.length - 1; i++) {
     for (let j = i + 1; j < s.bodies.length; j++) {
-      s.constraints.push(new Constraint(s.bodies[i], s.bodies[j], color));
+      s.constraints.push(new Constraint(s.bodies[i], s.bodies[j]));
     }
   }
   return s;
@@ -185,11 +137,10 @@ function Square(pos, size, color) {
  * Add a body to the shape and link it
  * @param {*} shape
  * @param {*} pos
- * @param {*} color
  */
 function Rope(shape, body) {
   shape.constraints.push(
-    new Constraint(body, shape.bodies[shape.bodies.length - 1], body.color)
+    new Constraint(body, shape.bodies[shape.bodies.length - 1])
   );
 
   shape.bodies.push(body);
@@ -204,7 +155,7 @@ function RopeSquare(pos, nrope, lrope) {
   for (let i = 0; i < nrope; i++) {
     Rope(
       s,
-      new Body(pos.minus(new vec(0, i * lrope)), Parameters.CORPSE_SIZE, [0, 0, 0])
+      new Body(pos.minus(new vec(0, i * lrope)), CORPSE_SIZE, [0, 0, 0])
     );
   }
 
@@ -223,7 +174,7 @@ function Grid(pos, points, sparse) {
       s.bodies.push(
         new Body(
           pos.plus(new vec(j * sparse, i * sparse)),
-          Parameters.CORPSE_SIZE,
+          CORPSE_SIZE,
           [0, 0, 0]
         )
       );
@@ -257,22 +208,4 @@ function Grid(pos, points, sparse) {
   return s;
 }
 
-function reset() {
-  system = new System();
-
-  system.addStruct(RopeSquare(new vec(1000 / 2, 1000 / 2), 10, 20));
-
-  system.addStruct(Grid(new vec(100, 100), 10, 30));
-
-  for (let i = 0; i < 5; i++) {
-    system.addStruct(
-      Square(
-        new vec(1000 - 50 - i * 70, RandomInt(500)),
-        new vec(40, 40),
-        [0, 0, 0]
-      )
-    );
-  }
-}
-
-export { Parameters, Methods, system }
+export { System, Constraint, Body, Grid, RopeSquare, Rope, Square }

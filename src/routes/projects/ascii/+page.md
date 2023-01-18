@@ -1,3 +1,8 @@
+---
+short: Image to ascii converter
+topic: ascii converter imagery
+---
+
 <script>
     let files;
     let gradient = "▓▓▒▒░░  ";
@@ -91,14 +96,14 @@
 
         <div class="flex flex-col px-2">
             <label for="gradient" class="text-sm">gradient:</label>
-            <input bind:value={gradient} on:change={generateImage} type="text" id="gradient" class="bg-transparent w-28">
+            <input bind:value={gradient} on:change={generateImage} type="text" id="gradient" class="w-28" style="background-color: transparent" >
         </div>
 
         <div class="flex flex-col px-2">
             <label for="scaling" class="text-sm">scale: </label>
             <div class="inline-flex">
-                <input bind:value={xscale} on:change={generateImage} type="number" min="1" max="100" id="scaling" class="bg-transparent">
-                <input bind:value={yscale} on:change={generateImage} type="number" min="1" max="100" class="bg-transparent">
+                <input bind:value={xscale} on:change={generateImage} type="number" min="1" max="100" id="scaling" style="background-color: transparent" >
+                <input bind:value={yscale} on:change={generateImage} type="number" min="1" max="100" style="background-color: transparent" >
             </div>
         </div>
 
@@ -108,12 +113,13 @@
         {#if base64}
             <img class="max-h-[200px]" bind:this={preview} src={base64} on:load={generateImage} alt="">
         {:else}
-            <p class="text-sm text-center italic ">no input image...</p>
+            <p class="text-sm text-center italic">no input image...</p>
         {/if}
     </div>
 
-    <div class="font-mono overflow-auto mt-1 mb-10 p-3 rounded bg-dark text-white max-h-[600px] flex justify-center items-center relative">
-        <button class="absolute top-2 right-2 py-1 px-2 rounded bg-dark outline outline-1 text-sm underline" on:click={copyClipboard}>copy</button>
+    <button class="text-sm underline" on:click={copyClipboard}>copy</button>
+
+    <div class="font-mono overflow-auto mt-1 mb-10 p-3 rounded max-h-[600px] flex justify-center items-center">
         <pre><code>{ascii}</code></pre>
     </div>
 </article>
