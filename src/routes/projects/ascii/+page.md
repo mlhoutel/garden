@@ -1,15 +1,18 @@
-<script>
-    import "$styles/projects.css"
+---
+short: Image to ascii converter
+topic: ascii converter imagery
+---
 
+<script>
     let files;
-    let gradient = "@%#*+=- ";
-    let xscale = 20;
-    let yscale = 15;
+    let gradient = "▓▓▒▒░░  ";
+    let xscale = 10;
+    let yscale = 25;
 
     let base64;
     let preview;
 
-    let ascii = "";
+    let ascii = ("□ ■ ".repeat(30) + "\n" + "■ □ ".repeat(30) + "\n" ).repeat(10)
 
     function updateImage(e) {
         const reader = new FileReader();
@@ -46,6 +49,7 @@
         for (let y = Math.round(yscale / 2); y < height - yscale; y += yscale) {
             for (let x = Math.round(xscale / 2); x < width - xscale; x += xscale) {
                 const merged = mergePixel(greyscale, x, y, xscale, yscale, width, height);
+
                 ascii_buffer += gradient[Math.floor((merged / 255) * (gradient.length - 1))];
             }
             ascii_buffer += '\n';
@@ -65,30 +69,58 @@
         const pos_y = py - Math.floor(ph / 2);
 
         for (let y = 0; y < ph; y++) {
+            const apy = pos_y + y;
+
             for (let x = 0; x < pw; x++) {
                 const apx = pos_x + x;
-                const apy = pos_y + y;
-                sum += data[(apx + apy * w) * 4];
+                sum += data[apx + apy * w];
             }
         }
 
         return sum / (pw * ph);
     }
 
+    function copyClipboard() {
+        navigator.clipboard.writeText(ascii);
+    }
+
 </script>
 
-<div class="p-3">
-    <input bind:files type="file" accept=".jpg, .jpeg, .png" on:change={updateImage}>
-    <input bind:value={gradient} on:change={generateImage} type="text">
-    <input bind:value={xscale} on:change={generateImage} type="number" min="1" max="100">
-    <input bind:value={yscale} on:change={generateImage} type="number" min="1" max="100">
-</div>
+<article>
+    <div class="p-3 inline-flex">
+        <div class="flex flex-col px-2">
+            <label for="image" class="text-sm">image:</label>
+            <label for="image" class="underline cursor-pointer">Click to select a file</label>
+            <input bind:files type="file" accept=".jpg, .jpeg, .png" on:change={updateImage} id="image" class="hidden">
+        </div>
 
-<div class="flex">
-    <div style="max-width: 300px; min-width: 300px">
-        <img bind:this={preview} src={base64} on:load={generateImage} alt="">
+        <div class="flex flex-col px-2">
+            <label for="gradient" class="text-sm">gradient:</label>
+            <input bind:value={gradient} on:change={generateImage} type="text" id="gradient" class="w-28" style="background-color: transparent" >
+        </div>
+
+        <div class="flex flex-col px-2">
+            <label for="scaling" class="text-sm">scale: </label>
+            <div class="inline-flex">
+                <input bind:value={xscale} on:change={generateImage} type="number" min="1" max="100" id="scaling" style="background-color: transparent" >
+                <input bind:value={yscale} on:change={generateImage} type="number" min="1" max="100" style="background-color: transparent" >
+            </div>
+        </div>
+
     </div>
-    <div style="font-family: monospace; overflow: auto">
+    
+    <div class="min-h-[200px] flex justify-center items-center">
+        {#if base64}
+            <img class="max-h-[200px]" bind:this={preview} src={base64} on:load={generateImage} alt="">
+        {:else}
+            <p class="text-sm text-center italic">no input image...</p>
+        {/if}
+    </div>
+
+    <button class="text-sm underline" on:click={copyClipboard}>copy</button>
+
+    <div class="font-mono overflow-auto mt-1 mb-10 p-3 rounded max-h-[600px] flex justify-center items-center">
         <pre><code>{ascii}</code></pre>
     </div>
-</div>
+</article>
+
