@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" href="/garden/favicon/favicon.png" />
+		<meta http-equiv="content-security-policy" content="">
+		<link href="/garden/_app/immutable/assets/_layout-ce2a5d5c.css" rel="stylesheet">
+		<link rel="modulepreload" href="/garden/_app/immutable/start-6e33a3ec.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/index-5039aeb8.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/singletons-57bcef17.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/index-ecc9e757.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/paths-b4419565.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/preload-helper-41c905a7.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/components/pages/_layout.svelte-905ba655.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/index-c87b80d8.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/ScrollTo-91ae7cee.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/modules/pages/_layout.js-9cbb603b.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/_layout-da46b06b.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/components/pages/projects/_layout.svelte-76503bbf.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/components/pages/projects/nbody/_page.md-81cfac75.js">
+		<link rel="modulepreload" href="/garden/_app/immutable/chunks/projects-8fba3f03.js"><title>Garden - Maël Lhoutellier</title><!-- HEAD_svelte-1fa4ftv_START --><link rel="icon" href="/garden/favicon/favicon.png"><!-- HEAD_svelte-1fa4ftv_END -->
+	</head>
+	<body>
+		<div id="svelte">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+
+
+
+<body class="background-primary"><nav class="background-tertiary flex items-center justify-between flex-wrap"><a href="/garden/"><div class="flex items-center flex-shrink-0 background-secondary px-5 py-2 absolute w-[100px] left-[-6px] top-0 skewed z-30"><img src="/garden/logos/sumblack.svg" alt="logo" class="h-8 anti-skewed">
+
+			<div class="absolute left-[55px] top-3 pl-5 flex"><div class="background-dark h-8 w-1 mx-0.5"></div>
+				<div class="background-dark h-8 w-2 mx-0.5"></div></div></div></a>
+
+	<div class="background-dark w-full absolute top-3 h-9 skewed left-[-20px] z-20"><div class="anti-skewed pt-1 mt-10 md:ml-[125px] md:mt-0 overflow-hidden"><a href="/garden/posts" class="background-primary md:background-dark font-serif px-1 w-[100%] md:w-5 block md:inline">Posts</a><a href="/garden/sheets" class="background-primary md:background-dark font-serif px-1 w-[100%] md:w-5 block md:inline">Sheets</a><a href="/garden/snippets" class="background-primary md:background-dark font-serif px-1 w-[100%] md:w-5 block md:inline">Snippets</a><a href="/garden/projects" class="background-primary md:background-dark font-serif px-1 w-[100%] md:w-5 block md:inline">Projects</a></div></div>
+
+	<div class="absolute top-3 right-4 h-9 inline-flex bg-grey text-white skewed z-30"><button class="flex items-center h-auto w-12 anti-skewed"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" class="h-6"><path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"></path></svg></button></div>
+
+	<div class="w-full block pt-12"></div></nav>
+
+<div class="w-full block h-[130px] md:h-0"></div>
+
+	<main><main><div class="relative"><div class="relative font-mono"><div class="absolute top-1 left-1"><div class="flex flex-col"><label class="text-dark"><span>gravity_constant</span>
+
+                <input type="range" min="1" max="27" step="1" class="bg-dark accent-dark" value="6.7">
+
+                <span>6.7</span>
+            </label><label class="text-dark"><span>light_speed</span>
+
+                <input type="range" min="0" max="8" step="1" class="bg-dark accent-dark" value="2">
+
+                <span>2</span>
+            </label><label class="text-dark"><span>paths_length</span>
+
+                <input type="range" min="1" max="20" step="1" class="bg-dark accent-dark" value="5">
+
+                <span>5</span>
+            </label><label class="text-dark"><span>number_iterations</span>
+
+                <input type="range" min="1" max="40" step="1" class="bg-dark accent-dark" value="10">
+
+                <span>10</span>
+            </label></div></div>
+    <div class="absolute top-3 right-14"><span class="text-dark text-xl font-bold">Infinity ms</span></div>
+    <div class="absolute top-1 right-1"><div class="flex flex-col"><button class="text-dark"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="45px" height="45px"><path fill-rule="evenodd" d="M15.312 11.424a5.5 5.5 0 01-9.201 2.466l-.312-.311h2.433a.75.75 0 000-1.5H3.989a.75.75 0 00-.75.75v4.242a.75.75 0 001.5 0v-2.43l.31.31a7 7 0 0011.712-3.138.75.75 0 00-1.449-.39zm1.23-3.723a.75.75 0 00.219-.53V2.929a.75.75 0 00-1.5 0V5.36l-.31-.31A7 7 0 003.239 8.188a.75.75 0 101.448.389A5.5 5.5 0 0113.89 6.11l.311.31h-2.432a.75.75 0 000 1.5h4.243a.75.75 0 00.53-.219z" clip-rule="evenodd"></path></svg>
+        </button><button class="text-dark"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="45px" height="45px"><path d="M5.75 3a.75.75 0 00-.75.75v12.5c0 .414.336.75.75.75h1.5a.75.75 0 00.75-.75V3.75A.75.75 0 007.25 3h-1.5zM12.75 3a.75.75 0 00-.75.75v12.5c0 .414.336.75.75.75h1.5a.75.75 0 00.75-.75V3.75a.75.75 0 00-.75-.75h-1.5z"></path></svg>
+        </button></div></div>
+
+    <div style="display: block;" class="m-0"></div></div></div></main></main>
+
+	
+
+
+
+<div class="background-tertiary w-full bottom-0 py-10 px-5 pointer-events-auto"><article class="flex margin-auto"><div class="px-10"><ul class="list-none underline"><li><a href="/garden/">home</a></li>
+				<li><a href="/garden/posts">posts</a></li>
+				<li><a href="/garden/sheets">sheets</a></li>
+				<li><a href="/garden/snippets">snippets</a></li>
+				<li><a href="/garden/projects">projects</a></li>
+				<li><a href="/garden/portfolio">portfolio</a></li></ul></div>
+		<div class="px-10"><h2 class="pt-0">About</h2>
+			<p>This website was made with sveltekit / tailwind / mdsvex</p></div></article>
+	
+	<div class="flex justify-center"><a class="underline px-1" href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noreferrer">COPYLEFT</a>
+		<span>- 2023 MAEL LHOUTELLIER -</span>
+		<a class="underline px-1" href="https://github.com/mlhoutel/garden" target="_blank" rel="noreferrer">SOURCE</a></div></div></body>
+
+
+		<script type="module" data-sveltekit-hydrate="n0yxok">
+			import { start } from "/garden/_app/immutable/start-6e33a3ec.js";
+
+			start({
+				env: {},
+				paths: {"base":"/garden","assets":"/garden"},
+				target: document.querySelector('[data-sveltekit-hydrate="n0yxok"]').parentNode,
+				version: "1674127136048",
+				hydrate: {
+					node_ids: [0, 3, 12],
+					data: [null,null,null],
+					form: null
+				}
+			});
+		</script>
+	</div>
+	</body>
+</html>
