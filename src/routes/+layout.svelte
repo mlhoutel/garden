@@ -13,7 +13,6 @@
 <svelte:head>
 	<link rel="icon" href="{base}/favicon/favicon.png" />
 	<title>Garden - Maël Lhoutellier</title>
-	<html lang="en" />
 </svelte:head>
 
 <body class="background-primary">

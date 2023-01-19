@@ -1,7 +1,7 @@
 <script>
 	import TopicPill from './TopicPill.svelte';
 	import { Icon } from '@steeze-ui/svelte-icon';
-	import { Filter } from '@steeze-ui/heroicons';
+	import { Funnel } from '@steeze-ui/heroicons';
 	import { createEventDispatcher } from 'svelte';
 
 	export let input = '';
@@ -90,7 +90,7 @@
 		{/each}
 	</div>
 	<div class="select-search">
-		<Icon src={Filter} theme="solid" size="20px" />
+		<Icon src={Funnel} theme="solid" size="20px" />
 		<input
 			type="search"
 			autocomplete="off"

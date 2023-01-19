@@ -5,7 +5,7 @@ topic: simulation tree
 
 
 <script>
-	import { Refresh } from '@steeze-ui/heroicons';
+	import { ArrowPath } from '@steeze-ui/heroicons';
 
     import Canvas from '$components/projects/Canvas.svelte'
     import { vec } from "$utils/projects.js"
@@ -51,7 +51,7 @@ topic: simulation tree
 
     let actions = {
         reset: {
-            label: Refresh,
+            label: ArrowPath,
             function: () => { reset() }
         }
     }

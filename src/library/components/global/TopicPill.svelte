@@ -1,7 +1,7 @@
 <script>
 	import { afterUpdate } from 'svelte';
 	import { Icon } from '@steeze-ui/svelte-icon';
-	import { X } from '@steeze-ui/heroicons';
+	import { XMark } from '@steeze-ui/heroicons';
 	import { createEventDispatcher } from 'svelte';
 
 	export let topic = undefined;
@@ -59,7 +59,7 @@
 		{pill.label}
 
 		{#if !!removable}
-			<Icon src={X} theme="solid" size="15px" class="ml-1" />
+			<Icon src={XMark} theme="solid" size="15px" class="ml-1" />
 		{/if}
 	</button>
 </a>

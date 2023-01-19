@@ -2,12 +2,12 @@
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import {
 		AcademicCap,
-		Terminal,
+		CommandLine,
 		Beaker,
-		Library,
-		DesktopComputer,
+		BuildingLibrary,
+		ComputerDesktop,
 		Briefcase,
-		LightningBolt,
+		Bolt,
 		Variable
 	} from '@steeze-ui/heroicons';
 	import TopicPill from '../global/TopicPill.svelte';
@@ -15,7 +15,7 @@
 
 	const jobs = [
 		{
-			icon: DesktopComputer,
+			icon: ComputerDesktop,
 			period: '2020-2023',
 			title: "Software Development",
 			event: "Apprenticeship",
@@ -35,7 +35,7 @@
 			place: "CEA / (LEMMA service), Grenoble; France"
 		},
 		{
-			icon: LightningBolt,
+			icon: Bolt,
 			period: '2019',
 			title: "Statistic analysis",
 			event: "Summer Job",
@@ -48,7 +48,7 @@
 
 	const studies = [
 		{
-			icon: Library,
+			icon: BuildingLibrary,
 			period: '2020-2023',
 			title: "Engineering Degree",
 			speciality: "Software speciality",
@@ -56,7 +56,7 @@
 			place: "IMT Atlantique engineering school, Nantes"
 		},
 		{
-			icon: Terminal,
+			icon: CommandLine,
 			period: '2018-2020',
 			title: "Computing Diploma",
 			speciality: "Maths-AI speciality",

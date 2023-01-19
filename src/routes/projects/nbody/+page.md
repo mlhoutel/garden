@@ -4,7 +4,7 @@ topic: simulation euler
 ---
 
 <script>
-	import { Pause, Play, Refresh } from '@steeze-ui/heroicons';
+	import { Pause, Play, ArrowPath } from '@steeze-ui/heroicons';
 
     import Canvas from '$components/projects/Canvas.svelte'
 
@@ -67,7 +67,7 @@ topic: simulation euler
 
     let actions = {
         reset: {
-            label: Refresh,
+            label: ArrowPath,
             function: () => { system.reset() }
         },
         pause: {
