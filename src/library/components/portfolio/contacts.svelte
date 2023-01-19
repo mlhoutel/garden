@@ -1,7 +1,7 @@
 <script>
 	import { scrollRef } from 'svelte-scrolling';
 	import { Icon } from '@steeze-ui/svelte-icon';
-	import { Folder, Mail, Hashtag, Link, MenuAlt1, Pencil } from '@steeze-ui/heroicons';
+	import { Folder, Envelope, Hashtag, Link, Bars2, Pencil } from '@steeze-ui/heroicons';
 	import FalseWindow from '../global/FalseWindow.svelte';
 
 	export let subject = '';
@@ -96,7 +96,7 @@
 						<Icon src={Folder} size="20px" />
 						<Icon src={Hashtag} size="20px" />
 						<Icon src={Link} size="20px" />
-						<Icon src={MenuAlt1} size="20px" />
+						<Icon src={Bars2} size="20px" />
 						<Icon src={Pencil} size="20px" />
 					</div>
 
@@ -104,7 +104,7 @@
 						href="mailto:mlhoutel@gmail.com.com?subject={subject}&body={body}"
 						class="inline-flex bg-grey text-white text-sm font-semibold px-3 py-0.5 rounded-md items-center"
 					>
-						<Icon src={Mail} size="20px" class="mr-1" />
+						<Icon src={Envelope} size="20px" class="mr-1" />
 						<div>Send</div>
 					</a>
 				</div>

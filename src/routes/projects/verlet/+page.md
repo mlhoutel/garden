@@ -5,7 +5,7 @@ topic: simulation verlet
 
 
 <script>
-	import { Pause, Play, Refresh } from '@steeze-ui/heroicons';
+	import { Pause, Play, ArrowPath } from '@steeze-ui/heroicons';
 
     import Canvas from '$components/projects/Canvas.svelte'
     import { vec, RandomInt } from "$utils/projects.js"
@@ -75,7 +75,7 @@ topic: simulation verlet
 
     let actions = {
         reset: {
-            label: Refresh,
+            label: ArrowPath,
             function: () => { reset() }
         },
         pause: {
