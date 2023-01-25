@@ -4,7 +4,7 @@
     import GraphTopics from "$components/global/GraphTopics.svelte";
 </script>
 
-<article>
+<article class="px-3 pt-14 pb-10">
     <h1>Home</h1>
     
     <p>
