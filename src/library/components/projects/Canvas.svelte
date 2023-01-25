@@ -3,26 +3,41 @@
     import Values from './Values.svelte'
     import Actions from './Actions.svelte'
 
+    import {onDestroy} from 'svelte';
+
     export let setup = (p5) => {}
     export let draw = (p5) => {}
-    
+
     let fps = 0
 
-    const sketch = (p5) => {
+    let p5ref = undefined
+
+    let sketch = (p5) => {
         p5.setup = () => {
             p5.frameRate(60)
             setup(p5)
+            p5ref = p5
         },
         p5.draw = () => {
             fps = p5.frameRate()
             draw(p5)
         }
+
+        p5.windowResized = () => {
+            p5.resizeCanvas(window.innerWidth, window.innerHeight);
+        }
     }
+
+    onDestroy(() => {
+        if (p5ref) {
+            p5ref.remove()
+            p5ref = undefined
+        }
+    })
 
     export let values = {}
     export let actions = {}
 </script>
-
 
 <div class="relative font-mono">
     <div class="absolute top-1 left-1">
