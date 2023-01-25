@@ -16,9 +16,15 @@
   <img src="https://img.shields.io/github/license/mlhoutel/garden?style=flat-square&color=yellow" />
 </a>
 
+&nbsp;&nbsp;
+
 <p align="center">
-    <img src="./static/logos/sumgrad.svg" width="100px"  />
+  <a href="https://mlhoutel.github.io/garden/"><img src="./static/logos/sumgrad.svg" width="100px" /></a>
 </p>
+  
+&nbsp;&nbsp;
+
+*Welcome to my digital garden, a collection of my thoughts, ponderings, and notes on various topics! Here you'll find blog posts that delve into topics that interest me, help sheets that are quick reference guides, and demos of small, fleeting projects. Whether you want to learn something new or just explore different perspectives, I hope you find something useful here. Thanks for visiting!* [browse website](https://mlhoutel.github.io/garden/)
 
 ## License
 
