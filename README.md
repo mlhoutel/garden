@@ -16,10 +16,9 @@
   <img src="https://img.shields.io/github/license/mlhoutel/garden?style=flat-square&color=yellow" />
 </a>
 
-<div style="display: flex; justify-content: center; padding: 50px 0px 50px 0px">
+<p align="center">
     <img src="./static/logos/sumgrad.svg" width="100px"  />
-</div>
-
+</p>
 
 ## License
 
