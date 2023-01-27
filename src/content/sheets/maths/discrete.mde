@@ -8,39 +8,33 @@ short: ""
 <table>
 <tbody>
 <tr>
-<td><span
-class="math inline">\(\mathbb{C}\)</span></td>
+<td>$\mathbb{C}$</td>
 <td><em>Complexs</em> (Real+Imaginary)</td>
-<td><span class="math inline">\(-5i, 5, i,
-3+2i, 10i\)</span></td>
+<td>$(-5i, 5, i, 3+2i, 10i)$</td>
 </tr>
 <tr>
-<td><span
-class="math inline">\(\mathbb{R}\)</span></td>
+<td>$\mathbb{R}$</td>
 <td><em>Reals</em> (All non imaginary)</td>
-<td><span class="math inline">\(-8.535, 9.76,
-\pi, e\)</span></td>
+<td>$-8.535, 9.76,
+\pi, e$</td>
 </tr>
 <tr>
-<td><span
-class="math inline">\(\mathbb{Q}\)</span></td>
+<td>$\mathbb{Q}$</td>
 <td><em>Rationals</em> (Fractions)</td>
-<td><span class="math inline">\(\frac{3}{7},
-0.65, 7\)</span></td>
+<td>$\frac{3}{7},
+0.65, 7$</td>
 </tr>
 <tr>
-<td><span
-class="math inline">\(\mathbb{Z}\)</span></td>
+<td>$\mathbb{Z}$</td>
 <td><em>Integers</em> (Whole numbers )</td>
-<td><span class="math inline">\(-53337, -5, 0,
-7, 19\)</span></td>
+<td>$-53337, -5, 0,
+7, 19$</td>
 </tr>
 <tr>
-<td><span
-class="math inline">\(\mathbb{N}\)</span></td>
+<td>$\mathbb{N}$</td>
 <td><em>Naturals</em> (Integer Positive)</td>
-<td><span class="math inline">\(0, 1, 42, 69,
-420\)</span></td>
+<td>$0, 1, 42, 69,
+420$</td>
 </tr>
 </tbody>
 </table>
@@ -52,38 +46,32 @@ class="math inline">\(\mathbb{N}\)</span></td>
 <table>
 <tbody>
 <tr>
-<td><span
-class="math inline">\(\exists\)</span></td>
+<td>$\exists$</td>
 <td><strong>Exists</strong></td>
 <td><strong>At least</strong> one element</td>
 </tr>
 <tr>
-<td><span
-class="math inline">\(\forall\)</span></td>
+<td>$\forall$</td>
 <td><strong>for All</strong></td>
 <td><strong>All elements</strong></td>
 </tr>
 <tr>
-<td><span
-class="math inline">\(\in\)</span></td>
+<td>$\in$</td>
 <td><strong>In</strong></td>
 <td>Is <strong>included</strong> in</td>
 </tr>
 <tr>
-<td><span
-class="math inline">\(\notin\)</span></td>
+<td>$\notin$</td>
 <td><strong>Not in</strong></td>
 <td>Is <strong>excluded</strong> from</td>
 </tr>
 <tr>
-<td><span
-class="math inline">\(\cup\)</span></td>
+<td>$\cup$</td>
 <td><strong>Union</strong></td>
 <td>Elements in A or in B</td>
 </tr>
 <tr>
-<td><span
-class="math inline">\(\cap\)</span></td>
+<td>$\cap$</td>
 <td><strong>Intersection</strong></td>
 <td>Elements in A and in B</td>
 </tr>
@@ -101,39 +89,34 @@ $A = \{x \in \mathbb{R} / x^2 + 2x - 3 = 0\}$
 <table>
 <tbody>
 <tr>
-<td><span
-class="math inline">\(\lor\)</span></td>
+<td>$\lor$</td>
 <td><strong>Or</strong></td>
-<td><span class="math inline">\((1 \lor 0) =
-1\)</span> , <span class="math inline">\((0 \lor 0) = 0\)</span></td>
+<td>$(1 \lor 0) =
+1\)$ , $\((0 \lor 0) = 0$</td>
 </tr>
 <tr>
-<td><span
-class="math inline">\(\land\)</span></td>
+<td>$\land$</td>
 <td><strong>And</strong></td>
-<td><span class="math inline">\((1 \land 0) =
-0\)</span> , <span class="math inline">\((1 \land 1) = 1\)</span></td>
+<td>$(1 \land 0) =
+0\)$ , $\((1 \land 1) = 1$</td>
 </tr>
 <tr>
-<td><span
-class="math inline">\(\neg\)</span></td>
+<td>$\neg$</td>
 <td><strong>Not</strong></td>
-<td><span class="math inline">\(\neg 1 =
-0\)</span> , <span class="math inline">\(\neg 0 = 1\)</span></td>
+<td>$\neg 1 =
+0\)$ , $\(\neg 0 = 1$</td>
 </tr>
 <tr>
-<td><span
-class="math inline">\(\uparrow\)</span></td>
+<td>$\uparrow$</td>
 <td><strong>Sheffer</strong></td>
-<td><span class="math inline">\(p \uparrow q
-\Leftrightarrow \neg(p \land q)\)</span></td>
+<td>$p \uparrow q
+\Leftrightarrow \neg(p \land q)$</td>
 </tr>
 <tr>
-<td><span
-class="math inline">\(\downarrow\)</span></td>
+<td>$\downarrow$</td>
 <td><strong>Pierce</strong></td>
-<td><span class="math inline">\(p \uparrow q
-\Leftrightarrow \neg(p \lor q)\)</span></td>
+<td>$p \uparrow q
+\Leftrightarrow \neg(p \lor q)$</td>
 </tr>
 </tbody>
 </table>
@@ -148,64 +131,42 @@ truth table:
 <table>
 <tbody>
 <tr>
-<td><span
-class="math inline">\(p\)</span></td>
-<td><span
-class="math inline">\(q\)</span></td>
-<td><span class="math inline">\(p \lor
-q\)</span></td>
-<td><span class="math inline">\(p \land
-q\)</span></td>
-<td><span class="math inline">\(\neg
-p\)</span></td>
+<td>$p$</td>
+<td>$q$</td>
+<td>$p \lor
+q$</td>
+<td>$p \land
+q$</td>
+<td>$\neg
+p$</td>
 </tr>
 <tr>
-<td><span
-class="math inline">\(0\)</span></td>
-<td><span
-class="math inline">\(0\)</span></td>
-<td><span
-class="math inline">\(0\)</span></td>
-<td><span
-class="math inline">\(0\)</span></td>
-<td><span
-class="math inline">\(1\)</span></td>
+<td>$0$</td>
+<td>$0$</td>
+<td>$0$</td>
+<td>$0$</td>
+<td>$1$</td>
 </tr>
 <tr>
-<td><span
-class="math inline">\(0\)</span></td>
-<td><span
-class="math inline">\(1\)</span></td>
-<td><span
-class="math inline">\(1\)</span></td>
-<td><span
-class="math inline">\(0\)</span></td>
-<td><span
-class="math inline">\(1\)</span></td>
+<td>$0$</td>
+<td>$1$</td>
+<td>$1$</td>
+<td>$0$</td>
+<td>$1$</td>
 </tr>
 <tr>
-<td><span
-class="math inline">\(1\)</span></td>
-<td><span
-class="math inline">\(0\)</span></td>
-<td><span
-class="math inline">\(1\)</span></td>
-<td><span
-class="math inline">\(0\)</span></td>
-<td><span
-class="math inline">\(0\)</span></td>
+<td>$1$</td>
+<td>$0$</td>
+<td>$1$</td>
+<td>$0$</td>
+<td>$0$</td>
 </tr>
 <tr>
-<td><span
-class="math inline">\(1\)</span></td>
-<td><span
-class="math inline">\(1\)</span></td>
-<td><span
-class="math inline">\(1\)</span></td>
-<td><span
-class="math inline">\(1\)</span></td>
-<td><span
-class="math inline">\(0\)</span></td>
+<td>$1$</td>
+<td>$1$</td>
+<td>$1$</td>
+<td>$1$</td>
+<td>$0$</td>
 </tr>
 </tbody>
 </table>
@@ -270,12 +231,9 @@ $Independence \Rightarrow P(A \cap B) = P(A) \times P(B)$
 <table>
 <tbody>
 <tr>
-<td><span
-class="math inline">\(E(X)=\sum_{i=1}^{n}[xi \times P(xi)]\)</span></td>
-<td><span
-class="math inline">\(V(X)=\sum_{i=1}^{n}[xi-E(X)]^2\)</span></td>
-<td><span
-class="math inline">\(\sigma(X)=\sqrt{V(X)}\)</span></td>
+<td>$E(X)=\sum_{i=1}^{n}[xi \times P(xi)]$</td>
+<td>$V(X)=\sum_{i=1}^{n}[xi-E(X)]^2$</td>
+<td>$\sigma(X)=\sqrt{V(X)}$</td>
 </tr>
 </tbody>
 </table>
@@ -298,12 +256,9 @@ distribution of parameters p = \... and n = \...
 <table>
 <tbody>
 <tr>
-<td><span
-class="math inline">\(E(X)=np\)</span></td>
-<td><span
-class="math inline">\(V(X)=npq\)</span></td>
-<td><span
-class="math inline">\(\sigma(X)=\sqrt{V(X)}\)</span></td>
+<td>$E(X)=np$</td>
+<td>$V(X)=npq$</td>
+<td>$\sigma(X)=\sqrt{V(X)}$</td>
 </tr>
 </tbody>
 </table>
@@ -321,12 +276,9 @@ Poisson Formula
 <table>
 <tbody>
 <tr>
-<td><span
-class="math inline">\(E(X)=\lambda\)</span></td>
-<td><span
-class="math inline">\(V(X)=\lambda\)</span></td>
-<td><span
-class="math inline">\(\sigma(X)=\sqrt{V(X)}\)</span></td>
+<td>$E(X)=\lambda$</td>
+<td>$V(X)=\lambda$</td>
+<td>$\sigma(X)=\sqrt{V(X)}$</td>
 </tr>
 </tbody>
 </table>
@@ -342,17 +294,14 @@ $\lambda=p \times n = 1 \times 3, P(X=4)=e^{-3} \times \frac{3^4}{3!}=0.168$
 
 Exponential Formula
 
-> $P(0 \geq X \geq x)=1-e^{-\lambda x} \/ P(X\leq x)=e^{-\lambda x}$
+> $P(0 \geq X \geq x)=1-e^{-\lambda x}, P(X\leq x)=e^{-\lambda x}$
 
 <table>
 <tbody>
 <tr>
-<td><span
-class="math inline">\(E(X)=\frac{1}{\lambda}\)</span></td>
-<td><span
-class="math inline">\(V(X)=\frac{1}{\lambda^2}\)</span></td>
-<td><span
-class="math inline">\(\sigma(X)=\frac{1}{\lambda}\)</span></td>
+<td>$E(X)=\frac{1}{\lambda}$</td>
+<td>$V(X)=\frac{1}{\lambda^2}$</td>
+<td>$\sigma(X)=\frac{1}{\lambda}$</td>
 </tr>
 </tbody>
 </table>
@@ -370,12 +319,9 @@ Uniform Formula
 <table>
 <tbody>
 <tr>
-<td><span
-class="math inline">\(E(X)=\frac{a+b}{2}\)</span></td>
-<td><span
-class="math inline">\(V(X)=\frac{(b-a)^2}{12}\)</span></td>
-<td><span
-class="math inline">\(\sigma(X)=\sqrt{V(X)}\)</span></td>
+<td>$E(X)=\frac{a+b}{2}$</td>
+<td>$V(X)=\frac{(b-a)^2}{12}$</td>
+<td>$\sigma(X)=\sqrt{V(X)}$</td>
 </tr>
 </tbody>
 </table>
@@ -430,12 +376,9 @@ Binomial Formula
 <table>
 <tbody>
 <tr>
-<td><span
-class="math inline">\(E(Y)=np\)</span></td>
-<td><span
-class="math inline">\(V(X)=npq\)</span></td>
-<td><span
-class="math inline">\(\sigma(Y)=\sqrt{V(X)}\)</span></td>
+<td>$E(Y)=np$</td>
+<td>$V(X)=npq$</td>
+<td>$\sigma(Y)=\sqrt{V(X)}$</td>
 </tr>
 </tbody>
 </table>
@@ -449,12 +392,9 @@ Poisson Formula
 <table>
 <tbody>
 <tr>
-<td><span
-class="math inline">\(E(X)=\lambda\)</span></td>
-<td><span
-class="math inline">\(V(X)=\lambda\)</span></td>
-<td><span
-class="math inline">\(\sigma(X)=\sqrt{V(X)}\)</span></td>
+<td>$E(X)=\lambda$</td>
+<td>$V(X)=\lambda$</td>
+<td>$\sigma(X)=\sqrt{V(X)}$</td>
 </tr>
 </tbody>
 </table>
@@ -468,12 +408,9 @@ Normal Formula
 <table>
 <tbody>
 <tr>
-<td><span
-class="math inline">\(E(X)=\lambda\)</span></td>
-<td><span
-class="math inline">\(V(X)=\lambda\)</span></td>
-<td><span
-class="math inline">\(\sigma(X)=\sqrt(\lambda)\)</span></td>
+<td>$E(X)=\lambda$</td>
+<td>$V(X)=\lambda$</td>
+<td>$\sigma(X)=\sqrt(\lambda)$</td>
 </tr>
 </tbody>
 </table>
@@ -522,21 +459,21 @@ $m=13, s=\sqrt{\frac{21}{20}} \times 2 = 2.049$
 <table>
 <tbody>
 <tr>
-<td>if <span class="math inline">\(n \geq slant 30\)</span></td>
-<td><p>Central Limit <span class="math inline">\(\Rightarrow\)</span>
-Normal Law <span class="math inline">\((m,
-\frac{\sigma}{\sqrt{n}})\)</span></p>
-<p><span class="math inline">\(P(m \in ( a,b))=P(\overline{X}-t \times
+<td>if $\(n \geq slant 30$</td>
+<td><p>Central Limit $\(\Rightarrow\)$
+Normal Law $\((m,
+\frac{\sigma}{\sqrt{n}})\)$</p>
+<p>$\(P(m \in ( a,b))=P(\overline{X}-t \times
 \frac{\sigma}{\sqrt{n}} &lt; m  &lt; \overline{X}+t \times
-\frac{\sigma}{\sqrt{n}})=\alpha\)</span></p></td>
+\frac{\sigma}{\sqrt{n}})=\alpha\)$</p></td>
 </tr>
 <tr>
-<td>if <span class="math inline">\(n &lt; 30\)</span></td>
-<td><p>Read Table <span class="math inline">\(\Rightarrow\)</span>
+<td>if $\(n &lt; 30$</td>
+<td><p>Read Table $\(\Rightarrow\)$
 Student Fisher</p>
-<p><span class="math inline">\(P(m \in (a,b))=P(\overline{X}-t \times
+<p>$\(P(m \in (a,b))=P(\overline{X}-t \times
 \frac{s}{\sqrt{n} } &lt; m &lt; \overline{X}+t \times
-\frac{s}{\sqrt{n}})=\alpha\)</span></p></td>
+\frac{s}{\sqrt{n}})=\alpha\)$</p></td>
 </tr>
 </tbody>
 </table>
@@ -554,14 +491,14 @@ Student Fisher</p>
 <tr>
 <td>if \(n \geqslant
 30\)</td>
-<td><span class="math inline">\(\sigma p =
-\sqrt{\frac{pe(1-pe)}{n}}\)</span></td>
+<td>$\sigma p =
+\sqrt{\frac{pe(1-pe)}{n}}$</td>
 </tr>
 <tr>
-<td>if <span class="math inline">\(n &lt;
-30\)</span></td>
-<td><span class="math inline">\(\sigma p =
-\sqrt{\frac{pe(1-pe)}{n-1}}\)</span></td>
+<td>if $\(n &lt;
+30$</td>
+<td>$\sigma p =
+\sqrt{\frac{pe(1-pe)}{n-1}}$</td>
 </tr>
 </tbody>
 </table>
