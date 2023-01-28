@@ -1,82 +1,30 @@
 ---
 title: "Discrete"
 short: ""
+topic: maths discrete
 ---
 
 ## Sets and Domains
 
-<table>
-<tbody>
-<tr>
-<td>$\mathbb{C}$</td>
-<td><em>Complexs</em> (Real+Imaginary)</td>
-<td>$(-5i, 5, i, 3+2i, 10i)$</td>
-</tr>
-<tr>
-<td>$\mathbb{R}$</td>
-<td><em>Reals</em> (All non imaginary)</td>
-<td>$-8.535, 9.76,
-\pi, e$</td>
-</tr>
-<tr>
-<td>$\mathbb{Q}$</td>
-<td><em>Rationals</em> (Fractions)</td>
-<td>$\frac{3}{7},
-0.65, 7$</td>
-</tr>
-<tr>
-<td>$\mathbb{Z}$</td>
-<td><em>Integers</em> (Whole numbers )</td>
-<td>$-53337, -5, 0,
-7, 19$</td>
-</tr>
-<tr>
-<td>$\mathbb{N}$</td>
-<td><em>Naturals</em> (Integer Positive)</td>
-<td>$0, 1, 42, 69,
-420$</td>
-</tr>
-</tbody>
-</table>
+| $\mathbb{C}$ | Complexs (Real+Imaginary)   | $(-5i, 5, i, 3+2i, 10i)$ |
+|--------------|-----------------------------|--------------------------|
+| $\mathbb{R}$ | Reals (All non imaginary)   | $-8.535, 9.76, \pi, e$   |
+| $\mathbb{Q}$ | Rationals (Fractions)       | $\frac{3}{7}, 0.65, 7$   |
+| $\mathbb{Z}$ | Integers (Whole numbers )   | $-53337, -5, 0, 7, 19$   |
+| $\mathbb{N}$ | Naturals (Integer Positive) | $0, 1, 42, 69, 420$      |
 
 > $\mathbb{C} \supset \mathbb{R} \supset \mathbb{Q} \supset \mathbb{Z} \supset \mathbb{N}$
 
 ### Notations
 
-<table>
-<tbody>
-<tr>
-<td>$\exists$</td>
-<td><strong>Exists</strong></td>
-<td><strong>At least</strong> one element</td>
-</tr>
-<tr>
-<td>$\forall$</td>
-<td><strong>for All</strong></td>
-<td><strong>All elements</strong></td>
-</tr>
-<tr>
-<td>$\in$</td>
-<td><strong>In</strong></td>
-<td>Is <strong>included</strong> in</td>
-</tr>
-<tr>
-<td>$\notin$</td>
-<td><strong>Not in</strong></td>
-<td>Is <strong>excluded</strong> from</td>
-</tr>
-<tr>
-<td>$\cup$</td>
-<td><strong>Union</strong></td>
-<td>Elements in A or in B</td>
-</tr>
-<tr>
-<td>$\cap$</td>
-<td><strong>Intersection</strong></td>
-<td>Elements in A and in B</td>
-</tr>
-</tbody>
-</table>
+| Notation  | Name         | Meaning                |       
+|-----------|--------------|------------------------|
+| $\exists$ | Exists       | At least one element   |
+| $\forall$ | for All      | All elements           |
+| $\in$     | In           | Is included in         |
+| $\notin$  | Not in       | Is excluded from       |
+| $\cup$    | Union        | Elements in A or in B  |
+| $\cap$    | Intersection | Elements in A and in B |
 
 ### Extensional definition of a set
 
@@ -86,40 +34,13 @@ $A = \{x \in \mathbb{R} / x^2 + 2x - 3 = 0\}$
 
 ### Connectors and expressions
 
-<table>
-<tbody>
-<tr>
-<td>$\lor$</td>
-<td><strong>Or</strong></td>
-<td>$(1 \lor 0) =
-1\)$ , $\((0 \lor 0) = 0$</td>
-</tr>
-<tr>
-<td>$\land$</td>
-<td><strong>And</strong></td>
-<td>$(1 \land 0) =
-0\)$ , $\((1 \land 1) = 1$</td>
-</tr>
-<tr>
-<td>$\neg$</td>
-<td><strong>Not</strong></td>
-<td>$\neg 1 =
-0\)$ , $\(\neg 0 = 1$</td>
-</tr>
-<tr>
-<td>$\uparrow$</td>
-<td><strong>Sheffer</strong></td>
-<td>$p \uparrow q
-\Leftrightarrow \neg(p \land q)$</td>
-</tr>
-<tr>
-<td>$\downarrow$</td>
-<td><strong>Pierce</strong></td>
-<td>$p \uparrow q
-\Leftrightarrow \neg(p \lor q)$</td>
-</tr>
-</tbody>
-</table>
+| Notation | Name | Meaning |
+|--------------|---------|------------------------------------------------|
+| $\lor$       | Or      | $(1 \lor 0) = 1$, $(0 \lor 0) = 0$             |
+| $\land$      | And     | $(1 \land 0) = 0$ , $(1 \land 1) = 1$          |
+| $\neg$       | Not     | $\neg 1 = 0$ , $\neg 0 = 1$                    |
+| $\uparrow$   | Sheffer | $p \uparrow q \Leftrightarrow \neg(p \land q)$ |
+| $\downarrow$ | Pierce  | $p \uparrow q \Leftrightarrow \neg(p \lor q)$  |
 
 ### Boolean logic
 
@@ -128,48 +49,13 @@ $\mathbb{B} = \{ 0 , 1 \}$
 $p \in \mathbb{B}, \left\lbrace \begin{array}{l} p = 0 \Leftrightarrow \neg p = 1 \\\\\\ p = 1 \Leftrightarrow \neg p = 0 \end{array}\right.$
 
 truth table:
-<table>
-<tbody>
-<tr>
-<td>$p$</td>
-<td>$q$</td>
-<td>$p \lor
-q$</td>
-<td>$p \land
-q$</td>
-<td>$\neg
-p$</td>
-</tr>
-<tr>
-<td>$0$</td>
-<td>$0$</td>
-<td>$0$</td>
-<td>$0$</td>
-<td>$1$</td>
-</tr>
-<tr>
-<td>$0$</td>
-<td>$1$</td>
-<td>$1$</td>
-<td>$0$</td>
-<td>$1$</td>
-</tr>
-<tr>
-<td>$1$</td>
-<td>$0$</td>
-<td>$1$</td>
-<td>$0$</td>
-<td>$0$</td>
-</tr>
-<tr>
-<td>$1$</td>
-<td>$1$</td>
-<td>$1$</td>
-<td>$1$</td>
-<td>$0$</td>
-</tr>
-</tbody>
-</table>
+
+| $p$ | $q$ | $p \lor q$ | $p \land q$ | $\neg p$ |
+|-----|-----|------------|-------------|----------|
+| $0$ | $0$ | $0$        | $0$         | $1$      |
+| $0$ | $1$ | $1$        | $0$         | $1$      |
+| $1$ | $0$ | $1$        | $0$         | $0$      |
+| $1$ | $1$ | $1$        | $1$         | $0$      |
 
 ### Reciprocal and Contraposed
 
@@ -204,13 +90,23 @@ Disjonctive Form:
 
 ### Continuous
 
+> TODO
+
 ### Mesurable
+
+> TODO
 
 ### Injection
 
+> TODO
+
 ### Surjection
 
+> TODO
+
 ### Bijection
+
+> TODO
 
 ## Probability
 
@@ -228,15 +124,9 @@ $Independence \Rightarrow P(A \cap B) = P(A) \times P(B)$
 
 ### Discrete Variable
 
-<table>
-<tbody>
-<tr>
-<td>$E(X)=\sum_{i=1}^{n}[xi \times P(xi)]$</td>
-<td>$V(X)=\sum_{i=1}^{n}[xi-E(X)]^2$</td>
-<td>$\sigma(X)=\sqrt{V(X)}$</td>
-</tr>
-</tbody>
-</table>
+ * $E(X)=\sum_{i=1}^{n}[xi \times P(xi)]$
+ * $V(X)=\sum_{i=1}^{n}[xi-E(X)]^2$
+ * $\sigma(X)=\sqrt{V(X)}$
 
 ##### Bernouilli
 
@@ -253,15 +143,9 @@ manner, with X the number of successes.
 According to the statement \[\...\], X therefore follows a binomial
 distribution of parameters p = \... and n = \...
 
-<table>
-<tbody>
-<tr>
-<td>$E(X)=np$</td>
-<td>$V(X)=npq$</td>
-<td>$\sigma(X)=\sqrt{V(X)}$</td>
-</tr>
-</tbody>
-</table>
+ * $E(X)=np$
+ * $V(X)=npq$
+ * $\sigma(X)=\sqrt{V(X)}$
 
 Exemple, We Roll 3 dice. What is the chance to have 2 times the 1?
 
@@ -273,15 +157,9 @@ Poisson Formula
 
 > $P(k)=P(X=k)=e^{-\lambda} \times \frac{\lambda^k}{k!}$
 
-<table>
-<tbody>
-<tr>
-<td>$E(X)=\lambda$</td>
-<td>$V(X)=\lambda$</td>
-<td>$\sigma(X)=\sqrt{V(X)}$</td>
-</tr>
-</tbody>
-</table>
+ * $E(X)=\lambda$
+ * $V(X)=\lambda$
+ * $\sigma(X)=\sqrt{V(X)}$
 
 Exemple, one more person every 40 seconds. What is the chance to have 4 persons in 2 minutes?
 
@@ -296,15 +174,9 @@ Exponential Formula
 
 > $P(0 \geq X \geq x)=1-e^{-\lambda x}, P(X\leq x)=e^{-\lambda x}$
 
-<table>
-<tbody>
-<tr>
-<td>$E(X)=\frac{1}{\lambda}$</td>
-<td>$V(X)=\frac{1}{\lambda^2}$</td>
-<td>$\sigma(X)=\frac{1}{\lambda}$</td>
-</tr>
-</tbody>
-</table>
+ * $E(X)=\frac{1}{\lambda}$
+ * $V(X)=\frac{1}{\lambda^2}$
+ * $\sigma(X)=\frac{1}{\lambda}$
 
 Exemple, Lambda=6.116x10\^(-4), Probability that T \> 1000?
 
@@ -316,15 +188,9 @@ Uniform Formula
 
 > $f(t)=\frac{1}{b-a}$ if $(t \in [a,b])$, else $0$
 
-<table>
-<tbody>
-<tr>
-<td>$E(X)=\frac{a+b}{2}$</td>
-<td>$V(X)=\frac{(b-a)^2}{12}$</td>
-<td>$\sigma(X)=\sqrt{V(X)}$</td>
-</tr>
-</tbody>
-</table>
+ * $E(X)=\frac{a+b}{2}$
+ * $V(X)=\frac{(b-a)^2}{12}$
+ * $\sigma(X)=\sqrt{V(X)}$
 
 ##### Truncated Normal
 
@@ -332,22 +198,10 @@ Normal Formula
 
 > $T=\frac{X-m}{\sigma} N(0,1)$
 
-<table>
-<tbody>
-<tr>
-<td></td>
-<td>95%</td>
-<td>98%</td>
-<td>99%</td>
-</tr>
-<tr>
-<td></td>
-<td>1.96</td>
-<td>2.33</td>
-<td>2.58</td>
-</tr>
-</tbody>
-</table>
+| 95%  | 98%  | 99%  |
+|------|------|------|
+| 1.96 | 2.33 | 2.58 |
+
 
 $f(t)=\frac{1}{\sqrt{2\pi}} \times e^{-\frac{t^2}{2}}$
 
@@ -373,15 +227,9 @@ Binomial Formula
 
 > $T=\frac{X-np}{\sqrt{npq}}$
 
-<table>
-<tbody>
-<tr>
-<td>$E(Y)=np$</td>
-<td>$V(X)=npq$</td>
-<td>$\sigma(Y)=\sqrt{V(X)}$</td>
-</tr>
-</tbody>
-</table>
+ * $E(Y)=np$
+ * $V(X)=npq$
+ * $\sigma(Y)=\sqrt{V(X)}$
 
 ##### Binomial by Poisson
 
@@ -389,15 +237,9 @@ Poisson Formula
 
 > $\lambda=np$ $(n \geqslant 30, p \leqslant 0.10, np \leqslant 5)$
 
-<table>
-<tbody>
-<tr>
-<td>$E(X)=\lambda$</td>
-<td>$V(X)=\lambda$</td>
-<td>$\sigma(X)=\sqrt{V(X)}$</td>
-</tr>
-</tbody>
-</table>
+ * $E(X)=\lambda$
+ * $V(X)=\lambda$
+ * $\sigma(X)=\sqrt{V(X)}$
 
 ##### Poisson by Normal
 
@@ -405,15 +247,9 @@ Normal Formula
 
 > $T=\frac{X-\lambda}{\sqrt{\lambda}}$
 
-<table>
-<tbody>
-<tr>
-<td>$E(X)=\lambda$</td>
-<td>$V(X)=\lambda$</td>
-<td>$\sigma(X)=\sqrt(\lambda)$</td>
-</tr>
-</tbody>
-</table>
+ * $E(X)=\lambda$
+ * $V(X)=\lambda$
+ * $\sigma(X)=\sqrt(\lambda)$
 
 ### Distribution
 
@@ -431,9 +267,9 @@ $T=\frac{X-n}{\sigma}=\frac{499-500}{0.5}=-2 \Leftrightarrow P(X \leqslant 499)=
 
 ##### Sample Proportion
 
-> $F(p, \sqrt{\frac{pq}{n}}$ for $n \geqslant 30$
+> $F(p, \sqrt{\frac{pq}{n}})$ for $n \geqslant 30$
 
-Exemple, 1% defective and 5000 pieces collected, certitude if \< 1.2% ?
+Exemple, 1% defective and 5000 pieces collected, certitude $if < 1.2%$ ?
 
 $\sigma=\sqrt{\frac{0.01 \times 0.99}{5000}} = 0.0014 \Rightarrow N(0.01, 0.0014)$
 
@@ -456,27 +292,18 @@ $m=13, s=\sqrt{\frac{21}{20}} \times 2 = 2.049$
 > confidence coefficient = $\alpha$, degree of freedom(khi2) =
 > $\chi^2=\frac{(sample-effective)^2}{effective}$
 
-<table>
-<tbody>
-<tr>
-<td>if $\(n \geq slant 30$</td>
-<td><p>Central Limit $\(\Rightarrow\)$
-Normal Law $\((m,
-\frac{\sigma}{\sqrt{n}})\)$</p>
-<p>$\(P(m \in ( a,b))=P(\overline{X}-t \times
-\frac{\sigma}{\sqrt{n}} &lt; m  &lt; \overline{X}+t \times
-\frac{\sigma}{\sqrt{n}})=\alpha\)$</p></td>
-</tr>
-<tr>
-<td>if $\(n &lt; 30$</td>
-<td><p>Read Table $\(\Rightarrow\)$
-Student Fisher</p>
-<p>$\(P(m \in (a,b))=P(\overline{X}-t \times
-\frac{s}{\sqrt{n} } &lt; m &lt; \overline{X}+t \times
-\frac{s}{\sqrt{n}})=\alpha\)$</p></td>
-</tr>
-</tbody>
-</table>
+ * if $n \geq 30$ : Central Limit 
+   > $\Rightarrow$ Normal Law 
+   > $(m, \frac{\sigma}{\sqrt{n}})$
+   > 
+   > $P(m \in ( a,b))=P(\overline{X} \times \frac{\sigma}{\sqrt{n}}$ 
+   > $\overline{X}+t \times \frac{\sigma}{\sqrt{n}})=\alpha$
+
+ * if $n < 30$ : Read Table 
+   > $\Rightarrow$ Student Fisher 
+   > 
+   > $P(m \in (a,b))=P(\overline{X}-t \times \frac{s}{\sqrt{n}}$
+   > $\overline{X}+t \times \frac{s}{\sqrt{n}})=\alpha$
 
 ### Proportion Estimation
 
@@ -486,22 +313,10 @@ Student Fisher</p>
 >
 > $N(p,\sqrt{\frac{pq}{n}}) \Rightarrow f=pe \times \sigma p = \sqrt{\frac{n}{n-1}} \sigma e$
 
-<table>
-<tbody>
-<tr>
-<td>if \(n \geqslant
-30\)</td>
-<td>$\sigma p =
-\sqrt{\frac{pe(1-pe)}{n}}$</td>
-</tr>
-<tr>
-<td>if $\(n &lt;
-30$</td>
-<td>$\sigma p =
-\sqrt{\frac{pe(1-pe)}{n-1}}$</td>
-</tr>
-</tbody>
-</table>
+ * if $n \geq 30$
+   > $\sigma p = \sqrt{\frac{pe(1-pe)}{n}}$
+ * if $n < 30$
+   > $\sigma p = \sqrt{\frac{pe(1-pe)}{n-1}}$
 
 Exemple, We have a survey with a sample of 160 persons, 40 agree. What is the estimated proportion?
 

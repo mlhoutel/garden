@@ -1,6 +1,7 @@
 ---
 title: "Analysis"
 short: ""
+topic: maths analysis
 ---
 
 ## Constants
