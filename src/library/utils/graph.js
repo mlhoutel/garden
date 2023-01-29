@@ -156,7 +156,7 @@ import seedrandom from 'seedrandom'
 function makeGraph(list) {
 	const { nodes, edges } = generateNodes(list);
 
-	const random = new seedrandom('wq6ukiqA3m6op7');
+	const random = new seedrandom('wb10PukiqW3oam6oN7');
 
 	// randomize initial positions
 	for (const node of nodes) {
