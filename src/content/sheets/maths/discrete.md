@@ -269,7 +269,7 @@ $T=\frac{X-n}{\sigma}=\frac{499-500}{0.5}=-2 \Leftrightarrow P(X \leqslant 499)=
 
 > $F(p, \sqrt{\frac{pq}{n}})$ for $n \geqslant 30$
 
-Exemple, 1% defective and 5000 pieces collected, certitude $if < 1.2%$ ?
+Exemple, 1% defective and 5000 pieces collected, certitude $if < 1.2\%$ ?
 
 $\sigma=\sqrt{\frac{0.01 \times 0.99}{5000}} = 0.0014 \Rightarrow N(0.01, 0.0014)$
 

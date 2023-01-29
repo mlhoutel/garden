@@ -4,6 +4,20 @@ short: ""
 topic: maths geometry
 ---
 
+
+
+<script>
+    import GraphPythagore from "$components/maths/geometry/GraphPythagore.svelte";
+    import GraphThales from "$components/maths/geometry/GraphThales.svelte";
+    import GraphCircle from "$components/maths/geometry/GraphCircle.svelte";
+    import GraphElipsis from "$components/maths/geometry/GraphElipsis.svelte";
+    import GraphComplex from "$components/maths/geometry/GraphComplex.svelte";
+    import GraphRotation from "$components/maths/geometry/GraphRotation.svelte";
+    import GraphTranslation from "$components/maths/geometry/GraphTranslation.svelte";
+    import GraphHomothety from "$components/maths/geometry/GraphHomothety.svelte";
+    import GraphSimilarity from "$components/maths/geometry/GraphSimilarity.svelte";
+</script>
+
 ## Shapes
 
 ### Triangles
@@ -13,14 +27,16 @@ topic: maths geometry
 > $c^2=a^2+b^2 \Leftrightarrow c=\sqrt{a^2+b^2}$
 
 Example:
-<!-- <GraphPythagore /> -->
+
+<GraphPythagore />
 
 ##### Thales Theorem (Homothety)
 
 > $\Large\frac{AD}{AB}=\frac{AE}{AC}=\frac{DE}{BC}$
 
 Example:
-<!-- <GraphThales /> -->
+
+<GraphThales />
 
 ### Circles
 
@@ -33,7 +49,8 @@ Example:
  *  Area: $A = π × r²$ 
 
 Example:
-<!-- <GraphCircle /> -->
+
+<GraphCircle />
 
 ### Ellipses
 
@@ -50,14 +67,18 @@ Example:
 
 An exact of the circumference does not exist, here's some approximations (in order of precision):
 
-* Popular approximation (5%) $2 \pi \sqrt{\frac{a^2+b^2}{2}}$
-* Ramanujan first approximation (0.005%) $\pi (3 (a+b) - \sqrt{(3a+b)(a+3b)})$
-* Ramanujan second approximation (0.0000005%) $\pi (a+b)(1+\frac{3h}{10+\sqrt{4-3h}}$
-* Series approximation (0.0000\...%) $\pi (a+b)(1 + \frac{h}{4} + \frac{h^2}{64} + \frac{h^3}{256} + \frac{25h^4}{16384} + ... )$
+* Popular approximation (5%) 
+> $2 \pi \sqrt{\frac{a^2+b^2}{2}}$
+* Ramanujan first approximation (0.005%) 
+> $\pi (3 (a+b) - \sqrt{(3a+b)(a+3b)})$
+* Ramanujan second approximation (0.0000005%) 
+> $\pi (a+b)(1+\frac{3h}{10+\sqrt{4-3h}}$
+* Series approximation (0.0000\...%) 
+> $\pi (a+b)(1 + \frac{h}{4} + \frac{h^2}{64} + \frac{h^3}{256} + \frac{25h^4}{16384} + ... )$
 
 Example:
-<!-- <GraphElipsis /> -->
 
+<GraphElipsis />
 
 ## Complex Numbers
 
@@ -90,13 +111,14 @@ Example:
 | $z = a + ib$   | $a$       | $ib$           |
 
 Example:
-<!-- <GraphComplex /> -->
+
+<GraphComplex />
 
 Example:
 
 | number   | $z = \frac{\sqrt{3}}{2} + \frac{1}{2} i$                                                                   |
 |----------|------------------------------------------------------------------------------------------------------------|
-| modulus  | $|z| = \frac{\sqrt{3}}{2}^2 + \frac{1}{2}^2 = 0.75 + 0.25 = 1$                                             |
+| modulus  | $\|z\| = \frac{\sqrt{3}}{2}^2 + \frac{1}{2}^2 = 0.75 + 0.25 = 1$                                             |
 | argument | $arg(z) = \frac{\pi}{6} (cos(\frac{\pi}{6})=\frac{\sqrt{3}}{2}, sin(\frac{\pi}{6})=\frac{1}{2})$           |
 | trigo    | $z = mod*(cos(arg)+i*sin(arg)) = cos(\frac{\pi}{6}) + i*sin(\frac{\pi}{6})$                                |
 | polar    | $z = mod*e^{i*arg} = e^{i*\frac{\pi}{6}}$                                                                  |
@@ -108,19 +130,19 @@ Example:
 -   center $\Omega(\omega)$
 -   angle $\theta$
 
-<!-- <GraphRotation />-->
+<GraphRotation />
 
 ##### Translation
 -   vector $u$
 
-<!-- <GraphTranslation />-->
+<GraphTranslation />
 
 ##### Homothety
 
 -   center $\Omega(\omega)$
 -   ratio $k = \frac{kb}{ka}$
 
-<!-- <GraphHomothety />-->
+<GraphHomothety />
 
 ##### Similarity
 
@@ -132,7 +154,7 @@ Example:
 **Rotation** of center $\Omega(\omega)$ and of angle $\theta$ then
 **Homothety** of center $\Omega(\omega)$ and of ration $k$
 
-<!-- <GraphSimilarity />-->
+<GraphSimilarity />
 
 Example:
 
@@ -288,4 +310,4 @@ $x=-1, y=1$
 
 ## Quaternions
 
-> TODO+
+> TODO

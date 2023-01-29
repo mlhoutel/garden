@@ -4,6 +4,14 @@ short: ""
 topic: maths analysis
 ---
 
+
+<script>
+    import GraphQuadratic from "$components/maths/analysis/GraphQuadratic.svelte";
+    import GraphExponential from "$components/maths/analysis/GraphExponential.svelte";
+    import GraphTrigonometry from "$components/maths/analysis/GraphTrigonometry.svelte";
+    import GraphRegression from "$components/maths/analysis/GraphRegression.svelte";
+</script>
+
 ## Constants
 
 | Name | Value   |
@@ -24,7 +32,7 @@ topic: maths analysis
 | $\Delta = 0$ | 1 solution in $\mathbb{R}$  | $\frac{-b}{2a}$                       |
 | $\Delta < 0$ | 2 solutions in $\mathbb{C}$ | $\frac{-b \pm i \sqrt{-\Delta} }{2a}$ |
 
-<!--  <GraphQuadratic /> -->
+<GraphQuadratic />
 
 **Identities**
 
@@ -40,7 +48,7 @@ topic: maths analysis
 | $e^x$   | <ul><li>$(e^x)' = e^x$</li><li>$\lim\limits_{\substack{x 	o +\infty} } e^x = +\infty$</li><li>$\lim\limits_{\substack{x \to -\infty} } e^x = 0$</li></ul> | <ul><li>$exp(ln(x))=x$</li><li>$exp(0)=1$</li><li>$exp(1)=e=2.71828182846$</li></ul> |
 | $ln(x)$ | <ul><li>$ln(x)' = \frac{1}{x}$</li><li>$\lim\limits_{\substack{x \to -\infty} } ln(x) = +\infty$</li><li>$\lim\limits_{\substack{x \to 0} } ln(x) = -\infty$</li></ul> | <ul><li>$ln(exp(x))=x$</li><li>$ln(0)=undefined$</li><li>$ln(1)=0$</li></ul> |
 
-<!--  <GraphExponential /> -->
+<GraphExponential />
   
 ### Trigonometry
 
@@ -70,7 +78,7 @@ topic: maths analysis
 | $\arcsin{\sin{\frac{15\pi}{4}}}=-\frac{\pi}{4}$ | $\arccos{\frac{-\sqrt{3}}{2}}=\frac{5\pi}{6}$ |
 | $\arcsin{\frac{1}{2}}=\frac{\pi}{6}$            | $\arccos{\frac{1}{2}}=\frac{\pi}{3}$          |
 
-<!-- <GraphTrigonometry /> -->
+<GraphTrigonometry />
 	
 #### Hcos, Hsin, Htan
 
@@ -279,8 +287,9 @@ Factorials formula: $n! = \prod\limits_{1 \leq i \leq n} i = 1 \times 2 \times 3
 
 #### Overfittingt and Underfitting
 
-<!-- <GraphRegression /> -->
-	
+<GraphRegression />
+
+
 #### Fourier Series
 
 Fourier coefficients Formula: 

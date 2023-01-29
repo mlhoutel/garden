@@ -1,5 +1,4 @@
 import { sveltekit } from '@sveltejs/kit/vite';
-import autoImport from 'sveltekit-autoimport'
 import path from 'path';
 
 /** @type {import('vite').UserConfig} */

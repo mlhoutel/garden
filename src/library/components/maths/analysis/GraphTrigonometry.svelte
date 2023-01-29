@@ -1,5 +1,5 @@
 <script>
-    import JSXGraph from '$components/global/JSXGraph'
+    import JSXGraph from '$components/global/JSXGraph.svelte'
 
     const drawCos = (JXG, id) => {
         const brd = JXG.JSXGraph.initBoard(id, { boundingbox: [-1, Math.PI, Math.PI, -1], axis:true, pan: {enabled: false}, showCopyright:false, showNavigation:false })
@@ -20,15 +20,15 @@
     const drawSin = (JXG, id) => {
         const brd = JXG.JSXGraph.initBoard(id, { boundingbox: [-Math.PI/2, Math.PI/2, Math.PI/2, -Math.PI/2], axis:true, pan: {enabled: false}, showCopyright:false, showNavigation:false })
         
-        var sin = brd.create('functiongraph',[function(x){ return Math.sin(x); }, -Math.PI/2, Math.PI/2],{strokecolor: 'red'});
+        let sin = brd.create('functiongraph',[function(x){ return Math.sin(x); }, -Math.PI/2, Math.PI/2],{strokecolor: 'red'});
         sin.setLabel('sin')
         sin.labelColor('red')
 
-        var sin_line = brd.create('functiongraph',[function(x){ return x; }, -Math.PI/2, Math.PI/2],{strokecolor: 'grey', dash:1});
+        let sin_line = brd.create('functiongraph',[function(x){ return x; }, -Math.PI/2, Math.PI/2],{strokecolor: 'grey', dash:1});
         sin_line.setLabel('y=x')
         sin_line.labelColor('grey')
 
-        var arcsin = brd.create('functiongraph',[function(x){ return Math.asin(x); }, -Math.PI/2, Math.PI/2],{strokecolor: 'blue'});
+        let arcsin = brd.create('functiongraph',[function(x){ return Math.asin(x); }, -Math.PI/2, Math.PI/2],{strokecolor: 'blue'});
         arcsin.setLabel('arcsin')
         arcsin.labelColor('blue')
     }
@@ -51,16 +51,8 @@
 </script>
 
 
-<table>
-    <tr>
-      <td>
-        <JSXGraph draw={drawCos} />
-      </td>
-      <td>
-        <JSXGraph draw={drawSin} />
-      </td>
-      <td>
-        <JSXGraph draw={drawTan} />
-      </td>
-    </tr>
-</table> 
+<div class="flex flex-col lg:flex-row">
+  <div><JSXGraph width="350px" height="200px" draw={drawCos} /></div>
+  <div><JSXGraph width="350px" height="200px" draw={drawSin} /></div>
+  <div><JSXGraph width="350px" height="200px" draw={drawTan} /></div>
+</div> 

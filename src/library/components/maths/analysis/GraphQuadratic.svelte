@@ -1,5 +1,5 @@
 <script>
-    import JSXGraph from '$components/global/JSXGraph'
+    import JSXGraph from '$components/global/JSXGraph.svelte'
 
     const draw = (JXG, id) => {
         const brd = JXG.JSXGraph.initBoard(id, { boundingbox: [-10, 10, 10, -10], axis:true, pan: {enabled: false}, showCopyright:false, showNavigation:false })
