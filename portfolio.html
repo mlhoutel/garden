@@ -5,20 +5,21 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="icon" href="/garden/favicon/favicon.png" />
 		<meta http-equiv="content-security-policy" content="">
-		<link href="/garden/_app/immutable/assets/_layout-322499a2.css" rel="stylesheet">
-		<link rel="modulepreload" href="/garden/_app/immutable/start-5cd03d59.js">
-		<link rel="modulepreload" href="/garden/_app/immutable/chunks/index-46686b93.js">
-		<link rel="modulepreload" href="/garden/_app/immutable/chunks/singletons-5796833d.js">
-		<link rel="modulepreload" href="/garden/_app/immutable/chunks/index-cc15cb3f.js">
-		<link rel="modulepreload" href="/garden/_app/immutable/chunks/paths-b4419565.js">
-		<link rel="modulepreload" href="/garden/_app/immutable/chunks/preload-helper-41c905a7.js">
-		<link rel="modulepreload" href="/garden/_app/immutable/components/pages/_layout.svelte-461d67b2.js">
-		<link rel="modulepreload" href="/garden/_app/immutable/chunks/index-c2d2abfc.js">
-		<link rel="modulepreload" href="/garden/_app/immutable/chunks/ScrollTo-8c02f42c.js">
-		<link rel="modulepreload" href="/garden/_app/immutable/modules/pages/_layout.js-9cbb603b.js">
-		<link rel="modulepreload" href="/garden/_app/immutable/chunks/_layout-da46b06b.js">
-		<link rel="modulepreload" href="/garden/_app/immutable/components/pages/portfolio/_page.svelte-7023f761.js">
-		<link rel="modulepreload" href="/garden/_app/immutable/chunks/TopicPill-49adea77.js"><title>Maël Lhoutellier - Portfolio</title><!-- HEAD_svelte-1fa4ftv_START --><link rel="icon" href="/garden/favicon/favicon.png"><!-- HEAD_svelte-1fa4ftv_END --><!-- HEAD_svelte-1aheii7_START --><!-- HEAD_svelte-1aheii7_END -->
+		<link href="/garden/_app/immutable/assets/_layout.322499a2.css" rel="stylesheet">
+		<link rel="preload" as="script" crossorigin="anonymous" href="/garden/_app/immutable/entry/start.da4c13f1.mjs">
+		<link rel="preload" as="script" crossorigin="anonymous" href="/garden/_app/immutable/chunks/index.73c741f7.mjs">
+		<link rel="preload" as="script" crossorigin="anonymous" href="/garden/_app/immutable/chunks/singletons.b0925d54.mjs">
+		<link rel="preload" as="script" crossorigin="anonymous" href="/garden/_app/immutable/chunks/index.8e5b1c0d.mjs">
+		<link rel="preload" as="script" crossorigin="anonymous" href="/garden/_app/immutable/chunks/paths.80c7acbc.mjs">
+		<link rel="preload" as="script" crossorigin="anonymous" href="/garden/_app/immutable/entry/app.61732312.mjs">
+		<link rel="preload" as="script" crossorigin="anonymous" href="/garden/_app/immutable/chunks/preload-helper.41c905a7.mjs">
+		<link rel="preload" as="script" crossorigin="anonymous" href="/garden/_app/immutable/entry/_layout.svelte.9647a202.mjs">
+		<link rel="preload" as="script" crossorigin="anonymous" href="/garden/_app/immutable/chunks/index.61d60e66.mjs">
+		<link rel="preload" as="script" crossorigin="anonymous" href="/garden/_app/immutable/chunks/ScrollTo.20ad40bc.mjs">
+		<link rel="preload" as="script" crossorigin="anonymous" href="/garden/_app/immutable/entry/_layout.js.fb1865a6.mjs">
+		<link rel="preload" as="script" crossorigin="anonymous" href="/garden/_app/immutable/chunks/_layout.da46b06b.mjs">
+		<link rel="preload" as="script" crossorigin="anonymous" href="/garden/_app/immutable/entry/portfolio-page.svelte.606f43af.mjs">
+		<link rel="preload" as="script" crossorigin="anonymous" href="/garden/_app/immutable/chunks/TopicPill.f89121f6.mjs"><title>Maël Lhoutellier - Portfolio</title><!-- HEAD_svelte-1fa4ftv_START --><link rel="icon" href="/garden/favicon/favicon.png"><!-- HEAD_svelte-1fa4ftv_END --><!-- HEAD_svelte-1aheii7_START --><!-- HEAD_svelte-1aheii7_END -->
 	</head>
 	<body>
 		<div id="svelte">
@@ -363,21 +364,30 @@
 		<a class="underline px-1" href="https://github.com/mlhoutel/garden" target="_blank" rel="noreferrer">SOURCE</a></div></div></body>
 
 
-		<script type="module" data-sveltekit-hydrate="13x07vl">
-			import { start } from "/garden/_app/immutable/start-5cd03d59.js";
+			
+			<script>
+				{
+					__sveltekit_1jaeno1 = {
+						env: {},
+						assets: "/garden",
+						element: document.currentScript.parentElement
+					};
 
-			start({
-				env: {},
-				paths: {"base":"/garden","assets":"/garden"},
-				target: document.querySelector('[data-sveltekit-hydrate="13x07vl"]').parentNode,
-				version: "1675012728348",
-				hydrate: {
-					node_ids: [0, 7],
-					data: [null,null],
-					form: null
+					const data = [null,null];
+
+					Promise.all([
+						import("/garden/_app/immutable/entry/start.da4c13f1.mjs"),
+						import("/garden/_app/immutable/entry/app.61732312.mjs")
+					]).then(([kit, app]) => {
+						kit.start(app, __sveltekit_1jaeno1.element, {
+							node_ids: [0, 7],
+							data,
+							form: null,
+							error: null
+						});
+					});
 				}
-			});
-		</script>
-	</div>
+			</script>
+		</div>
 	</body>
 </html>

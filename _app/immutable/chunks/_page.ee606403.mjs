@@ -1,0 +1,1 @@
+import{b as o}from"./paths.80c7acbc.mjs";const t=async({fetch:e})=>({projects:await(await e(`${o}/api/projects`)).json()}),n=Object.freeze(Object.defineProperty({__proto__:null,load:t},Symbol.toStringTag,{value:"Module"}));export{n as _,t as l};
