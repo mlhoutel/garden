@@ -45,7 +45,7 @@
 		</div>
 	</a>
 
-	<div class="background-dark w-full absolute top-3 h-9 skewed left-[-20px] z-20">
+	<div class="background-dark md:w-full absolute top-3 h-9 skewed left-[-20px] z-20">
 		<div class="anti-skewed pt-1 mt-10 md:ml-[125px] md:mt-0 overflow-hidden">
 			{#each getMenuItems() as item}
 				<a

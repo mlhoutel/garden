@@ -11,8 +11,7 @@
 		scrollTop();
 	}
 
-	const year = new Date().getFullYear()
-
+	const year = new Date().getFullYear();
 </script>
 
 <svelte:window bind:scrollY={y} />
@@ -44,11 +43,24 @@
 			<p>This website was made with sveltekit / tailwind / mdsvex</p>
 		</div>
 	</article>
-	
-	<div class="flex justify-center">
-		<a class="underline px-1" href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noreferrer">COPYLEFT</a>
-		<span>- {year} MAEL LHOUTELLIER -</span>
-		<a class="underline px-1" href="https://github.com/mlhoutel/garden" target="_blank" rel="noreferrer">SOURCE</a>
+
+	<div class="flex justify-center pt-10 px-20 flex-col md:flex-row">
+		<a
+			class="underline px-1"
+			href="https://creativecommons.org/licenses/by-sa/3.0/"
+			target="_blank"
+			rel="noreferrer"
+		>
+			COPYLEFT
+		</a>
+		<span>{year} MAEL LHOUTELLIER</span>
+		<a
+			class="underline px-1"
+			href="https://github.com/mlhoutel/garden"
+			target="_blank"
+			rel="noreferrer"
+		>
+			SOURCE
+		</a>
 	</div>
 </div>
-
