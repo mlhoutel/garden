@@ -156,14 +156,14 @@ import seedrandom from 'seedrandom'
 function makeGraph(list) {
 	const { nodes, edges } = generateNodes(list);
 
-	const random = new seedrandom('wb10PukiqW3oam6oN7');
+	const random = new seedrandom('WhYVgpjCm0ToYmfJz8Lt');
 
 	// randomize initial positions
 	for (const node of nodes) {
 		node.pos = new Vec2(random() * 300, random() * 300);
 	}
 
-	for (let i = 0; i < 1000; i++) {
+	for (let i = 0; i < 10000; i++) {
 		stepGraph(nodes, edges);
 	}
 
