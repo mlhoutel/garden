@@ -1,40 +1,33 @@
 <script>
-	import { onMount } from 'svelte';
-	import { preferences } from '$utils/store.js';
 	import { Icon } from '@steeze-ui/svelte-icon';
-	import { Sun, Moon} from '@steeze-ui/heroicons';
+	import { Sun, Moon } from '@steeze-ui/heroicons';
+	import { themeStore } from '../utils/theme';
 
 	import { base } from '$app/paths';
 
-	export function refreshTheme() {
-		if (preferences.theme != 'dark') {
+	// True for dark, false for light
+	let theme;
+
+	themeStore.subscribe((value) => {
+		theme = value;
+	});
+
+	function updateTheme() {
+		themeStore.set(!theme);
+		if (theme) {
 			document.documentElement.classList.add('dark');
 		} else {
 			document.documentElement.classList.remove('dark');
 		}
 	}
 
-	export function toggleTheme() {
-		preferences.theme = preferences.theme != 'dark' ? 'dark' : 'light';
-		refreshTheme();
-	}
-
-	export let menu = false;
-	function clickNavBar() {
-		menu = !menu;
-	}
-
-	onMount(() => {
-		refreshTheme();
-	});
-
 	export function getMenuItems() {
 		return [
-			{ label: "Posts", link: `${base}/posts` },
-			{ label: "Sheets", link: `${base}/sheets`},
-			{ label: "Snippets", link: `${base}/snippets`},
-			{ label: "Projects", link: `${base}/projects` }
-		]
+			{ label: 'Posts', link: `${base}/posts` },
+			{ label: 'Sheets', link: `${base}/sheets` },
+			{ label: 'Snippets', link: `${base}/snippets` },
+			{ label: 'Projects', link: `${base}/projects` }
+		];
 	}
 </script>
 
@@ -55,14 +48,18 @@
 	<div class="background-dark w-full absolute top-3 h-9 skewed left-[-20px] z-20">
 		<div class="anti-skewed pt-1 mt-10 md:ml-[125px] md:mt-0 overflow-hidden">
 			{#each getMenuItems() as item}
-				<a href={item.link} class="background-primary md:background-dark font-serif px-1 w-[100%] md:w-5 block md:inline">{item.label}</a>
+				<a
+					href={item.link}
+					class="background-primary md:background-dark font-serif px-1 w-[100%] md:w-5 block md:inline"
+					>{item.label}</a
+				>
 			{/each}
 		</div>
 	</div>
 
 	<div class="absolute top-3 right-4 h-9 inline-flex bg-grey text-white skewed z-30">
-		<button class="flex items-center h-auto w-12 anti-skewed" on:click={toggleTheme}>
-			{#if preferences.theme != 'dark'}
+		<button class="flex items-center h-auto w-12 anti-skewed" on:click={updateTheme}>
+			{#if !theme}
 				<Icon src={Moon} theme="solid" class="h-6" />
 			{:else}
 				<Icon src={Sun} theme="solid" class="h-7" />
@@ -73,4 +70,4 @@
 	<div class="w-full block pt-12" />
 </nav>
 
-<div class="w-full block h-[130px] md:h-0"></div>
+<div class="w-full block h-[130px] md:h-0" />
