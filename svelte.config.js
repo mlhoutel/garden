@@ -26,7 +26,7 @@ const config = {
 	kit: {
 		adapter: adapter({
 			strict: false,
-    		fallback: 'src/routes/+error.svelte'
+    		fallback: 'error.html'
 		}),
 		// paths: { base: base }
 	}
