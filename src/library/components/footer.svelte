@@ -20,6 +20,7 @@
 	<button
 		class="z-30 fixed bottom-10 right-10 background-primary p-2 rounded-full"
 		style="box-shadow: rgba(0,0,0,0.5) 0px 3px 5px 0px;"
+		aria-label="navigate to the top of the page"
 		on:click={navigateTop}
 	>
 		<Icon src={ChevronUp} size="35px" />

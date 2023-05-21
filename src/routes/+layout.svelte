@@ -2,18 +2,26 @@
 	import '$styles/layout.scss';
 	import '$styles/markdown.scss';
 
+	import { onMount } from 'svelte';
 	import { base } from '$app/paths';
 
 	import Header from '$components/header.svelte';
 	import Footer from '$components/footer.svelte';
-</script>
 
-<link
-	rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"
-	integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X"
-	crossorigin="anonymous"
-/>
+	onMount(async () => {
+		const link = document.createElement('link');
+		link.rel = 'stylesheet';
+		link.href = 'https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css';
+		link.integrity = 'sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X';
+		link.crossOrigin = 'anonymous';
+
+		await new Promise((resolve, reject) => {
+			link.onload = resolve;
+			link.onerror = reject;
+			document.head.appendChild(link);
+		});
+	});
+</script>
 
 <svelte:head>
 	<link rel="icon" href="{base}/favicon/favicon.png" />

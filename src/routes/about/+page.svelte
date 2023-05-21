@@ -47,6 +47,8 @@
 		<div class="A4 text-sm tracking-wider font-thin relative bg-white shadow-xl">
 			<img
 				src="{base}/logos/sumblack.svg"
+				width="400px"
+				height="400px"
 				alt="logo"
 				class="absolute pointer-events-none right-[50px] bottom-[80px] opacity-10 h-[400px]"
 			/>
@@ -56,7 +58,13 @@
 					<div class="flex">
 						<div class="flex-auto pt-8 pr-6">
 							<div class="inline-flex items-center overflow-visible">
-								<img src="{base}/logos/sumcolor.svg" alt="logo" class="h-11" />
+								<img
+									src="{base}/logos/sumcolor.svg"
+									width="44px"
+									height="44px"
+									alt="logo"
+									class="h-11"
+								/>
 								<h1 class="p-2">LHOUTELLIER Maël</h1>
 							</div>
 
@@ -173,7 +181,9 @@
 								<img
 									class="rounded-full mb-5 mx-1 mt-1 max-w-[170px] max-h-[170px] object-cover object-top"
 									src="{base}/images/avatar_placeholder.svg"
-									alt=""
+									width="170px"
+									height="170px"
+									alt="curriculum vitae avatar"
 								/>
 
 								<h2>CONTACTS</h2>

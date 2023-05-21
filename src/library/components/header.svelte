@@ -37,7 +37,13 @@
 		<div
 			class="flex items-center flex-shrink-0 background-secondary px-5 py-2 absolute w-[100px] left-[-6px] top-0 skewed z-30"
 		>
-			<img src="{base}/logos/sumblack.svg" alt="logo" class="h-8 anti-skewed" />
+			<img
+				src="{base}/logos/sumblack.svg"
+				alt="logo"
+				height="32px"
+				width="32px"
+				class="h-8 anti-skewed"
+			/>
 
 			<div class="absolute left-[55px] top-3 pl-5 flex">
 				<div class="background-dark h-8 w-1 mx-0.5" />
@@ -60,7 +66,11 @@
 	</div>
 
 	<div class="absolute top-3 right-4 h-9 inline-flex bg-grey text-white skewed z-30">
-		<button class="flex items-center h-auto w-12 anti-skewed" on:click={updateTheme}>
+		<button
+			class="flex items-center h-auto w-12 anti-skewed"
+			aria-label="toggle website theming"
+			on:click={updateTheme}
+		>
 			{#if !theme}
 				<Icon src={Moon} theme="solid" class="h-6" />
 			{:else}

@@ -108,7 +108,7 @@ topic: ascii converter imagery
         </div>
 
     </div>
-    
+
     <div class="min-h-[200px] flex justify-center items-center">
         {#if base64}
             <img class="max-h-[200px]" bind:this={preview} src={base64} on:load={generateImage} alt="">
@@ -122,5 +122,5 @@ topic: ascii converter imagery
     <div class="font-mono overflow-auto mt-1 mb-10 p-3 rounded max-h-[600px] flex justify-center items-center">
         <pre><code>{ascii}</code></pre>
     </div>
-</article>
 
+</article>
