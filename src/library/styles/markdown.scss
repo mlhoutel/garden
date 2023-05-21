@@ -13,38 +13,26 @@ article {
     h1, h1 a {
         @apply text-3xl md:text-4xl;
         text-align: center;
-       //  font-weight: 500;
-       // font-size: 2.8em;
     }
 
     h2, h2 a {
         @apply text-2xl md:text-3xl;
-        // font-weight: 500;
-        // font-size: 1.9em;
     }
 
     h3, h3 a {
         @apply text-xl md:text-2xl;
-        // font-weight: 500;
-        // font-size: 1.5em;
     }
 
     h4, h4 a {
         @apply text-lg md:text-xl;
-        // font-weight: 400;
-        // font-size: 1.4em;
     }
 
     h5, h5 a {
-        @apply text-base md:text-lg;
-        // font-weight: 400;
-        // font-size: 1.3em;
+        @apply text-lg md:text-xl;
     }
 
     h6, h6 a {
-        @apply text-sm md:text-base;
-        // font-weight: 400;
-        // font-size: 1.2em;
+        @apply text-lg md:text-xl;
     }
 
     h1, h1 a,
@@ -135,15 +123,19 @@ article {
     }
 
     em {
-        display: block;
         font-style: italic;
-        font-weight: 300;
-        font-size: 0.9em;
-        margin: auto;
-        text-align: center;
     }
 
-    sup {}
+    img + em {
+        @apply text-sm;
+        margin: auto;
+        text-align: center;
+        display: block;
+    }
+
+    sup {
+        @apply text-sm align-text-top;
+    }
 
     .footnotes {
         margin-top: 50px;
@@ -161,4 +153,14 @@ article {
         color: #666;
     }
 
+    .katex {
+        /* Adjust the vertical spacing between elements */
+        margin-bottom: 0.5em;
+    }
+
+    .katex .frac-line {
+        /* Adjust the vertical position of the fraction line */
+        top: 0.1em;
+        bottom: 0.1em;
+    }
 }
