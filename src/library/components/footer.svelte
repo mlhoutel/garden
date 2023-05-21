@@ -35,7 +35,7 @@
 				<li><a href="{base}/sheets">sheets</a></li>
 				<li><a href="{base}/snippets">snippets</a></li>
 				<li><a href="{base}/projects">projects</a></li>
-				<li><a href="{base}/portfolio">portfolio</a></li>
+				<li><a href="{base}/about">about</a></li>
 			</ul>
 		</div>
 		<div class="px-10">

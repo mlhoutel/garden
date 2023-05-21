@@ -26,7 +26,8 @@
 			{ label: 'Posts', link: `${base}/posts` },
 			{ label: 'Sheets', link: `${base}/sheets` },
 			{ label: 'Snippets', link: `${base}/snippets` },
-			{ label: 'Projects', link: `${base}/projects` }
+			{ label: 'Projects', link: `${base}/projects` },
+			{ label: 'About', link: `${base}/about` }
 		];
 	}
 </script>
@@ -49,6 +50,7 @@
 		<div class="anti-skewed pt-1 mt-10 md:ml-[125px] md:mt-0 overflow-hidden">
 			{#each getMenuItems() as item}
 				<a
+					data-sveltekit-preload-data
 					href={item.link}
 					class="background-primary md:background-dark font-serif px-1 w-[100%] md:w-5 block md:inline"
 					>{item.label}</a

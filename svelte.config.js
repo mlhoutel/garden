@@ -1,15 +1,20 @@
 import preprocess from 'svelte-preprocess';
 import importAssets from 'svelte-preprocess-import-assets';
-import adapter from '@sveltejs/adapter-auto';
 import { mdsvex } from 'mdsvex';
 import mdsvexConfig from './mdsvex.config.js';
 
-/*
-// STATIC DEPLOYMENT
-// if you want to deploy to gtihub pages, uncomment this block
-// as well as the "paths" property in the code below.
 
+/*
+// DYNAMIC DEPLOYEMENT
+import adapter from '@sveltejs/adapter-auto';
+*/
+
+// STATIC DEPLOYMENT
 import adapter from '@sveltejs/adapter-static';
+
+/*
+// if you want to deploy to github pages, uncomment this block
+// as well as the "paths" property in the code below.
 const dev = process.env.NODE_ENV === 'development';
 const base = dev ? '' : '/garden'
 */
