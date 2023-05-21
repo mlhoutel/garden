@@ -26,7 +26,10 @@
 		['postgres', { label: 'Postgres', icon: '', link: 'https://www.postgresql.org/' }],
 		['activemq', { label: 'ActiveMQ', icon: '', link: 'https://activemq.apache.org/' }],
 		['figma', { label: 'Figma', icon: '', link: 'https://www.figma.com/' }],
-		['vba', { label: 'VBA', icon: '', link: 'https://learn.microsoft.com/en-us/office/vba/api/overview/' }]
+		[
+			'vba',
+			{ label: 'VBA', icon: '', link: 'https://learn.microsoft.com/en-us/office/vba/api/overview/' }
+		]
 	]);
 
 	export let pill = { label: 'default', icon: '', link: undefined };
@@ -50,7 +53,7 @@
 	}
 </script>
 
-<a href={!removable ? pill.link : undefined} target="_blank" rel="noreferrer">
+<a href={!removable ? pill.link : './'} target="_blank" rel="noreferrer">
 	<button class="pill" on:click={handleClick}>
 		{#if !!pill.icon}
 			<Icon src={pill.icon} theme="solid" size="15px" class="mr-1" />
