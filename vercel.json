@@ -1,11 +1,11 @@
 {
   "routes": [
     { "handle": "filesystem" },
-    { "src": "/(.*)", "dest": "/error.html" },
     { "src": "/about", "dest": "/about.html" },
     { "src": "/posts", "dest": "/posts.html" },
     { "src": "/projects", "dest": "/projects.html" },
     { "src": "/sheets", "dest": "/sheets.html" },
-    { "src": "/snippets", "dest": "/snippets.html" }
+    { "src": "/snippets", "dest": "/snippets.html" },
+    { "src": "/(.*)", "dest": "/error.html" }
   ]
 }
