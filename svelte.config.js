@@ -24,7 +24,10 @@ const config = {
 	extensions: ['.svelte', ...mdsvexConfig.extensions],
 	preprocess: [mdsvex(mdsvexConfig), preprocess(), importAssets()],
 	kit: {
-		adapter: adapter({ strict: false }),
+		adapter: adapter({
+			strict: false,
+    		fallback: 'src/routes/+error.svelte'
+		}),
 		// paths: { base: base }
 	}
 };
