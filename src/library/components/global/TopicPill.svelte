@@ -53,7 +53,7 @@
 	}
 </script>
 
-<a href={!removable ? pill.link : './'} target="_blank" rel="noreferrer">
+<a href={pill.link ?? '/'} target={pill.link ? '_blank' : '_self'} rel="noreferrer">
 	<button class="pill" on:click={handleClick}>
 		{#if !!pill.icon}
 			<Icon src={pill.icon} theme="solid" size="15px" class="mr-1" />

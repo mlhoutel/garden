@@ -52,15 +52,16 @@
 		</div>
 	</a>
 
-	<div class="background-dark md:w-full absolute top-3 h-9 skewed left-[-20px] z-20">
-		<div class="anti-skewed pt-1 mt-10 md:ml-[125px] md:mt-0 overflow-hidden">
+	<div class="background-dark w-full absolute top-3 h-9 skewed left-[-20px] z-20">
+		<div class="anti-skewed text-lg pt-1 mt-10 md:ml-[125px] md:mt-0 overflow-hidden">
 			{#each getMenuItems() as item}
 				<a
 					data-sveltekit-preload-data
 					href={item.link}
-					class="background-primary md:background-dark font-serif px-1 w-[100%] md:w-5 block md:inline"
-					>{item.label}</a
+					class="background-primary md:background-dark font-serif px-1 py-0.5 w-full md:w-5 block md:inline"
 				>
+					{item.label}
+				</a>
 			{/each}
 		</div>
 	</div>
