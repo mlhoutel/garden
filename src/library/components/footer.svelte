@@ -43,7 +43,11 @@
 		<div class="">
 			<ul class="list-none underline">
 				{#each getFooterItems() as item}
-					<li><a class="px-10 text-base" href={item.link}>{item.label}</a></li>
+					<li>
+						<a class="px-10 text-base" href={item.link} data-sveltekit-preload-code="hover">
+							{item.label}
+						</a>
+					</li>
 				{/each}
 			</ul>
 		</div>

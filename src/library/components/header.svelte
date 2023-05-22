@@ -56,7 +56,7 @@
 		<div class="anti-skewed text-lg pt-1 mt-10 md:ml-[125px] md:mt-0 overflow-hidden">
 			{#each getMenuItems() as item}
 				<a
-					data-sveltekit-preload-data
+					data-sveltekit-preload-code="hover"
 					href={item.link}
 					class="background-primary md:background-dark font-serif px-1 py-0.5 w-full md:w-5 block md:inline"
 				>

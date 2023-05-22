@@ -35,7 +35,7 @@
 		<p class="p-5">{message}</p>
 
 		<div class="inline-flex justify-center">
-			<a class="pill text-base mx-1" href="/">
+			<a class="pill text-base mx-1" href="/" data-sveltekit-preload-code="hover">
 				<Icon src={Home} class="h-5 w-5 mr-1" />
 				Go home
 			</a>
