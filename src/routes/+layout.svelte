@@ -11,8 +11,8 @@
 	onMount(async () => {
 		const link = document.createElement('link');
 		link.rel = 'stylesheet';
-		link.href = 'https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css';
-		link.integrity = 'sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X';
+		link.href = 'https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.css';
+		link.integrity = 'sha384-3UiQGuEI4TTMaFmGIZumfRPtfKQ3trwQE2JgosJxCnGmQpL/lJdjpcHkaaFwHlcI';
 		link.crossOrigin = 'anonymous';
 
 		await new Promise((resolve, reject) => {
