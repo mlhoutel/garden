@@ -41,7 +41,7 @@ Finished sequence of elements in a set
 ### Equality of Words
 
 On the same Alphabet: $\alpha \in A, \beta \in A$
- => $\left\lbrace  \begin{array}{l} |\alpha| = |\beta| = n \\\\\\ \forall i \in [1,n], \alpha i = \beta i \end{array}\right.$
+ => $\left\lbrace \begin{array}{l} |\alpha| = |\beta| = n \\\\\\ \forall i \in [1,n], \alpha i = \beta i \end{array}\right.$
 
 > ex:
 > 

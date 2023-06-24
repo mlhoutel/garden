@@ -1,6 +1,7 @@
 <script>
 	import '$styles/layout.scss';
 	import '$styles/markdown.scss';
+	import 'material-icons/iconfont/material-icons.css';
 
 	import { onMount } from 'svelte';
 	import { base } from '$app/paths';

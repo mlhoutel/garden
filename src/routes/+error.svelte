@@ -1,7 +1,5 @@
 <script>
 	import { page } from '$app/stores';
-	import { Icon } from '@steeze-ui/svelte-icon';
-	import { Home, ExclamationTriangle } from '@steeze-ui/heroicons';
 
 	function preformat(page) {
 		switch (page.status) {
@@ -36,11 +34,11 @@
 
 		<div class="inline-flex justify-center">
 			<a class="pill text-base mx-1" href="/" data-sveltekit-preload-code="hover">
-				<Icon src={Home} class="h-5 w-5 mr-1" />
+				<i class="material-icons !text-xl mr-1">home</i>
 				Go home
 			</a>
 			<a class="pill text-base mx-1" href="https://github.com/mlhoutel/garden/issues">
-				<Icon src={ExclamationTriangle} class="h-5 w-5 mr-1" />
+				<i class="material-icons !text-xl mr-1">warning</i>
 				Report issue
 			</a>
 		</div>

@@ -24,7 +24,7 @@
   
 &nbsp;&nbsp;
 
-*Welcome to my digital garden, a collection of my thoughts, ponderings, and notes on various topics! Here you'll find blog posts that delve into topics that interest me, help sheets that are quick reference guides, and demos of small, fleeting projects. Whether you want to learn something new or just explore different perspectives, I hope you find something useful here. Thanks for visiting!* [browse website](https://mlhoutel.github.io/garden/)
+_Welcome to my digital garden, a collection of my thoughts, ponderings, and notes on various topics! Here you'll find blog posts that delve into topics that interest me, help sheets that are quick reference guides, and demos of small, fleeting projects. Whether you want to learn something new or just explore different perspectives, I hope you find something useful here. Thanks for visiting!_ [browse website](https://mlhoutel.github.io/garden/)
 
 ## License
 
@@ -43,6 +43,8 @@ git clone https://github.com/mlhoutel/garden
 ```
 npm install
 ```
+
+> Currently, [June 2023] the choice was made to bump up the libs towards svelte 4.0. The [mdsvex](https://github.com/pngwn/MDsveX) lib don't officialy support this version, so for now, the install should be done with `npm i --force`.
 
 3. start a local development server
 

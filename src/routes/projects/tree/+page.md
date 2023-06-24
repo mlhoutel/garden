@@ -3,10 +3,7 @@ short: Tree generator
 topic: simulation tree
 ---
 
-
 <script>
-	import { ArrowPath } from '@steeze-ui/heroicons';
-
     import Canvas from '$components/projects/Canvas.svelte'
     import { vec } from "$utils/projects.js"
     import { Drawable, Tree } from "./tree"
@@ -51,7 +48,7 @@ topic: simulation tree
 
     let actions = {
         reset: {
-            label: ArrowPath,
+            label: 'refresh',
             function: () => { reset() }
         }
     }

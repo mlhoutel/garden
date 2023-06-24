@@ -3,9 +3,7 @@ short: Verlet simulation
 topic: simulation verlet
 ---
 
-
 <script>
-	import { Pause, Play, ArrowPath } from '@steeze-ui/heroicons';
 
     import Canvas from '$components/projects/Canvas.svelte'
     import { vec, RandomInt } from "$utils/projects.js"
@@ -75,11 +73,11 @@ topic: simulation verlet
 
     let actions = {
         reset: {
-            label: ArrowPath,
+            label: 'refresh',
             function: () => { reset() }
         },
         pause: {
-            label: paused ? Play : Pause,
+            label: paused ? 'play' : 'pause',
             function: () => { paused = !paused }
         }
     }
@@ -89,4 +87,3 @@ topic: simulation verlet
 <div class="relative">
     <Canvas {setup} {draw} bind:values bind:actions />
 </div>
-

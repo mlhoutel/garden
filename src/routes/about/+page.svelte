@@ -1,8 +1,6 @@
 <script>
 	import { base } from '$app/paths';
 	import { browser } from '$app/environment';
-	import { Icon } from '@steeze-ui/svelte-icon';
-	import { Printer } from '@steeze-ui/heroicons';
 
 	function print() {
 		if (browser) {
@@ -36,8 +34,7 @@
 			class="overflow-hidden background-primary h-[70px] w-[70px] rounded-full mx-3 mt-10"
 			style="box-shadow: rgba(0,0,0,0.5) 0px 3px 5px 0px;"
 		>
-			<Icon src={Printer} theme="solid" class="h-6" />
-			<span class="text-sm pt-1">Export</span>
+			<i class="material-icons !text-3xl">print</i>
 		</button>
 	</div>
 </div>

@@ -4,8 +4,6 @@ topic: simulation euler
 ---
 
 <script>
-	import { Pause, Play, ArrowPath } from '@steeze-ui/heroicons';
-
     import Canvas from '$components/projects/Canvas.svelte'
 
     import { Body, System } from "./nbody"
@@ -67,11 +65,11 @@ topic: simulation euler
 
     let actions = {
         reset: {
-            label: ArrowPath,
+            label: 'refresh',
             function: () => { system.reset() }
         },
         pause: {
-            label: paused ? Play : Pause,
+            label: paused ? 'play' : 'pause',
             function: () => { paused = !paused }
         }
     }
@@ -80,4 +78,3 @@ topic: simulation euler
 <div class="relative">
     <Canvas {setup} {draw} bind:values bind:actions />
 </div>
-

@@ -1,7 +1,5 @@
 <script>
 	import { afterUpdate } from 'svelte';
-	import { Icon } from '@steeze-ui/svelte-icon';
-	import { XMark } from '@steeze-ui/heroicons';
 	import { createEventDispatcher } from 'svelte';
 
 	export let topic = undefined;
@@ -56,13 +54,13 @@
 <a href={pill.link ?? '/'} target={pill.link ? '_blank' : '_self'} rel="noreferrer">
 	<button class="pill" on:click={handleClick}>
 		{#if !!pill.icon}
-			<Icon src={pill.icon} theme="solid" size="15px" class="mr-1" />
+			<i class="material-icons !text-2xl mr-1">{pill.icon}</i>
 		{/if}
 
 		{pill.label}
 
 		{#if !!removable}
-			<Icon src={XMark} theme="solid" size="15px" class="ml-1" />
+			<i class="material-icons !text-2xl ml-1">close</i>
 		{/if}
 	</button>
 </a>

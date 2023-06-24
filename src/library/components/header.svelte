@@ -1,6 +1,4 @@
 <script>
-	import { Icon } from '@steeze-ui/svelte-icon';
-	import { Sun, Moon } from '@steeze-ui/heroicons';
 	import { themeStore } from '../utils/theme';
 
 	import { base } from '$app/paths';
@@ -73,9 +71,9 @@
 			on:click={updateTheme}
 		>
 			{#if !theme}
-				<Icon src={Moon} theme="solid" class="h-6" />
+				<i class="material-icons !text-2xl px-2">dark_mode</i>
 			{:else}
-				<Icon src={Sun} theme="solid" class="h-7" />
+				<i class="material-icons !text-2xl px-2">light_mode</i>
 			{/if}
 		</button>
 	</div>
