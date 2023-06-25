@@ -99,7 +99,9 @@
 		>
 			{#each displayed as option}
 				<div class="px-1">
-					<button class="selectOption w-full text-left" on:click={optionClick}>{option}</button>
+					<button class="selectOption w-full text-left text-sm" on:click={optionClick}
+						>{option}</button
+					>
 				</div>
 			{/each}
 		</div>

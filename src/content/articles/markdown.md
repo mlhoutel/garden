@@ -5,8 +5,6 @@ topic: markdown demo styling
 short: Demonstration of the automatic markdown styling with custom theme
 ---
 
-# h1 Heading
-
 ## h2 Heading
 
 ### h3 Heading

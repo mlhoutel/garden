@@ -16,6 +16,11 @@
 }
 
 @layer components {
+
+	.content {
+		@apply px-3 py-[50px] md:py-[100px];
+	}
+
 	article {
 		width: 100%;
 		max-width: 800px;

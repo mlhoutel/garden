@@ -20,7 +20,7 @@
 	const label = 'Go to project »';
 </script>
 
-<article class="px-3 pt-14 pb-10">
+<article class="content">
 	<h1>Projects</h1>
 
 	<ContentList {items} {label} />

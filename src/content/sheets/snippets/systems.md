@@ -1,7 +1,7 @@
 ---
 title: 'System'
 short: Gaussian elimination, Jacobi method and Gauss-Siedel
-topic: maths system-solving
+topic: maths system solving
 ---
 
 ## Gaussian
