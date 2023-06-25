@@ -12,12 +12,12 @@
 			data-sveltekit-preload-code="hover"
 			href={item.path}
 		>
-			<h3>{item.title}</h3>
+			<h3>{item.meta.title}</h3>
 		</a>
 
 		<div class="pills md:pt-[22px] md:pl-3">
-			{#if item.topic}
-				{#each item.topic.split(' ') as topic}
+			{#if item.meta.topic}
+				{#each item.meta.topic.split(' ') as topic}
 					<TopicPill {topic} />
 				{/each}
 			{/if}
@@ -25,7 +25,7 @@
 	</div>
 
 	<p class="pt-0 text-sm">
-		{#if item.short}{item.short}...<br />{/if}
+		{#if item.meta.short}{item.meta.short}...<br />{/if}
 
 		<a class="font-serif" data-sveltekit-preload-code="hover" href={item.path}>{label}</a>
 	</p>

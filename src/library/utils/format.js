@@ -2,6 +2,15 @@ function toAnchor(label) {
 	return label.toLowerCase().replace(' ', '-');
 }
 
+function escapeThemePath(path) {
+	const index = path.lastIndexOf('/');
+	return path.slice(0, index) + '-' + path.slice(index + 1);
+}
+
+function unescapeThemePath(path) {
+	return path.replaceAll('-', '/');
+}
+
 function extractParamFromUrl(url, label, base) {
 	const param = decodeURI(url.searchParams.get(label));
 
@@ -30,4 +39,8 @@ function searchEncodeUrl(params) {
 	);
 }
 
-export { toAnchor, searchDecodeUrl, searchEncodeUrl };
+function toUpper(text) {
+	return text.charAt(0).toUpperCase() + text.slice(1);
+}
+
+export { toAnchor, searchDecodeUrl, searchEncodeUrl, toUpper, escapeThemePath, unescapeThemePath };

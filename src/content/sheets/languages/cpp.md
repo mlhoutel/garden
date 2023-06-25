@@ -1440,15 +1440,3 @@ int main()
 
 }
 ```
-
-## Qt
-
-> TODO
-
-## CUDA
-
-> TODO
-
-## CMake and Builds
-
-> TODO

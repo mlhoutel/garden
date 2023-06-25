@@ -79,7 +79,7 @@
 		{/each}
 	</div>
 	<div class="select-search">
-		<i class="material-icons !text-2xl px-2">filter_alt</i>
+		<i class="material-icons !text-xl">filter_alt</i>
 		<input
 			type="search"
 			autocomplete="off"

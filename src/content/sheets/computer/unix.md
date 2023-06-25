@@ -1,7 +1,7 @@
 ---
-title: "Unix OS family"
-short: "group of computer operating systems that share a common heritage and many of the same design principles, and are known for their stability, flexibility, and portability"
-topic: computer-science unix 
+title: 'Unix OS family'
+short: 'group of computer operating systems that share a common heritage and many of the same design principles, and are known for their stability, flexibility, and portability'
+topic: computer-science unix
 ---
 
 ## Fast Help
@@ -75,35 +75,23 @@ topic: computer-science unix
 
 ### Linux directory
 
-``` 
-/                                               *Root directory*  
-├───bin                                         *Users programs*  
-├───boot                                        *System booting*  
-├───dev                                         *Devices (ex:CD)*  
-├───etc                                         *Config folder*   
-├───home                                        *Users folders*  
-│     ├───userA  
-│     └───userB  
-├───lib                                         *Shared libraries*  
-├───media                                       *Medias (ex:USB)*  
-├───mnt                                         *Temporary medias*  
-├───opt                                         *Programs add-ons*  
-├───proc                                        *System infos*  
-├───root                                        *Root user folder*  
-├───sbin                                        *System programs*  
-├───tmp                                         *Temporary folder*  
-├───usr                                         *Users programs*  
-└───var                                         *Datas and Logs*  
 ```
-
-## Structure
-
-> TODO
-
-## Administration
-
-> TODO
-
-## Bash
-
-> TODO
+/                                               *Root directory*
+├───bin                                         *Users programs*
+├───boot                                        *System booting*
+├───dev                                         *Devices (ex:CD)*
+├───etc                                         *Config folder*
+├───home                                        *Users folders*
+│     ├───userA
+│     └───userB
+├───lib                                         *Shared libraries*
+├───media                                       *Medias (ex:USB)*
+├───mnt                                         *Temporary medias*
+├───opt                                         *Programs add-ons*
+├───proc                                        *System infos*
+├───root                                        *Root user folder*
+├───sbin                                        *System programs*
+├───tmp                                         *Temporary folder*
+├───usr                                         *Users programs*
+└───var                                         *Datas and Logs*
+```

@@ -232,10 +232,6 @@ async function asynchrone() {
 try { /* Code */ } catch (error) { /* Code */ }
 ```
 
-## Typescript
-
-> TODO
-
 ## Ajax
 
 ```js
@@ -269,10 +265,6 @@ function Get(url) {
 	});
 }
 ```
-
-## p5
-
-> TODO
 
 ## NodeJs
 

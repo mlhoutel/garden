@@ -16,7 +16,10 @@ export const load = async ({ fetch }) => {
 		.sort((a, b) => a[0] - b[0])
 		.map((year) => ({ date: year[0], articles: year[1] }));
 
-	return {
-		years: sorted
-	};
+	const years = sorted.map((i) => ({
+		label: i.date,
+		items: i.articles
+	}));
+
+	return { years };
 };

@@ -34,11 +34,11 @@
 
 		<div class="inline-flex justify-center">
 			<a class="pill text-base mx-1" href="/" data-sveltekit-preload-code="hover">
-				<i class="material-icons !text-xl mr-1">home</i>
+				<i class="material-icons !text-lg mr-1">home</i>
 				Go home
 			</a>
 			<a class="pill text-base mx-1" href="https://github.com/mlhoutel/garden/issues">
-				<i class="material-icons !text-xl mr-1">warning</i>
+				<i class="material-icons !text-lg mr-1">warning</i>
 				Report issue
 			</a>
 		</div>

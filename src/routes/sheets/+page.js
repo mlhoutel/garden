@@ -1,28 +1,39 @@
 import { base } from '$app/paths';
+import { toUpper } from '$utils/format';
 
 export const load = async ({ fetch }) => {
 	const response = await fetch(`${base}/api/sheets`);
 	const sheets = await response.json();
 
-	// reconstruct file tree
-	let tree = {};
-
-	for (const sheet of sheets) {
-		const splited = sheet.path.split('/').slice(1);
-
-		let cursor = tree;
-		for (const [index, path] of splited.entries()) {
-			if (!cursor[path]) cursor[path] = {};
-
-			if (index == splited.length - 1) {
-				cursor[path] = sheet;
-			} else {
-				cursor = cursor[path];
-			}
+	const deepInsert = (tree, path) => {
+		if (path.length < 2) throw Error('bottom of path reached before assignment');
+		if (path.length == 2) {
+			const [key, value] = path;
+			if (!tree[key]?.length) tree[key] = [];
+			tree[key].push(value);
+		} else {
+			const key = path[0];
+			tree[key] = {};
+			deepInsert(tree[key], path.slice(1));
 		}
+	};
+
+	const convertNode = (tree) => {
+		if (Array.isArray(tree)) {
+			return tree;
+		} else {
+			return Object.entries(tree).map(([label, items]) => ({
+				label: toUpper(label),
+				items: convertNode(items)
+			}));
+		}
+	};
+
+	const tree = {};
+	for (const sheet of sheets) {
+		const splited = [...sheet.file.split('/').slice(1, -1), sheet];
+		deepInsert(tree, splited);
 	}
 
-	return {
-		tree
-	};
+	return { tree: convertNode(tree) };
 };

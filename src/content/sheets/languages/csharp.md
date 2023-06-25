@@ -311,10 +311,6 @@ static void Main(string[] args) {
 }
 ```
 
-INTERFACES
-
-> TODO
-
 ### Test Unit
 
 ```csharp
@@ -449,13 +445,3 @@ MessageBox.Show("text");
 
 System.Windows.Application.Current.Shutdown();
 ```
-
-> TODO
-
-## MVVM Light
-
-> TODO
-
-## API
-
-> TODO

@@ -160,7 +160,7 @@ class Car {
    		  ... but it's not realy true, the wheels could be changed, the car
    		  would still be the same. The interpretation is realy specific to what you need
 
-   		- The Driver seems completely independant from the rest of the pieces. It is 
+   		- The Driver seems completely independant from the rest of the pieces. It is
    		passed by parameter in the constructor, and we can emit the supposition that
    		the driver can be changed, for instance if he sells the car to another Driver
    		=> We could say that the Driver is in a shared aggregation with the Car
@@ -200,9 +200,9 @@ class Truck extends Vehicle {
 	/* Truck class implementation */
 }
 
-/* 
-   	We can see that the Polymorphism allows to store multiple childs 
-   	of the Car class in the same Array, that's really usefull 
+/*
+   	We can see that the Polymorphism allows to store multiple childs
+   	of the Car class in the same Array, that's really usefull
    */
 let MyVehicles: Array<Vehicles> = [new Car(), new Truck()];
 ```
@@ -220,7 +220,3 @@ let MyVehicles: Array<Vehicles> = [new Car(), new Truck()];
 - _Simple Inheritance:_ ascending aproach (factoring the top layer)
 - _Multiple Inheritance:_ independant bottom and top layers
 - _Agregation with Delegation:_ composition of the top layer (inject dependances)
-
-### Other concepts
-
-> TODO

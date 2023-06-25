@@ -363,8 +363,6 @@ echo($text); return $language;
 </form>
 ```
 
-> TODO
-
 ##### Text Input
 
 - **value:** displayed value
@@ -472,11 +470,3 @@ $$name = $_POST[$name];
 echo $name; // instead of echo $_POST["name"]; echo
 $surname;
 ```
-
-## MVC
-
-> TODO
-
-## Laravel
-
-> TODO
