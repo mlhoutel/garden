@@ -1,7 +1,7 @@
 ---
-title: "Docker container manager"
-short: "How to deploy and manage containerized applications"
-topic: computer-science docker
+title: 'Docker container manager'
+short: 'How to deploy and manage containerized applications'
+topic: engineering docker
 ---
 
 ## Fast Help

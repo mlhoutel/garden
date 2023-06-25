@@ -1,7 +1,7 @@
 ---
 title: 'Sphinx documentation generator'
 short: 'Convert source code documentation written in the reStructuredText format into a variety of output formats, such as HTML and PDF'
-topic: computer-science sphinx python
+topic: engineering sphinx python
 ---
 
 ## Introduction

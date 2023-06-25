@@ -23,11 +23,11 @@
 			<GraphTopics nodes={data.nodes} edges={data.edges} />
 		</div>
 
-		<div class="p-5 text-xs columns-2 md:columns-5">
+		<div class="p-5 columns-2 md:columns-5">
 			{#each data.nodes.sort((a, b) => b.count - a.count) as node}
 				<div>
-					<a href="{base}/search?topics={node.label}">
-						<span class="underline">[ {node.count} ]</span>
+					<a href="{base}/search?topics={node.label}" class="text-sm">
+						<span class="underline text-sm">[ {node.count} ]</span>
 						{node.label}
 					</a>
 				</div>
