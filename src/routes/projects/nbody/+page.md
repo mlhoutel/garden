@@ -1,4 +1,5 @@
 ---
+title: Nbody
 short: Nbody simple simulation with euler integration
 topic: simulation euler
 ---

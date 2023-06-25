@@ -1,14 +1,14 @@
 ---
-title: "Java"
-short: "general-purpose object-oriented programming language, write once, run anywhere"
-topic: programming-language compiled
+title: 'Java'
+short: 'general-purpose object-oriented programming language, write once, run anywhere'
+topic: language compiled
 ---
 
 ## JavaFx
 
 ### First Program
 
-``` java
+```java
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
@@ -42,21 +42,21 @@ public class MyApplication extends Application {
 
 #### Agencement
 
-``` java
+```java
 import javafx.scene.layout.Hbox;
 
 Hbox root = new Hbox();
 root.getChildren().addAll(/* ... */);
 ```
 
-``` java
+```java
 import javafx.scene.layout.Vbox;
 
 Vbox root = new Vbox();
 root.getChildren().addAll(/* ... */);
 ```
 
-``` java
+```java
 import javafx.scene.layout.FlowPane;
 
 FlowPane root = new FlowPane(Orientation.HORIZONTAL);
@@ -65,14 +65,14 @@ root.setColumnHalignment(HPos.CENTER);
 root.getChildren().addAll(/* ... */);
 ```
 
-``` java
+```java
 import javafx.scene.layout.TilePane;
 
 TilePane root = new TilePane(Orientation.HORIZONTAL);
 root.getChildren().addAll(/* ... */);
 ```
 
-``` java
+```java
 import javafx.scene.layout.GridPane;
 
 GridPane root = new GridPane();
@@ -82,7 +82,7 @@ root.add(/* Node */, 1, 2);
 root.add(/* Node */, 4, 0, 1, 2);
 ```
 
-``` java
+```java
 import javafx.scene.layout.AnchorPane;
 
 AnchorPane root = new AnchorPane();
@@ -93,14 +93,14 @@ root.setBottomAnchor(/* Node */, 0.0);
 root.setLeftAnchor(/* Node */, 0.0);
 ```
 
-``` java
+```java
 import javafx.scene.layout.StackPane;
 
 StackPane root = new StackPane();
 root.getChildren().addAll(/* ... */);
 ```
 
-``` java
+```java
 import javafx.scene.layout.BorderPane;
 
 BorderPane root = new BorderPane();

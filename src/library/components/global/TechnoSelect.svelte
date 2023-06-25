@@ -2,15 +2,12 @@
 	import TopicPill from './TopicPill.svelte';
 	import { createEventDispatcher } from 'svelte';
 
+	export let placeholder = 'Search...';
 	export let input = '';
-	export let options = ['A', 'b'];
-	export let displayOption = options;
-
+	export let options = [];
+	export let displayed = options;
 	export let selected = new Set();
-	export let displaySelected = [];
-
 	export let dropdown = false;
-	export const maxDropdown = 10;
 
 	export function inputFocus(e) {
 		dropdown = true;
@@ -33,10 +30,10 @@
 
 	export function updateDisplayOptions() {
 		if (!input.length) {
-			displayOption = options;
+			displayed = options;
 		} else {
 			const lowerInput = input.toLowerCase().trim();
-			displayOption = options.filter((o) => o.toLowerCase().includes(lowerInput));
+			displayed = options.filter((o) => o.toLowerCase().includes(lowerInput));
 		}
 	}
 
@@ -51,8 +48,6 @@
 
 		selected.add(!!found ? found : input.trim()); // update display
 		selected = selected; // update display
-
-		displaySelected = Array.from(selected);
 		input = '';
 		updateDisplayOptions();
 		dispatch('change', selected);
@@ -63,8 +58,6 @@
 
 		selected.add(e.target?.innerText);
 		selected = selected; // update display
-
-		displaySelected = Array.from(selected);
 		input = '';
 		updateDisplayOptions();
 		dispatch('change', selected);
@@ -73,18 +66,16 @@
 	export const dispatch = createEventDispatcher();
 
 	export function selectClick(e) {
-		selected.delete(e.detail.label);
+		selected.delete(e.detail);
 		selected = selected; // update display
-
-		displaySelected = [...Array.from(selected)];
 		dispatch('change', selected);
 	}
 </script>
 
 <div class="w-[300px]">
 	<div class="pills">
-		{#each displaySelected as topic}
-			<TopicPill {topic} on:click={selectClick} removable={true} />
+		{#each selected as topic}
+			<TopicPill disabled={true} {topic} on:click={selectClick} removable={true} />
 		{/each}
 	</div>
 	<div class="select-search">
@@ -92,7 +83,7 @@
 		<input
 			type="search"
 			autocomplete="off"
-			placeholder="Search..."
+			{placeholder}
 			bind:value={input}
 			on:focus={inputFocus}
 			on:blur={inputBlur}
@@ -103,12 +94,14 @@
 	</div>
 
 	{#if dropdown}
-		<div class="select-options w-[310px] z-20 max-h-[400px] overflow-y-auto">
-			<ul>
-				{#each displayOption as option}
-					<button class="selectOption" on:click={optionClick}>{option}</button>
-				{/each}
-			</ul>
+		<div
+			class="flex-col bg-white dark:bg-black select-options w-[300px] z-20 max-h-[400px] overflow-y-auto pb-3"
+		>
+			{#each displayed as option}
+				<div class="px-1">
+					<button class="selectOption w-full text-left" on:click={optionClick}>{option}</button>
+				</div>
+			{/each}
 		</div>
 	{/if}
 </div>

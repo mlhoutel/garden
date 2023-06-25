@@ -1,9 +1,5 @@
 # Garden
 
-<a href="https://github.com/mlhoutel/garden/blob/master/.github/workflows/deploy.yml" alt="Build">
-  <img src="https://img.shields.io/github/actions/workflow/status/mlhoutel/garden/deploy.yml?style=flat-square" />
-</a>
-
 <a href="https://github.com/mlhoutel/garden/blob/main/package.json" alt="Version">
   <img src="https://img.shields.io/github/package-json/v/mlhoutel/garden?style=flat-square&color=informational" />
 </a>

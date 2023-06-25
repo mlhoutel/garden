@@ -12,9 +12,8 @@
 	export function getFooterItems() {
 		return [
 			{ label: 'home', link: `${base}/` },
-			{ label: 'posts', link: `${base}/posts` },
+			{ label: 'articles', link: `${base}/articles` },
 			{ label: 'sheets', link: `${base}/sheets` },
-			{ label: 'snippets', link: `${base}/snippets` },
 			{ label: 'projects', link: `${base}/projects` },
 			{ label: 'about', link: `${base}/about` }
 		];

@@ -1,5 +1,5 @@
 ---
-title: "Benchmarking"
+title: 'Benchmarking'
 short: Benchmarking demo with a simple gcd algorithm
 topic: benchmarking
 ---
@@ -13,15 +13,15 @@ TEST WITH A SIMPLE IMPLEMENTATION OF EUCLIDEAN GCD ALGORITHM
 */
 
 if (typeof window === 'undefined') {
-    var { performance } = require('perf_hooks'); // in node
+	var { performance } = require('perf_hooks'); // in node
 } else {
-    // ================ /!\ Warning /!\ ================
-    // reduced time precision (1ms) in Firefox 60
-    // or with privacy.resistFingerprinting enabled
-    var performance = window.performance; // in web browser
+	// ================ /!\ Warning /!\ ================
+	// reduced time precision (1ms) in Firefox 60
+	// or with privacy.resistFingerprinting enabled
+	var performance = window.performance; // in web browser
 }
 
-const gcd = ((a, b) => (b === 0) ? a : gcd(b, a % b));
+const gcd = (a, b) => (b === 0 ? a : gcd(b, a % b));
 
 const PASS = 10;
 const ITER = 10000000;
@@ -29,16 +29,16 @@ const MAX = 1000000000;
 const ROUND = 100;
 
 const passes = [...Array(PASS).keys()].map((i) => {
-    const arr = [...Array(ITER).keys()].map(() => Math.floor(Math.random() * (MAX - ROUND)) * ROUND);
+	const arr = [...Array(ITER).keys()].map(() => Math.floor(Math.random() * (MAX - ROUND)) * ROUND);
 
-    const start = performance.now();
-    const c_gcd = arr.reduce((acc, val) => gcd(acc, val));
-    const end = performance.now();
+	const start = performance.now();
+	const c_gcd = arr.reduce((acc, val) => gcd(acc, val));
+	const end = performance.now();
 
-    const time = end - start;
-    console.log(`${i+1}/${PASS}: gcd = ${c_gcd} (${time}ms)`);
+	const time = end - start;
+	console.log(`${i + 1}/${PASS}: gcd = ${c_gcd} (${time}ms)`);
 
-    return time;
+	return time;
 });
 
 const sum = passes.reduce((a, b) => a + b, 0);
@@ -49,7 +49,7 @@ total duration: ${sum}ms
 mean duration: ${sum / PASS}ms
 max duration: ${Math.max(...passes)}ms
 min duration: ${Math.min(...passes)}ms
-mean gcd: ${(sum / PASS) / ITER}ms
+mean gcd: ${sum / PASS / ITER}ms
 ==========================================
 `);
 

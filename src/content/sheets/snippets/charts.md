@@ -1,5 +1,5 @@
 ---
-title: "Charts"
+title: 'Charts'
 short: Data plotting
 topic: maths visualisation
 ---
@@ -7,5 +7,5 @@ topic: maths visualisation
 ## Charts demo
 
 ```js
-TODO
+TODO;
 ```

@@ -1,7 +1,7 @@
 ---
-title: "Python"
-short: "high-level, interpreted programming language usefull for scripting and data-analysis"
-topic: programming-language scripting
+title: 'Python'
+short: 'high-level, interpreted programming language usefull for scripting and data-analysis'
+topic: language scripting
 ---
 
 ## Language
@@ -15,7 +15,7 @@ topic: programming-language scripting
 ## Anaconda
 
 ```sh
-conda info 
+conda info
 conda update conda
 conda env list
 conda env remove --name env-name

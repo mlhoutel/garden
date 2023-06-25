@@ -1,5 +1,5 @@
 ---
-title: "Interpolation"
+title: 'Interpolation'
 short: Lagrange polynomial and splines
 topic: maths interpolation
 ---
@@ -13,49 +13,51 @@ topic: maths interpolation
 // 3. We obtain the equations of the polynomial of degree n:        AX^3 + bX^2 + cX + d
 // 4. We replace X by X1, X2, ..., Xn and we obtain a system of equations
 // 5. We solve with one of the methods in the system folder
-// 
+//
 // Remark:
 // We know that for n nodes, there exists:
 // - an infinity of polynomials of degree n (or more)
 // - a unique polynomial of (degree n-1 or less)
 
 lagrange = (x, y, X) => {
-    const n = x.length
-    let L = 0
+	const n = x.length;
+	let L = 0;
 
-    for (let i = 0; i < n; i++) {
-        L += polynom(x, y, i, X)
-    }
+	for (let i = 0; i < n; i++) {
+		L += polynom(x, y, i, X);
+	}
 
-    return L
-}
+	return L;
+};
 
 polynom = (x, y, i, X) => {
-    const n = x.length
-    Li = 1
+	const n = x.length;
+	Li = 1;
 
-    for (let j = 0; j < n; j++) {
-        if (j != i) {
-            Li *= (X - x[j])
-        }
-    }
+	for (let j = 0; j < n; j++) {
+		if (j != i) {
+			Li *= X - x[j];
+		}
+	}
 
-    for (let j = 0; j < n; j++) {
-        if (j != i) {
-            Li /= (x[i] - x[j])
-        }
-    }
+	for (let j = 0; j < n; j++) {
+		if (j != i) {
+			Li /= x[i] - x[j];
+		}
+	}
 
-    Li *= y[i]
+	Li *= y[i];
 
-    return Li
-}
-
+	return Li;
+};
 
 const x = [0, 1, 2, 3];
 const y = [1, 1.1, 1.3, 4];
 
-console.log("Interpolated function between 0 and 4 =", [...new Array(40).keys()].map((e) => [e / 10, lagrange(x, y, e / 10)]))
+console.log(
+	'Interpolated function between 0 and 4 =',
+	[...new Array(40).keys()].map((e) => [e / 10, lagrange(x, y, e / 10)])
+);
 
 /*
 Interpolated function between 0 and 4 = [
@@ -108,5 +110,5 @@ Interpolated function between 0 and 4 = [
 ```js
 // https://en.wikipedia.org/wiki/Spline_(mathematics)
 
-TODO
+TODO;
 ```

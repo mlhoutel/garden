@@ -1,7 +1,7 @@
 ---
 title: 'Encoding'
 short: Object serialization
-topic: js serialization encoding
+topic: serialization encoding
 ---
 
 ## Encoding demo

@@ -1,7 +1,7 @@
 ---
-title: "C++"
-short: "General-purpose programming language, developed as an extension of the C programming language."
-topic: programming-language compiled
+title: 'C++'
+short: 'General-purpose programming language, developed as an extension of the C programming language.'
+topic: language compiled
 ---
 
 ## Introduction
@@ -71,15 +71,14 @@ Many C compiler exists, ([See all](https://en.wikipedia.org/wiki/List_of_compile
 
 I recommand these ones:
 
-* GCC (from GNU, Open sources): [Download GCC from GNU](https://gcc.gnu.org/)
-* MSVC (from Microsoft Visual Studio): [Download Visual Studio](https://visualstudio.microsoft.com/fr/downloads/)
+- GCC (from GNU, Open sources): [Download GCC from GNU](https://gcc.gnu.org/)
+- MSVC (from Microsoft Visual Studio): [Download Visual Studio](https://visualstudio.microsoft.com/fr/downloads/)
 
 For this example, I'm using [GCC 10.0.1](ftp://ftp.lip6.fr/pub/gcc/releases/gcc-10.1.0/), the base `command line` from **Windows 10** and the text editor [Sublime Text 3](https://www.sublimetext.com/3)
 
 > I recommand to install GCC from MinGW instead of compiling it yourself.
-> 
+>
 > you will find explanations on how to proceed [here](http://mingw.org/wiki/Getting_Started)
-
 
 #### Setup GCC and compiling a basic program
 
@@ -101,17 +100,17 @@ For this example, I'm using [GCC 10.0.1](ftp://ftp.lip6.fr/pub/gcc/releases/gcc-
 
    4. Open a new command and type `gcc`, now it should work and diplay that message: `gcc: fatal error: no input files. compilation terminated.`
 
-2.  Now we will compile the file `helloworld.c`
+2. Now we will compile the file `helloworld.c`
 
-    1.  Open a command in the same directory as the C file
+   1. Open a command in the same directory as the C file
 
-    2.  type `gcc helloworld.c -o helloworld.exe`
+   2. type `gcc helloworld.c -o helloworld.exe`
 
-    3.  then `./helloworld.exe`
+   3. then `./helloworld.exe`
 
-    4.  The program will output this string: `Hello, World!`
+   4. The program will output this string: `Hello, World!`
 
-3.  Great, you have now a `working basis` to begin your learning of the `C` and `C++` languages.
+3. Great, you have now a `working basis` to begin your learning of the `C` and `C++` languages.
 
 #### Compilator settings and flags
 
@@ -124,52 +123,51 @@ For this example, I'm using [GCC 10.0.1](ftp://ftp.lip6.fr/pub/gcc/releases/gcc-
 
 Command Syntax:
 
-```gcc [options] [source files] [object files] -o output file```
+`gcc [options] [source files] [object files] -o output file`
 
 If you don't put `-o output file`, the output file will be `a.exe` per default.
 
-Add libraries:   
+Add libraries:
 
-```-I %libpath%\include -L %libpath%\lib -l libfileA -l libfileB```
+`-I %libpath%\include -L %libpath%\lib -l libfileA -l libfileB`
 
- * `-I` define the include folder, generally where the headers files `.h` are
- *  `-L` define the folder where to look at the source files
- *  `-l` define the name/link for the library to include `.dll` if the lib is dynamically compiled, and `.lib` if it is staticaly compiled
+- `-I` define the include folder, generally where the headers files `.h` are
+- `-L` define the folder where to look at the source files
+- `-l` define the name/link for the library to include `.dll` if the lib is dynamically compiled, and `.lib` if it is staticaly compiled
 
-Warnings and Errors:   
+Warnings and Errors:
 
 The **Errors Flags** begin with a `-W` (for Warning):
 
--   `-w` disable all warnings messages, the program will keep compiling
--   `-Wall` enables all the warnings for minors errors
--   `-Wextra` enables some extra warning flags that -Wall don't
-    activate
--   `-Werror` make all warnings into errors.
--   `-Wfatal-errors` abort compilation on the first error
+- `-w` disable all warnings messages, the program will keep compiling
+- `-Wall` enables all the warnings for minors errors
+- `-Wextra` enables some extra warning flags that -Wall don't
+  activate
+- `-Werror` make all warnings into errors.
+- `-Wfatal-errors` abort compilation on the first error
 
 Debug Flags:
 
-```-Wall -Wextra -Wold-style-cast -Woverloaded-virtual -Wfloat-equal -Wwrite-strings -Wpointer-arith -Wcast-qual -Wcast-align -Wconversion -Wshadow -Weffc++ -Wredundant-decls -Wdouble-promotion -Winit-self -Wswitch-default -Wswitch-enum -Wundef -Wlogical-op -Winline ```
+`-Wall -Wextra -Wold-style-cast -Woverloaded-virtual -Wfloat-equal -Wwrite-strings -Wpointer-arith -Wcast-qual -Wcast-align -Wconversion -Wshadow -Weffc++ -Wredundant-decls -Wdouble-promotion -Winit-self -Wswitch-default -Wswitch-enum -Wundef -Wlogical-op -Winline `
 
 > For the Debug config, you can put all the flags to detect and display every error or unrecommanded feature of your code.
 
 Release Flags
 
-```-Werror -Wfatal-errors```
+`-Werror -Wfatal-errors`
 
 > For the Release config, the process abort at the first error
 
 The **Debug Flags** begin with a `-g` (for Generate debug informations)
 
- * `-g0` no debug informations
- * `-g1` minimal debug informations
- * `-g` default debug informations
- * `-g3` maximal debug informations
-
+- `-g0` no debug informations
+- `-g1` minimal debug informations
+- `-g` default debug informations
+- `-g3` maximal debug informations
 
 > I recommand to stay with the default value `-g` and switch to higher level `-g3` if you have no clue on the error.
 
-Optimisation:  
+Optimisation:
 
 The **Optimisation Flags** begin with a `-O` (for Optimisation)
 
@@ -236,7 +234,7 @@ The **Optimisation Flags** begin with a `-O` (for Optimisation)
 </tbody>
 </table>
 
-*informations from https://www.rapidtables.com/code/linux/gcc/gcc-o.html#optimization*
+_informations from https://www.rapidtables.com/code/linux/gcc/gcc-o.html#optimization_
 
 ### Import and use Libraries
 
@@ -244,22 +242,22 @@ The **Optimisation Flags** begin with a `-O` (for Optimisation)
 
 To **include a library** we use the `#include` command.
 
--   `#include <library.h>` when the headers folder is already linked in
-    the compiler
--   `#include "folder/library.h"` to search in a specific folder with
-    the path
+- `#include <library.h>` when the headers folder is already linked in
+  the compiler
+- `#include "folder/library.h"` to search in a specific folder with
+  the path
 
-List of the most common and used system libraries:   
+List of the most common and used system libraries:
 
--   **C** Input/Output library: `#include <stdio.h>`
--   **C** General library: `#include <stdlib.h>`
--   **C** Numerics library : `#include <cmath.h>`
--   **C** Strings library: `#include <string.h>`
--   **C** Time library: `#include <time.h>`
--   **C++** Time library: `#include <chrono>`
--   **C++** Treads library: `#include <thread>`
+- **C** Input/Output library: `#include <stdio.h>`
+- **C** General library: `#include <stdlib.h>`
+- **C** Numerics library : `#include <cmath.h>`
+- **C** Strings library: `#include <string.h>`
+- **C** Time library: `#include <time.h>`
+- **C++** Time library: `#include <chrono>`
+- **C++** Treads library: `#include <thread>`
 
-*informations from https://en.cppreference.com/w/cpp/header*
+_informations from https://en.cppreference.com/w/cpp/header_
 
 #### Namespace and utilities
 
@@ -267,17 +265,17 @@ When you use multiple libraries, it could be some `conflicts` under
 names between some libraries, that's why we use `namespaces`.
 
 > "Namespaces provide a method for preventing name conflicts in large projects."
-[source](https://en.cppreference.com/w/cpp/language/namespace)
+> [source](https://en.cppreference.com/w/cpp/language/namespace)
 
 We can use namespaces like that: `sf::...`
 
-``` cpp
+```cpp
 sf::RectangleShape rectangle(sf::Vector2f(120,50));
 ```
 
 Or like that: `namespace sf { ... }`
 
-``` cpp
+```cpp
 namespace sf {
   RectangleShape rectangle(Vector2f(120,50));
 }
@@ -285,7 +283,7 @@ namespace sf {
 
 Or even like that: `using namespace sf;`
 
-``` cpp
+```cpp
 using namespace sf;
 
 RectangleShape rectangle(Vector2f(120,50));
@@ -296,7 +294,6 @@ RectangleShape rectangle(Vector2f(120,50));
 > when you want to use both functions from libraries that would be in
 > conflict, you will have to mix the third and the first method\...
 
-
 ## Cheat Sheets
 
 ### Usefull Informations
@@ -304,11 +301,12 @@ RectangleShape rectangle(Vector2f(120,50));
 > Unofficial Documentation: https://en.cppreference.com/w/
 
 **About Cpp**
-* **Type of Language:** Procedural, Object-Oriented
-* **Born in:** 1985
-* **Caracteristics:** Statically typed, low level, fast
-* **Popularity:** 5.8% (6th) [src](http://pypl.github.io/PYPL.html)
-* **Usefull for:** softwares, games, embedded...
+
+- **Type of Language:** Procedural, Object-Oriented
+- **Born in:** 1985
+- **Caracteristics:** Statically typed, low level, fast
+- **Popularity:** 5.8% (6th) [src](http://pypl.github.io/PYPL.html)
+- **Usefull for:** softwares, games, embedded...
 
 ### Basic C Cheat Sheet
 
@@ -514,7 +512,7 @@ class="math inline">(2<sup>8</sup>−1)</span></td>
 
 > Chars are just integers linked to an characted by the ascii table.
 
-*informations from https://fr.cppreference.com/w/cpp/language/ascii*
+_informations from https://fr.cppreference.com/w/cpp/language/ascii_
 
 #### Input Output
 
@@ -524,19 +522,19 @@ class="math inline">(2<sup>8</sup>−1)</span></td>
 int main() {
 
 	// We define the age variable as an Integer
-	int age; 
+	int age;
 
 	// We use printf to output a line of text from a string
-	printf("Enter an integer for your age: "); 
-	
-	// Scanf convert the input variable and put it in age by reference. 
+	printf("Enter an integer for your age: ");
+
+	// Scanf convert the input variable and put it in age by reference.
 	// It will not stop until scanf detect a non null "string" input.
-	scanf("%i", &age); 
+	scanf("%i", &age);
 
 	// Then we use printf to output the string with the variable.
 	printf("You are %i years old.\nGreat!", age);
 
-	// fflush clean the output buffer, it discards any buffered data that has been fetched from 
+	// fflush clean the output buffer, it discards any buffered data that has been fetched from
 	// the underlying output file, but has not been consumed by the application. Thanks to that
 	// we are sure to have a clean output the next time we call the function printf.
 	fflush(stdin);
@@ -544,7 +542,8 @@ int main() {
 ```
 
 **output**
-``` 
+
+```
 Enter an integer for your age: 19
 You are 19 years old.
 Great!
@@ -591,7 +590,7 @@ int main() {
 	// 0000 0110 (6)
 	// ---------------
 	// 0000 0100 (4)
-	
+
 	binA | binB // 60 OR 6 = 62
 	// 0011 1100 (60)
 	// 0000 0110 (6)
@@ -608,7 +607,7 @@ int main() {
 	// (0) 0110 (6)
 	// ---------------
 	// (1) 1001 (-9)
-	
+
 	binB <<= 3 // 6 LEFT-SHIFTED BY 3 = 48
 	// 0000 0110 (6)
 	// ---------------
@@ -660,7 +659,7 @@ if (Condition) {
 
 **SWITCH**
 
-``` c
+```c
 switch (variable) {
   case 1: // Action
     break;
@@ -672,7 +671,7 @@ switch (variable) {
 
 **LOOPS**
 
-``` c
+```c
 
 do {
   // Action
@@ -700,7 +699,7 @@ for (int i = 0; i < 10; ++i) {
 #include <math.h>	// pow
 
 int main() {
-	
+
 	rand()%100; // Rand integer from 0 to 99
 
 	srand(time(NULL)); // Initialise the random generator with the internal clock as a Seed
@@ -708,7 +707,7 @@ int main() {
 
 	srand (1); // The random generator's seed is 1 by default, go put it back to see
 	rand()%100; // This next random number should be the SAME as the first one
-	
+
 	// To have a delimited random number, you can use this:
 	int max=112, min=75;
 	srand(time(NULL));
@@ -731,7 +730,7 @@ int main() {
 
 int main()
 {
-	// We declare an array of 4 integers 
+	// We declare an array of 4 integers
 	int numbers[5] = {0, 1, 2, 4, 8};
 
 	// You can also declare arrays like that, the array will have the size of the elements you define
@@ -747,9 +746,9 @@ int main()
 	numbers[0] = 20; // {20, 1, 2, 4, 8}
 	numbers[3] = 10; // {20, 1, 2, 10, 8}
 
-	// But the solution with the size calculation is not optimal: it can be a problem when 
+	// But the solution with the size calculation is not optimal: it can be a problem when
 	// the array is not declared on the stack but on the heat, a better solution can be :
-	
+
 	const int better_length = 10;
 	int better_numbers[better_length];
 
@@ -792,14 +791,14 @@ int main()
 			break;
 	}
 }
-	
+
 ```
 
 ```cpp
 string entry;
 int test;
 
-do { 
+do {
   // Test if the input string is composed of chars bewteen 'a' and 'z'
   test = scanf("%1\[a-z\]c\", &entry);
 } while(test != 1)
@@ -807,7 +806,7 @@ do {
 
 #### Functions
 
-``` cpp
+```cpp
 int random(int min, int max) {
   return (rand()%(max-min)) + min;
 }
@@ -824,7 +823,7 @@ void nothing() {
 ```cpp
 #include <stdio.h>
 
-// We define the Rectangle structure. 
+// We define the Rectangle structure.
 typedef struct {
 
 	// It contains some of it's Properties like the position (x,y) and the size (height, width)
@@ -864,6 +863,7 @@ int main() {
 ```
 
 output
+
 ```
    	structure: Rectangle
     + Position: [10.000000, 2.000000]
@@ -939,7 +939,7 @@ TODO
 #include <stdio.h>
 
 #define NUMARGS(...)  (sizeof((int[]) { __VA_ARGS__ }) / sizeof(int))
-#define FIRSTARG(...) FIRSTARG0(__VA_ARGS__, ERROR_NO_ARGS_PROVIDED) // assign an undeclared var to trigger the compiler error 
+#define FIRSTARG(...) FIRSTARG0(__VA_ARGS__, ERROR_NO_ARGS_PROVIDED) // assign an undeclared var to trigger the compiler error
 #define FIRSTARG0(X, ...) X // to avoid "warning: ISO C99 requires rest arguments to be used [enabled by default]" when 1 arg
 
 int main() {
@@ -964,7 +964,7 @@ void Function(const std::vector<int>& values) {
 
 int main()
 {
-	// We initialize an array of 5 int 
+	// We initialize an array of 5 int
 	std::array<int, 5> numbers;
 
 	for (int i=0; i<numbers.size();i++) {
@@ -973,7 +973,7 @@ int main()
 	}
 
 
-	// TODO Vector type and arrays of pointers, redifine 
+	// TODO Vector type and arrays of pointers, redifine
 	std::vector<int> values;
 	values.push_back(10);
 
@@ -982,7 +982,7 @@ int main()
 	}
 
 	// Or even
-	
+
 	for (const values& v : int) {
 		std::cout << v << std::endl;
 	}
@@ -997,7 +997,6 @@ int main()
 	return 0;
 }
 ```
-
 
 #### Stack & Heap
 
@@ -1343,7 +1342,7 @@ void DoWork() {
 		std::cout << "Working...\n";
 
 		// Prevent the thread to be CPU Usage 100% (if it print as fast as he can)
-		std::this_thread::sleep_for(1s); 
+		std::this_thread::sleep_for(1s);
 	}
 }
 
@@ -1355,7 +1354,7 @@ int main() {
 	// When whe press Enter, set s_Finished to true and stop the function printing by the otehr thread
 	std::cin.get();
 	s_Finished = true;
-	
+
 	// Tell the main thread to wait that the thread worker finish his task before it run the next ones
 	worker.join();
 

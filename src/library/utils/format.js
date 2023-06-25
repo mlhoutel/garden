@@ -2,4 +2,32 @@ function toAnchor(label) {
 	return label.toLowerCase().replace(' ', '-');
 }
 
-export { toAnchor };
+function extractParamFromUrl(url, label, base) {
+	const param = decodeURI(url.searchParams.get(label));
+
+	if (param == null) return base;
+
+	if (Array.isArray(base)) {
+		return param.split(',').filter((e) => e?.trim()?.length > 0);
+	} else if (typeof base == 'number') {
+		return Number(param);
+	} else {
+		return param;
+	}
+}
+
+function searchDecodeUrl(url, params) {
+	return Object.fromEntries(
+		Object.entries(params).map(([label, base]) => [label, extractParamFromUrl(url, label, base)])
+	);
+}
+
+function searchEncodeUrl(params) {
+	return encodeURI(
+		Object.entries(params)
+			.map(([label, value]) => `${label}=${value}`)
+			.join('&')
+	);
+}
+
+export { toAnchor, searchDecodeUrl, searchEncodeUrl };

@@ -21,9 +21,8 @@
 
 	export function getMenuItems() {
 		return [
-			{ label: 'Posts', link: `${base}/posts` },
+			{ label: 'Articles', link: `${base}/articles` },
 			{ label: 'Sheets', link: `${base}/sheets` },
-			{ label: 'Snippets', link: `${base}/snippets` },
 			{ label: 'Projects', link: `${base}/projects` },
 			{ label: 'About', link: `${base}/about` }
 		];

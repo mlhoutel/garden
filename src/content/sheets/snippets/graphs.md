@@ -1,5 +1,5 @@
 ---
-title: "Graphs"
+title: 'Graphs'
 short: Depth-first search, Breadth-first search, Tortoise and hare
 topic: maths graph-theory
 ---
@@ -7,17 +7,17 @@ topic: maths graph-theory
 ## DFS
 
 ```js
-TODO
+TODO;
 ```
 
 ## BFS
 
 ```js
-TODO
+TODO;
 ```
 
 ## Toirtoise and Hare
 
 ```js
-TODO
+TODO;
 ```

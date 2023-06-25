@@ -1,4 +1,5 @@
 ---
+title: Ascii
 short: Image to ascii converter
 topic: ascii converter imagery
 ---

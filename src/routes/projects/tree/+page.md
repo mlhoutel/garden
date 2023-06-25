@@ -1,4 +1,5 @@
 ---
+title: Tree
 short: Tree generator
 topic: simulation tree
 ---
