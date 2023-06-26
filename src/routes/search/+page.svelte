@@ -22,9 +22,20 @@
 	async function search(url) {
 		filters = searchDecodeUrl(url, { topics: [], words: [] });
 
-		const response = await fetch(`${base}/api/search?${searchEncodeUrl(filters)}`);
+		// const response = await fetch(`${base}/api/search?${searchEncodeUrl(filters)}`);
+		// results = (await response.json())?.results ?? [];
 
-		results = (await response.json())?.results ?? [];
+		// avoid SSR the search query by moving the filtering to the client side
+		const response = await fetch(`${base}/api/content`);
+		const content = (await response.json())?.content ?? [];
+
+		results = content.filter((e) => {
+			const hasTopics = filters.topics.reduce(
+				(acc, cur) => acc && e.meta.topic?.includes(cur),
+				true
+			);
+			return hasTopics;
+		});
 
 		topics = [...new Set(results.map((e) => e.meta.topic.split(' ')).flat())];
 	}

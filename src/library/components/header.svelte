@@ -50,7 +50,7 @@
 	</a>
 
 	<div
-		class="background-transparent md:background-dark md:w-full absolute top-[14px] md:skewed z-20 left-0 md:left-[-20px] px-3 md:px-0 max-w-[100vw] overflow-x-hidden w-full"
+		class="background-transparent md:background-dark md:w-full absolute top-[13px] md:skewed z-20 left-0 md:left-[-20px] px-3 md:px-0 max-w-[100vw] overflow-x-hidden w-full"
 	>
 		<div
 			class="md:anti-skewed text-lg pt-1 mt-10 md:ml-[125px] md:mt-0 overflow-hidden background-primary md:background-dark"

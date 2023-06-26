@@ -1,6 +1,6 @@
 ---
-title: "Vim & VS Code shortcuts"
-short: "Set of keyboard shortcuts to help users efficiently navigate and edit text"
+title: 'Vim & VS Code shortcuts'
+short: 'Set of keyboard shortcuts to help users efficiently navigate and edit text'
 topic: shortcuts vs-code vim cmder
 ---
 
@@ -68,23 +68,23 @@ topic: shortcuts vs-code vim cmder
 </tr>
 </table>
 
-### File Utils 
+### File Utils
 
 [VSCode Extension](https://marketplace.visualstudio.com/items?itemName=sleistner.vscode-fileutils)
 
-## Vim 
+## Vim
 
 [VSCode Extension](https://marketplace.visualstudio.com/items?itemName=vscodevim.vim)
 
 [Cheat Sheet](https://vim.rtorr.com/)
 
-```:set encoding=utf-8```
+`:set encoding=utf-8`
 
 ### Modes
 
 ```
 ┌──────────────┐     [Ctrl+C] >     ┌──────────────┐        [:] >       ┌───────────────┐
-│  --Insert--  │   <════════════>   │  --Normal--  │   <════════════>   │  --Command--  │  
+│  --Insert--  │   <════════════>   │  --Normal--  │   <════════════>   │  --Command--  │
 └──────────────┘      < [i]         └──────────────┘     < [Ctrl+C]     └───────────────┘
                                             ∧
                                             ║    ∧
@@ -95,9 +95,11 @@ topic: shortcuts vs-code vim cmder
                                     │  --Visual--  │
                                     └──────────────┘
 ```
+
 ### --Normal--
 
 **Navigation**
+
 <table>
 <tr>
 <td>Navigation [n] lines</td>
@@ -205,9 +207,8 @@ V (visual)
 at (go closing bracket)
 o / O (go back and forth)
 
-
-
 **Selection**
+
 <table>
 <tr>
 <td>Selection</td>
@@ -235,7 +236,8 @@ o / O (go back and forth)
 </tr>
 </table>
 
-**Macros**	
+**Macros**
+
 <table>
 <tr>
 <td>Record macro [name]</td>
@@ -266,6 +268,7 @@ o / O (go back and forth)
 ## Chrome
 
 [Cheat Sheet](https://support.google.com/chrome/answer/157179)
+
 <table>
 <tr>
 <td>Search</td>
