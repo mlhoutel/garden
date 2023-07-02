@@ -356,6 +356,11 @@
 		}
 
 		#print {
+			margin: 0;
+			padding: 0;
+		}
+
+		#print {
 			display: none;
 		}
 
@@ -366,8 +371,8 @@
 		}
 
 		#cv {
-			width: 100%;
-			height: 100%;
+			width: 230mm;
+			height: 325mm;
 			position: absolute;
 			top: 0;
 			left: 0;
@@ -377,14 +382,13 @@
 	@page {
 		size: A4;
 		margin: 0;
+		overflow: hidden;
 	}
 
 	.A4 {
 		overflow: hidden;
-		width: 225mm;
-		height: 315mm;
-		min-width: 225mm;
-		min-height: 315mm;
+		width: 230mm;
+		height: 325mm;
 		line-height: 1.2em !important;
 		text-align: justify;
 		font-family: 'Mukta', sans-serif;
