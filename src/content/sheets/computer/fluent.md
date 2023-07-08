@@ -1,7 +1,7 @@
 ---
 title: 'Fluent apis'
 short: 'Design pattern used in software development to create an interface for configuring an object in a clear and concise way, often using a chain of method calls to build up a complex configuration.'
-topic: engineering fluent-api java
+topic: design fluent-api java
 ---
 
 ## Api use

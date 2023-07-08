@@ -8,11 +8,12 @@ const config = {
 		alias: {
 			$images: path.resolve('static/images'),
 			$logos: path.resolve('static/logos'),
-			$routes:  path.resolve('src/routes'),
+			$routes: path.resolve('src/routes'),
 			$content: path.resolve('src/content'),
 			$components: path.resolve('src/library/components'),
 			$styles: path.resolve('src/library/styles'),
-			$utils: path.resolve('src/library/utils')
+			$utils: path.resolve('src/library/utils'),
+			$rehype: path.resolve('src/library/rehype')
 		}
 	},
 	server: {

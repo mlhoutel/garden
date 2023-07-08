@@ -1,7 +1,7 @@
 ---
 title: 'PHP'
 short: 'dynamically-typed, interpreted language for building server-side web applications'
-topic: language web
+topic: language php
 ---
 
 ## Cheat Sheets
@@ -349,17 +349,13 @@ echo($text); return $language;
 
 ```html
 <form id="inscription" method="post" action="form.php">
-
 	<p>
-
 		<label for="name">Name:</label>
 
 		<input type="text" name="name" id="name" />
-
 	</p>
 
 	<input type="submit" name="validate" id="validate" value="Send" />
-
 </form>
 ```
 
@@ -393,13 +389,11 @@ echo($text); return $language;
 
 ```html
 <select name="departement" id="departement">
-
 	<option value="choice A">Choice A</option>
 
 	<option value="choice B">Choice B</option>
 
 	<option value="choice C">Choice C</option>
-
 </select>
 ```
 
@@ -419,11 +413,9 @@ echo($text); return $language;
 
 ```html
 <fieldset>
-
-	<legend> Legend </legend>
+	<legend>Legend</legend>
 
 	<!-- FORM -->
-
 </fieldset>
 ```
 
