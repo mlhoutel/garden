@@ -26,7 +26,8 @@
 
 	<p class="pt-0 text-sm">
 		{#if item.meta.short}{item.meta.short}...<br />{/if}
-
-		<a class="font-serif text-sm" data-sveltekit-preload-code="hover" href={item.path}>{label}</a>
+		<a class="font-serif text-sm" data-sveltekit-preload-code="hover" href={item.path}>
+			{label}
+		</a>
 	</p>
 </div>

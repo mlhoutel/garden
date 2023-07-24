@@ -22,23 +22,32 @@
 </script>
 
 <main
-	class="flex justify-center items-center px-3 pt-[100px]  md:pt-[300px] pb-[100px] md:pb-[300px]"
+	class="flex justify-center items-center px-3 pt-[100px] md:pt-[300px] pb-[100px] md:pb-[300px]"
 >
 	<div class="flex flex-col justify-center">
-		<div class="inline-flex items-center justify-center">
-			<h1 class="text-7xl px-3 border-r-[1px] border-orange mr-4">{status}</h1>
-			<h2 class="text-4xl">{short}</h2>
-		</div>
+		<span class="inline-flex items-center justify-center">
+			<h1 class="text-4xl md:text-9xl">{status}</h1>
+			<p class="h-[50px] md:h-[130px] w-[1px] border-r-[1px] border-orange mx-2 md:mx-10" />
+			<h2 class="text-2xl md:text-6xl">{short}</h2>
+		</span>
 
 		<p class="p-5">{message}</p>
 
 		<div class="inline-flex justify-center">
-			<a class="pill text-base mx-1" href="/" data-sveltekit-preload-code="hover">
-				<i class="material-icons !text-lg mr-1">home</i>
-				Go home
+			<a
+				class="pill text-base mx-2 pl-3 pr-6 py-5 rounded-sm"
+				href="/"
+				data-sveltekit-preload-code="hover"
+			>
+				<i class="material-icons !text-2x mr-3">home</i>
+				Return home
 			</a>
-			<a class="pill text-base mx-1" href="https://github.com/mlhoutel/garden/issues">
-				<i class="material-icons !text-lg mr-1">warning</i>
+
+			<a
+				class="pill text-base mx-2 pl-3 pr-6 py-5 rounded-sm"
+				href="https://github.com/mlhoutel/garden/issues"
+			>
+				<i class="material-icons !text-2x mr-3">warning</i>
 				Report issue
 			</a>
 		</div>

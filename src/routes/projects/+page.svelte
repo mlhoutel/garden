@@ -3,25 +3,14 @@
 
 	export let data;
 
-	const items = [
-		{
-			label: 'Demos',
-			items: data.projects.map((e) => {
-				return {
-					...e,
-					title: e.meta.title,
-					short: e.meta.short,
-					topic: e.meta.topic
-				};
-			})
-		}
-	];
-
-	const label = 'Go to project »';
+	const items = data.tree ?? [];
+	const label = 'Continue reading »';
 </script>
 
-<article class="content">
-	<h1>Projects</h1>
+<div class="content">
+	<article>
+		<h1>Projects</h1>
 
-	<ContentList {items} {label} />
-</article>
+		<ContentList {items} {label} />
+	</article>
+</div>

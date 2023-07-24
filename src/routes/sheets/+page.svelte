@@ -4,7 +4,7 @@
 	export let data;
 
 	const items = data.tree ?? [];
-	const label = 'Go to sheet »';
+	const label = 'Continue reading »';
 </script>
 
 <article>

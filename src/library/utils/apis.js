@@ -36,13 +36,13 @@ async function listSheets() {
 }
 
 async function listProjects() {
-	const files = import.meta.glob('$routes/projects/*/*.md');
+	const files = import.meta.glob('$content/projects/**/*.md');
 	const projects = await fetchFiles(files);
 
 	const paths = projects.map((e) => ({
 		...e,
-		path: e.path.slice(1, -6),
-		file: e.path.slice(1, -6)
+		path: escapeThemePath(e.path.slice(2)),
+		file: e.path.slice(2)
 	}));
 
 	return paths;

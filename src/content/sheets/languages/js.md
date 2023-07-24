@@ -1,7 +1,7 @@
 ---
 title: 'JavaScript'
 short: 'High-level, dynamically-typed language, easy of use and flexible'
-topic: language web
+topic: language js
 ---
 
 ## Programming in JS
@@ -12,21 +12,15 @@ topic: language web
 <!DOCTYPE html>
 
 <html>
-
 	<head>
-
 		<meta charset="UTF-8" />
 
 		<title>Space Invader</title>
 
 		<link rel="stylesheet" type="text/css" href="style.css" />
-
 	</head>
 
-	<body>
-
-	</body>
-
+	<body></body>
 </html>
 
 <script type="text/javascript">
