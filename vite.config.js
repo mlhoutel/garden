@@ -12,8 +12,7 @@ const config = {
 			$content: path.resolve('src/content'),
 			$components: path.resolve('src/library/components'),
 			$styles: path.resolve('src/library/styles'),
-			$utils: path.resolve('src/library/utils'),
-			$rehype: path.resolve('src/library/rehype')
+			$utils: path.resolve('src/library/utils')
 		}
 	},
 	server: {

@@ -68,7 +68,7 @@
 	}
 
 	.pill {
-		@apply bg-black text-white dark:bg-orange dark:text-grey dark:font-bold font-thin text-xs m-0.5 py-[1px] px-[10px] max-h-[20px] rounded-full w-min flex justify-center items-center;
+		@apply bg-black text-white dark:bg-orange dark:text-grey dark:font-bold font-thin text-xs m-0.5 py-[5px] px-[7px] max-h-[20px] rounded-sm w-min flex justify-center items-center;
 
 		white-space: nowrap;
 		overflow: hidden;
@@ -186,7 +186,7 @@
 		outline: none;
 	}
 	.select-input::placeholder {
-		@apply dark:text-white text-black italic;
+		@apply dark:text-white text-black;
 	}
 	.select-input::-webkit-search-cancel-button {
 	}
