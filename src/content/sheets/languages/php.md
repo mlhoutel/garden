@@ -1,7 +1,7 @@
 ---
-title: "PHP"
-short: "dynamically-typed, interpreted language for building server-side web applications"
-topic: programming-language web
+title: 'PHP'
+short: 'dynamically-typed, interpreted language for building server-side web applications'
+topic: language php
 ---
 
 ## Cheat Sheets
@@ -11,11 +11,12 @@ topic: programming-language web
 **Official Documentation**: https://www.php.net/docs.php
 
 **About PHP**
-* **Type of Language:** Imperative, Object-Oriented
-* **Born in:** 1994
-* **Caracteristics:** Simple, permissive, html imbedded
-* **Popularity:** 5.85% (5th) [src](http://pypl.github.io/PYPL.html)
-* **Usefull for:** website backend, database linking
+
+- **Type of Language:** Imperative, Object-Oriented
+- **Born in:** 1994
+- **Caracteristics:** Simple, permissive, html imbedded
+- **Popularity:** 5.85% (5th) [src](http://pypl.github.io/PYPL.html)
+- **Usefull for:** website backend, database linking
 
 ### Types and Variables
 
@@ -65,11 +66,11 @@ topic: programming-language web
 </table>
 
 > It's also possible do define the type like `$foo = (double)4;` or like
-`settype($foo,'double');`
+> `settype($foo,'double');`
 
 ### Input Output
 
-``` php
+```php
    <?php
    	$age = 18;
    	var_dump($age); // => int(18)
@@ -84,7 +85,7 @@ topic: programming-language web
 
 ##### TESTS
 
-``` php
+```php
 <?php
 
 if (Condition) {
@@ -108,7 +109,7 @@ equality of value AND type
 
 ##### SWITCH
 
-``` php
+```php
 <?php
 
 switch (variable) {
@@ -125,7 +126,7 @@ switch (variable) {
 
 ##### LOOPS
 
-``` php
+```php
 <?php
 
 for ($i=0; $i < 10; $i++) {
@@ -149,7 +150,7 @@ foreach ($items as $item) {
 
 ### Random numbers
 
-``` php
+```php
 <?php
 
 define("MIN", 0); define("MAX", 100);
@@ -159,7 +160,7 @@ $alea = rand(MIN,MAX); // alias of mt_rand(MIN,MAX) since PHP
 
 ### Arrays
 
-``` php
+```php
 <?php
 
 $table = array("E1"=>0, "E2"=>6, "E3"=>5);
@@ -189,7 +190,7 @@ $test = array(10, 15, 20); count($test); // 3
 
 ##### ARRAYS OPERATORS
 
-``` php
+```php
 <?php
 
 $array_a = array(...); $array_b = array(...);
@@ -203,7 +204,7 @@ max($array_a); // return the max elem
 array_sum($array_a, $array_b); // return the sum of elem
 in_array("test", $array_a); // search and return true/false
 array_search("test", $array_a); // search and return the position
-array_shift($array_a); // extract the first value 
+array_shift($array_a); // extract the first value
 array_pop($array_a); // extract the last value
 
 echo(round(6.1234, 2)); // 6.12 echo(pow(5,2)); // 25
@@ -213,7 +214,7 @@ array_slice($array,2,1);
 
 ##### STRINGS
 
-``` php
+```php
 <?php
 
 $string = 'my String'; echo('length: ' . strlen($string));
@@ -221,7 +222,7 @@ $string = 'my String'; echo('length: ' . strlen($string));
 
 echo('substr 0 7: ' . substr($string, 0, 7)); // substr 0 7: my Stri
 
-echo('substr 1 1: ' . substr($string, 2, 2)); // substr 1 1: y 
+echo('substr 1 1: ' . substr($string, 2, 2)); // substr 1 1: y
 echo('substr 1: ' . substr($string, 1)); // substr 1: y String
 echo('strpos S: ' . strpos($string, "S")); // strpos S: 3 (First occurence)
 echo('strpos s: ' . strpos($string, "s")); // strpos s: false (Case sensitive)
@@ -239,7 +240,7 @@ explode(" ", $chain);
 
 ##### FILTER
 
-``` php
+```php
 <?php
 
 filter_var($mail, FILTER_VALIDATE_EMAIL); $verification =
@@ -247,6 +248,7 @@ preg_match($pattern, $string);
 ```
 
 filter table:
+
 <table>
 <tbody>
 <tr>
@@ -278,15 +280,15 @@ filter table:
 
 ##### FOLDERS
 
-``` php
+```php
 <?php
 
 $handle = fopen("file.txt","r"); // pointer or false if
-($handle) { 
+($handle) {
   while ($buffer = fgets($handle,2) != false) {
-  // return the line of a defined size 
-  echo $buffer; 
-  } 
+  // return the line of a defined size
+  echo $buffer;
+  }
 }
 
 fwrite($handle, $string); fclose($handle);
@@ -296,6 +298,7 @@ FILE_SKIP_EMPTY_LINES]); // return file in array
 ```
 
 options:
+
 <table>
 <tbody>
 <tr>
@@ -319,7 +322,7 @@ options:
 
 ##### DATE
 
-``` php
+```php
 <?php
 
 date_default_timezone_set('Europe/Paris');
@@ -328,7 +331,7 @@ date('Y')/date('m')/date('d');
 
 ### Functions
 
-``` php
+```php
 <?php
 
 function say($text[, $language="EN"]) {
@@ -344,91 +347,81 @@ echo($text); return $language;
 
 ##### FORM
 
-``` html
+```html
 <form id="inscription" method="post" action="form.php">
+	<p>
+		<label for="name">Name:</label>
 
-<p>
+		<input type="text" name="name" id="name" />
+	</p>
 
-<label for="name">Name:</label> <input
-type="text" name="name" id="name">
-
-</p> <input type="submit" name="validate"
-id="validate" value="Send"/>
-
+	<input type="submit" name="validate" id="validate" value="Send" />
 </form>
 ```
 
-> TODO
-
 ##### Text Input
 
--   **value:** displayed value
--   **size:** handler size
--   **name:** datas in php
--   **placeholder:** information
--   **maxlength:** max enabled
--   **title:** hovering info
--   **required:** needed to validate
--   **pattern** ="^[A-Za-z]+$"
+- **value:** displayed value
+- **size:** handler size
+- **name:** datas in php
+- **placeholder:** information
+- **maxlength:** max enabled
+- **title:** hovering info
+- **required:** needed to validate
+- **pattern** ="^[A-Za-z]+$"
 
 ##### TextArea Input
 
-``` html
-<textarea name="area" id="area" rows="10" cols="10">
-
-default text
-
-</textarea>
+```html
+<textarea name="area" id="area" rows="10" cols="10"> default text </textarea>
 ```
 
 ##### Radio Input
 
--   **value:** 0 or 1
--   **checked:** default
+- **value:** 0 or 1
+- **checked:** default
 
 ##### Checkbox Input
 
--   name="array[]"
+- name="array[]"
 
 ##### Select Input
 
-``` html
+```html
 <select name="departement" id="departement">
+	<option value="choice A">Choice A</option>
 
-<option value="choice A">Choice A</option> <option
-value="choice B">Choice B</option> <option
-value="choice C">Choice C</option>
+	<option value="choice B">Choice B</option>
 
+	<option value="choice C">Choice C</option>
 </select>
 ```
 
 ##### Special Inputs
 
--   **url**
--   **email**
--   **number**
--   **tel**
--   **date**
--   **time**
--   **search**
--   **color**
--   **range**
+- **url**
+- **email**
+- **number**
+- **tel**
+- **date**
+- **time**
+- **search**
+- **color**
+- **range**
 
 ##### FieldSet
 
-``` html
+```html
 <fieldset>
+	<legend>Legend</legend>
 
-<legend> Legend </legend>
-
-<!-- FORM -->
-
+	<!-- FORM -->
 </fieldset>
 ```
 
 ##### Datas
 
-``` php
+```php
 <?php
 
 print_r($_POST); echo ("Hello ".$_POST["name"]);
@@ -443,7 +436,7 @@ echo "<ul>"; foreach ($_POST["sports"] as $sport)
 
 ##### Include in same page
 
-``` php
+```php
 <?php
 
 if (!empty($_POST[])) {
@@ -455,7 +448,7 @@ include_once("file.php");
 
 ##### Dynamic variable
 
-``` php
+```php
 <?php
 
 $names = array('name','surname');
@@ -469,11 +462,3 @@ $$name = $_POST[$name];
 echo $name; // instead of echo $_POST["name"]; echo
 $surname;
 ```
-
-## MVC
-
-> TODO
-
-## Laravel
-
-> TODO

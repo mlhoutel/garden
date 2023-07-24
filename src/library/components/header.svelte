@@ -1,6 +1,4 @@
 <script>
-	import { Icon } from '@steeze-ui/svelte-icon';
-	import { Sun, Moon } from '@steeze-ui/heroicons';
 	import { themeStore } from '../utils/theme';
 
 	import { base } from '$app/paths';
@@ -23,9 +21,8 @@
 
 	export function getMenuItems() {
 		return [
-			{ label: 'Posts', link: `${base}/posts` },
+			{ label: 'Articles', link: `${base}/articles` },
 			{ label: 'Sheets', link: `${base}/sheets` },
-			{ label: 'Snippets', link: `${base}/snippets` },
 			{ label: 'Projects', link: `${base}/projects` },
 			{ label: 'About', link: `${base}/about` }
 		];
@@ -35,7 +32,7 @@
 <nav class="background-tertiary flex items-center justify-between flex-wrap">
 	<a href="{base}/">
 		<div
-			class="flex items-center flex-shrink-0 background-secondary px-5 py-2 absolute w-[100px] left-[-6px] top-0 skewed z-30"
+			class="h-[48px] flex items-center flex-shrink-0 background-secondary px-5 py-2 absolute w-[100px] left-[-6px] top-0 skewed z-30"
 		>
 			<img
 				src="{base}/logos/sumblack.svg"
@@ -52,13 +49,17 @@
 		</div>
 	</a>
 
-	<div class="background-dark w-full absolute top-3 h-9 skewed left-[-20px] z-20">
-		<div class="anti-skewed text-lg pt-1 mt-10 md:ml-[125px] md:mt-0 overflow-hidden">
+	<div
+		class="background-transparent md:background-dark md:w-full absolute top-[13px] md:skewed z-20 left-0 md:left-[-20px] px-3 md:px-0 max-w-[100vw] overflow-x-hidden w-full"
+	>
+		<div
+			class="md:anti-skewed text-lg pt-1 mt-10 md:ml-[125px] md:mt-0 overflow-hidden background-primary md:background-dark"
+		>
 			{#each getMenuItems() as item}
 				<a
 					data-sveltekit-preload-code="hover"
 					href={item.link}
-					class="background-primary md:background-dark font-serif px-1 py-0.5 w-full md:w-5 block md:inline"
+					class=" font-serif px-1 py-0.5 md:w-5 block md:inline"
 				>
 					{item.label}
 				</a>
@@ -73,9 +74,9 @@
 			on:click={updateTheme}
 		>
 			{#if !theme}
-				<Icon src={Moon} theme="solid" class="h-6" />
+				<i class="material-icons !text-2xl px-2">dark_mode</i>
 			{:else}
-				<Icon src={Sun} theme="solid" class="h-7" />
+				<i class="material-icons !text-2xl px-2">light_mode</i>
 			{/if}
 		</button>
 	</div>

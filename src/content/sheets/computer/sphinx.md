@@ -1,7 +1,7 @@
 ---
-title: "Sphinx documentation generator"
-short: "Convert source code documentation written in the reStructuredText format into a variety of output formats, such as HTML and PDF"
-topic: computer-science sphinx python
+title: 'Sphinx documentation generator'
+short: 'Convert source code documentation written in the reStructuredText format into a variety of output formats, such as HTML and PDF'
+topic: docs sphinx python
 ---
 
 ## Introduction
@@ -14,7 +14,7 @@ topic: computer-science sphinx python
 
 <https://docs.anaconda.com/anaconda/install/windows/>
 
-``` bash
+```bash
    $ conda create -n sphinx python=3.7 # Create the env we will use for sphinx
    $ conda activate sphinx 			# Activate the env (reopen a new command if error)
    (sphinx) $ conda install sphinx 	# Install Sphinx from the package repository
@@ -22,7 +22,7 @@ topic: computer-science sphinx python
    # Extentions (themes, converter, highligting etc)
    (sphinx) $ conda install -c anaconda recommonmark 		# If you want to use the .md language in addition to the .rst base one
    (sphinx) $ conda install -c anaconda sphinx_rtd_theme 	# Read The Doc theme is a cool theme to begin, see example at https://sphinx-rtd-theme.readthedocs.io/en/stable/
-   (sphinx) $ conda install -c conda-forge nbsphinx		# If you want to have embedded notebooks into the documentation 
+   (sphinx) $ conda install -c conda-forge nbsphinx		# If you want to have embedded notebooks into the documentation
    (sphinx) $ conda install -c conda-forge sphinx-copybutton # Add a copy button on the code blocks
 
    (sphinx) $ mkdir website_folder		# Create the website folder
@@ -37,16 +37,16 @@ topic: computer-science sphinx python
 
 #### Source Folder
 
-``` 
-source                                          *Root*  
+```
+source                                          *Root*
 ├─── _static                                    *Ressource*
-│     ├─── main.js  
-│     ├─── style.css  
-│     ├─── image.png  
-│     ├─── favicon.ico  
-│     └─── logo.svg   
+│     ├─── main.js
+│     ├─── style.css
+│     ├─── image.png
+│     ├─── favicon.ico
+│     └─── logo.svg
 ├─── _templates                                 *Templates*
-│     └─── layout.html   
+│     └─── layout.html
 ├─── pages                                      *Pages*
 ├─── conf.py                                    *Config*
 └─── index.rst                                  *Main Page*
@@ -54,7 +54,7 @@ source                                          *Root*
 
 #### Conf File
 
-``` 
+```
    # Configuration file for the Sphinx documentation builder.
 
    /* ... */
@@ -96,7 +96,7 @@ source                                          *Root*
 
 ### ReStructuredText (.rst)
 
-``` rst
+```rst
    ============================
    Main Title
    ============================
@@ -197,17 +197,17 @@ source                                          *Root*
 
    	.. topic:: Title
 
-   		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-   	Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-   	uis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+   		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+   	Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+   	uis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
    	Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
    	.. sidebar:: Sidebar Title
    	:short: Sidebar short
 
-   		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-   	Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-   	uis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+   		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+   	Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+   	uis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
    	Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
    	:download:`download samplet.py <sample.py>`
@@ -229,29 +229,3 @@ import pypandoc output = pypandoc.convert_file(\'file.md\', \'rst\')
 with open(\"file.rst\", \"w\", encoding=\"utf-8\") as f:
    f.write(output)
 ```
-
-## Themes
-
-### Install Theme
-
-> TODO
-
-### Edit Style
-
-> TODO
-
-### Code Syntax Highlighting
-
-<https://stackoverflow.com/questions/11315504/sphinx-list-of-supported-languages-for-highlighting>
-
-```
-pygmentize -L lexers
-```
-
-<https://docs.typo3.org/m/typo3/docs-how-to-document/master/en-us/WritingReST/Codeblocks.html>
-
-<https://pygments.org/docs/lexers/>
-
-<https://stylishthemes.github.io/Syntax-Themes/pygments/>
-
-<https://nbsphinx.readthedocs.io/en/0.7.0/installation.html>

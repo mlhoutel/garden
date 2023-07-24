@@ -1,0 +1,35 @@
+---
+title: Nbody
+short: Nbody simple simulation with euler integration
+topic: simulation euler
+---
+
+<div style="height: 100vh; width: 100vw; border: none">
+    <iframe src="https://experiments-roan.vercel.app/nbody" title="nbody" style="position: absolute; left: 0; height: 100%; width: 100%; border: none" />
+</div>
+
+<div style="height: 100px; width: 100%" />
+
+# N-Body / Barnes-Hut Simulation
+
+## Introduction:
+
+[N-Body problem](https://en.wikipedia.org/wiki/N-body_problem) play a vital role in understanding the dynamic interactions among a large number of particles in a physical system. These simulations are commonly used in various fields, such as astrophysics, computer graphics, and molecular dynamics.
+
+This type of problem is particularly exciting due to the compromise it imposes. Three fundamental aspects come into play: precision, stability, and optimization. These aspects are interconnected and often trade-off against each other. Increasing precision can lead to decreased stability, as smaller time steps may introduce errors. Finding the right balance between precision, stability, and optimization for the targeted context is essential for an effective simulation ([project sources](https://github.com/mlhoutel/experiments/blob/main/src/routes/nbody/index.js)).
+
+## Optimization:
+
+N-Body simulations involve calculating the interactions between every pair of particles in a system, leading to a time complexity of `O(n^2)`. This computational demand becomes prohibitive for large numbers of particles. You can select the `bruteforce` method to witness the impact of this computation method on the galaxy simulation
+
+To address this, the [Barnes-Hut algorithm](https://en.wikipedia.org/wiki/Barnes%E2%80%93Hut_simulation) is employed, which leverages spatial partitioning to group distant particles into clusters, thus reducing the number of interactions to `O(n log n)`. Use the `clustering` method and tick `debug` in the quadtree folder to visualize the partitionning computed at each step. Check [this article](https://jheer.github.io/barnes-hut/) for more details on how this algorithm works with simple explanations and nice visualizations.
+
+## Precision & Stability:
+
+[The Euler method](https://en.wikipedia.org/wiki/Euler_method) is a straightforward numerical integration technique used to update particle positions and velocities. While it is easy to implement and computationally inexpensive, it suffers from some limitations. One major issue is its inability to conserve energy, which can lead to the gradual drift of particles and unstable long-term behavior (wait some time with the `fading` option ticked to witness some drifting in the elipsis `orbits`). Additionally, the Euler method is only accurate for small time steps, making it less suitable for simulations with varying time scales.
+
+## Conclusion:
+
+N-Body simulations, particularly those implemented using the Barnes-Hut algorithm, offer an efficient way to study the dynamic interactions of a large number of particles. Through optimization and approximation techniques, the computational burden is significantly reduced. However, striking a balance between precision, stability, and optimization remains a challenge.
+
+<div style="height: 100px; width: 100%" />

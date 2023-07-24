@@ -1,7 +1,7 @@
 ---
-title: "C#"
-short: "Object-oriented programming language developed by Microsoft as part of its .NET initiative."
-topic: programming-language compiled
+title: 'C#'
+short: 'Object-oriented programming language developed by Microsoft as part of its .NET initiative.'
+topic: language c#
 ---
 
 ## Cheat Sheets
@@ -11,11 +11,12 @@ topic: programming-language compiled
 > **Official Documentation:** [MicrosoftCsharp](https://docs.microsoft.com/en-us/dotnet/csharp/)
 
 **About Csharp**
- * **Type of Language:** Procedural, Object-Oriented 
- * **Born in:** 2000
- * **Caracteristics:** Microsoft plateforms language
- * **Popularity:** 6.5% (4th) [src](http://pypl.github.io/PYPL.html)
- * **Usefull for:** software, mobile, web api...
+
+- **Type of Language:** Procedural, Object-Oriented
+- **Born in:** 2000
+- **Caracteristics:** Microsoft plateforms language
+- **Popularity:** 6.5% (4th) [src](http://pypl.github.io/PYPL.html)
+- **Usefull for:** software, mobile, web api...
 
 ### Types and Variables
 
@@ -153,7 +154,7 @@ Array.Reverse(days);
 Array.Sort(days);
 ```
 
-**LISTS**  
+**LISTS**
 
 ```csharp
 List <String> names = new List<String> { /* ... */ };
@@ -166,7 +167,7 @@ names[i] = names[i] + "s";
 }
 
 names.IndexOf("value");
-names.LastIndexOf("value"); 
+names.LastIndexOf("value");
 names.Reverse();
 names.Sort();
 
@@ -175,7 +176,7 @@ names.Insert(index, "value");
 names.RemoveAt(index);
 ```
 
-**DATE** 
+**DATE**
 
 ```csharp
 string date = "01/01/2000";
@@ -199,8 +200,8 @@ private DateTime born;
 public string Name {
 	get => this.name;
 	set {
-		if (value == null) { 
-			throw.newArgumentException("Name can't be null"); 
+		if (value == null) {
+			throw.newArgumentException("Name can't be null");
 		} else {
 			this.name = value;
 		}
@@ -208,7 +209,7 @@ public string Name {
 }
 
 	/* Public Constructor */
-public Person(String pName) { 
+public Person(String pName) {
 	Name = pName;
 	this.born = DateTime.Now;
 }
@@ -216,10 +217,10 @@ public Person(String pName) {
 	/* Method Definition */
 public int GetAge() {
 	int Age = DateTime.Now.Year - born.Year;
-	if (born.Month > DateTime.Now.Month) { 
-		Age-=1; 
+	if (born.Month > DateTime.Now.Month) {
+		Age-=1;
 	} else if (born.Month > DateTime.Now.Month) {
-		if (born.Day > DateTime.Now.Day) { 
+		if (born.Day > DateTime.Now.Day) {
 			Age-=1;
 		}
 	}
@@ -259,9 +260,9 @@ person.ToString();
 
 **DEFAULT METHODS**
 
- * `object.ToString();`
- * `object.Equals(object);`
- * `object.GetHashCode();`
+- `object.ToString();`
+- `object.Equals(object);`
+- `object.GetHashCode();`
 
 **ABSTRACT CLASS**
 
@@ -278,7 +279,7 @@ abstract class Shape {
 class Square : Shape {
 	int side;
 	public Square(int nSide) { side = nSide; }
-	public override int GetArea() { return side * side; } 
+	public override int GetArea() { return side * side; }
 
 	static void Main() {
 		Square square = new Square(12);
@@ -289,7 +290,7 @@ class Square : Shape {
 class Circle : Shape {
 	int radius;
 	public Circle(int nRadius) { radius = nRadius; }
-	public override int GetArea() { return 3.14159265 * radius * radius; } 
+	public override int GetArea() { return 3.14159265 * radius * radius; }
 
 	static void Main() {
 		Square square = new Square(12);
@@ -309,10 +310,6 @@ static void Main(string[] args) {
 	}
 }
 ```
-
-INTERFACES
-
-> TODO
 
 ### Test Unit
 
@@ -342,7 +339,7 @@ Object obj = new Object( /* ...*/ );
 
 ASSERTIONS
 
-:   
+:
 
 ```csharp
 /* Values Assertion */
@@ -355,7 +352,7 @@ Assert.Null(/* ... */);
 Assert.IsNotNull(/* ... */);
 
 /* Instances Comparison */
-Assert.AreEqual(A, B); 
+Assert.AreEqual(A, B);
 Assert.AreNotEqual(A, B);
 
 Assert.AreSame(A, B);
@@ -377,7 +374,7 @@ cost = COSTS[vGrade]
 
 The GUI Design is defined in App.xaml
 
-``` xml
+```xml
 <Window Title="Windows Title" Width="640" Height="480" MinWidth="400" MaxWidth="800" ResizeMode="NoResize" WindowsStartupLocation="CenterScreen">
 <Grid>
 	<Grid.ColumnDefinition />
@@ -397,6 +394,7 @@ The GUI Design is defined in App.xaml
 
 </Grid>
 ```
+
 **BACK**
 
 The Code-Behin of the GUI is defined in the App.xaml.cs
@@ -447,13 +445,3 @@ MessageBox.Show("text");
 
 System.Windows.Application.Current.Shutdown();
 ```
-
-> TODO
-
-## MVVM Light
-
-> TODO
-
-## API
-
-> TODO

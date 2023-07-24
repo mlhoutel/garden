@@ -1,7 +1,7 @@
 ---
-title: "ASCII Table"
-short: "Mapping of characters as a series of binary digits to integers"
-topic: computer-science ascii
+title: 'ASCII Table'
+short: 'Mapping of characters as a series of binary digits to integers'
+topic: encoding ascii
 ---
 
 <div style="overflow-x: auto">
@@ -612,4 +612,5 @@ topic: computer-science ascii
 </tbody>
 </table>
 </div>
-<em>informations from https://fr.cppreference.com/w/cpp/language/ascii</em>
+
+_informations from https://fr.cppreference.com/w/cpp/language/ascii_

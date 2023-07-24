@@ -16,11 +16,15 @@
 }
 
 @layer components {
+
+	.content {
+		@apply px-3 py-[50px] md:py-[100px];
+	}
+
 	article {
 		width: 100%;
-		max-width: 1024px;
+		max-width: 800px;
 		margin: auto;
-		overflow: hidden;
 	}
 
 	.background-dark {
@@ -64,7 +68,7 @@
 	}
 
 	.pill {
-		@apply bg-black text-white dark:bg-orange dark:text-grey dark:font-bold font-thin text-xs m-0.5 py-[1px] px-[10px] rounded-full w-min flex justify-center items-center;
+		@apply bg-black text-white dark:bg-orange dark:text-grey dark:font-bold font-thin text-xs m-0.5 py-[5px] px-[7px] max-h-[20px] rounded-sm w-min flex justify-center items-center;
 
 		white-space: nowrap;
 		overflow: hidden;
@@ -172,17 +176,17 @@
 	}
 
 	.select-search {
-		@apply inline-flex items-center px-3 w-full py-1 mx-3 mt-3 rounded-md bg-black text-white;
+		@apply inline-flex items-center mx-2 w-full mt-1 rounded-md dark:bg-black dark:text-white bg-white text-black;
 	}
 
 	.select-input {
-		@apply w-full bg-transparent px-1;
+		@apply w-full bg-transparent px-1 text-sm;
 	}
 	.select-input:focus {
 		outline: none;
 	}
 	.select-input::placeholder {
-		@apply text-white italic;
+		@apply dark:text-white text-black;
 	}
 	.select-input::-webkit-search-cancel-button {
 	}

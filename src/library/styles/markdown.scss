@@ -11,7 +11,7 @@ article {
     }
 
     h1, h1 a {
-        @apply text-3xl md:text-4xl;
+        @apply text-4xl md:text-7xl;
         text-align: center;
     }
 
@@ -41,7 +41,7 @@ article {
     h4, h4 a,
     h5, h5 a,
     h6, h6 a {
-        @apply font-serif pt-4;
+        @apply font-serif pt-4 relative;
     }
 
     strong {
@@ -96,8 +96,6 @@ article {
     }
 
     p a {
-        font-size: 0.9em;
-        font-style: italic;
         border-bottom: 1px dotted #666;
     }
 
@@ -162,5 +160,23 @@ article {
         /* Adjust the vertical position of the fraction line */
         top: 0.1em;
         bottom: 0.1em;
+    }
+
+    .anchor-link {
+        position: absolute;
+        transform: translate(-30px, 5%);
+        opacity: 0;
+        transition: all 0.1s ease-in-out;
+        height: 100%;
+        text-align: center;
+    }
+
+    h1:hover .anchor-link,
+    h2:hover .anchor-link,
+    h3:hover .anchor-link,
+    h4:hover .anchor-link,
+    h5:hover .anchor-link,
+    h6:hover .anchor-link {
+        opacity: 0.7;
     }
 }

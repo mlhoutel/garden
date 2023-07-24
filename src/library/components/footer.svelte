@@ -1,14 +1,10 @@
 <script>
 	import { base } from '$app/paths';
 
-	import { Icon } from '@steeze-ui/svelte-icon';
-	import { ChevronUp } from '@steeze-ui/heroicons';
-	import { scrollTop } from 'svelte-scrolling';
-
 	let y;
 
 	export function navigateTop() {
-		scrollTop();
+		document.body.scrollIntoView();
 	}
 
 	const year = new Date().getFullYear();
@@ -16,9 +12,8 @@
 	export function getFooterItems() {
 		return [
 			{ label: 'home', link: `${base}/` },
-			{ label: 'posts', link: `${base}/posts` },
+			{ label: 'articles', link: `${base}/articles` },
 			{ label: 'sheets', link: `${base}/sheets` },
-			{ label: 'snippets', link: `${base}/snippets` },
 			{ label: 'projects', link: `${base}/projects` },
 			{ label: 'about', link: `${base}/about` }
 		];
@@ -29,12 +24,12 @@
 
 {#if y > 50}
 	<button
-		class="z-30 fixed bottom-10 right-10 background-primary p-2 rounded-full"
+		class="z-30 fixed bottom-10 right-10 background-primary rounded-full"
 		style="box-shadow: rgba(0,0,0,0.5) 0px 3px 5px 0px;"
 		aria-label="navigate to the top of the page"
 		on:click={navigateTop}
 	>
-		<Icon src={ChevronUp} size="35px" />
+		<i class="material-icons !text-4xl p-2">expand_less</i>
 	</button>
 {/if}
 

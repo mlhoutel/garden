@@ -1,8 +1,6 @@
 import preprocess from 'svelte-preprocess';
-import importAssets from 'svelte-preprocess-import-assets';
 import { mdsvex } from 'mdsvex';
 import mdsvexConfig from './mdsvex.config.js';
-
 
 /*
 // DYNAMIC DEPLOYEMENT
@@ -22,12 +20,12 @@ const base = dev ? '' : '/garden'
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	extensions: ['.svelte', ...mdsvexConfig.extensions],
-	preprocess: [mdsvex(mdsvexConfig), preprocess(), importAssets()],
+	preprocess: [mdsvex(mdsvexConfig), preprocess()],
 	kit: {
 		adapter: adapter({
 			strict: false,
-    		fallback: 'error.html'
-		}),
+			fallback: 'error.html'
+		})
 		// paths: { base: base }
 	}
 };

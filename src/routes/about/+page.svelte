@@ -1,8 +1,6 @@
 <script>
 	import { base } from '$app/paths';
 	import { browser } from '$app/environment';
-	import { Icon } from '@steeze-ui/svelte-icon';
-	import { Printer } from '@steeze-ui/heroicons';
 
 	function print() {
 		if (browser) {
@@ -36,8 +34,7 @@
 			class="overflow-hidden background-primary h-[70px] w-[70px] rounded-full mx-3 mt-10"
 			style="box-shadow: rgba(0,0,0,0.5) 0px 3px 5px 0px;"
 		>
-			<Icon src={Printer} theme="solid" class="h-6" />
-			<span class="text-sm pt-1">Export</span>
+			<i class="material-icons !text-3xl">print</i>
 		</button>
 	</div>
 </div>
@@ -359,6 +356,11 @@
 		}
 
 		#print {
+			margin: 0;
+			padding: 0;
+		}
+
+		#print {
 			display: none;
 		}
 
@@ -369,8 +371,8 @@
 		}
 
 		#cv {
-			width: 100%;
-			height: 100%;
+			width: 230mm;
+			height: 325mm;
 			position: absolute;
 			top: 0;
 			left: 0;
@@ -380,14 +382,13 @@
 	@page {
 		size: A4;
 		margin: 0;
+		overflow: hidden;
 	}
 
 	.A4 {
 		overflow: hidden;
-		width: 225mm;
-		height: 315mm;
-		min-width: 225mm;
-		min-height: 315mm;
+		width: 230mm;
+		height: 325mm;
 		line-height: 1.2em !important;
 		text-align: justify;
 		font-family: 'Mukta', sans-serif;
