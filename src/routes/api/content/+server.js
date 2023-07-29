@@ -4,7 +4,6 @@ import { listArticles, listProjects, listSheets } from '$utils/apis';
 export const GET = async () => {
 	const articles = await listArticles();
 	const sheets = await listSheets();
-
 	const projects = await listProjects();
 
 	const content = [
@@ -13,5 +12,5 @@ export const GET = async () => {
 		...projects.map((e) => ({ ...e, type: 'project' }))
 	];
 
-	return json({ content });
+	return json(content);
 };

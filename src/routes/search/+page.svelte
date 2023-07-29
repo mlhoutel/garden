@@ -24,7 +24,7 @@
 
 		// avoid SSR the search query by moving the filtering to the client side
 		const response = await fetch(`${base}/api/content`);
-		const content = (await response.json())?.content ?? [];
+		const content = await response.json();
 
 		results = content.filter((e) => {
 			const hasTopics = filters.topics.reduce(
