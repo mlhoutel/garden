@@ -20,7 +20,7 @@ topic: simulation euler
 
 [N-Body problem](https://en.wikipedia.org/wiki/N-body_problem) play a vital role in understanding the dynamic interactions among a large number of particles in a physical system. These simulations are commonly used in various fields, such as astrophysics, computer graphics, and molecular dynamics.
 
-This type of problem is particularly exciting due to the compromise it imposes. Three fundamental aspects come into play: precision, stability, and optimization. These aspects are interconnected and often trade-off against each other. Increasing precision can lead to decreased stability, as smaller time steps may introduce errors. Finding the right balance between precision, stability, and optimization for the targeted context is essential for an effective simulation ([project sources](https://github.com/mlhoutel/experiments/blob/main/src/routes/nbody/index.js)).
+This type of problem is particularly exciting due to the compromise it imposes. Three fundamental aspects come into play: precision, stability, and optimization. These aspects are interconnected and often trade-off against each other. Finding the right balance between precision, stability, and optimization for the targeted context is essential for an effective simulation ([project sources](https://github.com/mlhoutel/experiments/blob/main/src/routes/nbody/index.js)).
 
 ## Optimization:
 

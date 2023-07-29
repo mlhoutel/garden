@@ -22,9 +22,6 @@
 	async function search(url) {
 		filters = searchDecodeUrl(url, { topics: [], words: [] });
 
-		// const response = await fetch(`${base}/api/search?${searchEncodeUrl(filters)}`);
-		// results = (await response.json())?.results ?? [];
-
 		// avoid SSR the search query by moving the filtering to the client side
 		const response = await fetch(`${base}/api/content`);
 		const content = (await response.json())?.content ?? [];
