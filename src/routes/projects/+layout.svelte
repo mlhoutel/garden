@@ -1,4 +1,3 @@
-
-<main>
-    <slot></slot>
+<main class="content-project">
+	<slot />
 </main>

@@ -34,8 +34,8 @@
 {/if}
 
 <div class="background-tertiary w-full bottom-0 py-10 px-5 pointer-events-auto">
-	<article class="flex margin-auto">
-		<div class="">
+	<article class="flex">
+		<div>
 			<ul class="list-none underline">
 				{#each getFooterItems() as item}
 					<li>

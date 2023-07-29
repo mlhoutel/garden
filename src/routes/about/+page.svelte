@@ -27,7 +27,7 @@
 	}
 </script>
 
-<div id="print" class="sticky top-0 z-30 md:flex md:justify-center mb-[-140px]">
+<div id="print" class="sticky top-0 z-30 md:flex md:justify-center mb-[-140px] overflow-hidden">
 	<div class="w-full flex md:justify-end" style="width: 210mm">
 		<button
 			on:click={print}
