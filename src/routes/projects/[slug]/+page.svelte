@@ -21,4 +21,6 @@
 
 <article>
 	<svelte:component this={data.content} />
+
+	<BreadCrumbs {items} />
 </article>

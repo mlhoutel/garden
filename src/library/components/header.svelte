@@ -84,4 +84,4 @@
 	<div class="w-full block pt-12" />
 </nav>
 
-<div class="w-full block h-[130px] md:h-0" />
+<div class="w-full block h-[140px] md:h-0" />

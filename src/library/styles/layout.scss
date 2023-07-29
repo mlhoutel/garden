@@ -21,10 +21,18 @@
 		@apply px-3 py-[50px] md:py-[100px];
 	}
 
+	.content-project {
+		@apply px-3 pb-[50px] md:pb-[100px];
+	}
+
 	article {
 		width: 100%;
 		max-width: 800px;
 		margin: auto;
+	}
+
+	article > * {
+		@apply px-5;
 	}
 
 	.background-dark {

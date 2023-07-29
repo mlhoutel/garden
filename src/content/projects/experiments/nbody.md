@@ -4,11 +4,15 @@ short: Nbody simple simulation with euler integration
 topic: simulation euler
 ---
 
+<script>
+    import IFrame from '$components/global/IFrame.svelte'
+</script>
+
 <div style="height: 100vh; width: 100vw; border: none">
-    <iframe src="https://experiments-roan.vercel.app/nbody" title="nbody" style="position: absolute; left: 0; height: 100%; width: 100%; border: none" />
+    <IFrame src="https://experiments-roan.vercel.app/nbody" title="nbody" />
 </div>
 
-<div style="height: 100px; width: 100%" />
+<div style="height: 50px; width: 100%" />
 
 # N-Body / Barnes-Hut Simulation
 
@@ -32,4 +36,4 @@ To address this, the [Barnes-Hut algorithm](https://en.wikipedia.org/wiki/Barnes
 
 N-Body simulations, particularly those implemented using the Barnes-Hut algorithm, offer an efficient way to study the dynamic interactions of a large number of particles. Through optimization and approximation techniques, the computational burden is significantly reduced. However, striking a balance between precision, stability, and optimization remains a challenge.
 
-<div style="height: 100px; width: 100%" />
+<div style="height: 30px; width: 100%" />

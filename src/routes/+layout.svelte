@@ -2,12 +2,16 @@
 	import '$styles/layout.scss';
 	import '$styles/markdown.scss';
 	import 'material-icons/iconfont/material-icons.css';
+	import { afterNavigate, beforeNavigate } from '$app/navigation';
 
 	import { onMount } from 'svelte';
 	import { base } from '$app/paths';
 
 	import Header from '$components/header.svelte';
 	import Footer from '$components/footer.svelte';
+	import Loader from '$components/global/Loader.svelte';
+
+	let loading = false;
 
 	onMount(async () => {
 		const link = document.createElement('link');
@@ -21,6 +25,14 @@
 			link.onerror = reject;
 			document.head.appendChild(link);
 		});
+	});
+
+	beforeNavigate((e) => {
+		loading = true;
+	});
+
+	afterNavigate((e) => {
+		loading = false;
 	});
 </script>
 
@@ -46,6 +58,7 @@
 
 <body class="background-primary">
 	<Header />
+	<Loader bind:loading />
 
 	<main>
 		<slot><!-- content --></slot>
