@@ -7,6 +7,8 @@
 	import TopicSelect from '$components/global/TopicSelect.svelte';
 	import ContentList from '$components/lists/ContentList.svelte';
 
+	export let data;
+
 	const label = 'Continue reading »';
 
 	let results = [];
@@ -22,9 +24,7 @@
 	async function search(url) {
 		filters = searchDecodeUrl(url, { topics: [], words: [] });
 
-		// avoid SSR the search query by moving the filtering to the client side
-		const response = await fetch(`${base}/api/content`);
-		const content = (await response.json())?.content ?? [];
+		const content = data.content ?? [];
 
 		results = content.filter((e) => {
 			const hasTopics = filters.topics.reduce(
