@@ -355,6 +355,10 @@
 			visibility: hidden;
 		}
 
+		:global(#navbar) {
+			display: none;
+		}
+
 		#print {
 			margin: 0;
 			padding: 0;
