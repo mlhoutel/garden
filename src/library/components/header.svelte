@@ -29,7 +29,7 @@
 	}
 </script>
 
-<nav class="background-tertiary flex items-center justify-between flex-wrap">
+<nav id="navbar" class="background-tertiary flex items-center justify-between flex-wrap">
 	<a href="{base}/">
 		<div
 			class="h-[48px] flex items-center flex-shrink-0 background-secondary px-5 py-2 absolute w-[100px] left-[-6px] top-0 skewed z-30"
