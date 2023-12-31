@@ -35,17 +35,4 @@ async function listSheets() {
 	return sorted;
 }
 
-async function listProjects() {
-	const files = import.meta.glob('$content/projects/**/*.md');
-	const projects = await fetchFiles(files);
-
-	const paths = projects.map((e) => ({
-		...e,
-		path: escapeThemePath(e.path.slice(2)),
-		file: e.path.slice(2)
-	}));
-
-	return paths;
-}
-
-export { listArticles, listProjects, listSheets };
+export { listArticles, listSheets };

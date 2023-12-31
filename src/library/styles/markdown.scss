@@ -11,7 +11,7 @@ article {
     }
 
     h1, h1 a {
-        @apply text-4xl md:text-7xl;
+        @apply text-4xl md:text-7xl pt-[50px] md:pt-[100px];
         text-align: center;
     }
 

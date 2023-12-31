@@ -14,7 +14,6 @@
 			{ label: 'home', link: `${base}/` },
 			{ label: 'articles', link: `${base}/articles` },
 			{ label: 'sheets', link: `${base}/sheets` },
-			{ label: 'projects', link: `${base}/projects` },
 			{ label: 'about', link: `${base}/about` }
 		];
 	}

@@ -28,6 +28,7 @@
 		"prettier-plugin-svelte": "^2.10.1",
 		"rehype-autolink-headings": "^6.1.1",
 		"rehype-slug": "^5.1.0",
+		"remark-gfm": "^4.0.0",
 		"remark-math": "^5.1.1",
 		"sass": "^1.63.6",
 		"seedrandom": "^3.0.5",

@@ -4,16 +4,18 @@ export const load = async ({ fetch }) => {
 	const response = await fetch(`${base}/api/articles`);
 	const articles = (await response.json()) || [];
 
-	const yearly = articles.reduce((acc, article) => {
-		const date = new Date(article.meta.date);
-		const key = date.getFullYear();
-		acc[key] = acc[key] || [];
-		acc[key].push(article);
-		return acc;
-	}, {});
+	const yearly = articles
+		.sort((a, b) => new Date(a.meta.date) - new Date(b.meta.date))
+		.reduce((acc, article) => {
+			const date = new Date(article.meta.date);
+			const key = date.getFullYear();
+			acc[key] = acc[key] || [];
+			acc[key].push(article);
+			return acc;
+		}, {});
 
 	const sorted = Object.entries(yearly)
-		.sort((a, b) => a[0] - b[0])
+		.sort((a, b) => b[0] - a[0])
 		.map((year) => ({ date: year[0], articles: year[1] }));
 
 	const years = sorted.map((i) => ({

@@ -23,7 +23,6 @@
 		return [
 			{ label: 'Articles', link: `${base}/articles` },
 			{ label: 'Sheets', link: `${base}/sheets` },
-			{ label: 'Projects', link: `${base}/projects` },
 			{ label: 'About', link: `${base}/about` }
 		];
 	}

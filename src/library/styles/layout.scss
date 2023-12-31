@@ -18,11 +18,11 @@
 @layer components {
 
 	.content {
-		@apply px-3 py-[50px] md:py-[100px];
+		@apply px-3 pb-[50px] md:pb-[100px];
 	}
 
-	.content-project {
-		@apply px-3 pb-[50px] md:pb-[100px];
+	.content h1 {
+		@apply pt-[50px] md:pt-[100px]
 	}
 
 	article {
