@@ -5,7 +5,7 @@ export const load = async ({ fetch }) => {
 	const articles = (await response.json()) || [];
 
 	const yearly = articles
-		.sort((a, b) => new Date(a.meta.date) - new Date(b.meta.date))
+		.sort((a, b) => new Date(b.meta.date) - new Date(a.meta.date))
 		.reduce((acc, article) => {
 			const date = new Date(article.meta.date);
 			const key = date.getFullYear();

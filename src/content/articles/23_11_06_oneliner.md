@@ -1,6 +1,6 @@
 ---
 title: 'Oneliner'
-date: 2023-05-14
+date: 2023-11-06
 topic: python ast one-liner
 short: Generalisation of one liner techniques for Python
 ---
@@ -11,9 +11,9 @@ short: Generalisation of one liner techniques for Python
 
 ## Introduction
 
-Have you ever been challenged to write a program in as few lines as possible? This happened to me recently as, during a seminar, a colleague dared me to compress a Python code snippet, involving intricate I/O operations and file reading coupled with data processing.
+Have you ever been challenged to write a program in as few lines as possible? That's what happened to me recently when, during a seminar, a colleague challenged me to compress a Python code snippet, involving simple I/O operations and file reading associated with data processing.
 
-Python, with its design emphasizing the significance of line breaks and tabs, might seem an unlikely candidate for such exercises. While in languages like C++ or Java, line breaks and tabs are often merely aesthetic, in Python, they serve as integral components of the language's structure.
+Python, with its design emphasizing the significance of line breaks and tabs, might seem an unlikely candidate for such exercises: while in languages like C++ or Java, line breaks and tabs are often merely aesthetic, in Python, they serve as integral components of the language's structure.
 
 > Whereas this code will run without a problem
 >
@@ -31,9 +31,9 @@ Python, with its design emphasizing the significance of line breaks and tabs, mi
 > SyntaxError: invalid syntax
 > ```
 
-In the midst of the exercice, I found myself pleasantly surprised by the myriad of creative tricks available to overcome the constraints imposed by Python's design.
+However, as I progressed through the exercise, I became pleasantly surprised by the myriad of creative tricks available to overcome the constraints imposed by Python's design.
 
-This sparked an intriguing thought: could these techniques be generalized to encompass the entire Python language? In other words, is it within the realm of possibility to devise a subset of Python that preserves the full range of language functionalities while adhering strictly to the constraint of never breaking lines?
+This realization prompted an intriguing thought: could these techniques be generalized to encompass the entire Python language? In other words, is it possible to design a subset of Python that preserves all the language's features while strictly adhering to the never-break-a-line constraint?
 
 ### The rules
 
@@ -49,21 +49,21 @@ exec("for i in range(3):\n\tfor j in range(3):\n\t\tprint(i, j)")
 
 #### Consistent Output for Accepted Cases:
 
-To ensure coherence and regression checks, this challenge was developed with Test-Driven Development (TDD). The outputs of the program, both before and after the one-lining process, must strictly match for acceptance.
+To ensure coherence and regression checks, this challenge was developed with [Test-Driven Development](https://fr.wikipedia.org/wiki/Test_driven_development). The outputs of the program, both before and after the one-lining process, must strictly match for acceptance.
 
-The Python version used throughout this challenge is v3.11 with the reference version Cpython. It is imperative that valid Python programs, both in terms of syntax and functionality, will be translated into one-liners that output valid python code.
+The Python version used throughout this challenge is v3.11 with the reference version [Cpython](https://en.wikipedia.org/wiki/CPython). It is imperative that valid Python programs, both in terms of syntax and functionality, are translated intoone-liners that produce valid Python code.
 
-### Disclamers
-
-One-liners will compromise legibility. The solutions presented below are by no means best practice. Furthermore, these solutions have NOT been thoroughly tested and should NOT be used for mission-critical applications.
+> **Disclamer**
+>
+> One-liners will compromise legibility. The solutions presented below are by no means best practice. Furthermore, these solutions have NOT been thoroughly tested and should NOT be used for mission-critical applications.
 
 ## Where to start
 
-So, let's say we have a random Python program. How can we alter it to be into a single line while ensuring it remains a valid program with similar functionality?
+So let's pretend we've got some random program code demonstrating the use of the various constructs of the Python language. How can we tweak it to fit into a single line, while ensuring that it remains a valid program with an identical functionality?
 
-To start, we need to analyse the structure of our Python program. Enter the Abstract Syntax Tree (AST), a pivotal tool in comprehending and manipulating the program's syntax.
+To tackle this, we need to understand the precise structure of our Python program. Enter the [Abstract Syntax Tree (AST)](https://en.wikipedia.org/wiki/Abstract_syntax_tree), a pivotal tool in comprehending and manipulating the program's syntax.
 
-An AST is a hierarchical tree-like representation of the syntactic structure of a Python program. It breaks down the code into nodes, each representing a distinct element such as statements, expressions, and more.
+An AST is a hierarchical tree-like representation of the syntactic structure of a Python program, it breaks down the code into nodes, each representing a distinct element.
 
 <blockquote>
 
@@ -76,7 +76,7 @@ def f(x):
 f(10)
 ```
 
-When this code is processed by the lexer, it breaks down the source code into individual tokens, which are the smallest units of meaning.
+When this code is processed by the [lexer](https://en.wikipedia.org/wiki/Lexical_analysis), it breaks down the source code into individual tokens, which are the smallest units of meaning.
 
 ```js
 Tokens:
@@ -85,7 +85,7 @@ Tokens:
 [NAME=f][OP=(][NAME=10][OP=)][ENDMARKER]
 ```
 
-Based on these tokens, we can parse the code and interpret the hierarchical structure of the program as an Abstract Syntax Tree.
+Based on these tokens, we can parse the code and interpret the hierarchical structure of the program as an AST.
 
 ![AST Graph]({base}/images/articles/oneliner/AST.png)
 _graphical representation of the AST generated for the program [fig.1]_
@@ -94,11 +94,9 @@ _graphical representation of the AST generated for the program [fig.1]_
 
 ### Mutating the AST
 
-Now that we have a structure that better represents the properties of our program, we will be able to navigate it and alter it to achieve our objectives. However, it is crucial to note that while making modifications, the program must retain its semantics, encompassing the behavior and functionality observed during execution. Therefore, any changes must involve replacing specific parts with behavioral equivalents, ensuring that the transformation maintains syntactic correctness.
+Now that we possess a structure that accurately represents the qualities of our program, we are able to navigate within it and alter it to achieve our goals. Nevertheless, it's also essential to remember that, while changes occur, the semantics of the program must be preserved, i.e. the behavior and functionality observed at runtime. Consequently, any changes must involve replacing specific parts with behavioral equivalents, with care taken to ensure that the transformation maintains syntactic correctness.
 
-As we delve into the intricacies of condensing Python code into a single line, a tantalizing question arises: Can we evaluate the Abstract Syntax Tree (AST) in advance to simplify it into a single root, essentially reducing it to a single line?
-
-Consider the following code snippet:
+As we look at the technical aspects of condensing Python code into a single line, a compelling question arises: Is it possible to collapse certain sections of the AST in advance, or perhaps to reduce it down to a single root, and thus a single line? For instance, consider the following code snippet:
 
 ```python
 a = 1
@@ -106,36 +104,34 @@ b = a + 2
 print(b)
 ```
 
-We can totally replace the values to reach this single line
+We can preserve the identical effect by substituting the variables with their values, thus producing this single line:
 
 ```python
 print(1 + 2)
 ```
 
-This technique is known as [inlining](https://en.wikipedia.org/wiki/Inline_expansion), a process where expressions or statements are replaced with their corresponding values or definitions at compile time. In the realm of traditional programming languages, compilers often perform inlining to optimize code execution. The idea is to eliminate redundant variable assignments and directly substitute expressions, potentially enhancing runtime efficiency.
+This technique is known as [inlining](https://en.wikipedia.org/wiki/Inline_expansion), a process in which expressions or declarations are replaced by their corresponding values at compile time. In the realm of traditional programming languages, compilers often perform such inlining to optimize code execution
 
-While inlining is a powerful optimization strategy, its generalization encounters significant challenges in the Python context. Python's dynamic nature, emphasis on sequential execution, and support for mutable objects pose obstacles to comprehensive inlining. Inlining, by its nature, may disrupt this sequence, potentially altering the program's behavior. The non-terminating problem further emphasizes that not all programs will reach an end state, making precomputation impossible in certain scenarios.
+While this is a powerful optimization strategy, its generalization encounters significant challenges in our case: the dynamic nature of the context and support for mutable objects make it hard to foresee the full effect of changes. For instance, inlining a sequence of action may potentially alter the program's behavior. Moreover, the [Halting problem](https://en.wikipedia.org/wiki/Halting_problem) make clear that precomputation is impossible in certain scenario, as no general algorithm exists to know if a programs will reach an end state from it's description.
 
 #### Maintain sequentiality
 
-An easy way to keep the sequantiality of operations in one line, is to use the ";" kewords:
+As we saw earlier, maintaining the sequentiality of operations is a sure way of preserving program functionality. A quick way of putting a sequence of operations in a line is to use the `;` keyword:
 
 ```python
 a = 1; a = a + 1; print(a)
 ```
 
-However, its utility is somewhat constrained. The use of ";" is not permissible before loops, within lambda bodies, or in situations where maintaining program scopes is crucial.
+However, its usability is somewhat limited. The semicolon is not allowed before loops, in lambda bodies or in other contexts where scoping must be retained.
 
-But, it's not the end yet, as by keeping the same idea, we can use an interesting property of the python arrays:
-[evaluations are always done sequentially](https://docs.python.org/3/library/stdtypes.html#lists)
+Yet we're not done yet, as we can keep the same idea and take advantage of an interesting property of python arrays:
+[evaluations are always carried out sequentially](https://docs.python.org/3/library/stdtypes.html#lists).
 
 ```python
 [print("1"), print("2"), print("3")]
 ```
 
-This trick can generally be employed to simulate the ordered instructions of bodies in the code.
-
-However, a notable limitation arises: not every Python keyword can be contained within a list. For example, the "assign" keyword will trigger a SyntaxError:
+This trick can generally be employed to simulate the ordered instructions of bodies in the code. However, a notable limitation arises: not every Python keyword can be contained within a list. For example, the `assign` keyword will trigger an error:
 
 ```python
     [a = 3]
@@ -143,7 +139,7 @@ However, a notable limitation arises: not every Python keyword can be contained 
 SyntaxError: invalid syntax
 ```
 
-To discern the types of code compatible with this trick, an exploration of the Python AST nodes is necessary. There are two primary categories of these nodes:
+To discern what syntax-compatible patterns exist, it's essential to understand Python's AST nodes. There are two main categories of these:
 
 - **Statements:**
 
@@ -153,7 +149,7 @@ To discern the types of code compatible with this trick, an exploration of the P
 
   An expression is a specific type of statement. It is a piece of code that evaluates to a value. Expressions can be embedded within statements or exist independently. An interesting property of expressions is that they can be used in many places without significant constraints, and specifically in our case, within lists.
 
-So, if we manage to convert each statement of our program into a similar expression, we can translate the entire program while maintaining sequentiality. To initiate this process, the walrus operator (":=") allows us to encapsulate declarations and assignments within a list.
+So, if we manage to convert each statement of our program into a similar expression, we can translate the entire program while maintaining sequentiality. To initiate this process, the walrus operator (`:=`) allows us to encapsulate declarations and assignments within a list.
 
 ```python
 [a := 3]
@@ -180,15 +176,15 @@ This can be succinctly converted to:
 [print("yes")] if True else None
 ```
 
-Similarly, the realm of function declarations can be entirely approximated by the concise syntax of lambda functions. However, a specific issue arises: the flow management keywords (`return`, `continue`, `break`, and `pass`) are statements; they cannot be used in a Python list or in a lambda body!
+Similarly, the realm of function declarations can be entirely approximated by the concise syntax of `lambdas`. However, a specific issue arises: the flow management keywords (`return`, `continue`, `break`, and `pass`) are statements! This means that explicit handling of flow statements becomes necessary.
 
-This means that explicit handling of flow statements becomes necessary. Let's focus specifically on the `return` statement, which influences the value yielded by the "function call" expression.
+Let's focus specifically on the `return` statement, which influences the value yielded by the "function call" expression.
 
-> **(i) Information:**
+> **Warning:**
 >
-> The chosen solution introduces additional code and checks, potentially affecting program performance.
+> The chosen solution will introduce additional code and checks, potentially affecting the targeted program performance.
 
-To address this issue, a (quite) straight forward approach involves pre-processing every body:
+To address this issue, a number of rules can be established and applied to pre-process every body:
 
 - **I. Program state handling**
 
@@ -197,11 +193,11 @@ To address this issue, a (quite) straight forward approach involves pre-processi
   ```
   [STATE := (None, 1), ...]
 
-  [0]: The return value buffer
-  [1]: The target indentation
+  STATE[0]: The return value buffer
+  STATE[1]: The target indentation
   ```
 
-  Return statement can then simply alter the `STATE[0]` value with the one to be passed on.
+  Return statement must alter the `STATE[0]` value, which will then be supplied to the outer scope.
 
 - **II. Explit flow management**
 
@@ -270,7 +266,7 @@ This simple loop can be transformed into a list comprehension as follows:
 [[a := i * 3, print(a)] for i in range(10)]
 ```
 
-However, it soon becomes apparent that this task is not as straightforward. List comprehensions demand maintaining the cardinality in the mapping between the range and the body actions, introducing the need once again for flow statement tricks, involving performing state checks at each iteration to ensure the desired behavior. Yet, we still need to find a way to implement `while` loops, essentially doubling the workload if we choose this path.
+However, it soon becomes apparent that this task is not as simple: list comprehensions demand maintaining the cardinality in the mapping between the range and the body actions, introducing the need once again for flow statement tricks, involving performing state checks at each iteration to ensure the desired behavior. Yet, we still need to find a way to implement `while` loops, essentially doubling the workload if we choose this path.
 
 The preferred approach here is to initially approximate `for` loops with `while` loops using an iterator:
 
@@ -314,7 +310,7 @@ This construct illustrates a technique known as self-application in lambda calcu
 
 > **The Y combinator**
 >
-> expressed as `Y = λf. (λx. f(x x)) (λf. f(x x))`, is a fixed-point combinator used in [lazy evaluated](https://en.wikipedia.org/wiki/Lazy_evaluation) contexts. Its essence lies in the ability to abstract recursive behavior within a concise and elegant form. In Python, it can be represented as follows:
+> expressed as `Y = λf. (λx. f(x x)) (λx. f(x x))`, is a fixed-point combinator used in [lazy evaluated](https://en.wikipedia.org/wiki/Lazy_evaluation) contexts. Its essence lies in the ability to abstract recursive behavior within a concise and elegant form. In Python, it can be represented as follows:
 >
 > ```python
 > Y = (lambda f:
@@ -362,7 +358,7 @@ Now that we have our basis, we need to incorporate additional parameters into th
 > print(factorial(5)) # yield 120
 > ```
 >
-> This construct is called the the [Z combinator](https://en.wikipedia.org/wiki/Fixed-point_combinator#Strict_fixed-point_combinator), and is expressed as `Z = λg.(λr.g (λy.r r y)) (λr.g (λy.r r y))` in lambda calculus.
+> This construct is called the the [Z combinator](https://en.wikipedia.org/wiki/Fixed-point_combinator#Strict_fixed-point_combinator), and is expressed as `Z = λf. (λg. f(λx. g g x)) (λg. f(λx. g g x))` in lambda calculus.
 
 What is left to us is to incorporates the loop closure. Its primary role will be to assess whether the termination condition has been satisfied or not.
 
