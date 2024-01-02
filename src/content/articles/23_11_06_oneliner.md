@@ -19,8 +19,8 @@ Python, with its design emphasizing the significance of line breaks and tabs, mi
 >
 > ```python
 > for i in range(3):
->    for j in range(3):
->        print(i, j)
+>   for j in range(3):
+>     print(i, j)
 > ```
 >
 > The same snippet without the right indentation will output a Syntax Error
@@ -71,7 +71,7 @@ Consider this provided code snippet as an example:
 
 ```python
 def f(x):
-    print(x + 5)
+  print(x + 5)
 
 f(10)
 ```
@@ -223,9 +223,9 @@ To provide a simple example of the results, consider the following code snippet:
 
 ```python
 def greet(name):
-    if name == '':
-        return 'Bye!'
-    return 'Hello, ' + name
+  if name == '':
+    return 'Bye!'
+  return 'Hello, ' + name
 ```
 
 The equivalent lambda expression would be:
@@ -279,7 +279,6 @@ CURSOR = next(ITERATOR, 'END_REACHED')
 
 # we check for termination with the default value
 while (CURSOR != 'END_REACHED'):
-
   ...
 
   # we go to the next iteration of the loop
@@ -346,7 +345,7 @@ Now that we have our basis, we need to incorporate additional parameters into th
 > f(1)(2)(3)
 > ```
 >
-> As the recursive call `x(x)` of the Y combinator is a problem becuase of the eagerly evaluation of python, we can apply the currying technique to delay the recursive call until it is explicitly invoked. Heres `(lambda x: f(x(x)))` becomes `(lambda g: f(lambda x: g(g)(x)))`, introducing a level of indirection with the use of the variable `g`.
+> Since the recursive call `x(x)` of the Y combinator causes trouble due to the eagerly evaluation of python, we can apply the currying technique to delay the recursive call until it is explicitly invoked. Thus, `(lambda x: f(x(x)))` becomes `(lambda g: f(lambda x: g(g)(x)))`, introducing a level of indirection with the use of the new parameter `g`.
 >
 > ```python
 > Z = (lambda f:
@@ -511,17 +510,17 @@ We are now confronted with the most challenging aspect of our task yet: the tran
 
 ```python
 with ContextManager() as ctx:
-    <code>
+  <code>
 ```
 
 will be approximated by the following code snippet:
 
 ```python
 try:
-    ctx = ContextManager().__enter__()
-    <code>
+  ctx = ContextManager().__enter__()
+  <code>
 finally:
-    ctx.__exit__(None, None, None)
+  ctx.__exit__(None, None, None)
 ```
 
 > We refrain from using the intermediary `except` block, to mimic the behavior of context managers, as the program will still come to a halt after executing the cleaning exit phase.
@@ -581,67 +580,67 @@ Using it, we can easily define our own Python code injection by leveraging the r
 
 ```python
 def make_bytecode(f):
-    code = {attr: getattr(f.__code__, attr) for attr in dir(f.__code__) if attr.startswith('co_')}
-    return f'''{f.__name__} = type(lambda: 0)(type((lambda: 0).__code__)(
-        {code['co_argcount']},
-        {code['co_posonlyargcount']},
-        {code['co_kwonlyargcount']},
-        {code['co_nlocals']},
-        {code['co_stacksize']},
-        {code['co_flags']},
-        {code['co_code']},
-        {code['co_consts']},
-        {code['co_names']},
-        {code['co_varnames']},
-        '{code['co_filename']}',
-        '{code['co_name']}',
-        {code['co_firstlineno']},
-        {code['co_lnotab']},
-        {code['co_freevars']},
-        {code['co_cellvars']},
-    ), {{ }})'''
+  code = {attr: getattr(f.__code__, attr) for attr in dir(f.__code__) if attr.startswith('co_')}
+  return f'''{f.__name__} = type(lambda: 0)(type((lambda: 0).__code__)(
+    {code['co_argcount']},
+    {code['co_posonlyargcount']},
+    {code['co_kwonlyargcount']},
+    {code['co_nlocals']},
+    {code['co_stacksize']},
+    {code['co_flags']},
+    {code['co_code']},
+    {code['co_consts']},
+    {code['co_names']},
+    {code['co_varnames']},
+    '{code['co_filename']}',
+    '{code['co_name']}',
+    {code['co_firstlineno']},
+    {code['co_lnotab']},
+    {code['co_freevars']},
+    {code['co_cellvars']},
+  ), {{ }})'''
 ```
 
 Trying it with a minimal try except catch function on `3.8.5 (default, Jul 20 2020, 23:11:29) [GCC 9.3.0]`
 
 ```python
 def tef(t, e, f):
-    try:
-        t()
-    except:
-        e()
-    finally:
-        f()
+  try:
+    t()
+  except:
+    e()
+  finally:
+    f()
 
 print(make_bytecode(tef))
-```
 
-We obtain the following object
-
-```python
+"""
 tef = type(lambda: 0)(type((lambda: 0).__code__)(
-        3,
-        0,
-        0,
-        3,
-        7,
-        67,
-        b'z"z\\n|\\x00\\x83\\x00\\x01\\x00W\\x00n\\x12\\x01\\x00\\x01\\x00\\x01\\x00|\\x01\\x83\\x00\\x01\\x00Y\\x00n\\x02X\\x00W\\x005\\x00|\\x02\\x83\\x00\\x01\\x00X\\x00d\\x00S\\x00',
-        (None,),
-        (),
-        ('t', 'e', 'f'),
-        'untitled.py',
-        'tef',
-        23,
-        b'\\x00\\x01\\x04\\x01\\n\\x01\\x06\\x01\\x10\\x02',
-        (),
-        (),
-    ), { })
+    3,
+    0,
+    0,
+    3,
+    7,
+    67,
+    b'z"z\\n|\\x00\\x83\\x00\\x01\\x00W\\x00n\\x12\\x01\\x00\\x01\\x00\\x01\\x00|\\x01\\x83\\x00\\x01\\x00Y\\x00n\\x02X\\x00W\\x005\\x00|\\x02\\x83\\x00\\x01\\x00X\\x00d\\x00S\\x00',
+    (None,),
+    (),
+    ('t', 'e', 'f'),
+    'untitled.py',
+    'tef',
+    23,
+    b'\\x00\\x01\\x04\\x01\\n\\x01\\x06\\x01\\x10\\x02',
+    (),
+    (),
+  ), { })
+"""
 ```
 
-Using a small code example with the extracted function on the same python compiler, we can check that it works accordingly to the first definition:
+Using a small code example with the extracted function, we can check that it works accordingly to the first definition (on the same python compiler!).
 
 ```python
+<generated tef type>
+
 tef(lambda: 1/0, lambda: print("Inside except_lambda"), lambda: print("Inside finally_lambda"))
 
 """
@@ -704,28 +703,28 @@ Using the example given by Chelsea, we can use the same trick in python 3 syntax
 import contextlib
 
 def tef(t, e, f):
-    class Body:
-        def __enter__(self): pass
-        def __exit__(self, et, ev, tb):
-            t()
-    class Handler:
-        def __enter__(self): pass
-        def __exit__(self, et, ev, tb):
-            if et is not None:
-                e(ev)
-                return True
-            return False
-    class Closure:
-        def __enter__(self): pass
-        def __exit__(self, et, ev, tb):
-          f()
+  class Body:
+    def __enter__(self): pass
+    def __exit__(self, et, ev, tb):
+      t()
+  class Handler:
+    def __enter__(self): pass
+    def __exit__(self, et, ev, tb):
+      if et is not None:
+        e(ev)
+        return True
+      return False
+  class Closure:
+    def __enter__(self): pass
+    def __exit__(self, et, ev, tb):
+      f()
 
-    ctx = contextlib.ExitStack()
-    ctx.enter_context(Closure())
-    ctx.enter_context(Handler())
-    ctx.enter_context(Body())
-    ctx.__enter__()
-    ctx.__exit__(None, None, None)
+  ctx = contextlib.ExitStack()
+  ctx.enter_context(Closure())
+  ctx.enter_context(Handler())
+  ctx.enter_context(Body())
+  ctx.__enter__()
+  ctx.__exit__(None, None, None)
 ```
 
 We now have our general-purpose exception handler in operation! We can now encapsulate it into a concise one-liner form for seamless integration into the translation process, and utilize it to emulate the `with` keyword as previously outlined.

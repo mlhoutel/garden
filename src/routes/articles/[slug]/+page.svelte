@@ -1,6 +1,8 @@
 <script>
 	export let data;
 
+	import { base } from '$app/paths';
+
 	import IFrame from '$components/global/IFrame.svelte';
 </script>
 
@@ -27,5 +29,14 @@
 
 	<div class="py-10">
 		<svelte:component this={data.content} />
+	</div>
+
+	<div class="w-full flex space-x-1">
+		<a href="{base}/articles" class="py-5 flex-1 pill text-center text-base rounded-sm">
+			List of articles
+		</a>
+		<a href="{base}/{data.next?.path}" class="py-5 flex-1 pill text-center text-base rounded-sm">
+			Next: {data.next?.meta?.title}
+		</a>
 	</div>
 </article>
