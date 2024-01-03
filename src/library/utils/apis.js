@@ -5,11 +5,20 @@ async function listArticles() {
 	const files = import.meta.glob('$content/articles/*.md');
 	const articles = await fetchFiles(files);
 
-	const paths = articles.map((e) => ({
-		...e,
-		path: e.path.slice(2), // remove t/ in path
-		file: e.path.slice(2)
-	}));
+	const paths = await Promise.all(
+		articles.map(async (e) => {
+			const count = e.html
+				.replace(/<[^>]*>/g, '')
+				.split(/\s+/)
+				.filter((word) => word.length > 0).length;
+
+			return {
+				meta: { ...e.meta, words: count },
+				path: e.path.slice(2), // remove t/ in path
+				file: e.path.slice(2) // remove t/ in path
+			};
+		})
+	);
 
 	const sorted = paths.sort((a, b) => {
 		return new Date(b.meta.date) - new Date(a.meta.date);
@@ -35,17 +44,4 @@ async function listSheets() {
 	return sorted;
 }
 
-async function listProjects() {
-	const files = import.meta.glob('$content/projects/**/*.md');
-	const projects = await fetchFiles(files);
-
-	const paths = projects.map((e) => ({
-		...e,
-		path: escapeThemePath(e.path.slice(2)),
-		file: e.path.slice(2)
-	}));
-
-	return paths;
-}
-
-export { listArticles, listProjects, listSheets };
+export { listArticles, listSheets };

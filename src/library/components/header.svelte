@@ -23,7 +23,6 @@
 		return [
 			{ label: 'Articles', link: `${base}/articles` },
 			{ label: 'Sheets', link: `${base}/sheets` },
-			{ label: 'Projects', link: `${base}/projects` },
 			{ label: 'About', link: `${base}/about` }
 		];
 	}
@@ -59,7 +58,7 @@
 				<a
 					data-sveltekit-preload-code="hover"
 					href={item.link}
-					class=" font-serif px-1 py-0.5 md:w-5 block md:inline"
+					class=" font-serif px-1 py-0.5 md:w-5 block md:inline hover:underline"
 				>
 					{item.label}
 				</a>

@@ -14,7 +14,6 @@
 			{ label: 'home', link: `${base}/` },
 			{ label: 'articles', link: `${base}/articles` },
 			{ label: 'sheets', link: `${base}/sheets` },
-			{ label: 'projects', link: `${base}/projects` },
 			{ label: 'about', link: `${base}/about` }
 		];
 	}
@@ -36,10 +35,14 @@
 <div class="background-tertiary w-full bottom-0 py-10 px-5 pointer-events-auto">
 	<article class="flex">
 		<div>
-			<ul class="list-none underline">
+			<ul class="list-none">
 				{#each getFooterItems() as item}
 					<li>
-						<a class="px-10 text-base" href={item.link} data-sveltekit-preload-code="hover">
+						<a
+							class="px-10 text-base hover:underline"
+							href={item.link}
+							data-sveltekit-preload-code="hover"
+						>
 							{item.label}
 						</a>
 					</li>

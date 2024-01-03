@@ -35,7 +35,7 @@
 
 		<div class="inline-flex justify-center">
 			<a
-				class="pill text-base mx-2 pl-3 pr-6 py-5 rounded-sm"
+				class="pill text-sm md:text-base mx-2 pl-3 pr-6 py-5 rounded-sm"
 				href="/"
 				data-sveltekit-preload-code="hover"
 			>
@@ -44,7 +44,7 @@
 			</a>
 
 			<a
-				class="pill text-base mx-2 pl-3 pr-6 py-5 rounded-sm"
+				class="pill text-sm md:text-base mx-2 pl-3 pr-6 py-5 rounded-sm"
 				href="https://github.com/mlhoutel/garden/issues"
 			>
 				<i class="material-icons !text-2x mr-3">warning</i>

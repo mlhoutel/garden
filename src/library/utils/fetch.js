@@ -8,10 +8,10 @@ export const fetchFiles = async (files) => {
 
 	const details = await Promise.all(
 		iterable.map(async ([path, resolver]) => {
-			const { metadata } = await resolver();
-
+			const resolved = await resolver();
 			return {
-				meta: metadata,
+				meta: resolved.metadata,
+				html: resolved.default.render().html,
 				path: path.slice(11, -3)
 			};
 		})

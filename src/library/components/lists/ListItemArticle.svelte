@@ -2,18 +2,11 @@
 	import TopicPill from '$components/global/TopicPill.svelte';
 
 	export let item;
-	export let label;
 </script>
 
-<div>
+<a data-sveltekit-preload-code="hover" href={item.path}>
 	<div class="block md:inline-flex">
-		<a
-			class="md:w-auto whitespace-nowrap text-clip"
-			data-sveltekit-preload-code="hover"
-			href={item.path}
-		>
-			<h3>{item.meta.title}</h3>
-		</a>
+		<h2 class="md:w-auto whitespace-nowrap text-clip">{item.meta.title}</h2>
 
 		<div class="pills md:pt-[22px] md:pl-3">
 			{#if item.meta.topic}
@@ -25,9 +18,12 @@
 	</div>
 
 	<p class="pt-0 text-sm">
-		{#if item.meta.short}{item.meta.short}...<br />{/if}
-		<a class="font-serif text-sm" data-sveltekit-preload-code="hover" href={item.path}>
-			{label}
-		</a>
+		{item.meta.short}...
 	</p>
-</div>
+
+	<p class="pt-1 text-sm">
+		[ {item.meta.words} words / {Math.ceil(item.meta.words / 160)} minutes read ]
+	</p>
+
+	<p class="px-1 py-2 text-base hover:underline">✦ Read article</p>
+</a>

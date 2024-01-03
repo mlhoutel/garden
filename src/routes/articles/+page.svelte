@@ -1,11 +1,10 @@
 <script>
-	import ContentList from '$components/lists/ContentList.svelte';
-	import { base } from '$app/paths';
+	import TreeList from '$components/lists/TreeList.svelte';
+	import ListItemArticle from '$components/lists/ListItemArticle.svelte';
 
 	export let data;
 
 	const items = data.years ?? [];
-	const label = 'Continue reading »';
 </script>
 
 <article>
@@ -13,7 +12,9 @@
 
 	<div class="md:inline-flex block">
 		<div>
-			<ContentList {items} {label} />
+			<TreeList {items} let:item>
+				<ListItemArticle {item} />
+			</TreeList>
 		</div>
 	</div>
 </article>
