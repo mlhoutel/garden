@@ -4,12 +4,11 @@
 	import { base } from '$app/paths';
 	import { goto } from '$app/navigation';
 	import { browser } from '$app/environment';
+
 	import TopicSelect from '$components/global/TopicSelect.svelte';
-	import ContentList from '$components/lists/ContentList.svelte';
+	import TreeList from '$components/lists/TreeList.svelte';
 
 	export let data;
-
-	const label = 'Continue reading »';
 
 	let results = [];
 	let topics = [];
@@ -48,7 +47,7 @@
 	$: selectedTopics = new Set(filters?.topics ?? []);
 </script>
 
-<article>
+<article class="min-h-[80vh]">
 	<h1>Search</h1>
 
 	<div class="inline-flex">
@@ -64,5 +63,5 @@
 		[ {results.length} entries founds for the current search... ]
 	</p>
 
-	<ContentList {items} {label} />
+	<TreeList {items} />
 </article>

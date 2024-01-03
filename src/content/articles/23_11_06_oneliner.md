@@ -176,7 +176,20 @@ This can be succinctly converted to:
 [print("yes")] if True else None
 ```
 
-Similarly, the realm of function declarations can be entirely approximated by the concise syntax of `lambdas`. However, a specific issue arises: the flow management keywords (`return`, `continue`, `break`, and `pass`) are statements! This means that explicit handling of flow statements becomes necessary.
+In the same way, the realm of function declarations can be fully approximated by the concise syntax of `lambdas`. For example, this function signature :
+
+```python
+def test(a, b):
+  ...
+```
+
+Turn into this lambda expression:
+
+```python
+test := (lamda a, b: [ ... ])
+```
+
+However, a specific issue arises: the flow management keywords (`return`, `continue`, `break`, and `pass`) are statements! This means that explicit handling of flow statements becomes necessary.
 
 Let's focus specifically on the `return` statement, which influences the value yielded by the "function call" expression.
 
@@ -228,7 +241,7 @@ def greet(name):
   return 'Hello, ' + name
 ```
 
-The equivalent lambda expression would be:
+The equivalent expression would be:
 
 ```python
 [
@@ -478,7 +491,7 @@ Unfortunately, our implementation can't introduce such optimizations because we 
 
 #### Completing python constructs
 
-Some of the problems I encountered later on were solved easely through the utilization of Python built-in tools. Notably, functions such as `setattr` and `__setitem__` played a pivotal role in circumventing issues related to accessors in the form of statements and prohibited attribute allocations. This was particularly beneficial when dealing with scenarios like the following, where direct attribute assignment faced limitations:
+Some of the problems I encountered later on were solved easely through the utilization of Python built-in tools. Notably, functions such as `setattr` and `__setitem__` played a significant role in circumventing issues related to accessors in the form of statements and prohibited attribute allocations. This was particularly beneficial when dealing with scenarios like the following, where direct attribute assignment faced limitations:
 
 ```python
 [..., self.a := 1, ...] # setattr(self, a, 1)
@@ -506,7 +519,7 @@ type('Person', (object,), { '__init__': (lambda self: []) })
 
 ### Exceptions and Contexts
 
-We are now confronted with the most challenging aspect of our task yet: the translation of context managers and exception handlers. To address this, we can start bt simplifying the problem with an approximation of the `with` keyword for context handling using `try/finally`, as illustrated below:
+We're now faced with the most difficult aspect of our task so far: translating context managers and exception handlers. To deal with those, we can start by reducing the problem using an approximation of the `with` keyword for context management using `try/finally`, as illustrated below:
 
 ```python
 with ContextManager() as ctx:
@@ -686,7 +699,7 @@ At this point, I found myself running out of options. My knowledge about the int
 
 As is often the case, when you conceive an idea, you are not the first. Discovering that others have ventured into similar territories can be both disconcerting and reassuring. That implementation adopted a pure functional programming approach, which proved to be the better choice in the end, as this approach presented fewer edge cases to handle and a more consistent behavior compared to the hybrid imperative style translation I opted for. I highly recommend watching the [associated talk "Chelsea Voss - Oneliner-izer: An Exercise in Constrained Coding - PyCon 2016"](https://www.youtube.com/watch?v=DsUxuz_Rt8g) for further insights.
 
-This is watching that talk that I learned about the `contextlib.nested` trick to block the handled exceptiions (todo explain more here). Saldy, this function used at first to combine multiple ContextHandler in one `with` is deprecated in Python 3, as the `with` keyword now support chained handlers. But, it can be easely replaced with the `contextlib.ExitStack`, as such`:
+It was by listening to this lecture that I learned about the `contextlib.nested` trick to emulate an exception handling scope. Unfortunately, this function, originally used to combine several ContextHandlers into a single `with`, is deprecated in Python 3, as the `with` keyword now supports chained handlers. But it can easily be replaced by the `contextlib.ExitStack` function, as such` :
 
 ```python
 with contextlib.nested(a, b, c):

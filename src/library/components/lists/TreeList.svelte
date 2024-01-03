@@ -1,10 +1,9 @@
 <script>
-	import ContentItem from '$components/lists/ContentItem.svelte';
 	import { toAnchor } from '$utils/format.js';
+	import ListItemGeneric from '$components/lists/ListItemGeneric.svelte';
 
 	export let depth = 0;
 	export let items;
-	export let label;
 </script>
 
 {#if Array.isArray(items)}
@@ -31,10 +30,16 @@
 			{/if}
 
 			{#each theme.items as item}
-				<svelte:self items={item} {label} depth={depth + 1} />
+				<svelte:self items={item} depth={depth + 1} let:item>
+					<slot {item}>
+						<ListItemGeneric {item} />
+					</slot>
+				</svelte:self>
 			{/each}
 		{/each}
 	</section>
 {:else}
-	<ContentItem item={items} {label} />
+	<slot item={items}>
+		<ListItemGeneric item={items} />
+	</slot>
 {/if}
