@@ -14,7 +14,7 @@
 
 {#if !disabled}
 	<a href="{base}/search?topics={topic}" rel="noreferrer">
-		<button class="pill" on:click={handleClick}>
+		<button class="pill hover:underline" on:click={handleClick}>
 			#{topic}
 
 			{#if !!removable}

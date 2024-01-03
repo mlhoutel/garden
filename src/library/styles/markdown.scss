@@ -180,4 +180,8 @@ article {
     h6:hover .anchor-link {
         opacity: 0.7;
     }
+
+    pre > code > * {
+        @apply leading-3 md:leading-6 text-sm md:text-base
+    }
 }

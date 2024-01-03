@@ -11,19 +11,19 @@
 		{#each items as theme}
 			{#if theme.label}
 				{#if depth == 0}
-					<h2 id={toAnchor(theme.label)} class="text-4xl font-bold tracking-widest">
+					<h2 id={toAnchor(theme.label)} class="text-3xl md:text-4xl font-bold tracking-widest">
 						{theme.label}
 					</h2>
 				{:else if depth == 1}
-					<h3 id={toAnchor(theme.label)} class="text-3xl font-bold tracking-widest">
+					<h3 id={toAnchor(theme.label)} class="text-2xl md:text-3xl font-bold tracking-widest">
 						{theme.label}
 					</h3>
 				{:else if depth == 2}
-					<h4 id={toAnchor(theme.label)} class="text-2xl font-bold tracking-widest">
+					<h4 id={toAnchor(theme.label)} class="text-xl md:text-2xl font-bold tracking-widest">
 						{theme.label}
 					</h4>
 				{:else if depth == 3}
-					<h5 id={toAnchor(theme.label)} class="text-xl font-bold tracking-widest">
+					<h5 id={toAnchor(theme.label)} class="text-lg md:text-xl font-bold tracking-widest">
 						{theme.label}
 					</h5>
 				{/if}

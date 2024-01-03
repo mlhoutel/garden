@@ -58,7 +58,7 @@
 				<a
 					data-sveltekit-preload-code="hover"
 					href={item.link}
-					class=" font-serif px-1 py-0.5 md:w-5 block md:inline"
+					class=" font-serif px-1 py-0.5 md:w-5 block md:inline hover:underline"
 				>
 					{item.label}
 				</a>

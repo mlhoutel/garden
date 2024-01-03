@@ -31,7 +31,7 @@
 
 		<div class="pills w-full md:justify-end">
 			<p class="pill">{data.words} words</p>
-			<p class="pill">{Math.round(data.words / 180)} minutes read</p>
+			<p class="pill">{Math.round(data.words / 160)} minutes read</p>
 		</div>
 	</div>
 
