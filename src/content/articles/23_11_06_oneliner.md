@@ -163,7 +163,7 @@ By employing these combined techniques, we can already transform small and simpl
 
 #### Based on this premise
 
-Expanding on this premise, numerous statements lend themselves to straightforward conversions. Take if statements, for example, which can be effortlessly transformed into equivalent ternary operators with sub-flows for each part of the program:
+Numerous statements lend themselves to straightforward conversions. Take conditionals, for instance, which can be effortlessly transformed into equivalent ternary operators with sub-flows for each part of the program:
 
 ```python
 if True:
@@ -186,7 +186,7 @@ def test(a, b):
 Turn into this lambda expression:
 
 ```python
-test := (lamda a, b: [ ... ])
+test := (lambda a, b: [ ... ])
 ```
 
 However, a specific issue arises: the flow management keywords (`return`, `continue`, `break`, and `pass`) are statements! This means that explicit handling of flow statements becomes necessary.
@@ -214,11 +214,7 @@ To address this issue, a number of rules can be established and applied to pre-p
 
 - **II. Explit flow management**
 
-  We can assume that all code in a branch after a flow statement will never be reached, and can be removed safely ([Dead code elimination](https://en.wikipedia.org/wiki/Dead-code_elimination)).
-
-  If a return statement occurs in a conditional branching, we explicitly move all remaining code to an else block.
-
-  While iterating through the code, we will continuously compute the current "indentation" of the different scopes and add checks at each branching to iterate towards the target indentation.
+  We can assume that all code in a branch after a flow statement will never be reached, and can be removed safely ([Dead code elimination](https://en.wikipedia.org/wiki/Dead-code_elimination)). If a return statement occurs in a conditional branching, we explicitly move all remaining code to an else block. While iterating through the code, we will continuously compute the current "indentation" of the different scopes and add checks at each branching to iterate towards the target indentation.
 
   ```python
   [..., <branching>, [...] if STATE[1] > 1 else None, ...]
@@ -569,7 +565,7 @@ sys.excepthook = (lambda t, v, b: [<except block>, <jump to (1)>])
 
 The recovery from the exception handler function requires a way to jump back to the stack, and the "goto" library in Python (https://github.com/snoack/python-goto) is designed to implement this concept by allowing an absolute jump to a designated flag in the program.
 
-Unfortunately, leveraging this library isn't feasible in this case, as after the `sys.excepthook` is invoked, the program is in an exceptional state, and the stack is effectively unwound as part of the process of handling the uncaught exception (to create the stack trace for instance). Consequently, the remaining frames on the call stack no longer exist and cannot be executed.
+Unfortunately, leveraging this library isn't feasible in this case, as after the `sys.excepthook` is invoked, the program is in an exceptional state, and the stack is effectively unwound as part of the process of handling the uncaught exception (to create the stack trace). Consequently, the remaining frames on the call stack no longer exist and cannot be executed.
 
 We come to the conclusion that we cannot recover from an unhandled exception in Python. However, as we are delving into the `goto` library, we discover that runtime bytecode alteration is feasible in this scripting language, enabling a wide range of possibilities...
 
@@ -589,7 +585,9 @@ Create a code object.  Not for the faint of heart.
 """
 ```
 
-Using it, we can easily define our own Python code injection by leveraging the right parameters. Since Python provides a significant amount of metadata, including information during runtime and introspection, I was able to create a function that automates the step of extracting the bytecode from Python functions:
+Using it, we can easily define our own "code object" by leveraging the right parameters, and we can directly supply it to a `type(lambda: 0)`, that, taking a code object, allow us to instanciate a new function.
+
+Since Python code provides a significant amount of metadata, I was able to create a function that automates the step of extracting the bytecode from Python functions:
 
 ```python
 def make_bytecode(f):
@@ -662,7 +660,7 @@ Inside finally_lambda
 """
 ```
 
-We can even check that the code object are the same between the two `tef` functions using the python class dissasembler (`dis.dis(tef)`):
+We can even confirm that the code object are the same between the two `tef` functions using the python class dissasembler (`dis.dis(tef)`):
 
 ```
  25           0 SETUP_FINALLY           34 (to 36)
@@ -691,7 +689,7 @@ We can even check that the code object are the same between the two `tef` functi
              46 RETURN_VALUE
 ```
 
-The problem is that the bytecode generated is wildly inconsistent between python compiler versions. Not a good solution, that not what we want, so we still have to find things
+The major problem here is that this generated bytecode is wildly inconsistent between python implementations, so the code will not be portable. In fact, it's never good to play with the bytecode, it's not a suitable solution.
 
 #### Contextlib solution
 
