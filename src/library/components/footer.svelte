@@ -39,7 +39,7 @@
 				{#each getFooterItems() as item}
 					<li>
 						<a
-							class="px-10 text-base hover:underline"
+							class="md:px-10 text-base hover:underline"
 							href={item.link}
 							data-sveltekit-preload-code="hover"
 						>

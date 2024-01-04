@@ -151,7 +151,7 @@ function stepGraph(nodes, edges) {
 	}
 }
 
-import seedrandom from 'seedrandom'
+import seedrandom from 'seedrandom';
 
 function makeGraph(list) {
 	const { nodes, edges } = generateNodes(list);
@@ -160,7 +160,7 @@ function makeGraph(list) {
 
 	// randomize initial positions
 	for (const node of nodes) {
-		node.pos = new Vec2(random() * 300, random() * 300);
+		node.pos = new Vec2(random() * 400, random() * 400);
 	}
 
 	for (let i = 0; i < 10000; i++) {

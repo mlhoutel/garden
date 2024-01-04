@@ -29,6 +29,7 @@
 	xmlns="http://www.w3.org/2000/svg"
 	width="100%"
 	class="h-[300px] sm:h-[500px] md:h-[700px]"
+	overflow="visible"
 	viewBox="{view_box.x1} {view_box.y1} {view_box.x2} {view_box.y2}"
 >
 	{#each edges as edge}
