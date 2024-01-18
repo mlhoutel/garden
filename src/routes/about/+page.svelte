@@ -77,11 +77,12 @@
 
 									<div class="border-l-4 border-black pl-6 ml-[5px] text-sm">
 										<p>
-											Specialist on serverless microservices in python and java, lead developer on
-											warehouse activities projects at the supply chain.
+											Specialist on serverless python/java microservices, optimization of
+											containerization methods, lead dev on supply chain projects, internal
+											technical talks and trainings.
 										</p>
 										<p class="font-bold">
-											[GCP, VueJs, Spring Boot, ActiveMQ, Kafka, Docker, Jenkins]
+											[GCP, Spring Boot, GraalVM, k8s, Grafana k6, Docker, Jenkins, VueJs]
 										</p>
 										<p class="italic text-xs">
 											U IRIS (Supply-Chain / Software Architecture Department), Nantes, France
@@ -100,9 +101,9 @@
 									<div class="border-l-4 border-black pl-6 ml-[5px] text-sm">
 										<p>
 											Development of software for network optimisation of camera video streams in
-											particle accelerator tunnels.
+											particle accelerator tunnels, data visualizations for team activities.
 										</p>
-										<p class="font-bold">[C++, Javascript, Express, OpenStack]</p>
+										<p class="font-bold">[C++, Javascript, Express, OpenStack, VueJs]</p>
 										<p class="italic text-xs">CERN (BE/CEM Service), Geneva, Switzerland</p>
 									</div>
 								</li>
@@ -191,6 +192,7 @@
 										+33 (0)7 81
 										<p class="align-middle mb-1 inline-flex w-[60px] h-[15px] bg-black" />
 									</a>
+									<a href="https://maellhoutellier.com" class="underline">maellhoutellier.com</a>
 									<a href="https://github.com/mlhoutel" class="underline">github.com/mlhoutel</a>
 									<a href="https://gitlab.com/mlhoutel" class="underline">gitlab.com/mlhoutel</a>
 									<a href="https://hackerrank.com/mlhoutel" class="underline">
@@ -232,8 +234,8 @@
 										<span class="text-base font-bold">
 											Naomesh: Demonstrator for monitoring the software footprint</span
 										>
-										<a href="https://github.com/naomesh" class="underline text-sm"
-											>github.com/naomesh</a
+										<a href="https://github.com/naomesh" class="underline text-sm">
+											github.com/naomesh</a
 										>
 									</div>
 
@@ -333,7 +335,7 @@
 
 					<div>
 						<h2>INTERESTS</h2>
-						<p>Guitar, Climbing, Running, Biking, Reading, Cooking, FOSS</p>
+						<p>Rock climbing, Guitar, Running, Biking, Reading, Cooking, FOSS</p>
 					</div>
 
 					<div class="pt-5 inline-flex italic">
