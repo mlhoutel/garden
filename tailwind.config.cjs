@@ -41,6 +41,10 @@ const config = {
 				green: '#baffc9',
 				ocean: '#bae1ff',
 				violet: '#cc9af4'
+			},
+			transitionProperty: {
+				padding: 'padding',
+				margin: 'margin'
 			}
 		}
 	},

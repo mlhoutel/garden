@@ -42,13 +42,22 @@
 <div class="block mt-10 max-w-[100vw] overflow-auto">
 	<container id="cv" class="md:flex md:justify-center">
 		<div class="A4 tracking-wider font-thin relative bg-white shadow-xl">
-			<img
-				src="{base}/logos/sumblack.svg"
-				width="400px"
-				height="400px"
-				alt="logo"
-				class="absolute pointer-events-none right-[50px] bottom-[80px] opacity-10 h-[400px]"
-			/>
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				xml:space="preserve"
+				width="100mm"
+				height="100mm"
+				viewBox="0 0 100 100"
+				class="absolute pointer-events-none right-[-80px] bottom-[-30px] opacity-5 h-[600px] w-[600px] text-[#1E262B] fill-current"
+			>
+				<g style="display:inline">
+					<path
+						d="m79.33 36.754-.001-17.892h-58.9v17.892zM22.369 37.64l22.993.005 20.585 12.923-45.326 29.303V61.383L40.217 48.85ZM79.346 80.07l-.005-17.794H49.89L22.49 80.12Z"
+						style="fill:#000;fill-opacity:1;stroke:#000;stroke-width:0;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;paint-order:markers stroke fill"
+					/>
+				</g>
+			</svg>
+
 			<div class="z-10 flex h-full">
 				<div class="w-6 bg-[#cfcecc]" />
 				<div class="w-full pl-2 pr-5 bg-[#f3f0e7]">
@@ -62,16 +71,19 @@
 									alt="logo"
 									class="h-11"
 								/>
-								<h1 class="p-2">LHOUTELLIER Maël</h1>
+
+								<p class="text-black !text-6xl font-black ml-[10px] mr-[-100px]">
+									LHOUTELLIER Maël
+								</p>
 							</div>
 
-							<h2 class="font-bold text-2xl">WORK EXPERIENCE</h2>
+							<h2 class="font-bold font-2xl">WORK EXPERIENCE</h2>
 							<ul>
 								<li>
 									<div class="inline-flex">
 										<p class="rounded-full bg-black w-[15px] h-[15px] mt-1" />
 										<p class="font-bold text-base pl-4">
-											2021-2023: Cloud R&D - Apprenticeship (3 years)
+											2021-2023 / U IRIS: Cloud R&D - Apprenticeship (3 years)
 										</p>
 									</div>
 
@@ -85,7 +97,8 @@
 											[GCP, Spring Boot, GraalVM, k8s, Grafana k6, Docker, Jenkins, VueJs]
 										</p>
 										<p class="italic text-xs">
-											U IRIS (Supply-Chain / Software Architecture Department), Nantes, France
+											U IRIS / U TECH (Supply-Chain / Software Architecture Department), Nantes,
+											France
 										</p>
 									</div>
 								</li>
@@ -94,7 +107,7 @@
 									<div class="inline-flex">
 										<p class="rounded-full bg-black w-[15px] h-[15px] mt-1" />
 										<p class="font-bold text-base pl-4">
-											2022: Software development - Internship (4 month)
+											2022 / CERN: Software development - Internship (4 month)
 										</p>
 									</div>
 
@@ -112,7 +125,7 @@
 									<div class="inline-flex">
 										<p class="rounded-full bg-black w-[15px] h-[15px] mt-1" />
 										<p class="font-bold text-base pl-4">
-											2020: Atomic Simulation - Internship (3 month)
+											2020 / CEA: Atomic Simulation - Internship (3 month)
 										</p>
 									</div>
 
@@ -129,7 +142,9 @@
 								<li>
 									<div class="inline-flex">
 										<p class="rounded-full bg-black w-[15px] h-[15px] mt-1" />
-										<p class="font-bold text-base pl-4">2019: Data mining - Summer Job (4 weeks)</p>
+										<p class="font-bold text-base pl-4">
+											2019 / LEM: Data mining - Summer Job (4 weeks)
+										</p>
 									</div>
 
 									<div class="pl-6 ml-[10px]">
@@ -178,7 +193,7 @@
 							<div class="flex flex-col">
 								<img
 									class="rounded-full mb-5 mx-1 mt-1 w-[170px] h-[170px] object-cover object-top"
-									src="{base}/images/avatar_placeholder.svg"
+									src="{base}/images/ProfilSumLogoLight.png"
 									width="170px"
 									height="170px"
 									alt="curriculum vitae avatar"

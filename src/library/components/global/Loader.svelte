@@ -6,16 +6,7 @@
 	{#if loading}
 		<div
 			class="h-full bg-orange absolute top-0 left-0"
-			style="width: 70%; animation: loading 0.5s ease-out;"
-		>
-			.
-		</div>
-	{/if}
-
-	{#if !loading}
-		<div
-			class="h-full bg-transparent absolute top-0 left-0"
-			style="width: 100%; animation: fadeOut 0.5s ease-out;"
+			style={`animation: loading 0.5s ease-out; ${loading ? 'width: 100%' : 'width:100%'}`}
 		>
 			.
 		</div>

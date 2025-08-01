@@ -40,7 +40,6 @@
 				width="32px"
 				class="h-8 anti-skewed"
 			/>
-
 			<div class="absolute left-[55px] top-3 pl-5 flex">
 				<div class="background-dark h-8 w-1 mx-0.5" />
 				<div class="background-dark h-8 w-2 mx-0.5" />
@@ -52,13 +51,13 @@
 		class="background-transparent md:background-dark md:w-full absolute top-[13px] md:skewed z-20 left-0 md:left-[-20px] px-3 md:px-0 max-w-[100vw] overflow-x-hidden w-full"
 	>
 		<div
-			class="md:anti-skewed text-lg pt-1 mt-10 md:ml-[125px] md:mt-0 overflow-hidden background-primary md:background-dark"
+			class="md:anti-skewed text-lg pt-[5px] mt-10 md:ml-[125px] md:mt-0 overflow-hidden background-primary md:background-dark"
 		>
 			{#each getMenuItems() as item}
 				<a
 					data-sveltekit-preload-code="hover"
 					href={item.link}
-					class=" font-serif px-1 py-0.5 md:w-5 block md:inline hover:underline"
+					class=" font-serif px-1 py-0.5 md:w-5 block md:inline horizontal-underline-animated transition-all dark:hover:[text-shadow:2px_2px_1px_black,1px_1px_1px_black,2px_2px_1px_black]"
 				>
 					{item.label}
 				</a>

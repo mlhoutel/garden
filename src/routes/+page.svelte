@@ -23,10 +23,18 @@
 			<GraphTopics nodes={data.nodes} edges={data.edges} />
 		</div>
 
+		<div class="mb-[-10px]">
+			<p class="text-xs italic text-center">
+				click on a topic below to see the list of associated content
+			</p>
+		</div>
 		<div class="p-5 columns-2 md:columns-5">
 			{#each data.nodes.sort((a, b) => b.count - a.count) as node}
 				<div>
-					<a href="{base}/search?topics={node.label}" class="text-sm">
+					<a
+						href="{base}/search?topics={node.label}"
+						class="horizontal-underline-animated text-sm pl-0 hover:pl-1 transition-all duration-300 py-0 hover:text-black"
+					>
 						<span class="underline text-sm">[ {node.count} ]</span>
 						{node.label}
 					</a>

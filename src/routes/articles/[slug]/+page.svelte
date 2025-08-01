@@ -19,7 +19,7 @@
 
 	<div class="md:flex md:flex-row flex-col pt-5">
 		<div class="w-[200px] px-1">
-			<a href="https://github.com/mlhoutel" class="text-sm text-orange">mlhoutel</a>
+			<a href="https://github.com/mlhoutel" class="text-sm underline-animated-block"> mlhoutel </a>
 			<span class="text-sm">
 				{new Date(data.date).toLocaleDateString('en-US', {
 					month: 'short',
@@ -39,18 +39,20 @@
 		<svelte:component this={data.content} />
 	</div>
 
-	<div class="w-full flex space-x-1">
+	<div class="w-full flex space-x-3">
 		<a
 			href="{base}/articles"
-			class="py-5 flex-1 pill text-center text-sm md:text-base rounded-sm truncate"
+			class="underline-animated-block py-1 flex-1 text-center text-sm md:text-base truncate"
+			data-sveltekit-preload-code="hover"
 		>
-			<span class="truncate">List of articles</span>
+			<span class="truncate">⏹ List of articles</span>
 		</a>
 		<a
 			href="{base}/{data.next?.path}"
-			class="py-5 flex-1 pill text-center text-sm md:text-base rounded-sm"
+			class="underline-animated-block py-1 flex-1 text-center text-sm md:text-base"
+			data-sveltekit-preload-code="hover"
 		>
-			<span class="truncate">Next: {data.next?.meta?.title}</span>
+			<span class="truncate">▶ Next: {data.next?.meta?.title}</span>
 		</a>
 	</div>
 </article>
