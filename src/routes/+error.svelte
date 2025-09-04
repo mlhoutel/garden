@@ -33,22 +33,19 @@
 
 		<p class="p-5">{message}</p>
 
-		<div class="inline-flex justify-center">
+		<div class="w-full flex space-x-3">
 			<a
-				class="pill text-sm md:text-base mx-2 pl-3 pr-6 py-5 rounded-sm"
+				class="underline-animated-block py-1 flex-1 text-center text-sm md:text-base truncate"
 				href="/"
 				data-sveltekit-preload-code="hover"
 			>
-				<i class="material-icons !text-2x mr-3">home</i>
-				Return home
+				<span class="truncate">⏹ Return Home</span>
 			</a>
-
 			<a
-				class="pill text-sm md:text-base mx-2 pl-3 pr-6 py-5 rounded-sm"
 				href="https://github.com/mlhoutel/garden/issues"
+				class="underline-animated-block py-1 flex-1 text-center text-sm md:text-base"
 			>
-				<i class="material-icons !text-2x mr-3">warning</i>
-				Report issue
+				<span class="truncate">⚠ Report issue</span>
 			</a>
 		</div>
 	</div>
