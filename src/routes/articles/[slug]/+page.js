@@ -11,7 +11,7 @@ export async function load({ params, fetch }) {
 	const index = articles.findIndex((e) => e.meta.title == article.metadata.title);
 
 	const next = articles[(index + 1) % articles.length];
-	const meta = article?.metadata;
+	const meta = { ...article?.metadata, ...articles?.[index]?.meta };
 
 	if (meta?.published === false) {
 		throw error(404, 'Article not published yet');
