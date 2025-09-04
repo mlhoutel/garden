@@ -1,4 +1,5 @@
 import { base } from '$app/paths';
+import { error } from '@sveltejs/kit';
 
 export async function load({ params, fetch }) {
 	const article = await import(`../../../content/articles/${params.slug}.md`);
@@ -10,7 +11,11 @@ export async function load({ params, fetch }) {
 	const index = articles.findIndex((e) => e.meta.title == article.metadata.title);
 
 	const next = articles[(index + 1) % articles.length];
-	const meta = articles[index].meta;
+	const meta = article?.metadata;
+
+	if (meta?.published === false) {
+		throw error(404, 'Article not published yet');
+	}
 
 	return {
 		content,

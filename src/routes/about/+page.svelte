@@ -1,4 +1,5 @@
 <script>
+	import { getValue } from '$utils/curriculum.js';
 	import { base } from '$app/paths';
 	import { browser } from '$app/environment';
 
@@ -7,6 +8,9 @@
 			window.print();
 		}
 	}
+
+	const lang = 'en';
+	const pub = true;
 
 	if (browser) {
 		const googleapis = document.createElement('link');
@@ -42,22 +46,6 @@
 <div class="block mt-10 max-w-[100vw] overflow-auto">
 	<container id="cv" class="md:flex md:justify-center">
 		<div class="A4 tracking-wider font-thin relative bg-white shadow-xl">
-			<svg
-				xmlns="http://www.w3.org/2000/svg"
-				xml:space="preserve"
-				width="100mm"
-				height="100mm"
-				viewBox="0 0 100 100"
-				class="absolute pointer-events-none right-[-80px] bottom-[-30px] opacity-5 h-[600px] w-[600px] text-[#1E262B] fill-current"
-			>
-				<g style="display:inline">
-					<path
-						d="m79.33 36.754-.001-17.892h-58.9v17.892zM22.369 37.64l22.993.005 20.585 12.923-45.326 29.303V61.383L40.217 48.85ZM79.346 80.07l-.005-17.794H49.89L22.49 80.12Z"
-						style="fill:#000;fill-opacity:1;stroke:#000;stroke-width:0;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;paint-order:markers stroke fill"
-					/>
-				</g>
-			</svg>
-
 			<div class="z-10 flex h-full">
 				<div class="w-6 bg-[#cfcecc]" />
 				<div class="w-full pl-2 pr-5 bg-[#f3f0e7]">
@@ -72,94 +60,38 @@
 									class="h-11"
 								/>
 
-								<p class="text-black !text-6xl font-black ml-[10px] mr-[-100px]">
-									LHOUTELLIER Maël
+								<p class="text-black !text-6xl font-black ml-[10px]">
+									{@html getValue('name', pub, lang)}
 								</p>
 							</div>
 
-							<h2 class="font-bold font-2xl">WORK EXPERIENCE</h2>
+							<h2 class="font-bold font-2xl">{@html getValue('experience_title', pub, lang)}</h2>
 							<ul>
-								<li>
-									<div class="inline-flex">
-										<p class="rounded-full bg-black w-[15px] h-[15px] mt-1" />
-										<p class="font-bold text-base pl-4">
-											2021-2023 / U IRIS: Cloud R&D - Apprenticeship (3 years)
-										</p>
-									</div>
+								{#each getValue('experiences_items', pub, lang) as item}
+									<li>
+										<div class="inline-flex">
+											<p class="rounded-full bg-black w-[15px] h-[15px] mt-1" />
+											<p class="font-bold text-base pl-4">
+												{@html item?.['title']}
+											</p>
+										</div>
 
-									<div class="border-l-4 border-black pl-6 ml-[5px] text-sm">
-										<p>
-											Specialist on serverless python/java microservices, optimization of
-											containerization methods, lead dev on supply chain projects, internal
-											technical talks and trainings.
-										</p>
-										<p class="font-bold">
-											[GCP, Spring Boot, GraalVM, k8s, Grafana k6, Docker, Jenkins, VueJs]
-										</p>
-										<p class="italic text-xs">
-											U IRIS / U TECH (Supply-Chain / Software Architecture Department), Nantes,
-											France
-										</p>
-									</div>
-								</li>
-
-								<li>
-									<div class="inline-flex">
-										<p class="rounded-full bg-black w-[15px] h-[15px] mt-1" />
-										<p class="font-bold text-base pl-4">
-											2022 / CERN: Software development - Internship (4 month)
-										</p>
-									</div>
-
-									<div class="border-l-4 border-black pl-6 ml-[5px] text-sm">
-										<p>
-											Development of software for network optimisation of camera video streams in
-											particle accelerator tunnels, data visualizations for team activities.
-										</p>
-										<p class="font-bold">[C++, Javascript, Express, OpenStack, VueJs]</p>
-										<p class="italic text-xs">CERN (BE/CEM Service), Geneva, Switzerland</p>
-									</div>
-								</li>
-
-								<li>
-									<div class="inline-flex">
-										<p class="rounded-full bg-black w-[15px] h-[15px] mt-1" />
-										<p class="font-bold text-base pl-4">
-											2020 / CEA: Atomic Simulation - Internship (3 month)
-										</p>
-									</div>
-
-									<div class="border-l-4 border-black pl-6 ml-[5px] text-sm">
-										<p>
-											Analysis, development and documentation of Prismatic, an atomic simulation
-											software for scanning transmission electron microscopy.
-										</p>
-										<p class="font-bold">[C++, CMake, Python, Docker, HDF5, Qt]</p>
-										<p class="italic text-xs">CEA (LEMMA Service), Grenoble, France</p>
-									</div>
-								</li>
-
-								<li>
-									<div class="inline-flex">
-										<p class="rounded-full bg-black w-[15px] h-[15px] mt-1" />
-										<p class="font-bold text-base pl-4">
-											2019 / LEM: Data mining - Summer Job (4 weeks)
-										</p>
-									</div>
-
-									<div class="pl-6 ml-[10px]">
-										<span>
-											Development of IT tools for statistic analysis and data organization of the
-											wordwide production tests results.
-										</span>
-										<p class="italic text-xs">
-											LEM (Quality service), Plan-les-Ouates, Switzerland
-										</p>
-									</div>
-								</li>
+										<div class="border-l-4 border-black pl-6 ml-[5px] text-sm">
+											<p>
+												{@html item?.['details']}
+											</p>
+											<p class="font-bold">
+												{@html item?.['keywords']}
+											</p>
+											<p class="italic text-xs">
+												{@html item?.['place']}
+											</p>
+										</div>
+									</li>
+								{/each}
 							</ul>
 
-							<h2>EDUCATION AND QUALIFICATIONS</h2>
+							<h2>{@html getValue('education_title', pub, lang)}</h2>
 							<ul>
 								<li>
 									<div class="inline-flex">
@@ -191,22 +123,11 @@
 
 						<div class="flex-none w-[230px] p-6 h-full bg-[#ffffff]">
 							<div class="flex flex-col">
-								<img
-									class="rounded-full mb-5 mx-1 mt-1 w-[170px] h-[170px] object-cover object-top"
-									src="{base}/images/ProfilSumLogoLight.png"
-									width="170px"
-									height="170px"
-									alt="curriculum vitae avatar"
-								/>
-
-								<h2>CONTACTS</h2>
+								<h2>{@html getValue('contact_title', pub, lang)}</h2>
 
 								<div class="leading-normal flex flex-col text-sm">
 									<a href="mailto:mlhoutel@gmail.com">mlhoutel@gmail.com</a>
-									<a href="tel:+33781......">
-										+33 (0)7 81
-										<p class="align-middle mb-1 inline-flex w-[60px] h-[15px] bg-black" />
-									</a>
+									<a href="tel:+33......">{@html getValue('contact_phone', pub, lang)}</a>
 									<a href="https://maellhoutellier.com" class="underline">maellhoutellier.com</a>
 									<a href="https://github.com/mlhoutel" class="underline">github.com/mlhoutel</a>
 									<a href="https://gitlab.com/mlhoutel" class="underline">gitlab.com/mlhoutel</a>
@@ -220,7 +141,7 @@
 							</div>
 
 							<div>
-								<h2>LANGUAGES</h2>
+								<h2>{@html getValue('languages_title', pub, lang)}</h2>
 
 								<div class="leading-normal flex flex-col text-sm">
 									<div>
@@ -242,7 +163,7 @@
 
 					<div>
 						<div>
-							<h2>OPEN SOURCE PROJECTS</h2>
+							<h2>OPEN SOURCE & PERSONNAL PROJECTS</h2>
 							<ul>
 								<li>
 									<div>
@@ -276,6 +197,7 @@
 									</div>
 								</li>
 
+								<!--
 								<li>
 									<div>
 										<span class="text-base font-bold">
@@ -291,32 +213,40 @@
 										<span class="font-bold">[TypeScript, Sveltekit, Tailwind, AlphaTab]</span>
 									</div>
 								</li>
+								-->
+
+								<li>
+									<div>
+										<span class="text-base font-bold">
+											Godot Ecosystem Contributions & GDScript Modules Suite (WIP)
+										</span>
+									</div>
+
+									<div class="text-sm">
+										<span>
+											Developing typed GDScript libraries (orchestrator, input manager, physics
+											controllers, dependency injections framework),<br /> prototyped in a custom game
+											and 3D tool. Contributed bug reports and PRs to Godot Engine and related projects.
+										</span>
+										<br />
+										<span class="font-bold">
+											[Godot, Typed GDScript, Ecosystem development, 3D, Open Source]
+										</span>
+									</div>
+								</li>
 							</ul>
 						</div>
 					</div>
 
 					<div>
-						<h2>REFERENTS</h2>
+						<h2>{@html getValue('referents_title', pub, lang)}</h2>
 
-						<div>
-							<p class="align-middle mb-1 inline-flex w-[200px] h-[15px] bg-black" />
-							<span>(Manager, U IRIS)</span>
-						</div>
-
-						<div>
-							<p class="align-middle mb-1 inline-flex w-[200px] h-[15px] bg-black" />
-							<span>(Computing Engineer, CERN)</span>
-						</div>
-
-						<div>
-							<p class="align-middle mb-1 inline-flex w-[200px] h-[15px] bg-black" />
-							<span>(Physic researcher, CEA of Grenoble)</span>
-						</div>
-
-						<div>
-							<p class="align-middle mb-1 inline-flex w-[200px] h-[15px] bg-black" />
-							<span>(Manager, LEM)</span>
-						</div>
+						{#each getValue('referents_items', pub, lang) as referent}
+							<div class="py-1">
+								{@html referent?.['name']}
+								<span>{@html referent?.['role']}</span>
+							</div>
+						{/each}
 					</div>
 
 					<div>
@@ -324,35 +254,38 @@
 
 						<div>
 							<span class="text-base font-bold">Languages: </span>
-							<span>JavaScript, C++, Java, Python, Rust, Scala, Haskell, PHP, C#</span>
+							<span>
+								JavaScript, Typescript, C++, Java, Python, GDScript, Rust, Scala, Haskell, PHP, C#
+							</span>
 						</div>
 
 						<div>
 							<span class="text-base font-bold">Databases: </span>
-							<span>Postgres, MySQL, Oracle, Redis, MongoDB</span>
+							<span>PostgreSQL, MySQL, Oracle, Redis, MongoDB, Redis, Memcached, S3</span>
 						</div>
 
 						<div>
 							<span class="text-base font-bold">Frameworks: </span>
-							<span>VueJs, Angular, React, Laravel, Spring Boot</span>
+							<span>VueJs, React, Angular, Svelte, Laravel, Spring Boot, Quarkus, Flask</span>
 						</div>
 
 						<div>
 							<span class="text-base font-bold">Cloud: </span>
-							<span>GCP Solutions, Kubernetes, Terraform</span>
+							<span>GCP Solutions, AWS Solutions, K8s, Terraform, Docker, Ansible</span>
 						</div>
 
 						<div>
 							<span class="text-base font-bold">Tools: </span>
-							<span>Git, Docker, Jenkins, Jira, Github Actions, VSCode, Vim, IntelliJ</span>
+							<span>Git, Jenkins, Jira, Github Actions, VSCode, Vim, IntelliJ, WSL</span>
 						</div>
 					</div>
 
 					<div>
 						<h2>INTERESTS</h2>
-						<p>Rock climbing, Guitar, Running, Biking, Reading, Cooking, FOSS</p>
+						<p>Rock climbing, Mountaineering, Guitar, Running, Biking, Reading, Cooking, FOSS</p>
 					</div>
 
+					<!--
 					<div class="pt-5 inline-flex italic">
 						<p class="w-[60px] h-[15px] bg-black" />
 						<p class="pl-1">
@@ -360,6 +293,7 @@
 							Contact me!
 						</p>
 					</div>
+					-->
 				</div>
 			</div>
 		</div>

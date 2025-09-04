@@ -1,7 +1,7 @@
 import { fetchFiles } from '$utils/fetch';
 import { escapeThemePath } from '$utils/format';
 
-async function listArticles() {
+async function listArticles({ includeDrafts = false } = {}) {
 	const files = import.meta.glob('$content/articles/*.md');
 	const articles = await fetchFiles(files);
 
@@ -20,7 +20,9 @@ async function listArticles() {
 		})
 	);
 
-	const sorted = paths.sort((a, b) => {
+	const filtered = paths.filter((a) => includeDrafts || a.meta.published !== false);
+
+	const sorted = filtered.sort((a, b) => {
 		return new Date(b.meta.date) - new Date(a.meta.date);
 	});
 
