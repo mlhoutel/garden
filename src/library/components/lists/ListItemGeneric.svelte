@@ -8,7 +8,7 @@
 	<div class="block md:inline-flex">
 		<a
 			data-sveltekit-preload-code="hover"
-			href={item.path}
+			href={item.path.startsWith('/') ? item.path : '/' + item.path}
 			class="md:w-auto whitespace-nowrap text-clip text-2xl md:text-3xl font-serif horizontal-underline-animated transition-all dark:hover:[text-shadow:2px_2px_1px_black,2px_2px_1px_black,3px_3px_1px_black]"
 		>
 			{item.meta.title}
@@ -29,7 +29,7 @@
 
 	<a
 		data-sveltekit-preload-code="hover"
-		href={item.path}
+		href={item.path.startsWith('/') ? item.path : '/' + item.path}
 		class="underline-animated-block px-1 text-base"
 	>
 		✦ Explore content
