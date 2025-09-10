@@ -1,5 +1,6 @@
 <script>
 	import { browser } from '$app/environment';
+	import IFrame from '$components/global/IFrame.svelte';
 
 	function print() {
 		if (browser) {
@@ -40,14 +41,14 @@
 
 <div class="block mt-10 max-w-[100vw] overflow-auto">
 	<container id="cv" class="md:flex md:justify-center">
-		<iframe
-			title="curriculum"
-			src="https://mlhoutel-curriculum.vercel.app/"
-			width="100%"
-			height="600px"
-			style="border:none;"
-			class="A4 tracking-wider font-thin relative bg-white shadow-xl"
-		/>
+		<div class="A4 tracking-wider font-thin relative bg-white shadow-xl">
+			<IFrame
+				title="curriculum"
+				src="https://mlhoutel-curriculum.vercel.app/"
+				style=""
+				class="A4 tracking-wider font-thin relative bg-white shadow-xl"
+			/>
+		</div>
 	</container>
 </div>
 

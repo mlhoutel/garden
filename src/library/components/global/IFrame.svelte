@@ -2,6 +2,8 @@
 	import Loader from '$components/global/Loader.svelte';
 	export let src;
 	export let title;
+	export let fstyle = 'position: absolute; left: 0; height: 100%; width: 100%; border: none';
+	export let fclass = '';
 
 	let loading = true;
 </script>
@@ -23,6 +25,7 @@
 		{src}
 		{title}
 		loading="lazy"
-		style="position: absolute; left: 0; height: 100%; width: 100%; border: none"
+		style={fstyle}
+		class={fclass}
 	/>
 </div>
