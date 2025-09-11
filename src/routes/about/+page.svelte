@@ -2,6 +2,18 @@
 	import { browser } from '$app/environment';
 	import IFrame from '$components/global/IFrame.svelte';
 
+	let lang = 'en'; // default language
+
+	function toggleLang() {
+		lang = lang === 'en' ? 'fr' : 'en';
+	}
+
+	// compute the src URL based on selected language
+	$: iframeSrc =
+		lang === 'en'
+			? 'https://mlhoutel-curriculum.vercel.app/en'
+			: 'https://mlhoutel-curriculum.vercel.app/fr';
+
 	function print() {
 		if (browser) {
 			window.print();
@@ -27,16 +39,39 @@
 	}
 </script>
 
-<div id="print" class="sticky top-0 z-30 md:flex md:justify-center mb-[-140px] overflow-hidden">
+<div
+	id="print"
+	class="sticky top-0 mr-[-70px] z-30 md:flex md:justify-center mb-[-160px] overflow-hidden"
+>
 	<div class="w-full flex md:justify-end pb-10" style="width: 210mm">
 		<button
 			on:click={print}
-			class="overflow-hidden background-primary h-[70px] w-[70px] rounded-full mx-3 mt-10
+			class="overflow-hidden background-primary h-[70px] w-[70px] rounded-full mx-1 mt-3
            transition-all duration-300 ease-in-out
             hover:bg-gray-100 dark:hover:bg-gray-700 hover:shadow-lg"
 			style="box-shadow: rgba(0,0,0,0.5) 0px 3px 5px 0px;"
 		>
 			<i class="material-icons !text-3xl">print</i>
+		</button>
+
+		<button
+			on:click={toggleLang}
+			class="overflow-hidden background-primary h-[70px] w-[70px] rounded-full mx-1 mt-3
+             transition-all duration-300 ease-in-out
+             hover:bg-gray-100 dark:hover:bg-gray-700 hover:shadow-lg"
+			style="box-shadow: rgba(0,0,0,0.5) 0px 3px 5px 0px;"
+		>
+			<div class="relative w-full h-full flex items-center justify-center">
+				<!-- Fixed translation icon -->
+				<i class="material-icons !text-3xl">language</i>
+
+				<!-- Small language label overlay -->
+				<p
+					class="absolute bottom-2 right-1 font-bold text-lg background-primary rounded-sm font-mono tracking-[0.15em] px-1"
+				>
+					{lang === 'en' ? 'FR' : 'EN'}
+				</p>
+			</div>
 		</button>
 	</div>
 </div>
@@ -46,7 +81,7 @@
 		<div class="A4 tracking-wider font-thin relative bg-white shadow-xl">
 			<IFrame
 				title="curriculum"
-				src="https://mlhoutel-curriculum.vercel.app/"
+				src={iframeSrc}
 				style=""
 				class="A4 tracking-wider font-thin relative bg-white shadow-xl"
 			/>
