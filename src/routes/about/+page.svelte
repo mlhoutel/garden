@@ -62,10 +62,7 @@
 			style="box-shadow: rgba(0,0,0,0.5) 0px 3px 5px 0px;"
 		>
 			<div class="relative w-full h-full flex items-center justify-center">
-				<!-- Fixed translation icon -->
 				<i class="material-icons !text-3xl">language</i>
-
-				<!-- Small language label overlay -->
 				<p
 					class="absolute bottom-2 right-1 font-bold text-lg background-primary rounded-sm font-mono tracking-[0.15em] px-1"
 				>
