@@ -4,15 +4,17 @@
 	"author": "Maël Lhoutellier <mlhoutel@gmail.com>",
 	"license": "MPL",
 	"scripts": {
-		"start": "vite dev",
-		"build": "vite build",
+		"start": "npm run assets && vite dev",
+		"build": "npm run assets && vite build",
 		"package": "vite package",
 		"preview": "vite preview",
 		"lint": "prettier --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
 		"format": "prettier --write --plugin-search-dir=. .",
-		"content:init": "git submodule update --init --recursive",
-		"content:update": "git submodule update --remote --merge",
-		"content:status": "git submodule status",
+  		"submodule": "sh scripts/init-submodule.sh",
+  		"assets": "sh scripts/copy-assets.sh",
+		"content:init": "npm run submodule -- update --init --recursive && npm run assets",
+		"content:update": "npm run submodule -- update --remote --merge && npm run assets",
+		"content:status": "npm run submodule -- status",
 		"setup": "npm install && npm run content:init"
 	},
 	"devDependencies": {

@@ -4,8 +4,9 @@ node_modules
 /.svelte-kit
 /build
 /functions
-
-# Content is managed via submodule
-# (but we keep the submodule reference)
+.env
 src/content/*
 !src/content/.gitkeep
+static/assets/*
+!static/assets/.gitkeep
+
