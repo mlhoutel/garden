@@ -1,4 +1,15 @@
 {
+  "git": {
+    "deploymentEnabled": {
+      "main": true
+    }
+  },
+  "github": {
+    "silent": false,
+    "autoAlias": true
+  },
+  "buildCommand": "npm run build",
+  "installCommand": "npm run setup",
   "routes": [
     { "handle": "filesystem" },
     { "src": "/about", "dest": "/about.html" },

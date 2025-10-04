@@ -9,7 +9,11 @@
 		"package": "vite package",
 		"preview": "vite preview",
 		"lint": "prettier --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
-		"format": "prettier --write --plugin-search-dir=. ."
+		"format": "prettier --write --plugin-search-dir=. .",
+		"content:init": "git submodule update --init --recursive",
+		"content:update": "git submodule update --remote --merge",
+		"content:status": "git submodule status",
+		"setup": "npm install && npm run content:init"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^2.1.0",
