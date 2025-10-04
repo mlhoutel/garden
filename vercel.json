@@ -8,7 +8,7 @@
     "silent": false,
     "autoAlias": true
   },
-  "buildCommand": "./vercel-build.sh",
+  "buildCommand": "npm run build",
   "installCommand": "npm run setup",
   "routes": [
     { "handle": "filesystem" },

@@ -156,6 +156,11 @@ import seedrandom from 'seedrandom';
 function makeGraph(list) {
 	const { nodes, edges } = generateNodes(list);
 
+	for (const edge of edges) {
+		if (!edge?.nodeA || !edge?.nodeB) {
+			console.log({ edge });
+		}
+	}
 	const random = new seedrandom('WhYVgpjCm0ToYmfJz8Lt');
 
 	// randomize initial positions

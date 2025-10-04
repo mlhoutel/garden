@@ -1,3 +1,5 @@
 [submodule "src/content"]
 	path = src/content
-	url = git@github.com:mlhoutel/garden-content.git
+	url = ${CONTENT_SUBMODULE_URL}
+[submodule "content"]
+	url = https://github.com/mlhoutel/garden-content
