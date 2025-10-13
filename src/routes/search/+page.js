@@ -1,10 +1,18 @@
 import { base } from '$app/paths';
 
 export const load = async ({ fetch }) => {
-	const articles = await fetch(`${base}/api/articles`);
-	const sheets = await fetch(`${base}/api/sheets`);
+	const res = await fetch(`${base}/api/sections`);
+	const sections = await res.json();
 
-	const responses = [...(await articles.json()), ...(await sheets.json())];
+	const results = await Promise.all(
+		sections.map(async (section) => {
+			const res = await fetch(`${base}/api/${section}`);
+			return res.ok ? await res.json() : [];
+		})
+	);
 
-	return { content: responses };
+	// Flatten all pages from all sections
+	const content = results.flat();
+
+	return { content };
 };

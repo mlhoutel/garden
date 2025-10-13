@@ -2,7 +2,6 @@
 	export let data;
 
 	import { base } from '$app/paths';
-
 	import IFrame from '$components/global/IFrame.svelte';
 </script>
 
@@ -11,7 +10,6 @@
 		<div style="height: 100vh; width: 100vw; border: none">
 			<IFrame src={data.iframe} title="iframe" />
 		</div>
-
 		<div style="height: 50px; width: 100%" />
 	{/if}
 
@@ -41,18 +39,21 @@
 
 	<div class="w-full flex space-x-3">
 		<a
-			href="{base}/articles"
+			href="{base}/{data.section}"
 			class="underline-animated-block py-1 flex-1 text-center text-sm md:text-base truncate"
 			data-sveltekit-preload-code="hover"
 		>
-			<span class="truncate">⏹ List of articles</span>
+			<span class="truncate">⏹ List of {data.section}</span>
 		</a>
-		<a
-			href="{base}/{data.next?.path}"
-			class="underline-animated-block py-1 flex-1 text-center text-sm md:text-base"
-			data-sveltekit-preload-code="hover"
-		>
-			<span class="truncate">▶ Next: {data.next?.meta?.title}</span>
-		</a>
+
+		{#if data.next}
+			<a
+				href="{base}/{data.next.path}"
+				class="underline-animated-block py-1 flex-1 text-center text-sm md:text-base"
+				data-sveltekit-preload-code="hover"
+			>
+				<span class="truncate">▶ Next: {data.next.meta.title}</span>
+			</a>
+		{/if}
 	</div>
 </article>

@@ -73,11 +73,6 @@
 </script>
 
 <div class="w-[300px]">
-	<div class="pills">
-		{#each selected as topic}
-			<TopicPill disabled={true} {topic} on:click={selectClick} removable={true} />
-		{/each}
-	</div>
 	<div class="select-search">
 		<i class="material-icons !text-xl">filter_alt</i>
 		<input
@@ -91,6 +86,11 @@
 			on:keypress={inputPress}
 			class="select-input"
 		/>
+	</div>
+	<div class="pills">
+		{#each selected as topic}
+			<TopicPill disabled={true} {topic} on:click={selectClick} removable={true} />
+		{/each}
 	</div>
 
 	{#if dropdown}

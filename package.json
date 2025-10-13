@@ -4,18 +4,20 @@
 	"author": "Maël Lhoutellier <mlhoutel@gmail.com>",
 	"license": "MPL",
 	"scripts": {
-		"start": "npm run assets && vite dev",
-		"build": "npm run assets && vite build",
+		"start": "npm run preprocess && vite dev",
+		"build": "npm run preprocess && vite build",
 		"package": "vite package",
 		"preview": "vite preview",
 		"lint": "prettier --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
 		"format": "prettier --write --plugin-search-dir=. .",
-  		"submodule": "sh scripts/init-submodule.sh",
-  		"assets": "sh scripts/copy-assets.sh",
-		"content:init": "npm run submodule -- update --init --recursive && npm run assets",
-		"content:update": "npm run submodule -- update --remote --merge && npm run assets",
-		"content:status": "npm run submodule -- status",
-		"setup": "npm install && npm run content:init"
+		"content:init": "npm run content:submodule && git submodule update --init --recursive",
+		"content:update": "git submodule update --remote --merge",
+		"content:status": "git submodule status",
+		"content:build": "node scripts/build-content.js",
+		"content:manifest": "node scripts/build-manifest.js",
+		"content:submodule": "node scripts/setup-submodule.js",
+		"preprocess": "npm run content:update && npm run content:build && npm run content:manifest",
+		"setup": "npm install && npm run content:init && npm run preprocess"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^2.1.0",
@@ -42,11 +44,9 @@
 		"svelte-preprocess": "^5.0.4",
 		"tailwindcss": "^3.3.2",
 		"uuid": "^9.0.0",
-		"vite": "^4.3.9"
+		"vite": "^4.3.9",
+		"yaml": "^2.8.1",
+		"gray-matter": "^4.0.3"
 	},
-	"type": "module",
-	"dependencies": {
-		"jsxgraph": "^1.5.0",
-		"p5": "^1.6.0"
-	}
+	"type": "module"
 }

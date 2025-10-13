@@ -1,5 +1,5 @@
 <script>
-	import { base } from '$app/paths';
+	export let linksItems;
 
 	let y;
 
@@ -8,15 +8,6 @@
 	}
 
 	const year = new Date().getFullYear();
-
-	export function getFooterItems() {
-		return [
-			{ label: 'home', link: `${base}/` },
-			{ label: 'articles', link: `${base}/articles` },
-			{ label: 'sheets', link: `${base}/sheets` },
-			{ label: 'about', link: `${base}/about` }
-		];
-	}
 </script>
 
 <svelte:window bind:scrollY={y} />
@@ -40,7 +31,7 @@
 			<h4>Navigation</h4>
 
 			<ul class="list-none">
-				{#each getFooterItems() as item}
+				{#each linksItems as item}
 					<li class="block text-left">
 						<a
 							class="text-base underline-animated-block"

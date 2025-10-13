@@ -1,4 +1,6 @@
 <script>
+	export let data;
+
 	import '$styles/layout.scss';
 	import '$styles/markdown.scss';
 	import 'material-icons/iconfont/material-icons.css';
@@ -57,12 +59,12 @@
 </svelte:head>
 
 <body class="background-primary">
-	<Header />
+	<Header linksItems={data.headerLinks} />
 	<Loader bind:loading />
 
 	<main>
 		<slot><!-- content --></slot>
 	</main>
 
-	<Footer />
+	<Footer linksItems={data.footerLinks} />
 </body>

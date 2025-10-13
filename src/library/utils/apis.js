@@ -1,49 +1,65 @@
-import { fetchFiles } from '$utils/fetch';
-import { escapeThemePath } from '$utils/format';
+import pagesManifest from '$meta/manifest.json';
+import { base } from '$app/paths';
 
-async function listArticles({ includeDrafts = false } = {}) {
-	const files = import.meta.glob('$content/articles/*.md');
-	const articles = await fetchFiles(files);
+export async function listPages(section, { includeDrafts = false } = {}) {
+	const pages = pagesManifest.filter((p) => p.section === section);
 
-	const paths = await Promise.all(
-		articles.map(async (e) => {
-			const count = e.html
-				.replace(/<[^>]*>/g, '')
-				.split(/\s+/)
-				.filter((word) => word.length > 0).length;
+	return pages
+		.map((e) => {
+			const meta = { ...e.meta };
+			const parts = e.path.split('/');
+			const subsection = parts[1]; // section/subsection/file.md
+			const slug = parts[2]?.replace(/\.md$/, '');
+
+			const wordCount = e.html
+				?.replace(/<[^>]*>/g, '')
+				?.split(/\s+/)
+				?.filter((w) => w.length > 0).length;
 
 			return {
-				meta: { ...e.meta, words: count },
-				path: e.path.slice(2), // remove t/ in path
-				file: e.path.slice(2) // remove t/ in path
+				...e,
+				meta: { ...meta, words: wordCount },
+				section,
+				subsection,
+				slug,
+				path: e.path?.replace(/\.md$/, '')
 			};
 		})
-	);
-
-	const filtered = paths.filter((a) => includeDrafts || a.meta.published !== false);
-
-	const sorted = filtered.sort((a, b) => {
-		return new Date(b.meta.date) - new Date(a.meta.date);
-	});
-
-	return sorted;
+		.filter((p) => includeDrafts || p.meta.published !== false)
+		.sort((a, b) => new Date(b.meta.date) - new Date(a.meta.date));
 }
 
-async function listSheets() {
-	const files = import.meta.glob('$content/sheets/**/*.md');
-	const sheets = await fetchFiles(files);
+export async function getLinksItems(fetch) {
+	const links = [
+		{ label: 'home', link: `${base}/` },
+		{ label: 'about', link: `${base}/about` }
+	];
 
-	const paths = sheets.map((e) => ({
-		...e,
-		path: escapeThemePath(e.path.slice(2)), // remove t/ in path
-		file: e.path.slice(2)
-	}));
+	try {
+		const res = await fetch(`${base}/api/sections`);
+		if (res.ok) {
+			const sections = await res.json();
+			sections.forEach((section) => {
+				links.splice(1, 0, {
+					label: section,
+					link: `${base}/${section}`
+				});
+			});
+		}
+	} catch (err) {
+		console.error('Failed to fetch sections for navigation', err);
+	}
 
-	const sorted = paths.sort((a, b) => {
-		return new Date(b.meta.date) - new Date(a.meta.date);
+	links.sort((a, b) => {
+		const aNum = parseInt(a);
+		const bNum = parseInt(b);
+
+		if (!isNaN(aNum) && !isNaN(bNum)) return bNum - aNum; // numeric descending
+		if (!isNaN(aNum)) return -1; // numbers before text
+		if (!isNaN(bNum)) return 1; // numbers before text
+
+		return String(a).localeCompare(String(b));
 	});
 
-	return sorted;
+	return links;
 }
-
-export { listArticles, listSheets };

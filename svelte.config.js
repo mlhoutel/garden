@@ -1,6 +1,12 @@
+import fs from 'fs';
+import path from 'path';
+
 import preprocess from 'svelte-preprocess';
 import { mdsvex } from 'mdsvex';
 import mdsvexConfig from './mdsvex.config.js';
+
+const manifestPath = path.resolve('./src/meta/manifest.json');
+const pagesManifest = JSON.parse(fs.readFileSync(manifestPath, 'utf-8'));
 
 /*
 // DYNAMIC DEPLOYEMENT
@@ -26,6 +32,18 @@ const config = {
 			strict: false,
 			fallback: 'error.html'
 		})
+		/*
+		prerender: {
+			entries: ['*'],
+			handleHttpError: ({ path, referrer, message }) => {
+				if (message.includes('404')) {
+					console.warn(`⚠️  Skipping prerender of missing page: ${path} (linked from ${referrer})`);
+					return; // ignore missing routes during crawl
+				}
+				throw new Error(message);
+			}
+		}
+		*/
 		// paths: { base: base }
 	}
 };

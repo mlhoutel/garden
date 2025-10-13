@@ -13,8 +13,6 @@
   "routes": [
     { "handle": "filesystem" },
     { "src": "/about", "dest": "/about.html" },
-    { "src": "/articles", "dest": "/articles.html" },
-    { "src": "/sheets", "dest": "/sheets.html" },
     { "src": "/search", "dest": "/search.html" },
     { "src": "/(.*)", "dest": "/error.html" }
   ]

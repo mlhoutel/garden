@@ -1,12 +1,16 @@
 import { json } from '@sveltejs/kit';
 import { makeGraph } from '$utils/graph.js';
-import { listArticles, listSheets } from '$utils/apis';
+import { listPages } from '$utils/apis';
+import pagesManifest from '$meta/manifest.json';
 
 export const GET = async () => {
-	const articles = await listArticles();
-	const sheets = await listSheets();
+	const sections = [...new Set(pagesManifest.map((p) => p.section))];
 
-	const topics = [...articles, ...sheets].map((s) => s.meta.topic?.split(' ') || []);
+	const pages = (
+		await Promise.all(sections.map(async (section) => await listPages(section)))
+	).flat();
+
+	const topics = [...pages].map((s) => s.meta.topic?.split(' ') || []);
 
 	const { nodes, edges } = makeGraph(topics);
 

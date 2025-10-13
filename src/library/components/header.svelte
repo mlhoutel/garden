@@ -3,6 +3,8 @@
 
 	import { base } from '$app/paths';
 
+	export let linksItems;
+
 	// True for dark, false for light
 	let theme;
 
@@ -17,14 +19,6 @@
 		} else {
 			document.documentElement.classList.remove('dark');
 		}
-	}
-
-	export function getMenuItems() {
-		return [
-			{ label: 'Articles', link: `${base}/articles` },
-			{ label: 'Sheets', link: `${base}/sheets` },
-			{ label: 'About', link: `${base}/about` }
-		];
 	}
 </script>
 
@@ -53,7 +47,7 @@
 		<div
 			class="md:anti-skewed text-lg pt-[5px] mt-10 md:ml-[125px] md:mt-0 overflow-hidden background-primary md:background-dark"
 		>
-			{#each getMenuItems() as item}
+			{#each linksItems as item}
 				<a
 					data-sveltekit-preload-code="hover"
 					href={item.link}

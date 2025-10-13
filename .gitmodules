@@ -1,5 +1,3 @@
-[submodule "src/content"]
-	path = src/content
-	url = ${CONTENT_SUBMODULE_URL}
-[submodule "content"]
-	url = https://github.com/mlhoutel/garden-content
+[submodule "database"]
+	path = database
+	url = https://github.com/mlhoutel/obsidian
