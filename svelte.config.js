@@ -1,4 +1,5 @@
-import preprocess from 'svelte-preprocess';
+import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
+import path from 'path';
 
 /*
 // DYNAMIC DEPLOYEMENT
@@ -18,12 +19,26 @@ const base = dev ? '' : '/garden'
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	extensions: ['.svelte'],
-	preprocess: [preprocess()],
+	preprocess: vitePreprocess(),
 	kit: {
 		adapter: adapter({
 			strict: false,
 			fallback: 'error.html'
-		})
+		}),
+
+		alias: {
+			$images: path.resolve('static/images'),
+			$logos: path.resolve('static/logos'),
+			$meta: path.resolve('src/meta'),
+			$routes: path.resolve('src/routes'),
+			$content: path.resolve('src/content'),
+			$components: path.resolve('src/library/components'),
+			$styles: path.resolve('src/library/styles'),
+			$utils: path.resolve('src/library/utils'),
+			$library: path.resolve('src/library'),
+			$types: path.resolve('src/library/types')
+		}
+
 		/*
 		prerender: {
 			entries: ['*'],

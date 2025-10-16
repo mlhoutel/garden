@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import { base } from '$app/paths';
 	export let data;
 
@@ -24,18 +24,18 @@
 		</div>
 
 		<div class="mb-[-10px]">
-			<p class="text-xs italic text-center">
+			<p class="text-center text-xs italic">
 				click on a topic below to see the list of associated content
 			</p>
 		</div>
-		<div class="p-5 columns-2 md:columns-5">
+		<div class="columns-2 p-5 md:columns-5">
 			{#each data.nodes.sort((a, b) => b.count - a.count) as node}
 				<div>
 					<a
 						href="{base}/search?topics={node.label}"
-						class="horizontal-underline-animated text-sm pl-0 hover:pl-1 transition-all duration-300 py-0 hover:text-black"
+						class="horizontal-underline-animated py-0 pl-0 text-sm transition-all duration-300 hover:pl-1 hover:text-black"
 					>
-						<span class="underline text-sm">[ {node.count} ]</span>
+						<span class="text-sm underline">[ {node.count} ]</span>
 						{node.label}
 					</a>
 				</div>

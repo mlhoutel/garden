@@ -1,12 +1,17 @@
 import { error } from '@sveltejs/kit';
 import { listPages } from '$utils/apis';
 import { renderMarkdown } from '$utils/markdown';
+import type { Page, PageLoadReturn } from '$types/types';
 
-export async function load({ params }) {
+export async function load({
+	params
+}: {
+	params: { section: string; subsection: string; slug: string };
+}): Promise<PageLoadReturn> {
 	const { section, subsection, slug } = params;
 
 	// Get all pages in this section
-	const pages = await listPages(section);
+	const pages: Page[] = await listPages(section);
 
 	// Find the page by subsection + slug
 	const page = pages.find((p) => p.path === `${section}/${subsection}/${slug}`);

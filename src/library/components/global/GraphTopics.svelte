@@ -1,11 +1,20 @@
-<script>
-	export let nodes = [];
-	export let edges = [];
+<script lang="ts">
+	import type { Node, Edge } from '$types/types';
+
+	export let nodes: Node[] = [];
+	export let edges: Edge[] = [];
 
 	const OUTER_PADDING = 20;
 
-	const computeViewBox = () => {
-		const bounds = { x1: 999999, y1: 9999999, x2: 0, y2: 0 };
+	interface Bounds {
+		x1: number;
+		y1: number;
+		x2: number;
+		y2: number;
+	}
+
+	const computeViewBox = (): Bounds => {
+		const bounds: Bounds = { x1: 999999, y1: 9999999, x2: 0, y2: 0 };
 
 		for (const node of nodes) {
 			if (node.pos.x > bounds.x2) bounds.x2 = node.pos.x;
@@ -22,6 +31,7 @@
 		return bounds;
 	};
 
+	// Reactive statement
 	$: view_box = computeViewBox();
 </script>
 

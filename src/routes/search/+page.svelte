@@ -1,5 +1,5 @@
-<script>
-	import { searchDecodeUrl, searchEncodeUrl } from '$utils/format.js';
+<script lang="ts">
+	import { searchDecodeUrl, searchEncodeUrl } from '$utils/format';
 	import { page } from '$app/stores';
 	import { base } from '$app/paths';
 	import { goto } from '$app/navigation';
@@ -7,23 +7,27 @@
 
 	import TopicSelect from '$components/global/TopicSelect.svelte';
 	import TreeList from '$components/lists/TreeList.svelte';
+	import type { Page } from '$types/types';
 
-	export let data;
+	export let data: { content?: Page[] };
 
-	let results = [];
-	let topics = [];
-	let filters = {};
+	type Filters = {
+		topics: string[];
+		words?: string[];
+	};
 
-	$: {
-		if (browser) {
-			search($page.url);
-		}
+	let results: Page[] = [];
+	let topics: string[] = [];
+	let filters: Filters = { topics: [], words: [] };
+
+	$: if (browser) {
+		search($page.url);
 	}
 
-	async function search(url) {
-		filters = searchDecodeUrl(url, { topics: [], words: [] });
+	async function search(url: URL) {
+		filters = searchDecodeUrl(url, { topics: [], words: [] }) as Filters;
 
-		const content = data.content ?? [];
+		const content: Page[] = data.content ?? [];
 
 		results = content.filter((e) => {
 			const hasTopics = filters.topics.reduce(
@@ -33,10 +37,10 @@
 			return hasTopics;
 		});
 
-		topics = [...new Set(results.map((e) => e.meta.topic.split(' ')).flat())];
+		topics = [...new Set(results.map((e) => e.meta.topic?.split(' ') ?? []).flat())];
 	}
 
-	function topicSelectionChanges(event) {
+	function topicSelectionChanges(event: CustomEvent<Set<string>>) {
 		filters.topics = [...event.detail];
 		goto(`${base}${$page.url.pathname}?${searchEncodeUrl(filters)}`);
 	}
@@ -59,7 +63,7 @@
 		/>
 	</div>
 
-	<p class="text-center content-center text-sm pb-10">
+	<p class="content-center pb-10 text-center text-sm">
 		[ {results.length} entries founds for the current search... ]
 	</p>
 

@@ -1,12 +1,14 @@
-<script>
-	export let loading;
+<script lang="ts">
+	import type { LoadingBarProps } from '$types/types';
+
+	export let loading: LoadingBarProps['loading'] = false;
 </script>
 
-<div class="w-full h-[3px] relative overflow-hidden">
+<div class="relative h-[3px] w-full overflow-hidden">
 	{#if loading}
 		<div
-			class="h-full bg-orange absolute top-0 left-0"
-			style={`animation: loading 0.5s ease-out; ${loading ? 'width: 100%' : 'width:100%'}`}
+			class="absolute left-0 top-0 h-full bg-orange"
+			style={`animation: loading 0.5s ease-out; width: 100%`}
 		>
 			.
 		</div>

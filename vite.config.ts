@@ -1,9 +1,10 @@
+import tailwindcss from '@tailwindcss/vite';
 import { sveltekit } from '@sveltejs/kit/vite';
+import { defineConfig } from 'vite';
 import path from 'path';
 
-/** @type {import('vite').UserConfig} */
-const config = {
-	plugins: [sveltekit()],
+export default defineConfig({
+	plugins: [tailwindcss(), sveltekit()],
 	assetsInclude: ['**/*.md'],
 	resolve: {
 		alias: {
@@ -15,7 +16,8 @@ const config = {
 			$components: path.resolve('src/library/components'),
 			$styles: path.resolve('src/library/styles'),
 			$utils: path.resolve('src/library/utils'),
-			$library: path.resolve('src/library')
+			$library: path.resolve('src/library'),
+			$types: path.resolve('src/library/types')
 		}
 	},
 	server: {
@@ -26,6 +28,4 @@ const config = {
 		port: 3000,
 		strictPort: false
 	}
-};
-
-export default config;
+});

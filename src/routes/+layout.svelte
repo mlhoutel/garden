@@ -1,11 +1,15 @@
-<script>
-	export let data;
+<script lang="ts">
+	import type { LinkItem } from '$types/types';
+
+	export let data: {
+		headerLinks: LinkItem[];
+		footerLinks: LinkItem[];
+	};
 
 	import '$styles/layout.scss';
 	import '$styles/markdown.scss';
 	import 'material-icons/iconfont/material-icons.css';
 	import { afterNavigate, beforeNavigate } from '$app/navigation';
-
 	import { onMount } from 'svelte';
 	import { base } from '$app/paths';
 
@@ -22,18 +26,18 @@
 		link.integrity = 'sha384-3UiQGuEI4TTMaFmGIZumfRPtfKQ3trwQE2JgosJxCnGmQpL/lJdjpcHkaaFwHlcI';
 		link.crossOrigin = 'anonymous';
 
-		await new Promise((resolve, reject) => {
-			link.onload = resolve;
-			link.onerror = reject;
+		await new Promise<void>((resolve, reject) => {
+			link.onload = () => resolve();
+			link.onerror = () => reject();
 			document.head.appendChild(link);
 		});
 	});
 
-	beforeNavigate((e) => {
+	beforeNavigate(() => {
 		loading = true;
 	});
 
-	afterNavigate((e) => {
+	afterNavigate(() => {
 		loading = false;
 	});
 </script>

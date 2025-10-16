@@ -1,7 +1,15 @@
-<script>
+<script lang="ts">
+	import type { Page } from '@sveltejs/kit';
 	import { page } from '$app/stores';
+	import { get } from 'svelte/store';
 
-	function preformat(page) {
+	interface ErrorInfo {
+		status: number;
+		short: string;
+		message: string;
+	}
+
+	function preformat(page: Page): ErrorInfo {
 		switch (page.status) {
 			case 404:
 				return {
@@ -13,29 +21,29 @@
 				return {
 					status: page.status,
 					short: 'Sorry, something went wrong.',
-					message: page.error.message
+					message: page.error?.message ?? 'Unknown error'
 				};
 		}
 	}
 
-	const { status, short, message } = preformat($page);
+	const { status, short, message } = preformat(get(page));
 </script>
 
 <main
-	class="flex justify-center items-center px-3 pt-[100px] md:pt-[300px] pb-[100px] md:pb-[300px]"
+	class="flex items-center justify-center px-3 pb-[100px] pt-[100px] md:pb-[300px] md:pt-[300px]"
 >
 	<div class="flex flex-col justify-center">
 		<span class="inline-flex items-center justify-center">
 			<h1 class="text-4xl md:text-9xl">{status}</h1>
-			<p class="h-[50px] md:h-[130px] w-[1px] border-r-[1px] border-orange mx-2 md:mx-10" />
+			<p class="mx-2 h-[50px] w-[1px] border-r-[1px] border-orange md:mx-10 md:h-[130px]"></p>
 			<h2 class="text-2xl md:text-6xl">{short}</h2>
 		</span>
 
 		<p class="p-5">{message}</p>
 
-		<div class="w-full flex space-x-3">
+		<div class="flex w-full space-x-3">
 			<a
-				class="underline-animated-block py-1 flex-1 text-center text-sm md:text-base truncate"
+				class="underline-animated-block flex-1 truncate py-1 text-center text-sm md:text-base"
 				href="/"
 				data-sveltekit-preload-code="hover"
 			>
@@ -43,7 +51,7 @@
 			</a>
 			<a
 				href="https://github.com/mlhoutel/garden/issues"
-				class="underline-animated-block py-1 flex-1 text-center text-sm md:text-base"
+				class="underline-animated-block flex-1 py-1 text-center text-sm md:text-base"
 			>
 				<span class="truncate">⚠ Report issue</span>
 			</a>

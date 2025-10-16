@@ -1,5 +1,7 @@
-<script>
-	export let data;
+<script lang="ts">
+	import type { PageMeta } from '$types/types';
+
+	export let data: PageMeta;
 
 	import { base } from '$app/paths';
 	import IFrame from '$components/global/IFrame.svelte';
@@ -10,14 +12,14 @@
 		<div style="height: 100vh; width: 100vw; border: none">
 			<IFrame src={data.iframe} title="iframe" />
 		</div>
-		<div style="height: 50px; width: 100%" />
+		<div style="height: 50px; width: 100%"></div>
 	{/if}
 
 	<h1>{data.title}</h1>
 
-	<div class="md:flex md:flex-row flex-col pt-5">
+	<div class="flex-col pt-5 md:flex md:flex-row">
 		<div class="w-[200px] px-1">
-			<a href="https://github.com/mlhoutel" class="text-sm underline-animated-block"> mlhoutel </a>
+			<a href="https://github.com/mlhoutel" class="underline-animated-block text-sm"> mlhoutel </a>
 			<span class="text-sm">
 				{new Date(data.date).toLocaleDateString('en-US', {
 					month: 'short',
@@ -29,18 +31,18 @@
 
 		<div class="pills w-full md:justify-end">
 			<p class="pill">{data.words} words</p>
-			<p class="pill">{Math.ceil(data.words / 160)} minutes read</p>
+			<p class="pill">{Math.ceil(data?.words ?? 0 / 160)} minutes read</p>
 		</div>
 	</div>
 
-	<div class="py-10 px-1">
+	<div class="px-1 py-10">
 		{@html data.content}
 	</div>
 
-	<div class="w-full flex space-x-3">
+	<div class="flex w-full space-x-3">
 		<a
 			href="{base}/{data.section}"
-			class="underline-animated-block py-1 flex-1 text-center text-sm md:text-base truncate"
+			class="underline-animated-block flex-1 truncate py-1 text-center text-sm md:text-base"
 			data-sveltekit-preload-code="hover"
 		>
 			<span class="truncate">⏹ List of {data.section}</span>
@@ -49,7 +51,7 @@
 		{#if data.next}
 			<a
 				href="{base}/{data.next.path}"
-				class="underline-animated-block py-1 flex-1 text-center text-sm md:text-base"
+				class="underline-animated-block flex-1 py-1 text-center text-sm md:text-base"
 				data-sveltekit-preload-code="hover"
 			>
 				<span class="truncate">▶ Next: {data.next.meta.title}</span>

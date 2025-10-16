@@ -1,8 +1,14 @@
 import pagesManifest from '$meta/manifest.json';
 import { base } from '$app/paths';
+import type { PageManifestEntry, Page, LinkItem, ListPagesOptions } from '$types/types';
 
-export async function listPages(section, { includeDrafts = false } = {}) {
-	const pages = pagesManifest.filter((p) => p.section === section);
+/**
+ * List pages in a given section
+ */
+export async function listPages(section?: string, options: ListPagesOptions = {}): Promise<Page[]> {
+	const { includeDrafts = false } = options;
+
+	const pages = (pagesManifest as PageManifestEntry[]).filter((p) => p.section === section);
 
 	return pages
 		.map((e) => {
@@ -22,15 +28,18 @@ export async function listPages(section, { includeDrafts = false } = {}) {
 				section,
 				subsection,
 				slug,
-				path: e.path?.replace(/\.md$/, '')
-			};
+				path: e.path.replace(/\.md$/, '')
+			} as Page;
 		})
 		.filter((p) => includeDrafts || p.meta.published !== false)
-		.sort((a, b) => new Date(a.meta.date) - new Date(b.meta.date));
+		.sort((a, b) => new Date(a.meta.date).getTime() - new Date(b.meta.date).getTime());
 }
 
-export async function getLinksItems(fetch) {
-	const links = [
+/**
+ * Get navigation link items dynamically
+ */
+export async function getLinksItems(fetch: typeof window.fetch): Promise<LinkItem[]> {
+	const links: LinkItem[] = [
 		{ label: 'home', link: `${base}/` },
 		{ label: 'about', link: `${base}/about` }
 	];
@@ -38,7 +47,7 @@ export async function getLinksItems(fetch) {
 	try {
 		const res = await fetch(`${base}/api/sections`);
 		if (res.ok) {
-			const sections = await res.json();
+			const sections: string[] = await res.json();
 			sections.forEach((section) => {
 				links.splice(1, 0, {
 					label: section,
@@ -51,14 +60,14 @@ export async function getLinksItems(fetch) {
 	}
 
 	links.sort((a, b) => {
-		const aNum = parseInt(a);
-		const bNum = parseInt(b);
+		const aNum = parseInt(a.label);
+		const bNum = parseInt(b.label);
 
 		if (!isNaN(aNum) && !isNaN(bNum)) return bNum - aNum; // numeric descending
 		if (!isNaN(aNum)) return -1; // numbers before text
 		if (!isNaN(bNum)) return 1; // numbers before text
 
-		return String(b).localeCompare(String(a));
+		return b.label.localeCompare(a.label);
 	});
 
 	return links;

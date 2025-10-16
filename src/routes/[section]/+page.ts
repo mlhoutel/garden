@@ -2,23 +2,25 @@ import { error } from '@sveltejs/kit';
 import { deepInsert, convertNode } from '$utils/tree';
 import { listPages } from '$utils/apis';
 import { toUpper } from '$utils/format';
+import type { Page, SectionLoadReturn } from '$types/types';
 
-/** @type {import('./$types').PageLoad} */
-export const load = async ({ params }) => {
+export const load = async ({
+	params
+}: {
+	params: { section?: string };
+}): Promise<SectionLoadReturn> => {
 	const { section } = params;
 
-	if (!section) {
-		throw error(404, 'Section not found');
-	}
+	if (!section) throw error(404, 'Section not found');
 
 	// Fetch all pages in this section
-	const pages = await listPages(section);
+	const pages: Page[] = await listPages(section);
 
 	// Build tree for navigation
-	const tree = {};
+	const tree: Record<string, any> = {};
 	for (const page of pages) {
-		const splited = [page.subsection, page];
-		deepInsert(tree, splited);
+		const path = [page.subsection, page];
+		deepInsert(tree, path);
 	}
 
 	const convertedTree = convertNode(tree);

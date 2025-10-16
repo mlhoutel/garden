@@ -1,4 +1,3 @@
-// src/utils/markdown.js
 import { unified } from 'unified';
 import remarkParse from 'remark-parse';
 import remarkFrontmatter from 'remark-frontmatter';
@@ -17,13 +16,25 @@ import rehypeStringify from 'rehype-stringify';
 import rehypeMermaid from './mermaid';
 
 /**
- * Render Markdown into HTML using unified (remark + rehype)
- * @param {string} markdown - The markdown source text
- * @param {object} [options]
- * @param {string} [options.path] - Path for citation plugin context
- * @returns {Promise<string>} - HTML string
+ * Options for rendering Markdown
  */
-export async function renderMarkdown(markdown, { path } = {}) {
+export interface RenderMarkdownOptions {
+	/** Optional path for citation plugin context */
+	path?: string;
+}
+
+/**
+ * Render Markdown into HTML using unified (remark + rehype)
+ * @param markdown - The markdown source text
+ * @param options - Optional rendering options
+ * @returns HTML string
+ */
+export async function renderMarkdown(
+	markdown: string,
+	options: RenderMarkdownOptions = {}
+): Promise<string> {
+	const { path } = options;
+
 	const file = await unified()
 		.use(remarkParse)
 		.use(remarkFrontmatter, ['yaml', 'toml'])
@@ -33,7 +44,7 @@ export async function renderMarkdown(markdown, { path } = {}) {
 		.use(remarkSmartypants)
 		.use(remarkRehype, { allowDangerousHtml: true }) // convert to rehype AST
 		.use(rehypeKatex) // render math nodes
-		.use(rehypeRaw) // now allow inline HTML
+		.use(rehypeRaw) // allow inline HTML
 		.use(rehypeSlug)
 		.use(rehypeAutolinkHeadings, { behavior: 'wrap' })
 		.use(rehypePrettyCode, { theme: 'github-dark' })

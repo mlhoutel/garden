@@ -1,8 +1,8 @@
-<script>
+<script lang="ts">
 	import { browser } from '$app/environment';
 	import IFrame from '$components/global/IFrame.svelte';
 
-	let lang = 'en'; // default language
+	let lang: 'en' | 'fr' = 'en'; // default language
 
 	function toggleLang() {
 		lang = lang === 'en' ? 'fr' : 'en';
@@ -41,14 +41,14 @@
 
 <div
 	id="print"
-	class="sticky top-0 mr-[-70px] z-30 md:flex md:justify-center mb-[-160px] overflow-hidden"
+	class="sticky top-0 z-30 mb-[-160px] mr-[-70px] overflow-hidden md:flex md:justify-center"
 >
-	<div class="w-full flex md:justify-end pb-10" style="width: 210mm">
+	<div class="flex w-full pb-10 md:justify-end" style="width: 210mm">
 		<button
 			on:click={print}
-			class="overflow-hidden background-primary h-[70px] w-[70px] rounded-full mx-1 mt-3
+			class="background-primary mx-1 mt-3 h-[70px] w-[70px] overflow-hidden rounded-full
            transition-all duration-300 ease-in-out
-            hover:bg-gray-100 dark:hover:bg-gray-700 hover:shadow-lg"
+            hover:bg-gray-100 hover:shadow-lg dark:hover:bg-gray-700"
 			style="box-shadow: rgba(0,0,0,0.5) 0px 3px 5px 0px;"
 		>
 			<i class="material-icons !text-3xl">print</i>
@@ -56,15 +56,15 @@
 
 		<button
 			on:click={toggleLang}
-			class="overflow-hidden background-primary h-[70px] w-[70px] rounded-full mx-1 mt-3
+			class="background-primary mx-1 mt-3 h-[70px] w-[70px] overflow-hidden rounded-full
              transition-all duration-300 ease-in-out
-             hover:bg-gray-100 dark:hover:bg-gray-700 hover:shadow-lg"
+             hover:bg-gray-100 hover:shadow-lg dark:hover:bg-gray-700"
 			style="box-shadow: rgba(0,0,0,0.5) 0px 3px 5px 0px;"
 		>
-			<div class="relative w-full h-full flex items-center justify-center">
+			<div class="relative flex h-full w-full items-center justify-center">
 				<i class="material-icons !text-3xl">language</i>
 				<p
-					class="absolute bottom-2 right-1 font-bold text-lg background-primary rounded-sm font-mono tracking-[0.15em] px-1"
+					class="background-primary absolute bottom-2 right-1 rounded-sm px-1 font-mono text-lg font-bold tracking-[0.15em]"
 				>
 					{lang === 'en' ? 'FR' : 'EN'}
 				</p>
@@ -73,14 +73,14 @@
 	</div>
 </div>
 
-<div class="block mt-10 max-w-[100vw] overflow-auto">
+<div class="mt-10 block max-w-[100vw] overflow-auto">
 	<container id="cv" class="md:flex md:justify-center">
-		<div class="A4 tracking-wider font-thin relative bg-white shadow-xl">
+		<div class="A4 relative bg-white font-thin tracking-wider shadow-xl">
 			<IFrame
 				title="curriculum"
 				src={iframeSrc}
-				style=""
-				class="A4 tracking-wider font-thin relative bg-white shadow-xl"
+				fstyle=""
+				fclass="A4 relative bg-white font-thin tracking-wider shadow-xl"
 			/>
 		</div>
 	</container>

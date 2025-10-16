@@ -1,35 +1,37 @@
-<script>
+<script lang="ts">
 	import TopicPill from './TopicPill.svelte';
 	import { createEventDispatcher } from 'svelte';
+	import type { TagSelectProps } from '$types/types';
 
-	export let placeholder = 'Search...';
-	export let input = '';
-	export let options = [];
-	export let displayed = options;
-	export let selected = new Set();
-	export let dropdown = false;
+	export let placeholder: TagSelectProps['placeholder'] = 'Search...';
+	export let input: TagSelectProps['input'] = '';
+	export let options: TagSelectProps['options'] = [];
+	export let displayed: string[] = options;
+	export let selected: Set<string> = new Set();
+	export let dropdown: boolean = false;
 
-	export function inputFocus(e) {
+	const dispatch = createEventDispatcher<{ change: Set<string> }>();
+
+	export function inputFocus(): void {
 		dropdown = true;
 		updateDisplayOptions();
 	}
 
-	export function inputBlur(e) {
-		// avoid loss of focus when option clicked
-		setTimeout(function () {
-			const active = document.activeElement; // This is the element that has focus
-			if (!active.classList.contains('selectOption')) {
+	export function inputBlur(): void {
+		setTimeout(() => {
+			const active = document.activeElement as HTMLElement | null;
+			if (!active?.classList.contains('selectOption')) {
 				dropdown = false;
 			}
 		}, 100);
 	}
 
-	export function inputChange(e) {
+	export function inputChange(): void {
 		updateDisplayOptions();
 	}
 
-	export function updateDisplayOptions() {
-		if (!input.length) {
+	export function updateDisplayOptions(): void {
+		if (!input?.length) {
 			displayed = options;
 		} else {
 			const lowerInput = input.toLowerCase().trim();
@@ -37,37 +39,35 @@
 		}
 	}
 
-	export function inputPress(e) {
+	export function inputPress(e: KeyboardEvent): void {
 		if (e.key !== 'Enter') return;
 
-		const lowerInput = input.toLowerCase().trim();
-
-		if (lowerInput == '') return;
+		const lowerInput = input?.toLowerCase().trim();
+		if (!lowerInput) return;
 
 		const found = options.find((o) => o.toLowerCase() === lowerInput);
-
-		selected.add(!!found ? found : input.trim()); // update display
-		selected = selected; // update display
+		selected.add(found ?? input?.trim() ?? '');
+		selected = new Set(selected); // trigger reactivity
 		input = '';
 		updateDisplayOptions();
 		dispatch('change', selected);
 	}
 
-	export function optionClick(e) {
+	export function optionClick(e: MouseEvent): void {
 		dropdown = false;
+		const target = e.target as HTMLElement;
+		if (!target) return;
 
-		selected.add(e.target?.innerText);
-		selected = selected; // update display
+		selected.add(target.innerText);
+		selected = new Set(selected);
 		input = '';
 		updateDisplayOptions();
 		dispatch('change', selected);
 	}
 
-	export const dispatch = createEventDispatcher();
-
-	export function selectClick(e) {
+	export function selectClick(e: CustomEvent<string>): void {
 		selected.delete(e.detail);
-		selected = selected; // update display
+		selected = new Set(selected);
 		dispatch('change', selected);
 	}
 </script>
@@ -87,21 +87,22 @@
 			class="select-input"
 		/>
 	</div>
+
 	<div class="pills">
-		{#each selected as topic}
+		{#each Array.from(selected) as topic}
 			<TopicPill disabled={true} {topic} on:click={selectClick} removable={true} />
 		{/each}
 	</div>
 
 	{#if dropdown}
 		<div
-			class="flex-col bg-white dark:bg-black select-options w-[300px] z-20 max-h-[400px] overflow-y-auto pb-3"
+			class="select-options z-20 max-h-[400px] w-[300px] flex-col overflow-y-auto bg-white pb-3 dark:bg-black"
 		>
 			{#each displayed as option}
 				<div class="px-1">
-					<button class="selectOption w-full text-left text-sm" on:click={optionClick}
-						>{option}</button
-					>
+					<button class="selectOption w-full text-left text-sm" on:click={optionClick}>
+						{option}
+					</button>
 				</div>
 			{/each}
 		</div>

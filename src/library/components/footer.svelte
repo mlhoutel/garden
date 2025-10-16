@@ -1,32 +1,33 @@
-<script>
-	export let linksItems;
+<script lang="ts">
+	import type { LinkItem } from '$types/types';
 
-	let y;
+	export let linksItems: LinkItem[] = [];
+
+	let scrollY = 0;
+	const year = new Date().getFullYear();
 
 	export function navigateTop() {
-		document.body.scrollIntoView();
+		window.scrollTo({ top: 0, behavior: 'smooth' });
 	}
-
-	const year = new Date().getFullYear();
 </script>
 
-<svelte:window bind:scrollY={y} />
+<svelte:window bind:scrollY />
 
-{#if y > 50}
+{#if scrollY > 50}
 	<button
-		class="z-30 fixed bottom-10 right-10 background-primary rounded-full"
+		class="background-primary fixed bottom-10 right-10 z-30 rounded-full"
 		style="box-shadow: rgba(0,0,0,0.5) 0px 3px 5px 0px;"
 		aria-label="navigate to the top of the page"
 		on:click={navigateTop}
 	>
-		<i class="material-icons !text-4xl p-2">expand_less</i>
+		<i class="material-icons p-2 !text-4xl">expand_less</i>
 	</button>
 {/if}
 
 <div
-	class="background-tertiary w-full bottom-0 py-10 px-5 pointer-events-auto relative overflow-clip"
+	class="background-tertiary pointer-events-auto relative bottom-0 w-full overflow-clip px-5 py-10"
 >
-	<article class="flex z-30">
+	<article class="z-30 flex">
 		<div class="md:mx-10">
 			<h4>Navigation</h4>
 
@@ -34,7 +35,7 @@
 				{#each linksItems as item}
 					<li class="block text-left">
 						<a
-							class="text-base underline-animated-block"
+							class="underline-animated-block text-base"
 							href={item.link}
 							data-sveltekit-preload-code="hover"
 						>
@@ -50,7 +51,7 @@
 		</div>
 	</article>
 
-	<div class="z-30 flex justify-center pt-10 px-14 flex-row">
+	<div class="z-30 flex flex-row justify-center px-14 pt-10">
 		<a
 			class="underline-animated-block mx-2 font-bold"
 			href="https://creativecommons.org/licenses/by-sa/3.0/"
@@ -69,14 +70,14 @@
 			SOURCE
 		</a>
 	</div>
-	<div class="absolute inset-0 pointer-events-none">
+	<div class="pointer-events-none absolute inset-0">
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
 			xml:space="preserve"
 			width="100mm"
 			height="100mm"
 			viewBox="0 0 100 100"
-			class="absolute left-[-20vw] top-[-10vw] rotate-45 opacity-5 h-[60vw] w-[60vw] text-[#1E262B] fill-current"
+			class="absolute left-[-20vw] top-[-10vw] h-[60vw] w-[60vw] rotate-45 fill-current text-[#1E262B] opacity-5"
 		>
 			<g style="display:inline">
 				<path
@@ -92,7 +93,7 @@
 			width="100mm"
 			height="100mm"
 			viewBox="0 0 100 100"
-			class="absolute left-[40vw] top-[-5vw] -rotate-45 opacity-5 h-[20vw] w-[20vw] text-[#1E262B] fill-current"
+			class="absolute left-[40vw] top-[-5vw] h-[20vw] w-[20vw] -rotate-45 fill-current text-[#1E262B] opacity-5"
 		>
 			<g style="display:inline">
 				<path
@@ -108,7 +109,7 @@
 			width="100mm"
 			height="100mm"
 			viewBox="0 0 100 100"
-			class="absolute left-[50vw] top-[25vw] rotate-180 opacity-5 h-[30vw] w-[30vw] text-[#1E262B] fill-current"
+			class="absolute left-[50vw] top-[25vw] h-[30vw] w-[30vw] rotate-180 fill-current text-[#1E262B] opacity-5"
 		>
 			<g style="display:inline">
 				<path
@@ -124,7 +125,7 @@
 			width="100mm"
 			height="100mm"
 			viewBox="0 0 100 100"
-			class="absolute left-[60vw] top-[-40vw] rotate-210 opacity-5 h-[70vw] w-[70vw] text-[#1E262B] fill-current"
+			class="rotate-210 absolute left-[60vw] top-[-40vw] h-[70vw] w-[70vw] fill-current text-[#1E262B] opacity-5"
 		>
 			<g style="display:inline">
 				<path
