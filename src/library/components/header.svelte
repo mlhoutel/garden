@@ -2,27 +2,37 @@
 	import type { LinkItem } from '$types/types';
 	import { themeStore } from '../utils/theme';
 	import { base } from '$app/paths';
-	import { onDestroy } from 'svelte';
+	import { onDestroy, onMount } from 'svelte';
+	import { browser } from '$app/environment';
 
 	export let linksItems: LinkItem[] = [];
 
 	// True for dark, false for light
 	let theme: boolean;
 
-	const unsubscribe = themeStore.subscribe((value) => {
-		theme = value;
-		updateDocumentTheme();
-	});
+	let unsubscribe: () => void;
 
-	onDestroy(() => {
-		unsubscribe();
-	});
+	// Run subscription only on the client
+	if (browser) {
+		onMount(() => {
+			unsubscribe = themeStore.subscribe((value) => {
+				theme = value;
+				updateDocumentTheme();
+			});
+		});
+
+		onDestroy(() => {
+			if (unsubscribe) unsubscribe();
+		});
+	}
 
 	function updateTheme() {
 		themeStore.set(!theme);
 	}
 
 	function updateDocumentTheme() {
+		if (!browser) return; // exit if server-side
+
 		if (theme) {
 			document.documentElement.classList.add('dark');
 		} else {
