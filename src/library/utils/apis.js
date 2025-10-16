@@ -26,7 +26,7 @@ export async function listPages(section, { includeDrafts = false } = {}) {
 			};
 		})
 		.filter((p) => includeDrafts || p.meta.published !== false)
-		.sort((a, b) => new Date(b.meta.date) - new Date(a.meta.date));
+		.sort((a, b) => new Date(a.meta.date) - new Date(b.meta.date));
 }
 
 export async function getLinksItems(fetch) {
@@ -58,7 +58,7 @@ export async function getLinksItems(fetch) {
 		if (!isNaN(aNum)) return -1; // numbers before text
 		if (!isNaN(bNum)) return 1; // numbers before text
 
-		return String(a).localeCompare(String(b));
+		return String(b).localeCompare(String(a));
 	});
 
 	return links;

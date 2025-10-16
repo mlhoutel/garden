@@ -1,12 +1,4 @@
-import fs from 'fs';
-import path from 'path';
-
 import preprocess from 'svelte-preprocess';
-import { mdsvex } from 'mdsvex';
-import mdsvexConfig from './mdsvex.config.js';
-
-const manifestPath = path.resolve('./src/meta/manifest.json');
-const pagesManifest = JSON.parse(fs.readFileSync(manifestPath, 'utf-8'));
 
 /*
 // DYNAMIC DEPLOYEMENT
@@ -25,8 +17,8 @@ const base = dev ? '' : '/garden'
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-	extensions: ['.svelte', ...mdsvexConfig.extensions],
-	preprocess: [mdsvex(mdsvexConfig), preprocess()],
+	extensions: ['.svelte'],
+	preprocess: [preprocess()],
 	kit: {
 		adapter: adapter({
 			strict: false,

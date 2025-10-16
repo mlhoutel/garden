@@ -34,7 +34,7 @@
 	</div>
 
 	<div class="py-10 px-1">
-		<svelte:component this={data.content} />
+		{@html data.content}
 	</div>
 
 	<div class="w-full flex space-x-3">

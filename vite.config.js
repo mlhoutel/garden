@@ -4,6 +4,7 @@ import path from 'path';
 /** @type {import('vite').UserConfig} */
 const config = {
 	plugins: [sveltekit()],
+	assetsInclude: ['**/*.md'],
 	resolve: {
 		alias: {
 			$images: path.resolve('static/images'),

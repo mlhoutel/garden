@@ -12,7 +12,7 @@ export const GET = async () => {
 		if (!isNaN(aNum)) return -1; // numbers before text
 		if (!isNaN(bNum)) return 1; // numbers before text
 
-		return String(a).localeCompare(String(b));
+		return String(b).localeCompare(String(a));
 	});
 
 	return json(sections);
