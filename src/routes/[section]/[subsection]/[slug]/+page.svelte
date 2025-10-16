@@ -31,7 +31,7 @@
 
 		<div class="pills w-full md:justify-end">
 			<p class="pill">{data.words} words</p>
-			<p class="pill">{Math.ceil(data?.words ?? 0 / 160)} minutes read</p>
+			<p class="pill">{Math.ceil(data.time / 60000)} minutes read</p>
 		</div>
 	</div>
 

@@ -47,7 +47,6 @@ export interface SearchItem {
 	tags: string[];
 	topics: string[];
 	meta?: any;
-	Index: string;
 }
 
 export interface SearchIndex {
@@ -81,6 +80,7 @@ export interface ArticleMeta {
 	short: string;
 	topic?: string;
 	words: number;
+	time: number;
 }
 
 export interface ArticleItem {

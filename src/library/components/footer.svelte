@@ -15,7 +15,7 @@
 
 {#if scrollY > 50}
 	<button
-		class="background-primary fixed bottom-10 right-10 z-30 rounded-full"
+		class="background-primary fixed right-10 bottom-10 z-30 cursor-pointer rounded-full"
 		style="box-shadow: rgba(0,0,0,0.5) 0px 3px 5px 0px;"
 		aria-label="navigate to the top of the page"
 		on:click={navigateTop}
@@ -32,7 +32,7 @@
 			<h4>Navigation</h4>
 
 			<ul class="list-none">
-				{#each linksItems as item}
+				{#each linksItems as item (`header_link_${item.link}`)}
 					<li class="block text-left">
 						<a
 							class="underline-animated-block text-base"
@@ -77,7 +77,7 @@
 			width="100mm"
 			height="100mm"
 			viewBox="0 0 100 100"
-			class="absolute left-[-20vw] top-[-10vw] h-[60vw] w-[60vw] rotate-45 fill-current text-[#1E262B] opacity-5"
+			class="absolute top-[-10vw] left-[-20vw] h-[60vw] w-[60vw] rotate-45 fill-current text-[#1E262B] opacity-5"
 		>
 			<g style="display:inline">
 				<path
@@ -93,7 +93,7 @@
 			width="100mm"
 			height="100mm"
 			viewBox="0 0 100 100"
-			class="absolute left-[40vw] top-[-5vw] h-[20vw] w-[20vw] -rotate-45 fill-current text-[#1E262B] opacity-5"
+			class="absolute top-[-5vw] left-[40vw] h-[20vw] w-[20vw] -rotate-45 fill-current text-[#1E262B] opacity-5"
 		>
 			<g style="display:inline">
 				<path
@@ -109,7 +109,7 @@
 			width="100mm"
 			height="100mm"
 			viewBox="0 0 100 100"
-			class="absolute left-[50vw] top-[25vw] h-[30vw] w-[30vw] rotate-180 fill-current text-[#1E262B] opacity-5"
+			class="absolute top-[25vw] left-[50vw] h-[30vw] w-[30vw] rotate-180 fill-current text-[#1E262B] opacity-5"
 		>
 			<g style="display:inline">
 				<path
@@ -125,7 +125,7 @@
 			width="100mm"
 			height="100mm"
 			viewBox="0 0 100 100"
-			class="rotate-210 absolute left-[60vw] top-[-40vw] h-[70vw] w-[70vw] fill-current text-[#1E262B] opacity-5"
+			class="absolute top-[-40vw] left-[60vw] h-[70vw] w-[70vw] rotate-210 fill-current text-[#1E262B] opacity-5"
 		>
 			<g style="display:inline">
 				<path

@@ -389,7 +389,7 @@
 							>
 								{#if result.topics.length > 0}
 									<div class="result-overline">
-										{#each result.topics.slice(0, 3) as topic}
+										{#each result.topics.slice(0, 3) as topic, i (i)}
 											<span class="topic-badge">{topic}</span>
 										{/each}
 									</div>
@@ -447,7 +447,7 @@
 				{/if}
 			</div>
 			<div class="topic-filters">
-				{#each availableTopics as topic}
+				{#each availableTopics as topic, i (i)}
 					<button
 						class="topic-filter"
 						class:active={selectedTopics.has(topic)}
@@ -468,7 +468,7 @@
 				<article class="result-item">
 					{#if result.topics.length > 0}
 						<div class="result-overline">
-							{#each result.topics as topic}
+							{#each result.topics as topic, i (i)}
 								<button class="topic-badge clickable" on:click={() => toggleTopic(topic)}>
 									{topic}
 								</button>

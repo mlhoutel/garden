@@ -41,7 +41,7 @@
 
 <div
 	id="print"
-	class="sticky top-0 z-30 mb-[-160px] mr-[-70px] overflow-hidden md:flex md:justify-center"
+	class="sticky top-0 z-30 mr-[-70px] mb-[-160px] overflow-hidden md:flex md:justify-center"
 >
 	<div class="flex w-full pb-10 md:justify-end" style="width: 210mm">
 		<button
@@ -64,7 +64,7 @@
 			<div class="relative flex h-full w-full items-center justify-center">
 				<i class="material-icons !text-3xl">language</i>
 				<p
-					class="background-primary absolute bottom-2 right-1 rounded-sm px-1 font-mono text-lg font-bold tracking-[0.15em]"
+					class="background-primary absolute right-1 bottom-2 rounded-sm px-1 font-mono text-lg font-bold tracking-[0.15em]"
 				>
 					{lang === 'en' ? 'FR' : 'EN'}
 				</p>
@@ -76,12 +76,7 @@
 <div class="mt-10 block max-w-[100vw] overflow-auto">
 	<container id="cv" class="md:flex md:justify-center">
 		<div class="A4 relative bg-white font-thin tracking-wider shadow-xl">
-			<IFrame
-				title="curriculum"
-				src={iframeSrc}
-				fstyle=""
-				fclass="A4 relative bg-white font-thin tracking-wider shadow-xl"
-			/>
+			<IFrame title="curriculum" src={iframeSrc} />
 		</div>
 	</container>
 </div>

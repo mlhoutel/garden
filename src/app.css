@@ -1,0 +1,626 @@
+@import url("https://fonts.googleapis.com/css2?family=Vollkorn&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inconsolata&display=swap");
+
+@import "tailwindcss";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* COLORS */
+  --color-black: #1F272D;
+  --color-grey: #223344;
+  --color-darker: #1E2722;
+  --color-dark: #282c34;
+  --color-light: #3F434C;
+  --color-lighter: #3F434C;
+  --color-white: #F4F0EB;
+
+  --color-orange: #FFB528;
+  --color-beige: #faf8f0;
+  --color-brown: #c6ac8f;
+  --color-blue: #7fb4e0;
+  --color-marine: #124559;
+
+  --color-pink: #ffb3ba;
+  --color-sand: #ffdfba;
+  --color-yellow: #ffffba;
+  --color-green: #baffc9;
+  --color-ocean: #bae1ff;
+  --color-violet: #cc9af4;
+
+  /* FONT FAMILY */
+  --font-sans: "Open Sans", sans-serif;
+  --font-serif: "Vollkorn", serif;
+  --font-mono: "Inconsolata", monospace;
+
+  /* BREAKPOINTS */
+  --breakpoint-sm: 480px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 976px;
+  --breakpoint-xl: 1440px;
+
+  /* TRANSITION PROPERTIES */
+  --transition-padding: padding;
+  --transition-margin: margin;
+
+  /* SPACING (custom for your layout) */
+  --spacing-50px: 50px;
+  --spacing-100px: 100px;
+}
+
+/* OPTIONAL: define Tailwind theme mappings using the variables */
+@layer utilities {
+  .text-black { color: var(--color-black); }
+  .text-grey { color: var(--color-grey); }
+  .text-white { color: var(--color-white); }
+  .bg-black { background-color: var(--color-black); }
+  .bg-white { background-color: var(--color-white); }
+  .bg-orange { background-color: var(--color-orange); }
+  /* ...add more mappings as needed */
+}
+
+@layer base {
+  html {
+    font-family: Inter, system-ui, sans-serif;
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
+}
+
+@layer components {
+  .content {
+    @apply px-3 pb-[50px] md:pb-[100px];
+  }
+
+  .content h1 {
+    @apply pt-[50px] md:pt-[100px];
+  }
+
+  article {
+    width: 100%;
+    max-width: 800px;
+    margin: auto;
+  }
+
+  article > * {
+    @apply px-5;
+  }
+
+  .background-dark {
+    @apply bg-black text-white;
+  }
+
+  .background-fill-dark {
+    @apply fill-black dark:fill-white;
+  }
+
+  .background-primary {
+    @apply bg-white text-black dark:bg-black dark:text-white;
+  }
+
+  .background-fill-primary {
+    @apply fill-white dark:fill-black;
+  }
+
+  .background-secondary {
+    @apply bg-orange text-white dark:bg-orange dark:text-white;
+  }
+
+  .background-fill-secondary {
+    @apply fill-black dark:fill-white;
+  }
+
+  .background-tertiary {
+    @apply bg-grey text-white;
+  }
+
+  .background-quaternary {
+    @apply bg-beige text-black dark:bg-grey dark:text-white;
+  }
+
+  .button-rounded {
+    @apply font-bold py-2 px-4 rounded-full;
+  }
+
+  .button-squared {
+    @apply font-bold py-2 px-4;
+  }
+
+  .pill {
+    @apply bg-black text-white dark:bg-orange dark:text-grey dark:font-bold font-thin text-xs m-0.5 py-[5px] px-[7px] max-h-[20px] rounded-sm w-min flex justify-center items-center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .pills {
+    @apply flex flex-wrap;
+  }
+
+  .dot {
+    @apply bg-white h-2 w-2 rounded-full;
+  }
+
+  .footer-text {
+    @apply px-3;
+  }
+
+  .navbar-button {
+    @apply block sm:hidden py-2 px-5 text-white font-semibold;
+  }
+
+  .navbar-items {
+    @apply sm:inline-flex bg-black w-full;
+  }
+
+  .navbar-links {
+    @apply py-2 flex flex-col sm:inline-flex sm:flex-row;
+  }
+
+  .navbar-links li {
+    @apply px-5 text-white font-medium;
+  }
+
+  .full-centered {
+    @apply w-full flex justify-center items-center p-6;
+  }
+
+  .skewed {
+    transform: skew(15deg, 0deg);
+  }
+
+  .semi-skewed {
+    transform: skew(7deg, 0deg);
+  }
+
+  .anti-skewed {
+    transform: skew(-15deg, 0deg);
+  }
+
+  .anti-semi-skewed {
+    transform: skew(-7deg, 0deg);
+  }
+
+  .content-section {
+    @apply overflow-hidden;
+  }
+
+  .content-h1 {
+    @apply text-4xl font-bold p-2 m-4 text-black dark:text-white border-b-2 border-orange;
+  }
+
+  .content-h2 {
+    @apply text-3xl font-bold p-7 text-black dark:text-white;
+    text-shadow: 5px 5px theme('colors.white', #fff);
+  }
+
+  .dark .content-h2 {
+    text-shadow: 10px 10px theme('colors.black', #000);
+  }
+
+  .content-h3 {
+    @apply text-lg font-bold p-2 text-black dark:text-white;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .content-big {
+    @apply text-4xl font-bold md:text-5xl lg:text-8xl;
+  }
+
+  .content-medium {
+    @apply text-lg font-semibold md:text-xl lg:text-3xl;
+  }
+
+  .content-base {
+    @apply md:text-lg lg:text-xl;
+  }
+
+  .content-small {
+    @apply text-sm md:text-base lg:text-lg;
+  }
+
+  .list-title {
+    @apply flex flex-wrap items-center my-[-3px] text-lg font-bold p-2 text-black dark:text-white
+  }
+
+  .list-dot {
+    @apply h-5 w-5 m-1 fill-orange;
+  }
+
+  .list-item {
+    @apply ml-5 py-1 px-6 border-l-[5px] border-black text-sm md:text-base lg:text-lg;;
+  }
+
+  .select-search {
+    @apply inline-flex items-center mx-2 w-full mt-1 rounded-md dark:bg-black dark:text-white bg-white text-black;
+  }
+
+  .select-input {
+    @apply w-full bg-transparent px-1 text-sm;
+  }
+
+  .select-input:focus {
+    outline: none;
+  }
+
+  .select-input::placeholder {
+    @apply dark:text-white text-black;
+  }
+
+  .select-options {
+    @apply absolute pl-3;
+  }
+
+  .select-options ul {
+    @apply bg-grey text-white rounded-md;
+  }
+
+  .select-options ul li {
+    @apply p-1 font-thin;
+  }
+
+  .navigation-bottom-button {
+    @apply flex-1 inline-flex items-center bg-black text-white m-3 pr-5 w-[45vw] sm:w-auto font-bold py-2 px-4 rounded-full;
+  }
+
+  .navigation-bottom-button-emphase {
+    @apply inline-flex;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .custom-form input,
+  .custom-form textarea {
+    border: none;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .custom-form textarea:focus,
+  .custom-form input:focus,
+  .custom-form a:focus {
+    outline: none;
+  }
+
+  .custom-form label {
+    @apply pr-3;
+  }
+
+  code[data-theme*=" "] {
+    color: var(--shiki-light);
+    background-color: var(--shiki-light-bg);
+  }
+
+  code[data-theme*=" "] span {
+    color: var(--shiki-light);
+  }
+
+  [saved-theme="dark"] code[data-theme*=" "] {
+    color: var(--shiki-dark);
+    background-color: var(--shiki-dark-bg);
+  }
+
+  [saved-theme="dark"] code[data-theme*=" "] span {
+    color: var(--shiki-dark);
+  }
+
+    /* Outer code block */
+  pre {
+    @apply relative rounded-sm p-2 overflow-x-auto text-sm font-mono;
+    background-color: transparent; /* Let dark/light theme work */
+    counter-reset: line; /* line numbers */
+    border: 1px solid #ddd; /* optional outline */
+  }
+
+  .dark pre {
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  /* Each line generated as span */
+  pre code span.line {
+    @apply relative block pl-8 py-[4px];
+    counter-increment: line;
+  }
+
+  /* Line numbers */
+  pre code span.line::before {
+    @apply absolute left-0 text-right w-6 pr-2 select-none text-gray-400 dark:text-gray-600;
+    content: counter(line);
+  }
+
+  /* Highlighted lines */
+  pre code span.line.bg-orange\/20 {
+    @apply rounded-sm; /* from onVisitHighlightedLine */
+  }
+
+  /* Highlighted characters */
+  pre code span.bg-orange\/30 {
+    @apply rounded-sm; /* from onVisitHighlightedChars */
+  }
+
+  /* Title bar for code blocks (if using onVisitTitle) */
+  pre code span.title {
+    @apply rounded-t-sm px-2 py-1 bg-gray-200 dark:bg-gray-800 text-sm font-semibold;
+  }
+
+  @keyframes blinker {
+    50% {
+      opacity: 0;
+    }
+  }
+
+  ::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-brown;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-orange;
+  }
+
+  input[type="color"] {
+    -webkit-appearance: none;
+    border: none;
+    width: 32px;
+    height: 16px;
+  }
+
+  input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 0;
+  }
+
+  input[type="color"]::-webkit-color-swatch {
+    border: none;
+  }
+
+  .underline-animated {
+    @apply relative z-10 font-medium no-underline transition-colors duration-300;
+  }
+
+  .underline-animated::after {
+    content: "";
+    @apply absolute left-0 bottom-0 w-full h-[1px] dark:bg-white bg-black transition-all duration-100 z-[-1];
+  }
+
+  .underline-animated:hover::after {
+    @apply h-[3px] bg-orange;
+  }
+
+  .underline-animated-block {
+    @apply relative z-10 font-medium no-underline transition-colors duration-300;
+  }
+
+  .underline-animated-block:hover {
+    @apply text-black;
+  }
+
+  .underline-animated-block::after {
+    content: "";
+    @apply absolute left-0 bottom-0 w-full h-[1px] dark:bg-white bg-black transition-all duration-100 z-[-1];
+  }
+
+  .underline-animated-block:hover::after {
+    @apply h-full bg-orange;
+  }
+
+  .horizontal-underline-animated {
+    @apply relative z-10 font-medium no-underline transition-colors duration-300;
+  }
+
+  .horizontal-underline-animated::after {
+    content: "";
+    @apply absolute left-0 bottom-0 h-[16px] w-0 bg-transparent opacity-90 transition-all duration-300 z-[-1];
+  }
+
+  .horizontal-underline-animated:hover::after {
+    @apply w-full bg-orange;
+  }
+}
+
+
+@layer base {
+  article * {
+    @apply text-sm md:text-base;
+  }
+
+  article h1,
+  article h1 a {
+    @apply text-4xl md:text-7xl pt-[50px] md:pt-[100px];
+    text-align: center;
+  }
+
+  article h2,
+  article h2 a {
+    @apply text-2xl md:text-3xl;
+  }
+
+  article h3,
+  article h3 a {
+    @apply text-xl md:text-2xl;
+  }
+
+  article h4,
+  article h4 a {
+    @apply text-lg md:text-xl;
+  }
+
+  article h5,
+  article h5 a {
+    @apply text-lg md:text-xl;
+  }
+
+  article h6,
+  article h6 a {
+    @apply text-lg md:text-xl;
+  }
+
+  article h1,
+  article h1 a,
+  article h2,
+  article h2 a,
+  article h3,
+  article h3 a,
+  article h4,
+  article h4 a,
+  article h5,
+  article h5 a,
+  article h6,
+  article h6 a {
+    @apply font-serif pt-4 relative;
+  }
+
+  article strong {
+    font-weight: bold;
+  }
+
+  article p {
+    font-weight: 300;
+    padding-top: 20px;
+    line-height: 1.8em;
+  }
+
+  article blockquote {
+    @apply m-3 px-3 border-l-4 border-orange;
+  }
+
+  article blockquote p {
+    padding: 5px 0px;
+  }
+
+  article ul {
+    list-style-type: disc;
+    margin-left: 20px;
+  }
+
+  article ol {
+    list-style-type: decimal;
+    margin-left: 20px;
+  }
+
+  article li,
+  article li p {
+    font-weight: 400;
+    margin: 0px;
+    padding: 0px;
+  }
+
+  article table,
+  article table th,
+  article table td {
+    padding: 5px 20px;
+    border-collapse: collapse;
+    border: 1px solid rgba(174, 174, 174, 0.5);
+  }
+
+  article table tr:nth-child(odd) {
+    background-color: rgba(243, 243, 243, 0.1);
+  }
+
+  article th,
+  article td {
+    padding: 0px 10px;
+  }
+
+  article p a {
+    border-bottom: 1px dotted #666;
+  }
+
+  article img {
+    display: block;
+    margin: auto;
+  }
+
+  article svg text {
+    @apply dark:fill-white;
+  }
+
+  article .jxgbox {
+    width: 500px;
+    height: 400px;
+    display: block;
+    margin: auto !important;
+  }
+
+  article ul em,
+  article ol em {
+    display: inline-flex;
+  }
+
+  article em {
+    font-style: italic;
+  }
+
+  article img + em {
+    @apply text-sm;
+    margin: auto;
+    text-align: center;
+    display: block;
+  }
+
+  article sup {
+    @apply text-sm align-text-top;
+  }
+
+  article .footnotes {
+    margin-top: 50px;
+    padding: 20px;
+  }
+
+  article .footnotes * {
+    font-weight: 200;
+    font-size: 0.95em;
+    color: #666;
+  }
+
+  article details {
+    margin: 20px 0px 10px 0px;
+    color: #666;
+  }
+
+  article .katex {
+    margin-bottom: 0.5em;
+  }
+
+  article .katex .frac-line {
+    top: 0.1em;
+    bottom: 0.1em;
+  }
+
+  article .anchor-link {
+    position: absolute;
+    transform: translate(-30px, 5%);
+    opacity: 0;
+    transition: all 0.1s ease-in-out;
+    height: 100%;
+    text-align: center;
+  }
+
+  article h1:hover .anchor-link,
+  article h2:hover .anchor-link,
+  article h3:hover .anchor-link,
+  article h4:hover .anchor-link,
+  article h5:hover .anchor-link,
+  article h6:hover .anchor-link {
+    opacity: 0.7;
+  }
+
+  article pre > code > * {
+    @apply leading-3 md:leading-6 text-sm md:text-base;
+  }
+}

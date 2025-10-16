@@ -23,7 +23,7 @@
 	</slot>
 {:else if Array.isArray(items)}
 	<section>
-		{#each items as theme (theme.label)}
+		{#each items as theme, i (`${i}_${theme.label}`)}
 			{#if theme.label}
 				{#if depth === 0}
 					<h2 id={toAnchor(theme.label)} class="text-3xl font-bold tracking-widest md:text-4xl">
@@ -44,7 +44,7 @@
 				{/if}
 			{/if}
 
-			{#each theme.items ?? [] as item (item.label)}
+			{#each theme.items ?? [] as item, i (`${i}_${item.label}`)}
 				<svelte:self items={item} depth={depth + 1} let:item>
 					<slot {item}>
 						<ListItemGeneric {item} />

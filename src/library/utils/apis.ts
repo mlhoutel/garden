@@ -17,14 +17,9 @@ export async function listPages(section?: string, options: ListPagesOptions = {}
 			const subsection = parts[1]; // section/subsection/file.md
 			const slug = parts[2]?.replace(/\.md$/, '');
 
-			const wordCount = e.html
-				?.replace(/<[^>]*>/g, '')
-				?.split(/\s+/)
-				?.filter((w) => w.length > 0).length;
-
 			return {
 				...e,
-				meta: { ...meta, words: wordCount },
+				meta,
 				section,
 				subsection,
 				slug,

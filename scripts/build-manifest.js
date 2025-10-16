@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter'; // parse frontmatter from markdown
+import readingTime from 'reading-time';
 
 const CONTENT_DIR = path.resolve('./src/content');
 const OUTPUT_FILE = path.resolve('./src/meta/manifest.json');
@@ -24,11 +25,7 @@ function walk(dir, section = null, subsection = null) {
 			const content = fs.readFileSync(fullPath, 'utf-8');
 			const { data: frontmatter, content: body } = matter(content);
 
-			// Compute word count
-			const wordCount = body
-				.replace(/<[^>]*>/g, '')
-				.split(/\s+/)
-				.filter((w) => w.length > 0).length;
+			const readStats = readingTime(body);
 
 			pages.push({
 				section,
@@ -37,7 +34,8 @@ function walk(dir, section = null, subsection = null) {
 				path: path.relative(CONTENT_DIR, fullPath).replace(/\\/g, '/'),
 				meta: {
 					...frontmatter,
-					words: wordCount,
+					words: readStats.words,
+					time: readStats.time,
 					published: frontmatter.published ?? true
 				}
 			});

@@ -89,7 +89,7 @@
 	</div>
 
 	<div class="pills">
-		{#each Array.from(selected) as topic}
+		{#each Array.from(selected) as topic, i (i)}
 			<TopicPill disabled={true} {topic} on:click={selectClick} removable={true} />
 		{/each}
 	</div>
@@ -98,7 +98,7 @@
 		<div
 			class="select-options z-20 max-h-[400px] w-[300px] flex-col overflow-y-auto bg-white pb-3 dark:bg-black"
 		>
-			{#each displayed as option}
+			{#each displayed as option, i (i)}
 				<div class="px-1">
 					<button class="selectOption w-full text-left text-sm" on:click={optionClick}>
 						{option}

@@ -5,7 +5,7 @@
 </script>
 
 <div class="inline-flex items-center space-x-1">
-	{#each items as item, i}
+	{#each items as item, i (`bread_crumbs_${i}`)}
 		<span>
 			{#if i === items.length - 1}
 				{item.text}

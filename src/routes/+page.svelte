@@ -29,7 +29,7 @@
 			</p>
 		</div>
 		<div class="columns-2 p-5 md:columns-5">
-			{#each data.nodes.sort((a, b) => b.count - a.count) as node}
+			{#each data.nodes.sort((a, b) => b.count - a.count) as node, i (i)}
 				<div>
 					<a
 						href="{base}/search?topics={node.label}"

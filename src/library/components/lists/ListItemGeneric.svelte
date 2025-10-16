@@ -17,7 +17,7 @@
 
 		<div class="pills md:pl-3 md:pt-[5px]">
 			{#if item.meta?.topic}
-				{#each item.meta.topic.split(' ') as topic}
+				{#each item.meta.topic.split(' ') as topic, i (i)}
 					<TopicPill {topic} />
 				{/each}
 			{/if}

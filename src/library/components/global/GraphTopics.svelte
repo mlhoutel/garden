@@ -42,7 +42,7 @@
 	overflow="visible"
 	viewBox="{view_box.x1} {view_box.y1} {view_box.x2} {view_box.y2}"
 >
-	{#each edges as edge}
+	{#each edges as edge, i (i)}
 		<line
 			class="stroke-slate-700"
 			x1={edge.nodeA.pos.x}
@@ -52,11 +52,11 @@
 		/>
 	{/each}
 
-	{#each nodes as node}
+	{#each nodes as node, i (i)}
 		<circle class="fill-orange" r={5 + node.count * 2} cx={node.pos.x} cy={node.pos.y} />
 	{/each}
 
-	{#each nodes as node}
+	{#each nodes as node, i (i)}
 		<text x={node.pos.x + node.count * 2 + 10} y={node.pos.y + node.count * 2 + 10}>
 			{node.label}
 		</text>

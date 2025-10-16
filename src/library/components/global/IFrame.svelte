@@ -4,14 +4,20 @@
 
 	export let src: IframeProps['src'];
 	export let title: IframeProps['title'];
-	export let fstyle: IframeProps['fstyle'] =
+
+	// Styles for the wrapper div
+	export let rootStyle: string = '';
+	export let rootClass: string = '';
+
+	// Styles for the iframe itself
+	export let iframeStyle: string =
 		'position: absolute; left: 0; height: 100%; width: 100%; border: none';
-	export let fclass: IframeProps['fclass'] = '';
+	export let iframeClass: string = '';
 
 	let loading = true;
 </script>
 
-<div>
+<div style={rootStyle} class={rootClass}>
 	{#if loading}
 		<div
 			class="background-primary absolute left-0 z-10 flex h-full w-full items-center justify-center"
@@ -28,7 +34,7 @@
 		{src}
 		{title}
 		loading="lazy"
-		style={fstyle}
-		class={fclass}
+		style={iframeStyle}
+		class={iframeClass}
 	></iframe>
 </div>
