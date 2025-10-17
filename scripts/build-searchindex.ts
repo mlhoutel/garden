@@ -1,3 +1,4 @@
+// scripts/generate-search-index.ts
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
@@ -11,9 +12,30 @@ const CONTENT_DIR = path.resolve('./src/content');
 const OUTPUT_FILE = path.resolve('./src/meta/search-index.json');
 
 // Configure which file types to index
-const INDEXABLE_EXTENSIONS = ['.md', '.svx', '.svelte'];
+const INDEXABLE_EXTENSIONS = ['.md', '.svx', '.svelte'] as const;
 
-function stripHtmlTags(html) {
+// --- Types ---
+
+interface FrontmatterData {
+	title?: string;
+	name?: string;
+	tags?: string[] | string;
+	categories?: string[] | string;
+	draft?: boolean;
+	unlisted?: boolean;
+	[key: string]: unknown;
+}
+
+interface SearchIndexItem {
+	slug: string;
+	title: string;
+	content: string;
+	tags: string[];
+}
+
+// --- Utility Functions ---
+
+function stripHtmlTags(html: string): string {
 	return html
 		.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
 		.replace(/<style\b[^<]*(?:(?!<\/style>)<[^<]*)*<\/style>/gi, '')
@@ -22,8 +44,8 @@ function stripHtmlTags(html) {
 		.trim();
 }
 
-function extractTextContent(content, frontmatter) {
-	// Remove frontmatter from content
+function extractTextContent(content: string): string {
+	// Remove frontmatter block
 	const withoutFrontmatter = content.replace(/^---\n[\s\S]*?\n---\n/, '');
 
 	// Strip HTML/Svelte tags and get plain text
@@ -38,7 +60,7 @@ function extractTextContent(content, frontmatter) {
 	return text;
 }
 
-function getSlugFromPath(filePath, contentDir) {
+function getSlugFromPath(filePath: string, contentDir: string): string {
 	let slug = path.relative(contentDir, filePath);
 
 	// Remove file extension
@@ -55,26 +77,25 @@ function getSlugFromPath(filePath, contentDir) {
 	}
 
 	// Normalize path separators
-	slug = slug.replace(/\\/g, '/');
-
-	return slug;
+	return slug.replace(/\\/g, '/');
 }
 
-function processFile(filePath, contentDir) {
+function processFile(filePath: string, contentDir: string): SearchIndexItem | null {
 	const content = fs.readFileSync(filePath, 'utf-8');
 
 	// Parse frontmatter if exists
 	const { data: frontmatter, content: mainContent } = matter(content);
+	const fm = frontmatter as FrontmatterData;
 
 	// Skip if explicitly marked as draft or unlisted
-	if (frontmatter.draft === true || frontmatter.unlisted === true) {
+	if (fm.draft === true || fm.unlisted === true) {
 		return null;
 	}
 
 	const slug = getSlugFromPath(filePath, contentDir);
 
 	// Extract title (from frontmatter or first heading)
-	let title = frontmatter.title || frontmatter.name || '';
+	let title = fm.title || fm.name || '';
 	if (!title) {
 		const h1Match = mainContent.match(/^#\s+(.+)$/m);
 		if (h1Match) {
@@ -85,11 +106,11 @@ function processFile(filePath, contentDir) {
 	}
 
 	// Extract tags
-	const tags = frontmatter.tags || frontmatter.categories || [];
-	const tagArray = Array.isArray(tags) ? tags : [tags].filter(Boolean);
+	const tags = fm.tags || fm.categories || [];
+	const tagArray = Array.isArray(tags) ? tags : [tags].filter((t): t is string => Boolean(t));
 
 	// Extract text content
-	const textContent = extractTextContent(mainContent, frontmatter);
+	const textContent = extractTextContent(mainContent);
 
 	return {
 		slug,
@@ -99,7 +120,11 @@ function processFile(filePath, contentDir) {
 	};
 }
 
-function traverseDirectory(dir, contentDir, results = []) {
+function traverseDirectory(
+	dir: string,
+	contentDir: string,
+	results: SearchIndexItem[] = []
+): SearchIndexItem[] {
 	const files = fs.readdirSync(dir);
 
 	for (const file of files) {
@@ -113,11 +138,9 @@ function traverseDirectory(dir, contentDir, results = []) {
 			}
 		} else if (stat.isFile()) {
 			const ext = path.extname(file);
-			if (INDEXABLE_EXTENSIONS.includes(ext)) {
+			if (INDEXABLE_EXTENSIONS.includes(ext as (typeof INDEXABLE_EXTENSIONS)[number])) {
 				const item = processFile(filePath, contentDir);
-				if (item) {
-					results.push(item);
-				}
+				if (item) results.push(item);
 			}
 		}
 	}
@@ -125,12 +148,12 @@ function traverseDirectory(dir, contentDir, results = []) {
 	return results;
 }
 
-function generateSearchIndex() {
-	console.log('Generating search index...');
+export function generateSearchIndex(): void {
+	console.log('🔍 Generating search index...');
 
 	// Ensure content directory exists
 	if (!fs.existsSync(CONTENT_DIR)) {
-		console.error(`Content directory not found: ${CONTENT_DIR}`);
+		console.error(`❌ Content directory not found: ${CONTENT_DIR}`);
 		process.exit(1);
 	}
 
@@ -138,7 +161,7 @@ function generateSearchIndex() {
 	const items = traverseDirectory(CONTENT_DIR, CONTENT_DIR);
 
 	// Convert to object format with slug as key
-	const index = {};
+	const index: Record<string, Omit<SearchIndexItem, 'slug'>> = {};
 	for (const item of items) {
 		index[item.slug] = {
 			title: item.title,
@@ -156,13 +179,11 @@ function generateSearchIndex() {
 	// Write index to file
 	fs.writeFileSync(OUTPUT_FILE, JSON.stringify(index, null, 2));
 
-	console.log(`✓ Search index generated with ${items.length} items`);
-	console.log(`  Output: ${OUTPUT_FILE}`);
+	console.log(`✅ Search index generated with ${items.length} items`);
+	console.log(`📁 Output: ${OUTPUT_FILE}`);
 }
 
 // Run if called directly
 if (import.meta.url === `file://${process.argv[1]}`) {
 	generateSearchIndex();
 }
-
-export { generateSearchIndex };

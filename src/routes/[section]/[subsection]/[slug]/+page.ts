@@ -1,7 +1,7 @@
 import { error } from '@sveltejs/kit';
 import { listPages } from '$utils/apis';
 import { renderMarkdown } from '$utils/markdown';
-import type { Page, PageLoadReturn } from '$types/types';
+import type { PageLoadReturn, Page } from '$types/types';
 
 export async function load({
 	params
@@ -14,7 +14,7 @@ export async function load({
 	const pages: Page[] = await listPages(section);
 
 	// Find the page by subsection + slug
-	const page = pages.find((p) => p.path === `${section}/${subsection}/${slug}`);
+	const page = pages.find((p) => p.path === `${section}/${subsection}/${slug}.md`);
 	if (!page) throw error(404, 'Page not found');
 
 	// Import .md file as text
@@ -28,19 +28,16 @@ export async function load({
 	const content = await renderMarkdown(markdown, { path: key });
 
 	// Find index for navigation
-	const index = pages.findIndex(
-		(p) => p.subsection === subsection && p.file?.endsWith(`${slug}.md`)
-	);
+	const index = pages.findIndex((p) => p.meta.subsection === subsection && p.meta.slug == slug);
 
 	const next = pages[(index + 1) % pages.length] || null;
 
-	const meta = { ...page.meta };
-	if (meta.published === false) throw error(404, 'Page not published yet');
+	if (page.meta.published === false) throw error(404, 'Page not published yet');
 
 	return {
 		content,
 		next,
-		...meta,
+		...page.meta,
 		section,
 		subsection
 	};

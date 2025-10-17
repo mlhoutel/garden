@@ -19,7 +19,7 @@ export const load = async ({
 	// Build tree for navigation
 	const tree: Record<string, any> = {};
 	for (const page of pages) {
-		const path = [page.subsection, page];
+		const path = [page.meta.subsection, page];
 		deepInsert(tree, path);
 	}
 

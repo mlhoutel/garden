@@ -1,146 +1,89 @@
-import seedrandom from 'seedrandom';
-import type { Vec2 as Vec2Type, Node as NodeType, Edge as EdgeType } from '$types/types';
+import type { GraphData, Node, Edge } from '$types/types';
+import type { Page } from '$types/types';
+import crypto from 'crypto';
 
-class Vec2 implements Vec2Type {
-	constructor(
-		public x: number,
-		public y: number
-	) {}
-
-	add(other: Vec2) {
-		return new Vec2(this.x + other.x, this.y + other.y);
-	}
-
-	times(scalar: number) {
-		return new Vec2(this.x * scalar, this.y * scalar);
-	}
-
-	get length(): number {
-		return Math.sqrt(this.x * this.x + this.y * this.y);
-	}
-
-	get normalized(): Vec2 {
-		const len = this.length || 1;
-		return this.times(1 / len);
-	}
-
-	get negated(): Vec2 {
-		return new Vec2(-this.x, -this.y);
-	}
+/** Generate unique edge IDs */
+function edgeId(a: string, b: string): string {
+	const [x, y] = [a, b].sort();
+	return crypto.createHash('md5').update(`${x}-${y}`).digest('hex');
 }
 
-class Node implements NodeType {
-	label: string;
-	count: number;
-	pos: Vec2;
+/** Build a topic graph:
+ *  - Each topic is a node
+ *  - Edges connect topics that co-occur in a page
+ *  - Node size = number of pages that use this topic
+ */
+export function getTopicGraph(pages: Page[]): GraphData {
+	const topicCounts = new Map<string, number>();
+	const cooccurrence = new Map<string, number>();
 
-	constructor(label: string, count: number) {
-		this.label = label;
-		this.count = count;
-		this.pos = new Vec2(0, 0);
-	}
-}
-
-class Edge implements EdgeType {
-	nodeA: Node;
-	nodeB: Node;
-	count: number;
-
-	constructor(nodeA: Node, nodeB: Node, count: number) {
-		this.nodeA = nodeA;
-		this.nodeB = nodeB;
-		this.count = count;
-	}
-}
-
-function makePairs(items: string[]): [string, string][] {
-	const pairs: [string, string][] = [];
-	for (let i = 0; i < items.length - 1; i++) {
-		for (let j = i + 1; j < items.length; j++) {
-			pairs.push([items[i], items[j]]);
+	for (const page of pages) {
+		const topics = page.meta.topics || [];
+		for (const t of topics) {
+			topicCounts.set(t, (topicCounts.get(t) || 0) + 1);
 		}
-	}
-	return pairs;
-}
 
-function generateNodes(list: string[][]) {
-	const sorted = list.map((t) => [...t].sort());
-
-	const l_nodes: Record<string, number> = {};
-	for (const topics of sorted) {
-		for (const topic of topics) {
-			l_nodes[topic] = (l_nodes[topic] || 0) + 1;
+		// For all topic pairs in this page, count co-occurrence
+		for (let i = 0; i < topics.length; i++) {
+			for (let j = i + 1; j < topics.length; j++) {
+				const id = edgeId(topics[i], topics[j]);
+				cooccurrence.set(id, (cooccurrence.get(id) || 0) + 1);
+			}
 		}
 	}
 
-	const l_edges: Record<string, number> = {};
-	for (const topics of sorted) {
-		const pairs = makePairs(topics);
-		for (const pair of pairs) {
-			const key = pair.join(',');
-			l_edges[key] = (l_edges[key] || 0) + 1;
-		}
-	}
+	const nodes: Node[] = Array.from(topicCounts.entries()).map(([id, count]) => ({
+		id,
+		label: id,
+		size: count,
+		meta: { pages: count }
+	}));
 
-	const nodes = Object.entries(l_nodes).map(([label, count]) => new Node(label, count));
-	const map_nodes: Record<string, Node> = {};
-	for (const node of nodes) map_nodes[node.label] = node;
-
-	const edges = Object.entries(l_edges).map(([labels, count]) => {
-		const [labelA, labelB] = labels.split(',');
-		return new Edge(map_nodes[labelA], map_nodes[labelB], count);
+	const edges: Edge[] = Array.from(cooccurrence.entries()).map(([id, count]) => {
+		// Extract original topics from hash
+		// (Not stored, so we rebuild by sorting topic names again)
+		const [source_id, target_id] = id.split('-');
+		return { id, size: count, source_id, target_id };
 	});
 
 	return { nodes, edges };
 }
 
-function stepGraph(nodes: Node[], edges: Edge[]) {
-	const SPACING = 12;
+/** Build a page network:
+ *  - Each page is a node
+ *  - Edges connect pages that share at least one topic
+ *  - Edge size = number of shared topics
+ */
+export function getPageGraph(pages: Page[]): GraphData {
+	const nodes: Node[] = pages.map((page) => ({
+		id: page.meta.slug,
+		label: page.meta.title || page.meta.slug,
+		size: page.meta.words,
+		meta: { ...page }
+	}));
 
-	for (let i = 0; i < nodes.length - 1; i++) {
-		for (let j = i + 1; j < nodes.length; j++) {
-			const nodeA = nodes[i];
-			const nodeB = nodes[j];
+	const edgesMap = new Map<string, number>();
 
-			const diff_pos = nodeB.pos.add(nodeA.pos.negated);
-			const diff_dist = diff_pos.length;
+	for (let i = 0; i < pages.length; i++) {
+		const p1 = pages[i];
+		const topics1 = new Set(p1.meta.topics || []);
 
-			if (diff_dist < SPACING) {
-				const correction = (SPACING - diff_dist) / 2;
-				const halfspace = diff_pos.normalized.times(correction);
+		for (let j = i + 1; j < pages.length; j++) {
+			const p2 = pages[j];
+			const topics2 = new Set(p2.meta.topics || []);
 
-				nodeA.pos = nodeA.pos.add(halfspace.negated);
-				nodeB.pos = nodeB.pos.add(halfspace);
+			const intersection = [...topics1].filter((t) => topics2.has(t));
+			if (intersection.length > 0) {
+				const id = edgeId(p1.meta.slug, p2.meta.slug);
+				edgesMap.set(id, intersection.length);
 			}
 		}
 	}
 
-	for (const edge of edges) {
-		const nodeA = edge.nodeA;
-		const nodeB = edge.nodeB;
-
-		const diff_pos = nodeB.pos.add(nodeA.pos.negated);
-		const diff_dist = diff_pos.length;
-
-		if (diff_dist > SPACING) {
-			const correction = (diff_dist - SPACING) / 2;
-			const halfspace = diff_pos.normalized.times(correction);
-
-			nodeA.pos = nodeA.pos.add(halfspace);
-			nodeB.pos = nodeB.pos.add(halfspace.negated);
-		}
-	}
-}
-
-export function makeGraph(list: string[][]) {
-	const { nodes, edges } = generateNodes(list);
-	const random = seedrandom('WhYVgpjCm0ToYmfJz8Lt');
-
-	for (const node of nodes) {
-		node.pos = new Vec2(random() * 400, random() * 400);
-	}
-
-	for (let i = 0; i < 10000; i++) stepGraph(nodes, edges);
+	const edges: Edge[] = Array.from(edgesMap.entries()).map(([id, count]) => {
+		const [source_id, target_id] = id.split('-');
+		return { id, size: count, source_id, target_id };
+	});
 
 	return { nodes, edges };
 }

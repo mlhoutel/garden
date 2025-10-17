@@ -3,20 +3,6 @@ export interface BreadcrumbItem {
 	href?: string; // optional, because the last item may not have a link
 }
 
-export interface Node {
-	label: string;
-	count: number;
-	pos: {
-		x: number;
-		y: number;
-	};
-}
-
-export interface Edge {
-	nodeA: Node;
-	nodeB: Node;
-}
-
 export interface IframeProps {
 	src: string;
 	title?: string;
@@ -75,23 +61,10 @@ export interface TagSelectProps {
 	dropdown?: boolean;
 }
 
-export interface ArticleMeta {
-	title: string;
-	short: string;
-	topic?: string;
-	words: number;
-	time: number;
-}
-
-export interface ArticleItem {
-	path: string;
-	meta: ArticleMeta;
-}
-
 export interface NestedListItem {
 	label?: string;
 	items?: NestedListItem[];
-	[key: string]: any; // for additional properties used by ListItemGeneric
+	[key: string]: any; // for additional properties used by TreeListItem
 }
 
 export interface LinkItem {
@@ -101,29 +74,20 @@ export interface LinkItem {
 export interface PageMeta {
 	title: string;
 	date: string;
-	published?: boolean;
+	published: boolean;
+	words: number;
+	section?: string;
+	subsection?: string;
+	slug: string;
+	time: number;
 	[extra: string]: any;
 }
 
-export interface PageManifestEntry {
-	section: string;
-	path: string;
-	meta: PageMeta;
-	html?: string;
-}
-
 export interface Page {
+	meta: PageMeta;
 	file: any;
-	section?: string;
-	subsection?: string;
-	slug?: string;
 	path: string;
-	meta: PageMeta & { words?: number };
 	html?: string;
-	words?: number;
-	title?: string;
-	date?: string;
-	published?: boolean;
 }
 
 export interface LinkItem {
@@ -155,15 +119,34 @@ export interface Vec2 {
 }
 
 export interface Node {
+	id: string;
 	label: string;
-	count: number;
-	pos: Vec2;
+	size: number;
+	meta?: any;
 }
 
 export interface Edge {
-	nodeA: Node;
-	nodeB: Node;
-	count: number;
+	id: string;
+	size: number;
+	source_id: string;
+	target_id: string;
+}
+
+export interface GraphData {
+	nodes: Node[];
+	edges: Edge[];
+}
+
+export interface SimulationNode extends Node {
+	x?: number;
+	y?: number;
+	fx?: number | null;
+	fy?: number | null;
+}
+
+export interface SimulationLink extends Edge {
+	source: SimulationNode | string;
+	target: SimulationNode | string;
 }
 
 export interface PageLoadReturn {

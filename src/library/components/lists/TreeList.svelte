@@ -1,25 +1,25 @@
 <script lang="ts">
 	import { toAnchor } from '$utils/format.js';
-	import ListItemGeneric from '$components/lists/ListItemGeneric.svelte';
-	import type { NestedListItem, ArticleItem } from '$types/types';
+	import TreeListItem from '$components/lists/TreeListItem.svelte';
+	import type { NestedListItem, Page } from '$types/types';
 
-	function isArticleItem(obj: any): obj is ArticleItem {
-		return obj && typeof obj.path === 'string' && 'meta' in obj;
+	function isPage(obj: any): obj is Page {
+		return obj && typeof obj.path === 'string';
 	}
 
 	export let depth: number = 0;
 	export let items: NestedListItem[] | NestedListItem;
 
-	let item: ArticleItem | undefined;
+	let item: Page | undefined;
 
-	if (!Array.isArray(items) && isArticleItem(items)) {
+	if (!Array.isArray(items) && isPage(items)) {
 		item = items; // safe now
 	}
 </script>
 
 {#if item}
 	<slot {item}>
-		<ListItemGeneric {item} />
+		<TreeListItem {item} />
 	</slot>
 {:else if Array.isArray(items)}
 	<section>
@@ -47,7 +47,7 @@
 			{#each theme.items ?? [] as item, i (`${i}_${item.label}`)}
 				<svelte:self items={item} depth={depth + 1} let:item>
 					<slot {item}>
-						<ListItemGeneric {item} />
+						<TreeListItem {item} />
 					</slot>
 				</svelte:self>
 			{/each}

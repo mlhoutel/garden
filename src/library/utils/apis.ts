@@ -1,6 +1,6 @@
 import pagesManifest from '$meta/manifest.json';
 import { base } from '$app/paths';
-import type { PageManifestEntry, Page, LinkItem, ListPagesOptions } from '$types/types';
+import type { PageMeta, Page, LinkItem, ListPagesOptions } from '$types/types';
 
 /**
  * List pages in a given section
@@ -8,24 +8,9 @@ import type { PageManifestEntry, Page, LinkItem, ListPagesOptions } from '$types
 export async function listPages(section?: string, options: ListPagesOptions = {}): Promise<Page[]> {
 	const { includeDrafts = false } = options;
 
-	const pages = (pagesManifest as PageManifestEntry[]).filter((p) => p.section === section);
+	const pages = (pagesManifest as Page[]).filter((p) => p.meta.section === section);
 
 	return pages
-		.map((e) => {
-			const meta = { ...e.meta };
-			const parts = e.path.split('/');
-			const subsection = parts[1]; // section/subsection/file.md
-			const slug = parts[2]?.replace(/\.md$/, '');
-
-			return {
-				...e,
-				meta,
-				section,
-				subsection,
-				slug,
-				path: e.path.replace(/\.md$/, '')
-			} as Page;
-		})
 		.filter((p) => includeDrafts || p.meta.published !== false)
 		.sort((a, b) => new Date(a.meta.date).getTime() - new Date(b.meta.date).getTime());
 }
@@ -34,10 +19,7 @@ export async function listPages(section?: string, options: ListPagesOptions = {}
  * Get navigation link items dynamically
  */
 export async function getLinksItems(fetch: typeof window.fetch): Promise<LinkItem[]> {
-	const links: LinkItem[] = [
-		{ label: 'home', link: `${base}/` },
-		{ label: 'about', link: `${base}/about` }
-	];
+	const links: LinkItem[] = [];
 
 	try {
 		const res = await fetch(`${base}/api/sections`);
@@ -62,8 +44,8 @@ export async function getLinksItems(fetch: typeof window.fetch): Promise<LinkIte
 		if (!isNaN(aNum)) return -1; // numbers before text
 		if (!isNaN(bNum)) return 1; // numbers before text
 
-		return b.label.localeCompare(a.label);
+		return a.label.localeCompare(b.label);
 	});
 
-	return links;
+	return [{ label: 'home', link: `${base}/` }, ...links, { label: 'about', link: `${base}/about` }];
 }

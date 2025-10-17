@@ -5,7 +5,7 @@ import pagesManifest from '$meta/manifest.json';
 export const GET: RequestHandler = async () => {
 	// Extract unique sections
 	const sections: string[] = [
-		...new Set(pagesManifest.map((p: any) => String(p.section)))
+		...new Set(pagesManifest.map((p: any) => String(p.meta.section)))
 	] as string[];
 
 	// Sort sections: numbers descending first, then text
@@ -17,7 +17,7 @@ export const GET: RequestHandler = async () => {
 		if (!isNaN(aNum)) return -1; // numbers before text
 		if (!isNaN(bNum)) return 1; // numbers before text
 
-		return String(b).localeCompare(String(a));
+		return String(a).localeCompare(String(b));
 	});
 
 	return json(sections);

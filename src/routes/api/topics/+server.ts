@@ -1,16 +1,10 @@
-import type { RequestHandler } from '@sveltejs/kit';
 import { json } from '@sveltejs/kit';
-import { listPages } from '$utils/apis';
 import type { Page } from '$types/types';
+import { getTopicGraph } from '$utils/graph';
+import pagesManifest from '$meta/manifest.json';
 
-export const GET: RequestHandler = async () => {
-	// Get all pages
-	const pages: Page[] = await listPages();
+export const prerender = true;
 
-	// Extract unique topics
-	const topics: string[] = [
-		...new Set(pages.map((p: any) => p.meta.topic?.split(' ') || []).flat(2))
-	] as string[];
-
-	return json({ topics });
+export const GET = () => {
+	return json(getTopicGraph(pagesManifest as Page[]));
 };
