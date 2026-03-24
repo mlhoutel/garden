@@ -210,40 +210,69 @@ function buildGithubEmbed(props: Record<string, string>): Element {
 	const GH_ICON = 'M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z';
 	const STAR_ICON = 'M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z';
 
-	// Background: esoteric SVG with concentric rings, orbital dots, corner glyphs
+	// Background SVG with OVERFLOW — elements extend beyond card boundaries
+	// viewBox extends 30px outside each edge to allow overflow
+	const cx = 460, cy = 70; // orbital center (right side, overflows right edge)
 	const bgSvg = h('svg', {
-		viewBox: '0 0 500 120', className: ['embed-github-bg'],
-		preserveAspectRatio: 'xMidYMid slice', xmlns: 'http://www.w3.org/2000/svg'
+		viewBox: '-30 -30 560 180', className: ['embed-github-bg'],
+		preserveAspectRatio: 'xMidYMid slice', xmlns: 'http://www.w3.org/2000/svg',
+		style: 'overflow:visible;'
 	}, [
-		// Concentric rings at right side (like a small sun/planet)
-		svgCircle(430, 60, 40, { fill: 'none', stroke: '#D4A017', 'stroke-width': '0.3', opacity: '0.08' }),
-		svgCircle(430, 60, 30, { fill: 'none', stroke: '#D4A017', 'stroke-width': '0.4', opacity: '0.1', 'stroke-dasharray': '2 4' }),
-		svgCircle(430, 60, 20, { fill: 'none', stroke: '#D4A017', 'stroke-width': '0.3', opacity: '0.12' }),
-		svgCircle(430, 60, 10, { fill: 'none', stroke: '#D4A017', 'stroke-width': '0.3', opacity: '0.08' }),
-		svgCircle(430, 60, 3, { fill: '#D4A017', opacity: '0.15' }),
-		// Orbital dots on the 30-radius ring
-		...[0, 72, 144, 216, 288].map((deg) => {
+		// === RIGHT SIDE: orbital system that overflows the card ===
+		// Concentric rings — outer ones extend past card boundary
+		svgCircle(cx, cy, 65, { fill: 'none', stroke: '#D4A017', 'stroke-width': '0.2', opacity: '0.05', 'stroke-dasharray': '3 8' }),
+		svgCircle(cx, cy, 50, { fill: 'none', stroke: '#D4A017', 'stroke-width': '0.3', opacity: '0.07' }),
+		svgCircle(cx, cy, 38, { fill: 'none', stroke: '#D4A017', 'stroke-width': '0.4', opacity: '0.09', 'stroke-dasharray': '2 5' }),
+		svgCircle(cx, cy, 25, { fill: 'none', stroke: '#D4A017', 'stroke-width': '0.3', opacity: '0.1' }),
+		svgCircle(cx, cy, 14, { fill: 'none', stroke: '#D4A017', 'stroke-width': '0.3', opacity: '0.08' }),
+		svgCircle(cx, cy, 4, { fill: '#D4A017', opacity: '0.15' }),
+		// Radial lines extending outward
+		...[0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330].map((deg) => {
 			const a = (deg * Math.PI) / 180;
-			return svgCircle(430 + Math.cos(a) * 30, 60 + Math.sin(a) * 30, 1.2, { fill: '#D4A017', opacity: '0.2' });
+			return svgLine(cx + Math.cos(a) * 16, cy + Math.sin(a) * 16, cx + Math.cos(a) * 23, cy + Math.sin(a) * 23, '#D4A017', 0.25, 0.07);
 		}),
-		// Radial lines from center
-		...[0, 45, 90, 135, 180, 225, 270, 315].map((deg) => {
-			const a = (deg * Math.PI) / 180;
-			return svgLine(430 + Math.cos(a) * 12, 60 + Math.sin(a) * 12, 430 + Math.cos(a) * 18, 60 + Math.sin(a) * 18, '#D4A017', 0.3, 0.08);
-		}),
-		// Corner diamonds
+		// Animated orbiting dots — slow ring (r=38)
+		h('g', { className: ['embed-github-orbit-slow'], style: `transform-origin: ${cx}px ${cy}px;` }, [
+			svgCircle(cx + 38, cy, 1.8, { fill: '#D4A017', opacity: '0.3' }),
+			svgCircle(cx - 38, cy, 1.0, { fill: '#D4A017', opacity: '0.2' }),
+			svgCircle(cx, cy - 38, 1.3, { fill: '#D4A017', opacity: '0.25' }),
+		]),
+		// Animated orbiting dots — fast ring (r=50)
+		h('g', { className: ['embed-github-orbit-fast'], style: `transform-origin: ${cx}px ${cy}px;` }, [
+			svgCircle(cx + 50, cy, 1.2, { fill: '#D4A017', opacity: '0.2' }),
+			svgCircle(cx - 25, cy + 43, 0.8, { fill: '#D4A017', opacity: '0.15' }),
+		]),
+
+		// === LEFT SIDE: small secondary orbital at top-left corner, overflows ===
+		svgCircle(-8, -5, 18, { fill: 'none', stroke: '#D4A017', 'stroke-width': '0.2', opacity: '0.06' }),
+		svgCircle(-8, -5, 10, { fill: 'none', stroke: '#D4A017', 'stroke-width': '0.25', opacity: '0.08', 'stroke-dasharray': '1.5 3' }),
+		svgCircle(-8, -5, 2, { fill: '#D4A017', opacity: '0.1' }),
+
+		// === CORNER DIAMONDS with extending lines ===
+		// Top-left: diamond + line extending up-left
 		svgPolygon('12,6 16,2 20,6 16,10', { fill: 'none', stroke: '#D4A017', 'stroke-width': '0.4', opacity: '0.12' }),
-		svgPolygon('480,6 484,2 488,6 484,10', { fill: 'none', stroke: '#D4A017', 'stroke-width': '0.4', opacity: '0.12' }),
+		svgLine(12, 2, -15, -18, '#D4A017', 0.25, 0.06),
+		// Top-right: diamond + line extending up-right
+		svgPolygon('488,6 492,2 496,6 492,10', { fill: 'none', stroke: '#D4A017', 'stroke-width': '0.4', opacity: '0.12' }),
+		svgLine(496, 2, 520, -15, '#D4A017', 0.25, 0.06),
+		// Bottom-left
 		svgPolygon('12,114 16,110 20,114 16,118', { fill: 'none', stroke: '#D4A017', 'stroke-width': '0.4', opacity: '0.12' }),
-		svgPolygon('480,114 484,110 488,114 484,118', { fill: 'none', stroke: '#D4A017', 'stroke-width': '0.4', opacity: '0.12' }),
-		// Horizontal accent lines
-		svgLine(24, 6, 200, 6, '#D4A017', 0.3, 0.06),
-		svgLine(300, 6, 476, 6, '#D4A017', 0.3, 0.06),
-		svgLine(24, 114, 200, 114, '#D4A017', 0.3, 0.06),
-		svgLine(300, 114, 476, 114, '#D4A017', 0.3, 0.06),
-		// Vertical edge lines
-		svgLine(8, 14, 8, 106, '#D4A017', 0.3, 0.04),
-		svgLine(492, 14, 492, 106, '#D4A017', 0.3, 0.04),
+		svgLine(12, 118, -10, 140, '#D4A017', 0.25, 0.05),
+		// Bottom-right
+		svgPolygon('488,114 492,110 496,114 492,118', { fill: 'none', stroke: '#D4A017', 'stroke-width': '0.4', opacity: '0.12' }),
+		svgLine(496, 118, 515, 138, '#D4A017', 0.25, 0.05),
+
+		// === BORDER LINES with dots ===
+		svgLine(24, 0, 220, 0, '#D4A017', 0.3, 0.06),
+		svgLine(280, 0, 480, 0, '#D4A017', 0.3, 0.06),
+		svgLine(24, 120, 220, 120, '#D4A017', 0.3, 0.06),
+		svgLine(280, 120, 480, 120, '#D4A017', 0.3, 0.06),
+		svgLine(0, 14, 0, 106, '#D4A017', 0.3, 0.04),
+		svgLine(500, 14, 500, 106, '#D4A017', 0.3, 0.04),
+		// Small dots along top line
+		svgCircle(120, 0, 0.8, { fill: '#D4A017', opacity: '0.1' }),
+		svgCircle(250, 0, 1.0, { fill: '#D4A017', opacity: '0.08' }),
+		svgCircle(380, 0, 0.8, { fill: '#D4A017', opacity: '0.1' }),
 	]);
 
 	// GitHub icon

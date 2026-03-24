@@ -39,16 +39,22 @@
 					level: parseInt(h.tagName[1])
 				}));
 
-			// Scroll-driven iframe animation: toggle .embed-in-view when centered
+			// Scroll-driven iframe animation with hysteresis to prevent flicker
 			const fullwidthEmbeds = article.querySelectorAll('.embed-fullwidth');
 			if (fullwidthEmbeds.length > 0) {
 				const embedObserver = new IntersectionObserver(
 					(entries) => {
 						for (const entry of entries) {
-							entry.target.classList.toggle('embed-in-view', entry.intersectionRatio > 0.6);
+							const isInView = entry.target.classList.contains('embed-in-view');
+							// Enter at 55%, leave at 40% — different thresholds prevent rapid toggling
+							if (!isInView && entry.intersectionRatio > 0.55) {
+								entry.target.classList.add('embed-in-view');
+							} else if (isInView && entry.intersectionRatio < 0.4) {
+								entry.target.classList.remove('embed-in-view');
+							}
 						}
 					},
-					{ threshold: [0, 0.3, 0.6, 1.0] }
+					{ threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.45, 0.5, 0.55, 0.6, 0.7, 0.8, 0.9, 1.0] }
 				);
 				fullwidthEmbeds.forEach((el) => embedObserver.observe(el));
 			}
