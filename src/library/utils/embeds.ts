@@ -33,6 +33,9 @@ export default function rehypeEmbeds() {
 				case 'iframe':
 					replacement = buildIframeEmbed(props, flags);
 					break;
+				case 'github':
+					replacement = buildGithubEmbed(props);
+					break;
 				// Future types: case 'video': case 'codepen': case 'jsxgraph': etc.
 			}
 
@@ -181,6 +184,79 @@ function buildChromeBar(title: string): Element {
 				type: 'raw',
 				value: `<button class="embed-fullscreen-btn" onclick="(function(b){var c=b.closest('.embed-container');if(!c)return;if(document.fullscreenElement){document.exitFullscreen()}else{c.requestFullscreen()}})(this)" title="Toggle fullscreen" aria-label="Toggle fullscreen">⛶</button>`
 			} as any
+		]
+	};
+}
+
+/**
+ * Build a GitHub repository card embed.
+ *
+ * Usage in markdown:
+ *   <div data-embed="github" data-repo="mlhoutel/SMatrices" data-description="Python symbolic matrix computation library" data-lang="Python" data-stars="12"></div>
+ */
+function buildGithubEmbed(props: Record<string, string>): Element {
+	const repo = props['repo'] || '';
+	const description = props['description'] || '';
+	const lang = props['lang'] || '';
+	const stars = props['stars'] || '';
+	const license = props['license'] || '';
+	const url = `https://github.com/${repo}`;
+	const [owner, name] = repo.split('/');
+
+	// Language color dots (approximate GitHub colors)
+	const langColors: Record<string, string> = {
+		python: '#3572A5', javascript: '#f1e05a', typescript: '#3178c6',
+		rust: '#dea584', go: '#00ADD8', java: '#b07219', 'c++': '#f34b7d',
+		c: '#555555', haskell: '#5e5086', svelte: '#ff3e00', html: '#e34c26',
+		css: '#563d7c', shell: '#89e051', lua: '#000080'
+	};
+	const langColor = langColors[lang.toLowerCase()] || '#D4A017';
+
+	// Esoteric ornament SVG for the top border
+	const ornamentSvg = `<svg viewBox="0 0 400 8" style="width:100%;height:8px;display:block;" preserveAspectRatio="xMidYMid meet"><line x1="0" y1="4" x2="150" y2="4" stroke="#D4A017" stroke-width="0.4" opacity="0.15"/><polygon points="155,4 159,1.5 163,4 159,6.5" fill="#D4A017" opacity="0.25"/><line x1="168" y1="4" x2="232" y2="4" stroke="#D4A017" stroke-width="0.5" opacity="0.2"/><polygon points="237,4 241,1.5 245,4 241,6.5" fill="#D4A017" opacity="0.25"/><line x1="250" y1="4" x2="400" y2="4" stroke="#D4A017" stroke-width="0.4" opacity="0.15"/></svg>`;
+
+	// Build the star/meta info line
+	const metaParts: string[] = [];
+	if (lang) {
+		metaParts.push(`<span style="display:inline-flex;align-items:center;gap:4px;"><span style="width:8px;height:8px;border-radius:50%;background:${langColor};display:inline-block;"></span>${lang}</span>`);
+	}
+	if (stars) {
+		metaParts.push(`<span style="display:inline-flex;align-items:center;gap:3px;"><svg viewBox="0 0 16 16" style="width:12px;height:12px;"><path d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z" fill="#D4A017"/></svg>${stars}</span>`);
+	}
+	if (license) {
+		metaParts.push(`<span>${license}</span>`);
+	}
+	const metaHtml = metaParts.join(`<span style="opacity:0.3;">·</span>`);
+
+	return {
+		type: 'element',
+		tagName: 'a',
+		properties: {
+			className: ['embed-container', 'embed-github'],
+			href: url,
+			target: '_blank',
+			rel: 'noreferrer',
+			style: 'display:block; text-decoration:none; margin:2rem 0; color:inherit;'
+		},
+		children: [
+			// Top ornament
+			{ type: 'raw', value: ornamentSvg } as any,
+			// Card body
+			{
+				type: 'raw',
+				value: `<div class="embed-github-body">
+					<div class="embed-github-header">
+						<svg viewBox="0 0 16 16" style="width:18px;height:18px;flex-shrink:0;"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" fill="#D4A017" opacity="0.7"/></svg>
+						<div>
+							<span class="embed-github-owner">${owner || ''}/</span><span class="embed-github-name">${name || repo}</span>
+						</div>
+					</div>
+					${description ? `<p class="embed-github-desc">${description}</p>` : ''}
+					${metaHtml ? `<div class="embed-github-meta">${metaHtml}</div>` : ''}
+				</div>`
+			} as any,
+			// Bottom ornament
+			{ type: 'raw', value: ornamentSvg } as any
 		]
 	};
 }
