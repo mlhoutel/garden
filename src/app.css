@@ -655,7 +655,7 @@
 		overflow-x: clip;
 	}
 
-	/* Default state: smaller with rounded corners, magnetic spring easing */
+	/* Default state: smaller with rounded corners, mechanical easing */
 	article .embed-sticky-wrapper .embed-fullwidth {
 		z-index: 20;
 		left: auto;
@@ -664,29 +664,30 @@
 		border-radius: 14px;
 		background: #1A1A1A;
 		box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
-		transition: transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1),
-					box-shadow 0.7s cubic-bezier(0.22, 0.61, 0.36, 1),
-					border-radius 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+		transition: transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1),
+					box-shadow 0.5s cubic-bezier(0.25, 0.1, 0.25, 1),
+					border-radius 0.4s cubic-bezier(0.25, 0.1, 0.25, 1),
+					border 0.3s ease;
 	}
 
-	/* Hover when not yet sticky — magnetic pull toward full size */
+	/* Hover when not yet sticky — steady pull toward full size */
 	article .embed-sticky-wrapper .embed-fullwidth:hover {
 		transform: scale(0.94);
 		box-shadow: 0 8px 40px rgba(0, 0, 0, 0.2),
 					0 0 60px rgba(212, 160, 23, 0.04);
 	}
 
-	/* When fixed to viewport — snap to full size with satisfying click feel */
+	/* When fixed to viewport — mechanical lock to full size, no bounce */
 	article .embed-sticky-wrapper .embed-fullwidth.embed-in-view {
 		transform: scale(1);
 		border-radius: 0;
-		/* Spring overshoot easing gives a magnetic "snap" feel */
-		transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
-					box-shadow 0.5s ease,
-					border-radius 0.3s ease;
+		border: none;
+		transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+					box-shadow 0.4s ease,
+					border-radius 0.25s ease,
+					border 0.2s ease;
 		box-shadow: 0 16px 80px rgba(0, 0, 0, 0.4),
-					0 0 120px rgba(212, 160, 23, 0.06),
-					0 0 0 1px rgba(212, 160, 23, 0.12);
+					0 0 120px rgba(212, 160, 23, 0.06);
 	}
 
 	/* No hover effect when already sticky */

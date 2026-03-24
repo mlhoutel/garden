@@ -47,7 +47,7 @@
 				const embed = w.querySelector('.embed-fullwidth') as HTMLElement | null;
 				if (!embed) return;
 
-				const TRAVEL = 1000;
+				const TRAVEL = 2000;
 				// Get header height for offset
 				const header = document.querySelector('nav');
 				const HEADER_H = header ? header.offsetHeight : 50;
