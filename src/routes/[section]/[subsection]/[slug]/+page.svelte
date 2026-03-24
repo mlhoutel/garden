@@ -28,6 +28,7 @@
 		}
 		window.addEventListener('scroll', updateProgress, { passive: true });
 
+		const stickyCleanups: (() => void)[] = [];
 		const article = document.querySelector('article');
 		if (article) {
 			const headings = article.querySelectorAll('h2, h3');
@@ -39,28 +40,60 @@
 					level: parseInt(h.tagName[1])
 				}));
 
-			// Scroll-driven iframe animation with hysteresis to prevent flicker
-			const fullwidthEmbeds = article.querySelectorAll('.embed-fullwidth');
-			if (fullwidthEmbeds.length > 0) {
-				const embedObserver = new IntersectionObserver(
-					(entries) => {
-						for (const entry of entries) {
-							const isInView = entry.target.classList.contains('embed-in-view');
-							// Enter at 55%, leave at 40% — different thresholds prevent rapid toggling
-							if (!isInView && entry.intersectionRatio > 0.55) {
-								entry.target.classList.add('embed-in-view');
-							} else if (isInView && entry.intersectionRatio < 0.4) {
-								entry.target.classList.remove('embed-in-view');
-							}
-						}
-					},
-					{ threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.45, 0.5, 0.55, 0.6, 0.7, 0.8, 0.9, 1.0] }
-				);
-				fullwidthEmbeds.forEach((el) => embedObserver.observe(el));
-			}
+			// JS-powered sticky iframe: position:fixed during scroll range
+			const stickyWrappers = article.querySelectorAll('.embed-sticky-wrapper');
+			stickyWrappers.forEach((wrapper) => {
+				const embed = wrapper.querySelector('.embed-fullwidth') as HTMLElement | null;
+				if (!embed) return;
+
+				const TRAVEL = 500;
+				(wrapper as HTMLElement).style.paddingBottom = TRAVEL + 'px';
+
+				function updateSticky() {
+					const rect = (wrapper as HTMLElement).getBoundingClientRect();
+					const embedH = embed!.offsetHeight;
+
+					if (rect.top <= 0 && rect.bottom > embedH) {
+						// Sticky zone: fix to viewport top
+						embed!.style.position = 'fixed';
+						embed!.style.top = '0';
+						embed!.style.bottom = 'auto';
+						embed!.style.left = rect.left + 'px';
+						embed!.style.width = (wrapper as HTMLElement).offsetWidth + 'px';
+						embed!.classList.add('embed-in-view');
+					} else if (rect.bottom <= embedH) {
+						// Past sticky zone: anchor to wrapper bottom
+						embed!.style.position = 'absolute';
+						embed!.style.top = 'auto';
+						embed!.style.bottom = '0';
+						embed!.style.left = '0';
+						embed!.style.width = '100%';
+						embed!.classList.remove('embed-in-view');
+					} else {
+						// Before sticky zone: normal flow
+						embed!.style.position = 'relative';
+						embed!.style.top = 'auto';
+						embed!.style.bottom = 'auto';
+						embed!.style.left = 'auto';
+						embed!.style.width = '100%';
+						embed!.classList.remove('embed-in-view');
+					}
+				}
+
+				window.addEventListener('scroll', updateSticky, { passive: true });
+				window.addEventListener('resize', updateSticky, { passive: true });
+				updateSticky();
+				stickyCleanups.push(() => {
+					window.removeEventListener('scroll', updateSticky);
+					window.removeEventListener('resize', updateSticky);
+				});
+			});
 		}
 
-		return () => window.removeEventListener('scroll', updateProgress);
+		return () => {
+			window.removeEventListener('scroll', updateProgress);
+			stickyCleanups.forEach((fn) => fn());
+		};
 	});
 </script>
 
