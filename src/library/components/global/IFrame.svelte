@@ -1,31 +1,44 @@
-<script>
+<script lang="ts">
 	import Loader from '$components/global/Loader.svelte';
-	export let src;
-	export let title;
-	export let fstyle = 'position: absolute; left: 0; height: 100%; width: 100%; border: none';
-	export let fclass = '';
+	import type { IframeProps } from '$types/types';
 
-	let loading = true;
+	let {
+		src,
+		title,
+		rootStyle = '',
+		rootClass = '',
+		iframeStyle = 'position: absolute; left: 0; height: 100%; width: 100%; border: none',
+		iframeClass = ''
+	}: {
+		src: IframeProps['src'];
+		title: IframeProps['title'];
+		rootStyle?: string;
+		rootClass?: string;
+		iframeStyle?: string;
+		iframeClass?: string;
+	} = $props();
+
+	let loading = $state(true);
 </script>
 
-<div>
+<div style={rootStyle} class={rootClass}>
 	{#if loading}
 		<div
-			class="absolute left-0 w-full h-full z-10 background-primary flex items-center justify-center"
+			class="background-primary absolute left-0 z-10 flex h-full w-full items-center justify-center"
 		>
 			<div class="w-[100px]">
-				<p class="p-0 text-xs text-center pb-1">loading...</p>
+				<p class="p-0 pb-1 text-center text-xs">loading...</p>
 				<Loader bind:loading />
 			</div>
 		</div>
 	{/if}
 
 	<iframe
-		on:load={() => (loading = false)}
+		onload={() => (loading = false)}
 		{src}
 		{title}
 		loading="lazy"
-		style={fstyle}
-		class={fclass}
-	/>
+		style={iframeStyle}
+		class={iframeClass}
+	></iframe>
 </div>

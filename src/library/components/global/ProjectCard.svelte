@@ -1,19 +1,18 @@
-<script>
+<script lang="ts">
 	import { base } from '$app/paths';
+	import type { Project } from '$types/types';
 
-	export let project = undefined;
+	let { project }: { project: Project } = $props();
 </script>
 
-<div class="relative  overflow-hidden h-[130px] sm:h-[200px] md:h-[300px] lg:h-[400px]">
+<div class="relative h-[130px] overflow-hidden sm:h-[200px] md:h-[300px] lg:h-[400px]">
 	<img
-		src="{base}/images/{project.short}/0.png"
+		src={`${base}/images/${project.short}/0.png`}
 		alt="cover"
-		class="object-cover w-full h-full brightness-50"
+		class="h-full w-full object-cover brightness-50"
 	/>
 
-	<h2
-		class="absolute w-full text-center content-medium bottom-0 inset-x-0 text-white p-3 lg:p-10"
-	>
+	<h2 class="content-medium absolute inset-x-0 bottom-0 w-full p-3 text-center text-white lg:p-10">
 		{project.title}
 	</h2>
 </div>

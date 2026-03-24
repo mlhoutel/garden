@@ -1,50 +1,44 @@
-import fs from 'fs';
+import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 import path from 'path';
 
-import preprocess from 'svelte-preprocess';
-import { mdsvex } from 'mdsvex';
-import mdsvexConfig from './mdsvex.config.js';
-
-const manifestPath = path.resolve('./src/meta/manifest.json');
-const pagesManifest = JSON.parse(fs.readFileSync(manifestPath, 'utf-8'));
-
-/*
-// DYNAMIC DEPLOYEMENT
-import adapter from '@sveltejs/adapter-auto';
-*/
-
-// STATIC DEPLOYMENT
 import adapter from '@sveltejs/adapter-static';
 
-/*
-// if you want to deploy to github pages, uncomment this block
-// as well as the "paths" property in the code below.
-const dev = process.env.NODE_ENV === 'development';
-const base = dev ? '' : '/garden'
-*/
+const dev = process.argv.includes('dev');
+const base = dev ? '' : process.env.BASE_PATH || '';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-	extensions: ['.svelte', ...mdsvexConfig.extensions],
-	preprocess: [mdsvex(mdsvexConfig), preprocess()],
+	extensions: ['.svelte'],
+	preprocess: vitePreprocess(),
 	kit: {
 		adapter: adapter({
 			strict: false,
 			fallback: 'error.html'
-		})
-		/*
+		}),
+
+		alias: {
+			$images: path.resolve('static/images'),
+			$logos: path.resolve('static/logos'),
+			$meta: path.resolve('src/meta'),
+			$routes: path.resolve('src/routes'),
+			$content: path.resolve('src/content'),
+			$components: path.resolve('src/library/components'),
+			$styles: path.resolve('src/library/styles'),
+			$utils: path.resolve('src/library/utils'),
+			$library: path.resolve('src/library'),
+			$types: path.resolve('src/library/types')
+		},
 		prerender: {
 			entries: ['*'],
 			handleHttpError: ({ path, referrer, message }) => {
 				if (message.includes('404')) {
 					console.warn(`⚠️  Skipping prerender of missing page: ${path} (linked from ${referrer})`);
-					return; // ignore missing routes during crawl
+					return;
 				}
 				throw new Error(message);
 			}
-		}
-		*/
-		// paths: { base: base }
+		},
+		paths: { base }
 	}
 };
 
