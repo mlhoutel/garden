@@ -14,6 +14,7 @@ import rehypePrettyCode from 'rehype-pretty-code';
 import rehypeCitation from 'rehype-citation';
 import rehypeStringify from 'rehype-stringify';
 import rehypeMermaid from './mermaid';
+import rehypeEmbeds from './embeds';
 import { transformerCopyButton } from '@rehype-pretty/transformers';
 
 function mergeClasses(
@@ -64,6 +65,7 @@ export async function renderMarkdown(
 		.use(remarkRehype, { allowDangerousHtml: true }) // convert to rehype AST
 		.use(rehypeKatex) // render math nodes
 		.use(rehypeRaw) // allow inline HTML
+		.use(rehypeEmbeds) // transform data-embed divs into rendered components
 		.use(rehypeSlug)
 		.use(rehypeAutolinkHeadings, { behavior: 'wrap' })
 		.use(rehypePrettyCode, {

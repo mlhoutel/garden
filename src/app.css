@@ -626,6 +626,17 @@
 		color: var(--color-text-muted);
 	}
 
+	/* Inline embeds (iframe, video, etc.) */
+	article .embed-container {
+		border-radius: 6px;
+		overflow: hidden;
+		border: 1px solid var(--color-border);
+	}
+
+	article .embed-iframe iframe {
+		background-color: var(--color-surface);
+	}
+
 	/* Emphasis */
 	article em {
 		font-style: italic;
