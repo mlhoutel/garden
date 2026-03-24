@@ -170,9 +170,16 @@ function buildChromeBar(title: string): Element {
 		svgPolygon('2,10 6,7.5 6,12.5', { fill: '#D4A017', opacity: '0.2' })
 	]);
 
+	// Minimize button (collapse iframe to just the chrome bar)
+	const minimizeBtn = h('button', {
+		className: ['embed-chrome-btn', 'embed-minimize-btn'],
+		title: 'Minimize',
+		'aria-label': 'Minimize'
+	}, [t('\u2500')]); // ─ horizontal line character
+
 	// Fullscreen button
 	const fullscreenBtn = h('button', {
-		className: ['embed-fullscreen-btn'],
+		className: ['embed-chrome-btn', 'embed-fullscreen-btn'],
 		onclick: "(function(b){var c=b.closest('.embed-container');if(!c)return;if(document.fullscreenElement){document.exitFullscreen()}else{c.requestFullscreen()}})(this)",
 		title: 'Toggle fullscreen',
 		'aria-label': 'Toggle fullscreen'
@@ -184,6 +191,7 @@ function buildChromeBar(title: string): Element {
 		h('span', { className: ['embed-chrome-title'] }, [t(title)]),
 		goldDiamond(),
 		rightSvg,
+		minimizeBtn,
 		fullscreenBtn
 	]);
 }

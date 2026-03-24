@@ -764,8 +764,8 @@
 		flex-shrink: 0;
 	}
 
-	.embed-fullscreen-btn {
-		margin-left: auto;
+	/* Chrome bar action buttons (minimize, fullscreen) */
+	.embed-chrome-btn {
 		background: none;
 		border: none;
 		cursor: pointer;
@@ -777,8 +777,31 @@
 		flex-shrink: 0;
 	}
 
-	.embed-fullscreen-btn:hover {
+	.embed-chrome-btn:hover {
 		color: rgba(212, 160, 23, 0.9);
+	}
+
+	.embed-minimize-btn {
+		margin-left: auto;
+	}
+
+	/* Minimized state: collapse iframe, show only chrome bar */
+	.embed-container.embed-minimized .embed-iframe-inner {
+		height: 0 !important;
+		min-height: 0 !important;
+		overflow: hidden;
+		padding: 0;
+		margin: 0;
+		opacity: 0;
+		transition: height 0.3s ease, opacity 0.2s ease;
+	}
+
+	.embed-container.embed-minimized .embed-chrome {
+		border-radius: 6px;
+	}
+
+	.embed-container.embed-minimized {
+		border-radius: 6px;
 	}
 
 	/* GitHub repo card — Dune-styled with overflowing esoteric elements */

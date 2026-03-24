@@ -57,8 +57,10 @@
 				w.style.minHeight = (embedH + TRAVEL) + 'px';
 
 				let state: 'normal' | 'fixed' | 'bottom' = 'normal';
+				let minimized = false;
 
 				function updateSticky() {
+					if (minimized) return;
 					const wRect = w.getBoundingClientRect();
 					// Account for header: iframe should stick below header, not at top
 					const triggerTop = HEADER_H;
@@ -109,6 +111,7 @@
 
 				window.addEventListener('scroll', updateSticky, { passive: true });
 				window.addEventListener('resize', () => {
+					if (minimized) return;
 					embed.style.position = '';
 					embed.style.top = '';
 					embed.style.bottom = '';
@@ -123,6 +126,46 @@
 					updateSticky();
 				});
 				updateSticky();
+
+				// Minimize button: collapse iframe to just the chrome bar
+				const minimizeBtn = embed.querySelector('.embed-minimize-btn');
+				if (minimizeBtn) {
+					minimizeBtn.addEventListener('click', () => {
+						minimized = !minimized;
+						if (minimized) {
+							// Reset sticky state first
+							embed.style.position = '';
+							embed.style.top = '';
+							embed.style.bottom = '';
+							embed.style.left = '';
+							embed.style.width = '';
+							embed.style.maxWidth = '';
+							embed.style.transform = '';
+							embed.style.zIndex = '';
+							embed.classList.remove('embed-in-view');
+							state = 'normal';
+							// Collapse: just the chrome bar height, no sticky travel
+							embed.classList.add('embed-minimized');
+							w.style.minHeight = '0';
+							w.style.paddingBottom = '0';
+							// Change icon to restore (▭ or similar)
+							minimizeBtn.textContent = '\u25A1'; // □ square = restore
+							minimizeBtn.setAttribute('title', 'Restore');
+							minimizeBtn.setAttribute('aria-label', 'Restore');
+						} else {
+							// Restore
+							embed.classList.remove('embed-minimized');
+							const newTravel = Math.round(window.innerHeight * 1.5);
+							w.style.minHeight = (embed.offsetHeight + newTravel) + 'px';
+							w.style.paddingBottom = '';
+							minimizeBtn.textContent = '\u2500'; // ─ horizontal line = minimize
+							minimizeBtn.setAttribute('title', 'Minimize');
+							minimizeBtn.setAttribute('aria-label', 'Minimize');
+							updateSticky();
+						}
+					});
+				}
+
 				stickyCleanups.push(() => {
 					window.removeEventListener('scroll', updateSticky);
 				});
