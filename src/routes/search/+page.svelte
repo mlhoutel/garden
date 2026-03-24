@@ -23,11 +23,13 @@
 
 	onMount(() => {
 		const params = new URLSearchParams(window.location.search);
-		searchTerm = params.get('q') || '';
-		const t = params.get('topics');
+		// Restore from URL first, then sessionStorage as fallback
+		searchTerm = params.get('q') || sessionStorage.getItem('garden-search-q') || '';
+		const t = params.get('topics') || sessionStorage.getItem('garden-search-topics') || '';
 		if (t) selectedTopics = new Set(t.split(',').filter(Boolean));
 		initialized = true;
 		doSearch();
+		updateUrl();
 	});
 
 	function doSearch() {
@@ -68,6 +70,8 @@
 	function clearFilters() {
 		selectedTopics = new Set();
 		searchTerm = '';
+		sessionStorage.removeItem('garden-search-q');
+		sessionStorage.removeItem('garden-search-topics');
 		doSearch();
 		updateUrl();
 	}
@@ -77,6 +81,11 @@
 		if (selectedTopics.size > 0) params.set('topics', [...selectedTopics].join(','));
 		const qs = params.toString();
 		history.replaceState({}, '', `${base}/search${qs ? '?' + qs : ''}`);
+		// Persist to sessionStorage as reload fallback
+		if (searchTerm) sessionStorage.setItem('garden-search-q', searchTerm);
+		else sessionStorage.removeItem('garden-search-q');
+		if (selectedTopics.size > 0) sessionStorage.setItem('garden-search-topics', [...selectedTopics].join(','));
+		else sessionStorage.removeItem('garden-search-topics');
 	}
 
 	// ─── Light-speed canvas effect ───

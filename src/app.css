@@ -248,35 +248,36 @@
 
 	pre {
 		@apply relative overflow-x-auto font-mono;
-		font-size: 0.72rem;
-		padding: 0.75rem 0.65rem;
-		background-color: #f8f4ec;
-		border: 1px solid #e0d4c0;
-		border-top: 2px solid rgba(212, 160, 23, 0.15);
-		border-radius: 6px;
+		font-size: 0.64rem;
+		line-height: 1.6;
+		padding: 0.7rem 0.5rem;
+		background-color: #faf6ee;
+		border: 1px solid #e8dcc8;
+		border-left: 3px solid rgba(212, 160, 23, 0.2);
+		border-radius: 4px;
 		counter-reset: line;
 	}
 
 	.dark pre {
-		background-color: #1e1c1a;
-		border-color: #3a3530;
-		border-top-color: rgba(212, 160, 23, 0.2);
+		background-color: #1c1a18;
+		border-color: #33302a;
+		border-left-color: rgba(212, 160, 23, 0.25);
 	}
 
 	pre code span.line {
-		@apply relative block py-[3px] pl-8;
+		@apply relative block py-[2px] pl-7;
 		counter-increment: line;
 	}
 
 	pre code span.line::before {
-		@apply absolute left-0 w-6 pr-2 text-right select-none;
-		color: #b8a880;
-		font-size: 0.7rem;
+		@apply absolute left-0 w-5 pr-1.5 text-right select-none;
+		color: #c4b490;
+		font-size: 0.62rem;
 		content: counter(line);
 	}
 
 	.dark pre code span.line::before {
-		color: #5a5040;
+		color: #4a4030;
 	}
 
 	pre code span.line.bg-orange\/20 {
@@ -571,6 +572,11 @@
 	article blockquote p {
 		padding: 4px 0;
 		margin-top: 0;
+	}
+
+	article blockquote pre,
+	article blockquote code {
+		font-style: normal;
 	}
 
 	/* Lists */
@@ -992,6 +998,6 @@
 	/* Code in articles */
 	article pre > code > * {
 		@apply leading-4 md:leading-5;
-		font-size: 0.72rem;
+		font-size: 0.62rem;
 	}
 }
