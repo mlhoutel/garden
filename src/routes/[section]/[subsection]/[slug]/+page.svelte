@@ -40,52 +40,81 @@
 					level: parseInt(h.tagName[1])
 				}));
 
-			// JS-powered sticky iframe: position:fixed during scroll range
+			// JS-powered sticky iframe with placeholder to prevent layout jump
 			const stickyWrappers = article.querySelectorAll('.embed-sticky-wrapper');
 			stickyWrappers.forEach((wrapper) => {
-				const embed = wrapper.querySelector('.embed-fullwidth') as HTMLElement | null;
+				const w = wrapper as HTMLElement;
+				const embed = w.querySelector('.embed-fullwidth') as HTMLElement | null;
 				if (!embed) return;
 
 				const TRAVEL = 500;
-				(wrapper as HTMLElement).style.paddingBottom = TRAVEL + 'px';
+
+				// Measure the embed's natural height ONCE before any manipulation
+				const embedH = embed.offsetHeight;
+				// Set wrapper's min-height so it never collapses when embed goes fixed
+				w.style.minHeight = (embedH + TRAVEL) + 'px';
+
+				let state: 'normal' | 'fixed' | 'bottom' = 'normal';
 
 				function updateSticky() {
-					const rect = (wrapper as HTMLElement).getBoundingClientRect();
-					const embedH = embed!.offsetHeight;
+					const wRect = w.getBoundingClientRect();
+					const wTop = wRect.top;
+					const wBottom = wRect.bottom;
 
-					if (rect.top <= 0 && rect.bottom > embedH) {
-						// Sticky zone: fix to viewport top
-						embed!.style.position = 'fixed';
-						embed!.style.top = '0';
-						embed!.style.bottom = 'auto';
-						embed!.style.left = rect.left + 'px';
-						embed!.style.width = (wrapper as HTMLElement).offsetWidth + 'px';
-						embed!.classList.add('embed-in-view');
-					} else if (rect.bottom <= embedH) {
-						// Past sticky zone: anchor to wrapper bottom
-						embed!.style.position = 'absolute';
-						embed!.style.top = 'auto';
-						embed!.style.bottom = '0';
-						embed!.style.left = '0';
-						embed!.style.width = '100%';
-						embed!.classList.remove('embed-in-view');
-					} else {
-						// Before sticky zone: normal flow
-						embed!.style.position = 'relative';
-						embed!.style.top = 'auto';
-						embed!.style.bottom = 'auto';
-						embed!.style.left = 'auto';
-						embed!.style.width = '100%';
-						embed!.classList.remove('embed-in-view');
+					// Embed should start sticking when its top hits viewport top (wTop <= 0)
+					// and stop sticking when wrapper bottom - embedH pixels have scrolled past
+					const shouldFix = wTop <= 0 && wBottom > embedH;
+					const pastEnd = wBottom <= embedH;
+
+					if (shouldFix && state !== 'fixed') {
+						state = 'fixed';
+						embed.style.position = 'fixed';
+						embed.style.top = '0';
+						embed.style.bottom = '';
+						embed.style.left = wRect.left + 'px';
+						embed.style.width = w.offsetWidth + 'px';
+						embed.style.zIndex = '20';
+						embed.classList.add('embed-in-view');
+					} else if (shouldFix && state === 'fixed') {
+						// Update left/width on scroll (in case of horizontal changes)
+						embed.style.left = wRect.left + 'px';
+						embed.style.width = w.offsetWidth + 'px';
+					} else if (pastEnd && state !== 'bottom') {
+						state = 'bottom';
+						embed.style.position = 'absolute';
+						embed.style.top = '';
+						embed.style.bottom = '0';
+						embed.style.left = '0';
+						embed.style.width = '100%';
+						embed.style.zIndex = '';
+						embed.classList.remove('embed-in-view');
+					} else if (!shouldFix && !pastEnd && state !== 'normal') {
+						state = 'normal';
+						embed.style.position = '';
+						embed.style.top = '';
+						embed.style.bottom = '';
+						embed.style.left = '';
+						embed.style.width = '';
+						embed.style.zIndex = '';
+						embed.classList.remove('embed-in-view');
 					}
 				}
 
 				window.addEventListener('scroll', updateSticky, { passive: true });
-				window.addEventListener('resize', updateSticky, { passive: true });
+				window.addEventListener('resize', () => {
+					// Recalc on resize
+					embed.style.position = '';
+					embed.style.top = '';
+					embed.style.bottom = '';
+					embed.style.left = '';
+					embed.style.width = '';
+					state = 'normal';
+					w.style.minHeight = (embed.offsetHeight + TRAVEL) + 'px';
+					updateSticky();
+				});
 				updateSticky();
 				stickyCleanups.push(() => {
 					window.removeEventListener('scroll', updateSticky);
-					window.removeEventListener('resize', updateSticky);
 				});
 			});
 		}
