@@ -30,6 +30,8 @@ export const load = async ({
 
 	return {
 		tree: convertedTree,
-		title: toUpper(section)
+		pages,
+		title: toUpper(section),
+		section
 	};
 };

@@ -29,14 +29,31 @@ export async function load({
 
 	// Find index for navigation
 	const index = pages.findIndex((p) => p.meta.subsection === subsection && p.meta.slug == slug);
-
 	const next = pages[(index + 1) % pages.length] || null;
 
 	if (page.meta.published === false) throw error(404, 'Page not published yet');
 
+	// Find related pages (same subsection, then same topics)
+	const currentTopics = new Set(page.meta.topic?.split(' ').filter(Boolean) || []);
+	const sameSubsection = pages
+		.filter((p) => p.meta.subsection === subsection && p.meta.slug !== slug)
+		.slice(0, 5);
+
+	const byTopic = pages
+		.filter((p) => {
+			if (p.meta.slug === slug) return false;
+			if (sameSubsection.some((s) => s.meta.slug === p.meta.slug)) return false;
+			const pTopics = p.meta.topic?.split(' ').filter(Boolean) || [];
+			return pTopics.some((t: string) => currentTopics.has(t));
+		})
+		.slice(0, 5);
+
+	const related = [...sameSubsection, ...byTopic].slice(0, 8);
+
 	return {
 		content,
 		next,
+		related,
 		...page.meta,
 		section,
 		subsection

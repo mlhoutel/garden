@@ -159,10 +159,16 @@ export interface PageLoadReturn {
 	published?: boolean;
 	section: string;
 	subsection: string;
+	related?: Page[];
+	date?: string;
+	time?: number;
+	iframe?: string;
+	[extra: string]: any;
 }
 
 export interface SectionLoadReturn {
 	tree: NestedListItem[] | NestedListItem;
+	pages?: Page[];
 	title?: string;
 	section?: string;
 }

@@ -1,10 +1,13 @@
 <script lang="ts">
 	import TreeList from '$components/lists/TreeList.svelte';
+	import SnippetFeed from '$components/global/SnippetFeed.svelte';
 	import { toUpper } from '$utils/format';
 	import { base } from '$app/paths';
 	import seedrandom from 'seedrandom';
 	import { randomQuote } from '$utils/quotes';
 	import type { SectionLoadReturn, NestedListItem } from '$types/types';
+
+	let isSnippets = $derived(data.section === 'snippets');
 
 	let { data }: { data: SectionLoadReturn } = $props();
 
@@ -179,8 +182,10 @@
 </div>
 
 <!-- Content -->
-<div class="mx-auto max-w-[680px] px-4 pt-4 pb-16">
-	{#if items.length > 0}
+<div class="mx-auto px-4 pt-4 pb-16" style="max-width: {isSnippets ? '900px' : '680px'};">
+	{#if isSnippets && data.pages}
+		<SnippetFeed items={data.pages} />
+	{:else if items.length > 0}
 		<TreeList {items} />
 	{:else}
 		<p class="py-16 text-center" style="color: var(--color-text-muted);">

@@ -9,8 +9,9 @@ export function contentReload(): Plugin {
 	let server: ViteDevServer;
 	let timer: ReturnType<typeof setTimeout> | null = null;
 	let rebuilding = false;
+	let pendingRestart = false;
 
-	function rebuild(changedFile: string) {
+	function rebuild(changedFile: string, needsRestart: boolean) {
 		if (rebuilding) return;
 		rebuilding = true;
 
@@ -28,22 +29,30 @@ export function contentReload(): Plugin {
 			const elapsed = Date.now() - start;
 			console.log(`\x1b[32m   ✓ Rebuilt in ${elapsed}ms\x1b[0m`);
 
-			// Invalidate all content and meta modules in Vite's module graph
-			const graph = server.moduleGraph;
-			for (const [url, mod] of graph.urlToModuleMap) {
-				if (
-					url.includes('src/content/') ||
-					url.includes('src/meta/') ||
-					url.includes('manifest.json') ||
-					url.includes('search-index.json')
-				) {
-					graph.invalidateModule(mod);
+			if (needsRestart) {
+				// New or deleted files require a server restart because
+				// import.meta.glob() is evaluated at transform time and its
+				// file map is frozen for the lifetime of the dev server.
+				// A browser reload alone won't pick up new glob entries.
+				console.log('\x1b[33m   ↻ Restarting server (new/deleted file detected)...\x1b[0m\n');
+				server.restart();
+			} else {
+				// For content edits, invalidate modules and reload the browser
+				const graph = server.moduleGraph;
+				for (const [url, mod] of graph.urlToModuleMap) {
+					if (
+						url.includes('src/content/') ||
+						url.includes('src/meta/') ||
+						url.includes('manifest.json') ||
+						url.includes('search-index.json')
+					) {
+						graph.invalidateModule(mod);
+					}
 				}
-			}
 
-			// Full reload — safest approach since import.meta.glob map is frozen
-			server.ws.send({ type: 'full-reload' });
-			console.log('\x1b[32m   ✓ Browser reloaded\x1b[0m\n');
+				server.ws.send({ type: 'full-reload' });
+				console.log('\x1b[32m   ✓ Browser reloaded\x1b[0m\n');
+			}
 		} catch (err) {
 			console.error('\x1b[31m   ✗ Rebuild failed:\x1b[0m', (err as Error).message);
 		} finally {
@@ -67,11 +76,18 @@ export function contentReload(): Plugin {
 				if (!filePath.endsWith('.md')) return;
 				if (event !== 'change' && event !== 'add' && event !== 'unlink') return;
 
+				// Track whether a restart is needed (new or deleted files)
+				if (event === 'add' || event === 'unlink') {
+					pendingRestart = true;
+				}
+
 				// Debounce: batch rapid changes (e.g., git operations, bulk saves)
 				if (timer) clearTimeout(timer);
 				timer = setTimeout(() => {
 					timer = null;
-					rebuild(filePath);
+					const needsRestart = pendingRestart;
+					pendingRestart = false;
+					rebuild(filePath, needsRestart);
 				}, DEBOUNCE_MS);
 			});
 
