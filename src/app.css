@@ -645,17 +645,15 @@
 		background-color: var(--color-surface);
 	}
 
-	/* Sticky scroll wrapper: centering breakout + extra height for sticky travel */
+	/* Sticky scroll wrapper: negative-margin centering (NO transform — transform breaks sticky) */
 	article .embed-sticky-wrapper {
-		position: relative;
-		left: 50%;
-		transform: translateX(-50%);
 		width: calc(100vw - 100px);
 		max-width: calc(100vw - 100px);
-		padding: 3rem 0 12rem 0;
+		margin-left: calc(-50vw + 50% + 50px);
+		padding: 3rem 0 20rem 0;
 	}
 
-	/* Inside sticky wrapper: iframe sticks without transforms (transform breaks sticky) */
+	/* Iframe sticks to top of viewport during scroll through wrapper's padding-bottom */
 	article .embed-sticky-wrapper .embed-fullwidth {
 		position: sticky;
 		top: 0;
@@ -663,12 +661,11 @@
 		left: auto;
 		transform: none;
 		width: 100%;
-		transition: transform 0.5s ease, box-shadow 0.5s ease, border-radius 0.4s ease;
+		transition: box-shadow 0.5s ease, border-radius 0.4s ease;
 	}
 
-	/* Scale up gently when in view — no reflow, just visual zoom */
+	/* Subtle glow when in view */
 	article .embed-sticky-wrapper .embed-fullwidth.embed-in-view {
-		transform: scale(1.015);
 		border-radius: 4px;
 		box-shadow: 0 8px 50px rgba(0, 0, 0, 0.25), 0 0 80px rgba(212, 160, 23, 0.04);
 	}
