@@ -149,7 +149,7 @@ function buildIframeEmbed(props: Record<string, string>, flags: Set<string>): El
 	if (fullwidth) {
 		return h('div', {
 			className: ['embed-sticky-wrapper'],
-			style: `padding: 3rem 0;`
+			style: `padding-top: 3rem;`
 		}, [container]);
 	}
 
