@@ -67,16 +67,19 @@
 
 					if (shouldFix && state !== 'fixed') {
 						state = 'fixed';
+						// Use clientWidth (excludes scrollbar) for exact edge-to-edge fit
+						const vw = document.documentElement.clientWidth;
 						embed.style.position = 'fixed';
 						embed.style.top = HEADER_H + 'px';
 						embed.style.bottom = '';
-						embed.style.left = wRect.left + 'px';
-						embed.style.width = w.offsetWidth + 'px';
+						embed.style.left = '0';
+						embed.style.width = vw + 'px';
 						embed.style.zIndex = '20';
 						embed.classList.add('embed-in-view');
 					} else if (shouldFix && state === 'fixed') {
-						embed.style.left = wRect.left + 'px';
-						embed.style.width = w.offsetWidth + 'px';
+						const vw = document.documentElement.clientWidth;
+						embed.style.left = '0';
+						embed.style.width = vw + 'px';
 					} else if (pastEnd && state !== 'bottom') {
 						state = 'bottom';
 						embed.style.position = 'absolute';
