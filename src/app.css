@@ -645,35 +645,48 @@
 		background-color: var(--color-surface);
 	}
 
-	/* Sticky scroll wrapper: JS manages position, CSS handles layout + animation */
+	/* Sticky scroll wrapper: full viewport width so iframe fills screen when fixed */
 	article .embed-sticky-wrapper {
 		position: relative;
-		width: calc(100vw - 100px);
-		max-width: calc(100vw - 100px);
-		margin-left: calc(-50vw + 50% + 50px);
+		width: 100vw;
+		max-width: 100vw;
+		margin-left: calc(-50vw + 50%);
 		padding: 3rem 0 0 0; /* JS sets paddingBottom dynamically */
 	}
 
-	/* Default state: slightly smaller, with subtle border */
+	/* Default state: slightly smaller with rounded corners */
 	article .embed-sticky-wrapper .embed-fullwidth {
 		z-index: 20;
 		left: auto;
 		width: 100%;
-		transform: scale(0.96);
-		border-radius: 10px;
-		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-		transition: transform 0.6s cubic-bezier(0.25, 0.1, 0.25, 1),
-					box-shadow 0.6s ease,
+		transform: scale(0.92);
+		border-radius: 12px;
+		background: #1A1A1A; /* dark bg prevents jitter gaps between chrome bar and iframe */
+		box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+		transition: transform 0.6s cubic-bezier(0.22, 0.61, 0.36, 1),
+					box-shadow 0.6s cubic-bezier(0.22, 0.61, 0.36, 1),
 					border-radius 0.5s ease;
 	}
 
-	/* When JS marks it as in-view (fixed to viewport) — grow to full size */
+	/* Hover when not yet sticky — subtle lift */
+	article .embed-sticky-wrapper .embed-fullwidth:hover {
+		transform: scale(0.94);
+		box-shadow: 0 8px 40px rgba(0, 0, 0, 0.2),
+					0 0 60px rgba(212, 160, 23, 0.04);
+	}
+
+	/* When fixed to viewport — full size, dramatic shadow */
 	article .embed-sticky-wrapper .embed-fullwidth.embed-in-view {
 		transform: scale(1);
-		border-radius: 2px;
-		box-shadow: 0 12px 60px rgba(0, 0, 0, 0.35),
-					0 0 100px rgba(212, 160, 23, 0.06),
-					0 0 0 1px rgba(212, 160, 23, 0.15);
+		border-radius: 0;
+		box-shadow: 0 16px 80px rgba(0, 0, 0, 0.4),
+					0 0 120px rgba(212, 160, 23, 0.06),
+					0 0 0 1px rgba(212, 160, 23, 0.12);
+	}
+
+	/* No hover effect when already sticky */
+	article .embed-sticky-wrapper .embed-fullwidth.embed-in-view:hover {
+		transform: scale(1);
 	}
 
 	/* Full-width breakout (standalone, not in sticky wrapper) */
@@ -717,7 +730,13 @@
 		gap: 0.4rem;
 		padding: 0.4rem 0.75rem;
 		background: #1A1A1A;
-		border-bottom: 2px solid rgba(212, 160, 23, 0.2);
+		border-bottom: 1px solid rgba(212, 160, 23, 0.2);
+		margin-bottom: -1px; /* overlap with iframe-inner to prevent 1px gap on scale jitter */
+	}
+
+	/* Iframe inner — dark bg behind iframe prevents white flash during scale */
+	.embed-iframe-inner {
+		background: #1A1A1A;
 	}
 
 	.embed-chrome-title {
