@@ -137,10 +137,23 @@ function buildIframeEmbed(props: Record<string, string>, flags: Set<string>): El
 	if (hasChrome) children.push(buildChromeBar(chromeTitle));
 	children.push(innerWrapper);
 
-	return h('div', {
+	const container = h('div', {
 		className: classes,
-		style: `margin: ${fullwidth ? '2.5rem 0' : '2rem 0'};`
+		style: `margin: 0;`
 	}, children);
+
+	// Fullwidth iframes get a sticky scroll wrapper:
+	// - outer wrapper is taller than the iframe by 200px (sticky travel distance)
+	// - iframe sticks to top during that 200px, then scrolls away
+	// - starts at 94% width, expands to 100% when in view (via CSS .embed-in-view)
+	if (fullwidth) {
+		return h('div', {
+			className: ['embed-sticky-wrapper'],
+			style: `padding: 3rem 0;`
+		}, [container]);
+	}
+
+	return h('div', { style: 'margin: 2rem 0;' }, [container]);
 }
 
 function buildChromeBar(title: string): Element {
@@ -194,17 +207,56 @@ function buildGithubEmbed(props: Record<string, string>): Element {
 	};
 	const langColor = langColors[lang.toLowerCase()] || '#D4A017';
 
-	// GitHub octocat icon
-	const ghIcon = h('svg', { viewBox: '0 0 16 16', style: 'width:18px;height:18px;flex-shrink:0;', xmlns: 'http://www.w3.org/2000/svg' }, [
-		svgPath('M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z', { fill: '#D4A017', opacity: '0.7' })
+	const GH_ICON = 'M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z';
+	const STAR_ICON = 'M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z';
+
+	// Background: esoteric SVG with concentric rings, orbital dots, corner glyphs
+	const bgSvg = h('svg', {
+		viewBox: '0 0 500 120', className: ['embed-github-bg'],
+		preserveAspectRatio: 'xMidYMid slice', xmlns: 'http://www.w3.org/2000/svg'
+	}, [
+		// Concentric rings at right side (like a small sun/planet)
+		svgCircle(430, 60, 40, { fill: 'none', stroke: '#D4A017', 'stroke-width': '0.3', opacity: '0.08' }),
+		svgCircle(430, 60, 30, { fill: 'none', stroke: '#D4A017', 'stroke-width': '0.4', opacity: '0.1', 'stroke-dasharray': '2 4' }),
+		svgCircle(430, 60, 20, { fill: 'none', stroke: '#D4A017', 'stroke-width': '0.3', opacity: '0.12' }),
+		svgCircle(430, 60, 10, { fill: 'none', stroke: '#D4A017', 'stroke-width': '0.3', opacity: '0.08' }),
+		svgCircle(430, 60, 3, { fill: '#D4A017', opacity: '0.15' }),
+		// Orbital dots on the 30-radius ring
+		...[0, 72, 144, 216, 288].map((deg) => {
+			const a = (deg * Math.PI) / 180;
+			return svgCircle(430 + Math.cos(a) * 30, 60 + Math.sin(a) * 30, 1.2, { fill: '#D4A017', opacity: '0.2' });
+		}),
+		// Radial lines from center
+		...[0, 45, 90, 135, 180, 225, 270, 315].map((deg) => {
+			const a = (deg * Math.PI) / 180;
+			return svgLine(430 + Math.cos(a) * 12, 60 + Math.sin(a) * 12, 430 + Math.cos(a) * 18, 60 + Math.sin(a) * 18, '#D4A017', 0.3, 0.08);
+		}),
+		// Corner diamonds
+		svgPolygon('12,6 16,2 20,6 16,10', { fill: 'none', stroke: '#D4A017', 'stroke-width': '0.4', opacity: '0.12' }),
+		svgPolygon('480,6 484,2 488,6 484,10', { fill: 'none', stroke: '#D4A017', 'stroke-width': '0.4', opacity: '0.12' }),
+		svgPolygon('12,114 16,110 20,114 16,118', { fill: 'none', stroke: '#D4A017', 'stroke-width': '0.4', opacity: '0.12' }),
+		svgPolygon('480,114 484,110 488,114 484,118', { fill: 'none', stroke: '#D4A017', 'stroke-width': '0.4', opacity: '0.12' }),
+		// Horizontal accent lines
+		svgLine(24, 6, 200, 6, '#D4A017', 0.3, 0.06),
+		svgLine(300, 6, 476, 6, '#D4A017', 0.3, 0.06),
+		svgLine(24, 114, 200, 114, '#D4A017', 0.3, 0.06),
+		svgLine(300, 114, 476, 114, '#D4A017', 0.3, 0.06),
+		// Vertical edge lines
+		svgLine(8, 14, 8, 106, '#D4A017', 0.3, 0.04),
+		svgLine(492, 14, 492, 106, '#D4A017', 0.3, 0.04),
+	]);
+
+	// GitHub icon
+	const ghIcon = h('svg', { viewBox: '0 0 16 16', style: 'width:22px;height:22px;flex-shrink:0;', xmlns: 'http://www.w3.org/2000/svg' }, [
+		svgPath(GH_ICON, { fill: '#D4A017', opacity: '0.8' })
 	]);
 
 	// Star icon
-	const starIcon = h('svg', { viewBox: '0 0 16 16', style: 'width:12px;height:12px;', xmlns: 'http://www.w3.org/2000/svg' }, [
-		svgPath('M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z', { fill: '#D4A017' })
+	const starIcon = h('svg', { viewBox: '0 0 16 16', style: 'width:13px;height:13px;', xmlns: 'http://www.w3.org/2000/svg' }, [
+		svgPath(STAR_ICON, { fill: '#D4A017' })
 	]);
 
-	// Header: icon + owner/name
+	// Header
 	const header = h('div', { className: ['embed-github-header'] }, [
 		ghIcon,
 		h('div', {}, [
@@ -213,17 +265,16 @@ function buildGithubEmbed(props: Record<string, string>): Element {
 		])
 	]);
 
-	// Body children
 	const bodyChildren: (Element | Text)[] = [header];
 
 	if (description) {
 		bodyChildren.push(h('p', { className: ['embed-github-desc'] }, [t(description)]));
 	}
 
-	// Meta line (lang, stars, license)
+	// Meta line
 	const metaChildren: (Element | Text)[] = [];
 	if (lang) {
-		metaChildren.push(h('span', { style: 'display:inline-flex;align-items:center;gap:4px;' }, [
+		metaChildren.push(h('span', { style: 'display:inline-flex;align-items:center;gap:5px;' }, [
 			h('span', { style: `width:8px;height:8px;border-radius:50%;background:${langColor};display:inline-block;` }),
 			t(lang)
 		]));
@@ -240,6 +291,9 @@ function buildGithubEmbed(props: Record<string, string>): Element {
 		bodyChildren.push(h('div', { className: ['embed-github-meta'] }, metaChildren));
 	}
 
+	// Arrow hint
+	bodyChildren.push(h('span', { className: ['embed-github-arrow'] }, [t('\u2192')]));
+
 	const body = h('div', { className: ['embed-github-body'] }, bodyChildren);
 
 	return h('a', {
@@ -248,9 +302,5 @@ function buildGithubEmbed(props: Record<string, string>): Element {
 		target: '_blank',
 		rel: 'noreferrer',
 		style: 'display:block; text-decoration:none; margin:2rem 0; color:inherit;'
-	}, [
-		goldOrnamentSvg(),
-		body,
-		goldOrnamentSvg()
-	]);
+	}, [bgSvg, body]);
 }

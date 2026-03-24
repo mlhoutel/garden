@@ -38,6 +38,20 @@
 					text: h.textContent?.trim() || '',
 					level: parseInt(h.tagName[1])
 				}));
+
+			// Scroll-driven iframe animation: toggle .embed-in-view when centered
+			const fullwidthEmbeds = article.querySelectorAll('.embed-fullwidth');
+			if (fullwidthEmbeds.length > 0) {
+				const embedObserver = new IntersectionObserver(
+					(entries) => {
+						for (const entry of entries) {
+							entry.target.classList.toggle('embed-in-view', entry.intersectionRatio > 0.6);
+						}
+					},
+					{ threshold: [0, 0.3, 0.6, 1.0] }
+				);
+				fullwidthEmbeds.forEach((el) => embedObserver.observe(el));
+			}
 		}
 
 		return () => window.removeEventListener('scroll', updateProgress);
