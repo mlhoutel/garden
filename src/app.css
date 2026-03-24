@@ -139,6 +139,12 @@
 		@apply px-4 md:px-0;
 	}
 
+	/* Fullwidth embeds must escape article padding */
+	article > .embed-fullwidth {
+		padding-left: 0 !important;
+		padding-right: 0 !important;
+	}
+
 	/* Background helpers */
 	.background-primary {
 		background-color: var(--color-bg);
@@ -638,16 +644,20 @@
 		background-color: var(--color-surface);
 	}
 
-	/* Full-width breakout: escape article's 680px constraint */
+	/* Full-width breakout: escape article's 680px constraint + any parent padding */
 	article .embed-fullwidth {
+		position: relative;
+		left: 50%;
+		transform: translateX(-50%);
 		width: 100vw;
 		max-width: 100vw;
-		margin-left: calc(-50vw + 50%);
 		border-radius: 0;
 		border-left: none;
 		border-right: none;
 		padding-left: 0;
 		padding-right: 0;
+		margin-left: 0;
+		margin-right: 0;
 	}
 
 	/* Fullscreen mode: fill entire screen with no gaps */
