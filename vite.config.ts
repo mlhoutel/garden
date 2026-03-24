@@ -5,7 +5,6 @@ import path from 'path';
 
 export default defineConfig({
 	plugins: [tailwindcss(), sveltekit()],
-	assetsInclude: ['**/*.md'],
 	resolve: {
 		alias: {
 			$images: path.resolve('static/images'),

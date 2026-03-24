@@ -18,7 +18,7 @@ export async function load({
 	if (!page) throw error(404, 'Page not found');
 
 	// Import .md file as text
-	const modules = import.meta.glob('../../../../content/**/*.md', { as: 'raw' });
+	const modules = import.meta.glob('../../../../content/**/*.md', { query: '?raw', import: 'default' });
 	const key = `../../../../content/${section}/${subsection}/${slug}.md`;
 
 	const loader = modules[key];
