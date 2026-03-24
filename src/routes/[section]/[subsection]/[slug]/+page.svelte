@@ -47,7 +47,7 @@
 				const embed = w.querySelector('.embed-fullwidth') as HTMLElement | null;
 				if (!embed) return;
 
-				const TRAVEL = 2000;
+				const TRAVEL = Math.round(window.innerHeight * 1.5);
 				// Get header height for offset
 				const header = document.querySelector('nav');
 				const HEADER_H = header ? header.offsetHeight : 50;
@@ -67,19 +67,21 @@
 
 					if (shouldFix && state !== 'fixed') {
 						state = 'fixed';
-						// Use clientWidth (excludes scrollbar) for exact edge-to-edge fit
 						const vw = document.documentElement.clientWidth;
 						embed.style.position = 'fixed';
 						embed.style.top = HEADER_H + 'px';
 						embed.style.bottom = '';
 						embed.style.left = '0';
 						embed.style.width = vw + 'px';
+						embed.style.maxWidth = 'none';
+						embed.style.transform = 'none';
 						embed.style.zIndex = '20';
 						embed.classList.add('embed-in-view');
 					} else if (shouldFix && state === 'fixed') {
 						const vw = document.documentElement.clientWidth;
 						embed.style.left = '0';
 						embed.style.width = vw + 'px';
+						embed.style.maxWidth = 'none';
 					} else if (pastEnd && state !== 'bottom') {
 						state = 'bottom';
 						embed.style.position = 'absolute';
@@ -87,6 +89,8 @@
 						embed.style.bottom = '0';
 						embed.style.left = '0';
 						embed.style.width = '100%';
+						embed.style.maxWidth = '100%';
+						embed.style.transform = '';
 						embed.style.zIndex = '';
 						embed.classList.remove('embed-in-view');
 					} else if (!shouldFix && !pastEnd && state !== 'normal') {
@@ -96,6 +100,8 @@
 						embed.style.bottom = '';
 						embed.style.left = '';
 						embed.style.width = '';
+						embed.style.maxWidth = '';
+						embed.style.transform = '';
 						embed.style.zIndex = '';
 						embed.classList.remove('embed-in-view');
 					}
@@ -108,8 +114,12 @@
 					embed.style.bottom = '';
 					embed.style.left = '';
 					embed.style.width = '';
+					embed.style.maxWidth = '';
+					embed.style.transform = '';
+					embed.classList.remove('embed-in-view');
 					state = 'normal';
-					w.style.minHeight = (embed.offsetHeight + TRAVEL) + 'px';
+					const newTravel = Math.round(window.innerHeight * 1.5);
+					w.style.minHeight = (embed.offsetHeight + newTravel) + 'px';
 					updateSticky();
 				});
 				updateSticky();
