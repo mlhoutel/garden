@@ -2,9 +2,10 @@ import tailwindcss from '@tailwindcss/vite';
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vite';
 import path from 'path';
+import { contentReload } from './scripts/vite-plugin-content-reload';
 
 export default defineConfig({
-	plugins: [tailwindcss(), sveltekit()],
+	plugins: [tailwindcss(), contentReload(), sveltekit()],
 	resolve: {
 		alias: {
 			$images: path.resolve('static/images'),
