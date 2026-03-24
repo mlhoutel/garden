@@ -654,19 +654,26 @@
 		padding: 3rem 0 0 0; /* JS sets paddingBottom dynamically */
 	}
 
-	/* Default state: relative, inside wrapper */
+	/* Default state: slightly smaller, with subtle border */
 	article .embed-sticky-wrapper .embed-fullwidth {
 		z-index: 20;
 		left: auto;
-		transform: none;
 		width: 100%;
-		transition: box-shadow 0.4s ease, border-radius 0.4s ease, transform 0.4s ease;
+		transform: scale(0.96);
+		border-radius: 10px;
+		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+		transition: transform 0.6s cubic-bezier(0.25, 0.1, 0.25, 1),
+					box-shadow 0.6s ease,
+					border-radius 0.5s ease;
 	}
 
-	/* When JS marks it as in-view (fixed to viewport top) */
+	/* When JS marks it as in-view (fixed to viewport) — grow to full size */
 	article .embed-sticky-wrapper .embed-fullwidth.embed-in-view {
+		transform: scale(1);
 		border-radius: 2px;
-		box-shadow: 0 8px 50px rgba(0, 0, 0, 0.3), 0 0 80px rgba(212, 160, 23, 0.05);
+		box-shadow: 0 12px 60px rgba(0, 0, 0, 0.35),
+					0 0 100px rgba(212, 160, 23, 0.06),
+					0 0 0 1px rgba(212, 160, 23, 0.15);
 	}
 
 	/* Full-width breakout (standalone, not in sticky wrapper) */

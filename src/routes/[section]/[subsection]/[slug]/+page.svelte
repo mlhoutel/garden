@@ -40,7 +40,7 @@
 					level: parseInt(h.tagName[1])
 				}));
 
-			// JS-powered sticky iframe with placeholder to prevent layout jump
+			// JS-powered sticky iframe with grow animation
 			const stickyWrappers = article.querySelectorAll('.embed-sticky-wrapper');
 			stickyWrappers.forEach((wrapper) => {
 				const w = wrapper as HTMLElement;
@@ -48,35 +48,33 @@
 				if (!embed) return;
 
 				const TRAVEL = 500;
+				// Get header height for offset
+				const header = document.querySelector('nav');
+				const HEADER_H = header ? header.offsetHeight : 50;
 
-				// Measure the embed's natural height ONCE before any manipulation
+				// Measure natural height before manipulation
 				const embedH = embed.offsetHeight;
-				// Set wrapper's min-height so it never collapses when embed goes fixed
 				w.style.minHeight = (embedH + TRAVEL) + 'px';
 
 				let state: 'normal' | 'fixed' | 'bottom' = 'normal';
 
 				function updateSticky() {
 					const wRect = w.getBoundingClientRect();
-					const wTop = wRect.top;
-					const wBottom = wRect.bottom;
-
-					// Embed should start sticking when its top hits viewport top (wTop <= 0)
-					// and stop sticking when wrapper bottom - embedH pixels have scrolled past
-					const shouldFix = wTop <= 0 && wBottom > embedH;
-					const pastEnd = wBottom <= embedH;
+					// Account for header: iframe should stick below header, not at top
+					const triggerTop = HEADER_H;
+					const shouldFix = wRect.top <= triggerTop && wRect.bottom > embedH + triggerTop;
+					const pastEnd = wRect.bottom <= embedH + triggerTop;
 
 					if (shouldFix && state !== 'fixed') {
 						state = 'fixed';
 						embed.style.position = 'fixed';
-						embed.style.top = '0';
+						embed.style.top = HEADER_H + 'px';
 						embed.style.bottom = '';
 						embed.style.left = wRect.left + 'px';
 						embed.style.width = w.offsetWidth + 'px';
 						embed.style.zIndex = '20';
 						embed.classList.add('embed-in-view');
 					} else if (shouldFix && state === 'fixed') {
-						// Update left/width on scroll (in case of horizontal changes)
 						embed.style.left = wRect.left + 'px';
 						embed.style.width = w.offsetWidth + 'px';
 					} else if (pastEnd && state !== 'bottom') {
@@ -102,7 +100,6 @@
 
 				window.addEventListener('scroll', updateSticky, { passive: true });
 				window.addEventListener('resize', () => {
-					// Recalc on resize
 					embed.style.position = '';
 					embed.style.top = '';
 					embed.style.bottom = '';
