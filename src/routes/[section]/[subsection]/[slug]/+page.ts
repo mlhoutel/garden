@@ -33,27 +33,55 @@ export async function load({
 
 	if (page.meta.published === false) throw error(404, 'Page not published yet');
 
-	// Find related pages (same subsection, then same topics)
+	// Find related pages (same subsection, then same topics, then rest)
 	const currentTopics = new Set(page.meta.topic?.split(' ').filter(Boolean) || []);
-	const sameSubsection = pages
-		.filter((p) => p.meta.subsection === subsection && p.meta.slug !== slug)
-		.slice(0, 5);
+	const seen = new Set<string>([slug]);
 
-	const byTopic = pages
-		.filter((p) => {
-			if (p.meta.slug === slug) return false;
-			if (sameSubsection.some((s) => s.meta.slug === p.meta.slug)) return false;
-			const pTopics = p.meta.topic?.split(' ').filter(Boolean) || [];
-			return pTopics.some((t: string) => currentTopics.has(t));
-		})
-		.slice(0, 5);
+	const sameSubsection = pages.filter((p) => {
+		if (seen.has(p.meta.slug)) return false;
+		if (p.meta.subsection !== subsection) return false;
+		seen.add(p.meta.slug);
+		return true;
+	});
 
-	const related = [...sameSubsection, ...byTopic].slice(0, 8);
+	const byTopic = pages.filter((p) => {
+		if (seen.has(p.meta.slug)) return false;
+		const pTopics = p.meta.topic?.split(' ').filter(Boolean) || [];
+		if (!pTopics.some((t: string) => currentTopics.has(t))) return false;
+		seen.add(p.meta.slug);
+		return true;
+	});
+
+	const rest = pages.filter((p) => !seen.has(p.meta.slug));
+
+	const related = [...sameSubsection, ...byTopic, ...rest];
+
+	// For snippets: pre-render related content for infinite scroll feed
+	let relatedRendered: { meta: any; content: string; path: string }[] | undefined;
+	if (section === 'snippets') {
+		const FEED_SIZE = 20;
+		const feedItems = related.slice(0, FEED_SIZE);
+		relatedRendered = [];
+
+		for (const item of feedItems) {
+			const itemKey = `../../../../content/${item.path}`;
+			const itemLoader = modules[itemKey];
+			if (!itemLoader) continue;
+			try {
+				const itemMd = await itemLoader();
+				const itemHtml = await renderMarkdown(itemMd, { path: itemKey });
+				relatedRendered.push({ meta: item.meta, content: itemHtml, path: item.path });
+			} catch {
+				// Skip items that fail to render
+			}
+		}
+	}
 
 	return {
 		content,
 		next,
 		related,
+		relatedRendered,
 		...page.meta,
 		section,
 		subsection
