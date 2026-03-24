@@ -1,25 +1,26 @@
 <script lang="ts">
-	import type { SearchItem, SearchIndex, SearchMode } from '$types/types';
+	import type { SearchItem, SearchIndex, SearchMode, Page } from '$types/types';
 	import { onMount, onDestroy } from 'svelte';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { base } from '$app/paths';
 	import FlexSearch from 'flexsearch';
 	import type { Document, DocumentData, Id } from 'flexsearch';
+	import pagesManifest from '$meta/manifest.json';
 
 	// Local helper type: override DocumentData only for this page
 	type DocumentFor<T> = Document<T & Record<string, any>>;
 
-	export let mode: SearchMode = 'compact';
-	export let initialTopics: string[] = [];
+	let { mode = 'compact' as SearchMode, initialTopics = [] as string[] } = $props();
 
 	let searchBar: HTMLInputElement;
-	let isActive = false;
-	let searchTerm = '';
-	let searchResults: SearchItem[] = [];
-	let selectedTopics: Set<string> = new Set(initialTopics);
-	let availableTopics: string[] = [];
-	let currentFocusIndex = -1;
+	let isActive = $state(false);
+	let searchTerm = $state('');
+	let searchResults = $state<SearchItem[]>([]);
+	let selectedTopics = $state<Set<string>>(new Set(initialTopics));
+	let availableTopics = $state<string[]>([]);
+	let matchingTopics = $state<string[]>([]);
+	let currentFocusIndex = $state(-1);
 
 	let index: DocumentFor<SearchItem>;
 	let searchData: SearchIndex = {};
@@ -30,11 +31,14 @@
 	const numCompactResults = 6;
 	const numFullPageResults = 50;
 
-	$: numResults = mode === 'compact' ? numCompactResults : numFullPageResults;
-	$: if (initialTopics.length > 0) {
-		selectedTopics = new Set(initialTopics);
-		performSearch();
-	}
+	let numResults = $derived(mode === 'compact' ? numCompactResults : numFullPageResults);
+
+	$effect(() => {
+		if (initialTopics.length > 0) {
+			selectedTopics = new Set(initialTopics);
+			performSearch();
+		}
+	});
 
 	const encoder = (str: string) => {
 		return str
@@ -66,42 +70,31 @@
 	});
 
 	onDestroy(() => {
-		if (mode === 'compact') {
+		if (typeof window !== 'undefined' && mode === 'compact') {
 			window.removeEventListener('keydown', handleKeydown);
 		}
 	});
 
 	async function loadSearchData() {
 		try {
-			// Load from your existing API
-			const sectionsRes = await fetch(`${base}/api/sections`);
-			const sections = await sectionsRes.json();
+			// Build search index directly from manifest -no API calls needed
+			const pages = (pagesManifest as Page[]).filter((p) => p.meta.published !== false);
 
-			const results = await Promise.all(
-				sections.map(async (section: string) => {
-					const res = await fetch(`${base}/api/${section}`);
-					return res.ok ? await res.json() : [];
-				})
-			);
-
-			const content = results.flat();
-
-			// Build search index from API data
 			let id = 0;
 			const topicsSet = new Set<string>();
 
-			for (const item of content) {
-				const slug = item.slug || item.id || `item-${id}`;
-				const itemTopics = item.meta?.topic ? item.meta.topic.split(' ') : [];
+			for (const item of pages) {
+				const slug = item.path.replace('.md', '');
+				const itemTopics = item.meta.topic ? item.meta.topic.split(' ').filter(Boolean) : [];
 
 				itemTopics.forEach((t: string) => topicsSet.add(t));
 
 				const searchItem: SearchItem = {
 					id,
 					slug,
-					title: item.meta?.title || item.title || '',
-					content: item.content || '',
-					tags: item.meta?.tags || [],
+					title: item.meta.title || '',
+					content: item.meta.short || '',
+					tags: [],
 					topics: itemTopics,
 					meta: item.meta
 				};
@@ -115,7 +108,6 @@
 
 			availableTopics = Array.from(topicsSet).sort();
 
-			// Initial search if in fullpage mode
 			if (mode === 'fullpage') {
 				performSearch();
 			}
@@ -222,6 +214,14 @@
 			title: searchTerm ? highlight(searchTerm, item.title) : item.title,
 			content: searchTerm ? highlight(searchTerm, item.content, true) : item.content.slice(0, 200)
 		}));
+
+		// Find matching topics for suggestions
+		if (searchTerm.trim() && mode === 'compact') {
+			const term = searchTerm.toLowerCase().trim();
+			matchingTopics = availableTopics.filter((t) => t.toLowerCase().includes(term)).slice(0, 5);
+		} else {
+			matchingTopics = [];
+		}
 
 		currentFocusIndex = -1;
 	}
@@ -332,7 +332,7 @@
 {#if mode === 'compact'}
 	<!-- Compact top bar search -->
 	<div class="search-compact">
-		<button class="search-button" on:click={openSearch} aria-label="Search" title="Search (Cmd+K)">
+		<button class="search-button" onclick={openSearch} aria-label="Search" title="Search (Cmd+K)">
 			<svg width="18" height="18" viewBox="0 0 18 18" fill="none">
 				<path
 					d="M12.5 11h-.79l-.28-.27A6.471 6.471 0 0 0 13 6.5 6.5 6.5 0 1 0 6.5 13c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L17.49 16l-4.99-5zm-6 0C4.01 11 2 8.99 2 6.5S4.01 2 6.5 2 11 4.01 11 6.5 8.99 11 6.5 11z"
@@ -344,7 +344,7 @@
 		</button>
 
 		{#if isActive}
-			<div class="search-overlay" on:click={closeSearch}></div>
+			<div class="search-overlay" onclick={closeSearch} role="button" tabindex="-1"></div>
 			<div class="search-popover">
 				<div class="search-input-wrapper">
 					<svg class="search-icon" width="18" height="18" viewBox="0 0 18 18" fill="none">
@@ -356,12 +356,12 @@
 					<input
 						bind:this={searchBar}
 						bind:value={searchTerm}
-						on:input={handleInput}
+						oninput={handleInput}
 						type="text"
 						placeholder="Search articles..."
 						class="search-input"
 					/>
-					<button class="close-btn" on:click={closeSearch} aria-label="Close">
+					<button class="close-btn" onclick={closeSearch} aria-label="Close">
 						<svg width="16" height="16" viewBox="0 0 16 16" fill="none">
 							<path
 								d="M12 4L4 12M4 4l8 8"
@@ -374,7 +374,27 @@
 				</div>
 
 				<div class="search-results">
-					{#if searchTerm && searchResults.length === 0}
+					<!-- Topic suggestions -->
+					{#if matchingTopics.length > 0}
+						<div class="topic-suggestions">
+							<span class="suggestion-label">Topics</span>
+							<div class="suggestion-pills">
+								{#each matchingTopics as topic (topic)}
+									<button
+										class="suggestion-pill"
+										onclick={() => {
+											closeSearch();
+											goto(`${base}/search?topics=${topic}`);
+										}}
+									>
+										#{topic}
+									</button>
+								{/each}
+							</div>
+						</div>
+					{/if}
+
+					{#if searchTerm && searchResults.length === 0 && matchingTopics.length === 0}
 						<div class="no-results">
 							<p>No results found</p>
 							<p class="hint">Try different keywords</p>
@@ -384,8 +404,8 @@
 							<button
 								class="result-card"
 								class:focused={i === currentFocusIndex}
-								on:click={() => navigateToResult(result.slug)}
-								on:mouseenter={() => (currentFocusIndex = i)}
+								onclick={() => navigateToResult(result.slug)}
+								onmouseenter={() => (currentFocusIndex = i)}
 							>
 								{#if result.topics.length > 0}
 									<div class="result-overline">
@@ -431,7 +451,7 @@
 				<input
 					bind:this={searchBar}
 					bind:value={searchTerm}
-					on:input={handleInput}
+					oninput={handleInput}
 					type="text"
 					placeholder="Search articles..."
 					class="search-input"
@@ -443,7 +463,7 @@
 			<div class="filter-header">
 				<h3>Filter by Topics</h3>
 				{#if selectedTopics.size > 0 || searchTerm}
-					<button class="clear-filters" on:click={clearFilters}>Clear all</button>
+					<button class="clear-filters" onclick={clearFilters}>Clear all</button>
 				{/if}
 			</div>
 			<div class="topic-filters">
@@ -451,7 +471,7 @@
 					<button
 						class="topic-filter"
 						class:active={selectedTopics.has(topic)}
-						on:click={() => toggleTopic(topic)}
+						onclick={() => toggleTopic(topic)}
 					>
 						{topic}
 					</button>
@@ -469,7 +489,7 @@
 					{#if result.topics.length > 0}
 						<div class="result-overline">
 							{#each result.topics as topic, i (i)}
-								<button class="topic-badge clickable" on:click={() => toggleTopic(topic)}>
+								<button class="topic-badge clickable" onclick={() => toggleTopic(topic)}>
 									{topic}
 								</button>
 							{/each}
@@ -486,7 +506,46 @@
 {/if}
 
 <style>
-	/* Compact Mode Styles */
+	/* Topic suggestions in compact search */
+	.topic-suggestions {
+		padding: 0.6rem 0.85rem;
+		border-bottom: 1px solid rgba(212, 160, 23, 0.1);
+	}
+
+	.suggestion-label {
+		display: block;
+		font-family: var(--font-mono);
+		font-size: 0.6rem;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		color: #6b6460;
+		margin-bottom: 0.4rem;
+	}
+
+	.suggestion-pills {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.3rem;
+	}
+
+	.suggestion-pill {
+		padding: 0.15rem 0.5rem;
+		font-family: var(--font-mono);
+		font-size: 0.7rem;
+		color: #d4a017;
+		background: rgba(212, 160, 23, 0.08);
+		border: 1px solid rgba(212, 160, 23, 0.2);
+		border-radius: 2px;
+		cursor: pointer;
+		transition: all 0.15s;
+		letter-spacing: 0.03em;
+	}
+
+	.suggestion-pill:hover {
+		background: rgba(212, 160, 23, 0.2);
+		border-color: #d4a017;
+	}
+	/* Compact Mode -always dark-themed to match the header */
 	.search-compact {
 		position: relative;
 	}
@@ -494,20 +553,25 @@
 	.search-button {
 		display: flex;
 		align-items: center;
-		gap: 0.5rem;
-		padding: 0.5rem 0.75rem;
+		gap: 0.35rem;
+		padding: 0.3rem 0.5rem;
 		background: transparent;
-		border: 1px solid var(--border, #e5e7eb);
-		border-radius: 6px;
+		border: 1px solid rgba(212, 160, 23, 0.2);
+		border-radius: 4px;
 		cursor: pointer;
-		color: var(--text-secondary, #6b7280);
+		color: #9a928a;
 		transition: all 0.2s;
-		font-size: 0.875rem;
+		font-size: 0.75rem;
 	}
 
 	.search-button:hover {
-		background: var(--hover-bg, #f9fafb);
-		border-color: var(--border-hover, #d1d5db);
+		border-color: #d4a017;
+		color: #d4a017;
+	}
+
+	.search-button svg {
+		width: 14px;
+		height: 14px;
 	}
 
 	.search-hint {
@@ -517,17 +581,20 @@
 	@media (min-width: 640px) {
 		.search-hint {
 			display: inline;
+			font-family: var(--font-serif);
+			letter-spacing: 0.05em;
 		}
 	}
 
 	.search-button kbd {
 		display: none;
-		padding: 0.125rem 0.375rem;
-		background: var(--kbd-bg, #f3f4f6);
-		border: 1px solid var(--border, #e5e7eb);
-		border-radius: 3px;
-		font-family: monospace;
-		font-size: 0.7rem;
+		padding: 0.1rem 0.3rem;
+		background: rgba(255, 255, 255, 0.05);
+		border: 1px solid rgba(212, 160, 23, 0.15);
+		border-radius: 2px;
+		font-family: var(--font-mono);
+		font-size: 0.6rem;
+		color: #9a928a;
 	}
 
 	@media (min-width: 768px) {
@@ -536,11 +603,12 @@
 		}
 	}
 
+	/* Overlay + Popover -dark themed */
 	.search-overlay {
 		position: fixed;
 		inset: 0;
-		background: rgba(0, 0, 0, 0.4);
-		backdrop-filter: blur(4px);
+		background: rgba(0, 0, 0, 0.6);
+		backdrop-filter: blur(6px);
 		z-index: 100;
 		animation: fadeIn 0.2s;
 	}
@@ -556,15 +624,16 @@
 
 	.search-popover {
 		position: fixed;
-		top: 80px;
+		top: 60px;
 		left: 50%;
 		transform: translateX(-50%);
 		width: 90%;
-		max-width: 640px;
+		max-width: 600px;
 		max-height: 70vh;
-		background: var(--bg, white);
-		border-radius: 12px;
-		box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+		background: #1e1e1e;
+		border: 1px solid rgba(212, 160, 23, 0.15);
+		border-radius: 8px;
+		box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
 		z-index: 101;
 		display: flex;
 		flex-direction: column;
@@ -587,12 +656,12 @@
 		display: flex;
 		align-items: center;
 		gap: 0.75rem;
-		padding: 1rem 1.25rem;
-		border-bottom: 1px solid var(--border, #e5e7eb);
+		padding: 0.85rem 1rem;
+		border-bottom: 1px solid rgba(212, 160, 23, 0.1);
 	}
 
 	.search-icon {
-		color: var(--text-secondary, #9ca3af);
+		color: #d4a017;
 		flex-shrink: 0;
 	}
 
@@ -600,13 +669,14 @@
 		flex: 1;
 		border: none;
 		background: transparent;
-		font-size: 1rem;
+		font-size: 0.95rem;
 		outline: none;
-		color: var(--text, #111827);
+		color: #e8e0d4;
+		font-family: var(--font-body);
 	}
 
 	.search-input::placeholder {
-		color: var(--text-secondary, #9ca3af);
+		color: #6b6460;
 	}
 
 	.close-btn {
@@ -614,16 +684,16 @@
 		background: transparent;
 		border: none;
 		cursor: pointer;
-		color: var(--text-secondary, #9ca3af);
+		color: #6b6460;
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		border-radius: 4px;
-		transition: background 0.2s;
+		transition: all 0.2s;
 	}
 
 	.close-btn:hover {
-		background: var(--hover-bg, #f3f4f6);
+		color: #d4a017;
 	}
 
 	.search-results {
@@ -634,24 +704,24 @@
 
 	.no-results,
 	.search-hint-text {
-		padding: 3rem 1rem;
+		padding: 2.5rem 1rem;
 		text-align: center;
-		color: var(--text-secondary, #6b7280);
+		color: #6b6460;
 	}
 
 	.hint {
-		font-size: 0.875rem;
+		font-size: 0.8rem;
 		margin-top: 0.5rem;
-		opacity: 0.7;
+		opacity: 0.6;
 	}
 
 	.result-card {
 		width: 100%;
-		padding: 0.875rem 1rem;
-		margin-bottom: 0.25rem;
+		padding: 0.75rem 0.85rem;
+		margin-bottom: 0.2rem;
 		background: transparent;
 		border: 1px solid transparent;
-		border-radius: 8px;
+		border-radius: 6px;
 		text-align: left;
 		cursor: pointer;
 		transition: all 0.15s;
@@ -659,25 +729,26 @@
 
 	.result-card:hover,
 	.result-card.focused {
-		background: var(--hover-bg, #f9fafb);
-		border-color: var(--accent, #3b82f6);
+		background: rgba(212, 160, 23, 0.06);
+		border-color: rgba(212, 160, 23, 0.2);
 	}
 
 	.result-overline {
 		display: flex;
-		gap: 0.375rem;
+		gap: 0.3rem;
 		flex-wrap: wrap;
-		margin-bottom: 0.5rem;
+		margin-bottom: 0.4rem;
 	}
 
 	.topic-badge {
-		font-size: 0.7rem;
-		padding: 0.125rem 0.5rem;
-		background: var(--topic-bg, #e0e7ff);
-		color: var(--topic-color, #4f46e5);
-		border-radius: 4px;
+		font-size: 0.65rem;
+		padding: 0.1rem 0.4rem;
+		background: rgba(212, 160, 23, 0.15);
+		color: #d4a017;
+		border-radius: 2px;
 		font-weight: 500;
 		border: none;
+		font-family: var(--font-mono);
 	}
 
 	.topic-badge.clickable {
@@ -686,50 +757,52 @@
 	}
 
 	.topic-badge.clickable:hover {
-		background: var(--topic-hover-bg, #c7d2fe);
+		background: rgba(212, 160, 23, 0.3);
 	}
 
 	.result-title {
-		margin: 0 0 0.5rem 0;
-		font-size: 0.95rem;
-		font-weight: 600;
+		margin: 0 0 0.35rem 0;
+		font-size: 0.9rem;
+		font-weight: 500;
 		line-height: 1.4;
-		color: var(--text, #111827);
+		color: #e8e0d4;
+		font-family: var(--font-serif);
 	}
 
 	.result-content {
 		margin: 0;
-		font-size: 0.85rem;
-		color: var(--text-secondary, #6b7280);
+		font-size: 0.8rem;
+		color: #9a928a;
 		line-height: 1.5;
 	}
 
 	.search-footer {
-		padding: 0.75rem 1rem;
-		border-top: 1px solid var(--border, #e5e7eb);
-		background: var(--footer-bg, #f9fafb);
+		padding: 0.6rem 0.85rem;
+		border-top: 1px solid rgba(212, 160, 23, 0.1);
+		background: rgba(0, 0, 0, 0.2);
 	}
 
 	.shortcuts {
 		display: flex;
-		gap: 1rem;
-		font-size: 0.75rem;
-		color: var(--text-secondary, #6b7280);
+		gap: 0.75rem;
+		font-size: 0.7rem;
+		color: #6b6460;
 		justify-content: center;
 	}
 
 	kbd {
-		padding: 0.125rem 0.375rem;
-		background: var(--kbd-bg, white);
-		border: 1px solid var(--border, #d1d5db);
-		border-radius: 3px;
-		font-family: monospace;
-		font-size: 0.7rem;
+		padding: 0.1rem 0.3rem;
+		background: rgba(255, 255, 255, 0.05);
+		border: 1px solid rgba(212, 160, 23, 0.12);
+		border-radius: 2px;
+		font-family: var(--font-mono);
+		font-size: 0.6rem;
+		color: #9a928a;
 	}
 
-	/* Full Page Mode Styles */
+	/* Full Page Mode -uses design system tokens */
 	.search-fullpage {
-		max-width: 800px;
+		max-width: 680px;
 		margin: 0 auto;
 		padding: 2rem 1rem;
 	}
@@ -740,16 +813,28 @@
 
 	.search-header h1 {
 		margin-bottom: 1rem;
+		font-family: var(--font-serif);
+		font-variant: small-caps;
+		letter-spacing: 0.05em;
 	}
 
 	.search-fullpage .search-input-wrapper {
-		border: 1px solid var(--border, #e5e7eb);
-		border-radius: 8px;
+		border: 1px solid var(--color-border);
+		border-radius: 4px;
 		padding: 0.75rem 1rem;
 	}
 
 	.search-fullpage .search-input {
-		font-size: 1.125rem;
+		font-size: 1rem;
+		color: var(--color-text);
+	}
+
+	.search-fullpage .search-input::placeholder {
+		color: var(--color-text-muted);
+	}
+
+	.search-fullpage .search-icon {
+		color: var(--color-accent);
 	}
 
 	.filters-section {
@@ -764,89 +849,93 @@
 	}
 
 	.filter-header h3 {
-		font-size: 0.875rem;
+		font-size: 0.8rem;
 		font-weight: 600;
-		color: var(--text-secondary, #6b7280);
+		color: var(--color-text-muted);
 		text-transform: uppercase;
-		letter-spacing: 0.05em;
+		letter-spacing: 0.08em;
 		margin: 0;
+		font-family: var(--font-mono);
 	}
 
 	.clear-filters {
 		padding: 0.25rem 0.75rem;
 		background: transparent;
-		border: 1px solid var(--border, #e5e7eb);
-		border-radius: 6px;
-		font-size: 0.875rem;
+		border: 1px solid var(--color-border);
+		border-radius: 4px;
+		font-size: 0.8rem;
 		cursor: pointer;
-		color: var(--text-secondary, #6b7280);
+		color: var(--color-text-muted);
 		transition: all 0.15s;
+		font-family: var(--font-mono);
 	}
 
 	.clear-filters:hover {
-		background: var(--hover-bg, #f9fafb);
-		border-color: var(--accent, #3b82f6);
-		color: var(--accent, #3b82f6);
+		border-color: var(--color-accent);
+		color: var(--color-accent);
 	}
 
 	.topic-filters {
 		display: flex;
-		gap: 0.5rem;
+		gap: 0.4rem;
 		flex-wrap: wrap;
 	}
 
 	.topic-filter {
-		padding: 0.5rem 1rem;
-		background: var(--filter-bg, #f3f4f6);
-		border: 1px solid var(--border, #e5e7eb);
-		border-radius: 6px;
-		font-size: 0.875rem;
+		padding: 3px 8px;
+		background: transparent;
+		border: 1px solid var(--color-border);
+		border-radius: 2px;
+		font-size: 0.75rem;
 		cursor: pointer;
 		transition: all 0.15s;
-		color: var(--text, #111827);
+		color: var(--color-text-muted);
+		font-family: var(--font-mono);
+		letter-spacing: 0.03em;
 	}
 
 	.topic-filter:hover {
-		background: var(--hover-bg, #e5e7eb);
+		border-color: var(--color-accent);
+		color: var(--color-accent);
 	}
 
 	.topic-filter.active {
-		background: var(--accent, #3b82f6);
-		color: white;
-		border-color: var(--accent, #3b82f6);
+		background: var(--color-accent);
+		color: #1a1a1a;
+		border-color: var(--color-accent);
+		font-weight: 700;
 	}
 
 	.results-info {
 		margin-bottom: 1.5rem;
-		padding: 0.75rem 1rem;
-		background: var(--info-bg, #f9fafb);
-		border-radius: 8px;
+		padding: 0.6rem 1rem;
+		background: var(--color-surface);
+		border-radius: 4px;
 		text-align: center;
 	}
 
 	.results-info p {
 		margin: 0;
-		font-size: 0.875rem;
-		color: var(--text-secondary, #6b7280);
+		font-size: 0.8rem;
+		color: var(--color-text-muted);
+		font-family: var(--font-mono);
 	}
 
 	.search-results-list {
 		display: flex;
 		flex-direction: column;
-		gap: 1rem;
+		gap: 0;
 	}
 
 	.result-item {
-		padding: 1.5rem;
-		background: var(--card-bg, white);
-		border: 1px solid var(--border, #e5e7eb);
-		border-radius: 8px;
+		padding: 1.25rem 0;
+		background: transparent;
+		border-bottom: 1px solid var(--color-border);
 		transition: all 0.2s;
 	}
 
 	.result-item:hover {
-		border-color: var(--accent, #3b82f6);
-		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+		padding-left: 0.5rem;
 	}
 
 	.result-link {
@@ -855,19 +944,27 @@
 	}
 
 	.result-item .result-title {
-		font-size: 1.25rem;
-		margin-bottom: 0.75rem;
+		font-size: 1.1rem;
+		margin-bottom: 0.4rem;
+		font-family: var(--font-serif);
+		color: var(--color-text);
+		transition: color 0.2s;
+	}
+
+	.result-item:hover .result-title {
+		color: var(--color-accent);
 	}
 
 	.result-item .result-content {
-		font-size: 0.95rem;
+		font-size: 0.85rem;
 		line-height: 1.6;
+		color: var(--color-text-muted);
 	}
 
 	:global(mark) {
-		background: var(--highlight-bg, #fef08a);
+		background: rgba(212, 160, 23, 0.2);
 		color: inherit;
-		padding: 0.125rem 0.25rem;
+		padding: 0.1rem 0.2rem;
 		border-radius: 2px;
 		font-weight: 500;
 	}

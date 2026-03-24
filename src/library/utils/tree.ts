@@ -49,10 +49,15 @@ function convertNode(tree: TreeNode): ConvertedNode[] | any[] {
 	if (Array.isArray(tree)) {
 		return tree;
 	} else {
-		return Object.entries(tree).map(([label, items]) => ({
-			label: toUpper(label),
-			items: convertNode(items)
-		}));
+		// Reverse so that numeric keys (years) appear newest-first.
+		// Object.entries returns integer-like keys in ascending order per the JS spec,
+		// but we want descending (2024, 2023, 2022...).
+		return Object.entries(tree)
+			.reverse()
+			.map(([label, items]) => ({
+				label: toUpper(label),
+				items: convertNode(items)
+			}));
 	}
 }
 

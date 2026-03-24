@@ -70,10 +70,10 @@ It is designed to work with **local development** using a plain HTTPS URL and **
 
 ## Structure
 
-- `articles/` — Markdown posts  
-- `sheets/` — Reference materials  
-- `assets/` — Images and media  
-- `config/` — Metadata and configuration
+- `articles/` -Markdown posts  
+- `sheets/` -Reference materials  
+- `assets/` -Images and media  
+- `config/` -Metadata and configuration
 
 ---
 
@@ -120,7 +120,7 @@ Value: https://<GH_TOKEN>@github.com/yourusername/blog-content-private.git
    - **Permissions:** `Contents: Read-only`  
    - **Expiration:** choose what works for you (or no expiration if you prefer).  
 
-3. Copy the generated token — you will need it in Vercel.
+3. Copy the generated token -you will need it in Vercel.
 
 ---
 

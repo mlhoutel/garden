@@ -12,7 +12,7 @@ export async function listPages(section?: string, options: ListPagesOptions = {}
 
 	return pages
 		.filter((p) => includeDrafts || p.meta.published !== false)
-		.sort((a, b) => new Date(a.meta.date).getTime() - new Date(b.meta.date).getTime());
+		.sort((a, b) => new Date(b.meta.date).getTime() - new Date(a.meta.date).getTime());
 }
 
 /**

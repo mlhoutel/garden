@@ -2,7 +2,7 @@
 	import { base } from '$app/paths';
 	import type { Project } from '$types/types';
 
-	export let project: Project;
+	let { project }: { project: Project } = $props();
 </script>
 
 <div class="relative h-[130px] overflow-hidden sm:h-[200px] md:h-[300px] lg:h-[400px]">

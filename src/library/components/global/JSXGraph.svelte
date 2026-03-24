@@ -3,9 +3,7 @@
 	import { v4 as uuidv4 } from 'uuid';
 	import type { JSXGraphProps } from '$types/types';
 
-	export let draw: JSXGraphProps['draw'];
-	export let width: JSXGraphProps['width'] = '100%';
-	export let height: JSXGraphProps['height'] = '400px';
+	let { draw, width = '100%', height = '400px' }: JSXGraphProps = $props();
 
 	const id = uuidv4();
 

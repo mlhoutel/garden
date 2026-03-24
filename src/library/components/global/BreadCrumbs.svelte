@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { BreadcrumbItem } from '$types/types';
 
-	export let items: BreadcrumbItem[] = [];
+	let { items = [] }: { items: BreadcrumbItem[] } = $props();
 </script>
 
 <div class="inline-flex items-center space-x-1">

@@ -16,6 +16,9 @@ export const load = async ({
 	// Fetch all pages in this section
 	const pages: Page[] = await listPages(section);
 
+	// No pages = invalid section
+	if (pages.length === 0) throw error(404, 'Section not found');
+
 	// Build tree for navigation
 	const tree: Record<string, any> = {};
 	for (const page of pages) {

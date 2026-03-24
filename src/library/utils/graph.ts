@@ -1,11 +1,19 @@
 import type { GraphData, Node, Edge } from '$types/types';
 import type { Page } from '$types/types';
-import crypto from 'crypto';
 
-/** Generate unique edge IDs */
-function edgeId(a: string, b: string): string {
+/** Generate a stable unique edge ID from two node IDs */
+function edgeKey(a: string, b: string): string {
 	const [x, y] = [a, b].sort();
-	return crypto.createHash('md5').update(`${x}-${y}`).digest('hex');
+	return `${x}|||${y}`;
+}
+
+function parseEdgeKey(key: string): [string, string] {
+	const [a, b] = key.split('|||');
+	return [a, b];
+}
+
+function getTopics(page: Page): string[] {
+	return page.meta.topic ? page.meta.topic.split(' ').filter(Boolean) : [];
 }
 
 /** Build a topic graph:
@@ -18,16 +26,15 @@ export function getTopicGraph(pages: Page[]): GraphData {
 	const cooccurrence = new Map<string, number>();
 
 	for (const page of pages) {
-		const topics = page.meta.topics || [];
+		const topics = getTopics(page);
 		for (const t of topics) {
 			topicCounts.set(t, (topicCounts.get(t) || 0) + 1);
 		}
 
-		// For all topic pairs in this page, count co-occurrence
 		for (let i = 0; i < topics.length; i++) {
 			for (let j = i + 1; j < topics.length; j++) {
-				const id = edgeId(topics[i], topics[j]);
-				cooccurrence.set(id, (cooccurrence.get(id) || 0) + 1);
+				const key = edgeKey(topics[i], topics[j]);
+				cooccurrence.set(key, (cooccurrence.get(key) || 0) + 1);
 			}
 		}
 	}
@@ -39,11 +46,9 @@ export function getTopicGraph(pages: Page[]): GraphData {
 		meta: { pages: count }
 	}));
 
-	const edges: Edge[] = Array.from(cooccurrence.entries()).map(([id, count]) => {
-		// Extract original topics from hash
-		// (Not stored, so we rebuild by sorting topic names again)
-		const [source_id, target_id] = id.split('-');
-		return { id, size: count, source_id, target_id };
+	const edges: Edge[] = Array.from(cooccurrence.entries()).map(([key, count]) => {
+		const [source_id, target_id] = parseEdgeKey(key);
+		return { id: key, size: count, source_id, target_id };
 	});
 
 	return { nodes, edges };
@@ -66,23 +71,23 @@ export function getPageGraph(pages: Page[]): GraphData {
 
 	for (let i = 0; i < pages.length; i++) {
 		const p1 = pages[i];
-		const topics1 = new Set(p1.meta.topics || []);
+		const topics1 = new Set(getTopics(p1));
 
 		for (let j = i + 1; j < pages.length; j++) {
 			const p2 = pages[j];
-			const topics2 = new Set(p2.meta.topics || []);
+			const topics2 = new Set(getTopics(p2));
 
 			const intersection = [...topics1].filter((t) => topics2.has(t));
 			if (intersection.length > 0) {
-				const id = edgeId(p1.meta.slug, p2.meta.slug);
-				edgesMap.set(id, intersection.length);
+				const key = edgeKey(p1.meta.slug, p2.meta.slug);
+				edgesMap.set(key, intersection.length);
 			}
 		}
 	}
 
-	const edges: Edge[] = Array.from(edgesMap.entries()).map(([id, count]) => {
-		const [source_id, target_id] = id.split('-');
-		return { id, size: count, source_id, target_id };
+	const edges: Edge[] = Array.from(edgesMap.entries()).map(([key, count]) => {
+		const [source_id, target_id] = parseEdgeKey(key);
+		return { id: key, size: count, source_id, target_id };
 	});
 
 	return { nodes, edges };

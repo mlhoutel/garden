@@ -2,38 +2,38 @@
 	import TopicPill from '$components/global/TopicPill.svelte';
 	import type { Page } from '$types/types';
 
-	export let item: Page;
-	$: pagePath = (item.path?.startsWith('/') ? item.path : '/' + item.path).replace('.md', '');
+	let { item }: { item: Page } = $props();
+	let pagePath = $derived((item.path?.startsWith('/') ? item.path : '/' + item.path).replace('.md', ''));
 </script>
 
-<div class="mt-2 mb-5">
-	<div class="block md:inline-flex">
-		<a
-			data-sveltekit-preload-code="hover"
-			href={pagePath}
-			class="horizontal-underline-animated font-serif text-2xl text-clip whitespace-nowrap transition-all md:w-auto md:text-3xl dark:hover:[text-shadow:2px_2px_1px_black,2px_2px_1px_black,3px_3px_1px_black]"
-		>
+<a
+	data-sveltekit-preload-code="hover"
+	href={pagePath}
+	class="group block py-4 transition-all duration-200"
+	style="border-bottom: 1px solid var(--color-border); text-decoration: none;"
+>
+	<div class="flex flex-col gap-1 md:flex-row md:items-baseline md:gap-3">
+		{#if item?.meta.date}
+			<span class="shrink-0 font-mono text-[0.7rem]" style="color: var(--color-text-muted);">
+				{new Date(item.meta.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+			</span>
+		{/if}
+		<span class="font-serif text-[1.15rem] transition-colors duration-200 group-hover:text-[--color-accent]" style="color: var(--color-text);">
 			{item?.meta.title}
-		</a>
-
-		<div class="pills md:pt-[5px] md:pl-3">
-			{#if item?.meta.topic}
-				{#each item.meta.topic.split(' ') as topic, i (i)}
-					<TopicPill {topic} />
-				{/each}
-			{/if}
-		</div>
+		</span>
 	</div>
 
-	<p class="pt-0 pb-3 text-sm">
-		{item?.meta.short}...
-	</p>
+	{#if item?.meta.short}
+		<p class="mt-1 text-base leading-relaxed" style="color: var(--color-text);">
+			{item.meta.short}
+		</p>
+	{/if}
 
-	<a
-		data-sveltekit-preload-code="hover"
-		href={pagePath}
-		class="underline-animated-block px-1 text-base"
-	>
-		✦ Explore content
-	</a>
-</div>
+	{#if item?.meta.topic}
+		<div class="mt-2 flex flex-wrap gap-1">
+			{#each item.meta.topic.split(' ').filter(Boolean).slice(0, 5) as topic, i (i)}
+				<TopicPill {topic} />
+			{/each}
+		</div>
+	{/if}
+</a>

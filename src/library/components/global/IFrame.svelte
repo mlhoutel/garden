@@ -2,19 +2,23 @@
 	import Loader from '$components/global/Loader.svelte';
 	import type { IframeProps } from '$types/types';
 
-	export let src: IframeProps['src'];
-	export let title: IframeProps['title'];
+	let {
+		src,
+		title,
+		rootStyle = '',
+		rootClass = '',
+		iframeStyle = 'position: absolute; left: 0; height: 100%; width: 100%; border: none',
+		iframeClass = ''
+	}: {
+		src: IframeProps['src'];
+		title: IframeProps['title'];
+		rootStyle?: string;
+		rootClass?: string;
+		iframeStyle?: string;
+		iframeClass?: string;
+	} = $props();
 
-	// Styles for the wrapper div
-	export let rootStyle: string = '';
-	export let rootClass: string = '';
-
-	// Styles for the iframe itself
-	export let iframeStyle: string =
-		'position: absolute; left: 0; height: 100%; width: 100%; border: none';
-	export let iframeClass: string = '';
-
-	let loading = true;
+	let loading = $state(true);
 </script>
 
 <div style={rootStyle} class={rootClass}>
@@ -30,7 +34,7 @@
 	{/if}
 
 	<iframe
-		on:load={() => (loading = false)}
+		onload={() => (loading = false)}
 		{src}
 		{title}
 		loading="lazy"

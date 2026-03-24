@@ -1,20 +1,10 @@
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 import path from 'path';
 
-/*
-// DYNAMIC DEPLOYEMENT
-import adapter from '@sveltejs/adapter-auto';
-*/
-
-// STATIC DEPLOYMENT
 import adapter from '@sveltejs/adapter-static';
 
-/*
-// if you want to deploy to github pages, uncomment this block
-// as well as the "paths" property in the code below.
-const dev = process.env.NODE_ENV === 'development';
-const base = dev ? '' : '/garden'
-*/
+const dev = process.argv.includes('dev');
+const base = dev ? '' : process.env.BASE_PATH || '';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -37,21 +27,18 @@ const config = {
 			$utils: path.resolve('src/library/utils'),
 			$library: path.resolve('src/library'),
 			$types: path.resolve('src/library/types')
-		}
-
-		/*
+		},
 		prerender: {
 			entries: ['*'],
 			handleHttpError: ({ path, referrer, message }) => {
 				if (message.includes('404')) {
 					console.warn(`⚠️  Skipping prerender of missing page: ${path} (linked from ${referrer})`);
-					return; // ignore missing routes during crawl
+					return;
 				}
 				throw new Error(message);
 			}
-		}
-		*/
-		// paths: { base: base }
+		},
+		paths: { base }
 	}
 };
 

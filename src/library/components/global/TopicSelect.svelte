@@ -1,16 +1,23 @@
 <script lang="ts">
 	import TopicPill from './TopicPill.svelte';
-	import { createEventDispatcher } from 'svelte';
 	import type { TagSelectProps } from '$types/types';
 
-	export let placeholder: TagSelectProps['placeholder'] = 'Search...';
-	export let input: TagSelectProps['input'] = '';
-	export let options: TagSelectProps['options'] = [];
-	export let displayed: string[] = options;
-	export let selected: Set<string> = new Set();
-	export let dropdown: boolean = false;
+	let {
+		placeholder = 'Search...' as TagSelectProps['placeholder'],
+		input = $bindable(''),
+		options = [] as TagSelectProps['options'],
+		selected = new Set<string>(),
+		onchange
+	}: {
+		placeholder?: TagSelectProps['placeholder'];
+		input?: string;
+		options?: TagSelectProps['options'];
+		selected?: Set<string>;
+		onchange?: (value: Set<string>) => void;
+	} = $props();
 
-	const dispatch = createEventDispatcher<{ change: Set<string> }>();
+	let displayed = $state(options);
+	let dropdown = $state(false);
 
 	export function inputFocus(): void {
 		dropdown = true;
@@ -50,7 +57,7 @@
 		selected = new Set(selected); // trigger reactivity
 		input = '';
 		updateDisplayOptions();
-		dispatch('change', selected);
+		onchange?.(selected);
 	}
 
 	export function optionClick(e: MouseEvent): void {
@@ -62,13 +69,13 @@
 		selected = new Set(selected);
 		input = '';
 		updateDisplayOptions();
-		dispatch('change', selected);
+		onchange?.(selected);
 	}
 
-	export function selectClick(e: CustomEvent<string>): void {
-		selected.delete(e.detail);
+	function selectClick(topic: string): void {
+		selected.delete(topic);
 		selected = new Set(selected);
-		dispatch('change', selected);
+		onchange?.(selected);
 	}
 </script>
 
@@ -80,17 +87,17 @@
 			autocomplete="off"
 			{placeholder}
 			bind:value={input}
-			on:focus={inputFocus}
-			on:blur={inputBlur}
-			on:input={inputChange}
-			on:keypress={inputPress}
+			onfocus={inputFocus}
+			onblur={inputBlur}
+			oninput={inputChange}
+			onkeypress={inputPress}
 			class="select-input"
 		/>
 	</div>
 
 	<div class="pills">
 		{#each Array.from(selected) as topic, i (i)}
-			<TopicPill disabled={true} {topic} on:click={selectClick} removable={true} />
+			<TopicPill disabled={true} {topic} onclick={selectClick} removable={true} />
 		{/each}
 	</div>
 
@@ -100,7 +107,7 @@
 		>
 			{#each displayed as option, i (i)}
 				<div class="px-1">
-					<button class="selectOption w-full text-left text-sm" on:click={optionClick}>
+					<button class="selectOption w-full text-left text-sm" onclick={optionClick}>
 						{option}
 					</button>
 				</div>
