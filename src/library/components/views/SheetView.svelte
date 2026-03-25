@@ -75,7 +75,7 @@
 	<!-- Sidebar TOC (desktop only) -->
 	{#if tocItems.length > 1}
 		<aside class="hidden w-[200px] shrink-0 lg:block">
-			<nav class="sticky top-14" aria-label="Table of contents">
+			<nav class="sticky top-[50px]" aria-label="Table of contents">
 				<h4 class="mb-3 font-mono text-[0.6rem] tracking-[0.12em] uppercase" style="color: var(--color-text-muted);">
 					On this page
 				</h4>

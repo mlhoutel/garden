@@ -193,8 +193,7 @@
 					{#each linksItems as item (`footer_${item.link}`)}
 						<li>
 							<a
-								class="text-sm transition-colors duration-200 hover:text-[#D4A017]"
-								style="color: #9A928A;"
+								class="footer-link"
 								href={item.link}
 								data-sveltekit-preload-code="hover"
 							>
@@ -324,5 +323,33 @@
 	.scroll-top-btn:hover svg line:last-child {
 		opacity: 1;
 		transition: all 0.3s;
+	}
+
+	/* Footer link with sweep underline */
+	.footer-link {
+		position: relative;
+		color: #9A928A;
+		font-size: 0.875rem;
+		transition: color 0.2s;
+		text-decoration: none;
+	}
+
+	.footer-link::after {
+		content: '';
+		position: absolute;
+		left: 0;
+		bottom: -1px;
+		width: 0;
+		height: 1px;
+		background-color: #D4A017;
+		transition: width 0.3s ease;
+	}
+
+	.footer-link:hover {
+		color: #D4A017;
+	}
+
+	.footer-link:hover::after {
+		width: 100%;
 	}
 </style>

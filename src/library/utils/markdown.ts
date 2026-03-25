@@ -16,6 +16,25 @@ import rehypeStringify from 'rehype-stringify';
 import rehypeMermaid from './mermaid';
 import rehypeEmbeds from './embeds';
 import { transformerCopyButton } from '@rehype-pretty/transformers';
+import { visit } from 'unist-util-visit';
+import type { Root, Element } from 'hast';
+
+/**
+ * Rehype plugin: add target="_blank" and rel="noopener noreferrer" to external links
+ */
+function rehypeExternalLinks() {
+	return (tree: Root) => {
+		visit(tree, 'element', (node: Element) => {
+			if (node.tagName !== 'a') return;
+			const href = node.properties?.href;
+			if (typeof href === 'string' && (href.startsWith('http://') || href.startsWith('https://'))) {
+				node.properties = node.properties || {};
+				node.properties.target = '_blank';
+				node.properties.rel = 'noopener noreferrer';
+			}
+		});
+	};
+}
 
 function mergeClasses(
 	existing: string | number | boolean | (string | number)[],
@@ -111,6 +130,7 @@ export async function renderMarkdown(
 		})
 		.use(rehypeCitation, { path })
 		.use(rehypeMermaid)
+		.use(rehypeExternalLinks)
 		.use(rehypeStringify)
 		.process(markdown);
 
