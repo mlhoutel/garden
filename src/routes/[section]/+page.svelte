@@ -4,7 +4,7 @@
 	import { toUpper } from '$utils/format';
 	import { base } from '$app/paths';
 	import seedrandom from 'seedrandom';
-	import { randomQuote } from '$utils/quotes';
+	import QuoteCycler from '$components/global/QuoteCycler.svelte';
 	import type { SectionLoadReturn, NestedListItem } from '$types/types';
 
 	let isSnippets = $derived(data.section === 'snippets');
@@ -26,7 +26,7 @@
 		Snippets: '{ ◆ }'
 	};
 
-	const selectedQuote = randomQuote();
+	// Quote cycler handles its own state
 
 	let description = $derived(sectionDescriptions[title] || '');
 	let icon = $derived(sectionIcons[title] || '◆');
@@ -156,10 +156,7 @@
 	</svg>
 	<!-- Quote -->
 	<div class="mx-auto flex max-w-[680px] justify-end px-4 pt-0">
-		<p class="font-serif text-sm italic" style="color: var(--color-text-muted);">
-			"{selectedQuote.text}" ·
-			<span class="text-xs not-italic">{selectedQuote.author}</span>
-		</p>
+		<QuoteCycler />
 	</div>
 </div>
 
