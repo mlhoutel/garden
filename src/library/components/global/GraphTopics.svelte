@@ -18,8 +18,8 @@
 	let shootingStarTimer: ReturnType<typeof setTimeout>;
 	let shootingStarsActive = false;
 
-	const nodeMinRadius = 1.5;
-	const nodeScale = 2.2;
+	const nodeMinRadius = 1;
+	const nodeScale = 1.8;
 
 	const GOLD = '#D4A017';
 	const GOLD_BRIGHT = '#F5E6B8';
@@ -251,7 +251,7 @@
 
 		const sizes = dNodes.map((n) => n.size).sort((a, b) => a - b);
 		const medianSize = sizes[Math.floor(sizes.length * 0.6)] || 1;
-		const labelThreshold = sizes[Math.floor(sizes.length * 0.65)] || 1;
+		const labelThreshold = sizes[Math.floor(sizes.length * 0.75)] || 1;
 
 		const svg = d3
 			.select(svgContainer)
