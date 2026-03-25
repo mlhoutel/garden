@@ -18,8 +18,8 @@
 	let shootingStarTimer: ReturnType<typeof setTimeout>;
 	let shootingStarsActive = false;
 
-	const nodeMinRadius = 1;
-	const nodeScale = 1.8;
+	const nodeMinRadius = 0.6;
+	const nodeScale = 2.5;
 
 	const GOLD = '#D4A017';
 	const GOLD_BRIGHT = '#F5E6B8';
@@ -226,11 +226,47 @@
 		const hw = width / 2,
 			hh = height / 2;
 
-		const dLinks: SimulationLink[] = edges.map((e) => ({
+		// Edge pruning: keep a spanning tree (no islands) + random subset of extras
+		// This reduces rendering cost while preserving connectivity
+		const pruneRng = seedrandom('edge-prune');
+		const allLinks: SimulationLink[] = edges.map((e) => ({
 			...e,
 			source: e.source_id,
 			target: e.target_id
 		}));
+
+		// Build spanning tree with Union-Find
+		const parent = new Map<string, string>();
+		function find(x: string): string {
+			if (!parent.has(x)) parent.set(x, x);
+			if (parent.get(x) !== x) parent.set(x, find(parent.get(x)!));
+			return parent.get(x)!;
+		}
+		function union(a: string, b: string): boolean {
+			const ra = find(a), rb = find(b);
+			if (ra === rb) return false;
+			parent.set(ra, rb);
+			return true;
+		}
+
+		// Sort edges by size (prefer keeping important connections)
+		const sorted = [...allLinks].sort((a, b) => (b.size || 1) - (a.size || 1));
+		const treeEdges: SimulationLink[] = [];
+		const extraEdges: SimulationLink[] = [];
+
+		for (const link of sorted) {
+			const src = typeof link.source === 'string' ? link.source : link.source.id;
+			const tgt = typeof link.target === 'string' ? link.target : link.target.id;
+			if (union(src, tgt)) {
+				treeEdges.push(link);
+			} else {
+				extraEdges.push(link);
+			}
+		}
+
+		// Keep all tree edges + 35% of extras
+		const keptExtras = extraEdges.filter(() => pruneRng() < 0.35);
+		const dLinks = [...treeEdges, ...keptExtras];
 
 		// Initial positions: big nodes AT center, small ones spread outward
 		const initRng = seedrandom('graph-init');
@@ -396,7 +432,7 @@
 		// Size-dependent forces: big = strong pull to center, small = weak pull + pushed outward
 		const maxSize = Math.max(...dNodes.map((d) => d.size || 1));
 
-		// Custom force: big nodes pinned to center, small ones pushed outward
+		// Custom force: big nodes strongly pulled to center, small ones pushed outward
 		function radialSizeForce(alpha: number) {
 			for (const d of dNodes) {
 				const normalized = (d.size || 1) / maxSize; // 0..1
@@ -404,17 +440,14 @@
 					y = d.y ?? 0;
 				const dist = Math.sqrt(x * x + y * y) || 1;
 
-				// Two-part force:
-				// 1. Big nodes: directly pull toward (0,0) proportional to their size
-				// 2. Small nodes: push outward
-				if (normalized > 0.4) {
-					// Pull inward -directly reduce position toward center
-					const pullStrength = normalized * normalized * 0.15 * alpha;
+				if (normalized > 0.3) {
+					// Strong center pull — cubic scaling for top nodes
+					const pullStrength = normalized * normalized * normalized * 0.25 * alpha;
 					d.vx = (d.vx ?? 0) - x * pullStrength;
 					d.vy = (d.vy ?? 0) - y * pullStrength;
 				} else {
-					// Push outward
-					const pushStrength = (1 - normalized * 2) * 0.2 * alpha;
+					// Push small nodes outward more aggressively
+					const pushStrength = (1 - normalized * 3) * 0.3 * alpha;
 					d.vx = (d.vx ?? 0) + (x / dist) * pushStrength;
 					d.vy = (d.vy ?? 0) + (y / dist) * pushStrength;
 				}
@@ -428,8 +461,8 @@
 				d3
 					.forceLink<SimulationNode, SimulationLink>(dLinks)
 					.id((d) => d.id)
-					.distance(40 + Math.min(width, height) * 0.04)
-					.strength(0.15)
+					.distance(50 + Math.min(width, height) * 0.05)
+					.strength(0.1)
 			)
 			.force('charge', d3.forceManyBody().strength(chargeStr).distanceMax(100))
 			.force('center', d3.forceCenter(0, 0).strength(0.01))
