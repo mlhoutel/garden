@@ -31,20 +31,23 @@
 	let description = $derived(sectionDescriptions[title] || '');
 	let icon = $derived(sectionIcons[title] || '◆');
 
-	// Constellation stars for header
-	const rng = seedrandom(`section-${title}`);
-	const stars: { cx: number; cy: number; r: number; opacity: number }[] = [];
-	for (let i = 0; i < 150; i++) {
-		stars.push({
-			cx: rng() * 100,
-			cy: rng() * 100,
-			r: 0.02 + rng() * 0.06,
-			opacity: 0.06 + rng() * 0.3
-		});
-	}
+	// Constellation stars for header (recomputed when title changes)
+	let stars = $derived.by(() => {
+		const rng = seedrandom(`section-${title}`);
+		const result: { cx: number; cy: number; r: number; opacity: number }[] = [];
+		for (let i = 0; i < 150; i++) {
+			result.push({
+				cx: rng() * 100,
+				cy: rng() * 100,
+				r: 0.02 + rng() * 0.06,
+				opacity: 0.06 + rng() * 0.3
+			});
+		}
+		return result;
+	});
 
-	// Constellation lines -connect nearby stars
-	const geomRng = seedrandom(`section-geom-${title}`);
+	// Constellation lines RNG (recomputed when title changes)
+	let geomRng = $derived(seedrandom(`section-geom-${title}`));
 </script>
 
 <svelte:head>
@@ -154,9 +157,11 @@
 		<polygon points="488,12 492,9 496,12 492,15" fill="#D4A017" opacity="0.45" />
 		<line x1="500" y1="12" x2="800" y2="12" stroke="#D4A017" stroke-width="0.7" opacity="0.3" />
 	</svg>
-	<!-- Quote -->
+	<!-- Quote (keyed on section so it re-picks on navigation) -->
 	<div class="mx-auto flex max-w-[680px] justify-end px-4 pt-0">
-		<QuoteCycler />
+		{#key data.section}
+			<QuoteCycler />
+		{/key}
 	</div>
 </div>
 

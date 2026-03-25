@@ -13,6 +13,7 @@
 
 	let wrapperEl: HTMLDivElement;
 	let svgContainer: SVGSVGElement;
+	let linkCanvas: HTMLCanvasElement;
 	let simulation: d3.Simulation<SimulationNode, SimulationLink>;
 	// loading is a $bindable prop
 	let shootingStarTimer: ReturnType<typeof setTimeout>;
@@ -264,8 +265,8 @@
 			}
 		}
 
-		// Keep all tree edges + 35% of extras
-		const keptExtras = extraEdges.filter(() => pruneRng() < 0.35);
+		// Keep all tree edges + 25% of extras (aggressive pruning for performance)
+		const keptExtras = extraEdges.filter(() => pruneRng() < 0.25);
 		const dLinks = [...treeEdges, ...keptExtras];
 
 		// Initial positions: big nodes AT center, small ones spread outward
@@ -294,21 +295,12 @@
 			.attr('viewBox', [-hw, -hh, width, height])
 			.style('max-width', '100%')
 			.style('height', 'auto')
-			.style('background', BG);
+			.style('background', 'transparent');
 
-		// Glow filter
-		const defs = svg.append('defs');
-		const gf = defs
-			.append('filter')
-			.attr('id', 'glow')
-			.attr('width', '200%')
-			.attr('height', '200%')
-			.attr('x', '-50%')
-			.attr('y', '-50%');
-		gf.append('feGaussianBlur').attr('stdDeviation', '2.5').attr('result', 'blur');
-		const fm = gf.append('feMerge');
-		fm.append('feMergeNode').attr('in', 'blur');
-		fm.append('feMergeNode').attr('in', 'SourceGraphic');
+		// Canvas for links (much faster than SVG line elements)
+		linkCanvas.width = width;
+		linkCanvas.height = height;
+		const ctx = linkCanvas.getContext('2d')!;
 
 		drawGeometricBackground(svg, width, height);
 
@@ -317,12 +309,12 @@
 		shootingStarsActive = true;
 		function scheduleNextStar() {
 			if (!shootingStarsActive) return;
-			// Faster: short delays with occasional bursts, rare long pauses
+			// Organic timing with frequent shooting stars
 			const delay = 80 + Math.random() * 900 + (Math.random() < 0.1 ? 1500 : 0);
 			shootingStarTimer = setTimeout(() => {
 				if (!shootingStarsActive) return;
 				spawnShootingStar(starsGroup, width, height);
-				// Often spawn 1-2 extras close behind
+				// Frequent bursts for visual richness
 				if (Math.random() < 0.4) {
 					setTimeout(() => spawnShootingStar(starsGroup, width, height), 30 + Math.random() * 150);
 				}
@@ -334,29 +326,44 @@
 		}
 		scheduleNextStar();
 
-		// Links
-		const link = svg
-			.append('g')
-			.selectAll<SVGLineElement, SimulationLink>('line')
-			.data(dLinks)
-			.join('line')
-			.attr('stroke', LINK_COLOR)
-			.attr('stroke-opacity', 0.2)
-			.attr('stroke-width', 0.5);
+		// Links drawn on canvas in tick handler (no SVG elements needed)
 
-		// Glow (large nodes only)
-		const largeNodes = dNodes.filter((d) => d.size >= medianSize);
-		const glow = svg
-			.append('g')
-			.selectAll<SVGCircleElement, SimulationNode>('circle')
-			.data(largeNodes)
-			.join('circle')
-			.attr('r', (d) => nodeMinRadius + Math.sqrt(d.size || 1) * nodeScale + 2)
-			.attr('fill', (d, i) => planetColor(d, i))
-			.attr('opacity', 0.12)
-			.attr('filter', 'url(#glow)');
+		// Track highlight state for canvas link drawing
+		let highlightedNodeId: string | null = null;
+		let highlightedNeighbors: Set<string> = new Set();
 
-		// Nodes
+		function drawLinks() {
+			if (!ctx) return;
+			ctx.clearRect(0, 0, width, height);
+			ctx.lineWidth = 0.5;
+			ctx.lineCap = 'round';
+
+			for (const l of dLinks) {
+				const s = typeof l.source === 'object' ? l.source : null;
+				const t = typeof l.target === 'object' ? l.target : null;
+				if (!s || !t) continue;
+
+				const sx = (s.x ?? 0) + hw, sy = (s.y ?? 0) + hh;
+				const tx = (t.x ?? 0) + hw, ty = (t.y ?? 0) + hh;
+
+				// Highlight connected links on hover
+				if (highlightedNodeId) {
+					const isConnected = s.id === highlightedNodeId || t.id === highlightedNodeId;
+					ctx.strokeStyle = isConnected ? 'rgba(212,160,23,0.5)' : 'rgba(58,58,58,0.05)';
+					ctx.lineWidth = isConnected ? 1 : 0.3;
+				} else {
+					ctx.strokeStyle = 'rgba(80,75,65,0.08)';
+					ctx.lineWidth = 0.4;
+				}
+
+				ctx.beginPath();
+				ctx.moveTo(sx, sy);
+				ctx.lineTo(tx, ty);
+				ctx.stroke();
+			}
+		}
+
+		// Nodes — large nodes get CSS glow (much cheaper than SVG filter)
 		const node = svg
 			.append('g')
 			.selectAll<SVGCircleElement, SimulationNode>('circle')
@@ -364,8 +371,9 @@
 			.join('circle')
 			.attr('r', (d) => nodeMinRadius + Math.sqrt(d.size || 1) * nodeScale)
 			.attr('fill', (d, i) => (d.size >= medianSize ? planetColor(d, i) : OFF_WHITE))
-			.attr('opacity', 0.85)
-			.style('cursor', 'pointer');
+			.attr('opacity', (d) => (d.size >= medianSize ? 0.95 : 0.8))
+			.style('cursor', 'pointer')
+			.style('filter', (d, i) => d.size >= medianSize ? `drop-shadow(0 0 ${2 + Math.sqrt(d.size) * 0.5}px ${planetColor(d, i)})` : 'none');
 
 		// Labels
 		const labels = svg
@@ -475,8 +483,8 @@
 					.iterations(1)
 			)
 			.force('radialSize', radialSizeForce)
-			.alphaDecay(0.035)
-			.velocityDecay(0.4);
+			.alphaDecay(0.06)
+			.velocityDecay(0.5);
 
 		simulation.on('tick', () => {
 			// Jagged boundary: push back using non-linear wavy edges
@@ -489,13 +497,11 @@
 				if (Math.abs(y) > by) d.vy = (d.vy ?? 0) - (y - Math.sign(y) * by) * 0.07;
 			}
 
-			link
-				.attr('x1', (d) => (typeof d.source === 'object' ? (d.source.x ?? 0) : 0))
-				.attr('y1', (d) => (typeof d.source === 'object' ? (d.source.y ?? 0) : 0))
-				.attr('x2', (d) => (typeof d.target === 'object' ? (d.target.x ?? 0) : 0))
-				.attr('y2', (d) => (typeof d.target === 'object' ? (d.target.y ?? 0) : 0));
+			// Canvas links (much faster than SVG attr updates)
+			drawLinks();
+
+			// SVG nodes + labels only
 			node.attr('cx', (d) => d.x ?? 0).attr('cy', (d) => d.y ?? 0);
-			glow.attr('cx', (d) => d.x ?? 0).attr('cy', (d) => d.y ?? 0);
 			labels
 				.attr('x', (d) => d.x ?? 0)
 				.attr('y', (d) => (d.y ?? 0) - (nodeMinRadius + Math.sqrt(d.size || 1) * nodeScale));
@@ -507,6 +513,11 @@
 		simulation.on('tick.loading', () => {
 			if (simulation.alpha() < 0.05 && loading && Date.now() - loadStart >= MIN_LOAD_MS) {
 				loading = false;
+			}
+			// Stop simulation completely once fully settled (zero ongoing CPU)
+			if (simulation.alpha() < 0.005) {
+				simulation.stop();
+				drawLinks(); // final frame
 			}
 		});
 
@@ -521,34 +532,32 @@
 			neighborMap.get(tid)!.add(sid);
 		}
 
-		// Hover
+		// Hover — update canvas links + SVG nodes/labels
 		node
 			.on('mouseover', (event, d) => {
 				const nb = neighborMap.get(d.id) || new Set();
+				highlightedNodeId = d.id;
+				highlightedNeighbors = nb;
 				node
 					.attr('opacity', (n) => (n.id === d.id || nb.has(n.id) ? 1 : 0.1))
-					.attr('fill', (n) => (n.id === d.id ? GOLD_BRIGHT : nb.has(n.id) ? GOLD : OFF_WHITE));
-				glow.attr('opacity', (n) => (nb.has(n.id) || n.id === d.id ? 0.2 : 0.02));
-				labels.attr('opacity', (n) => (n.id === d.id ? 1 : nb.has(n.id) ? 0.8 : 0));
-				link
-					.attr('stroke-opacity', (l) => {
-						const s = typeof l.source === 'object' ? l.source.id : l.source;
-						const t = typeof l.target === 'object' ? l.target.id : l.target;
-						return s === d.id || t === d.id ? 0.6 : 0.03;
-					})
-					.attr('stroke', (l) => {
-						const s = typeof l.source === 'object' ? l.source.id : l.source;
-						const t = typeof l.target === 'object' ? l.target.id : l.target;
-						return s === d.id || t === d.id ? GOLD : LINK_COLOR;
+					.attr('fill', (n) => (n.id === d.id ? GOLD_BRIGHT : nb.has(n.id) ? GOLD : OFF_WHITE))
+					.style('filter', (n, i) => {
+						if (n.id === d.id) return `drop-shadow(0 0 8px ${GOLD_BRIGHT}) drop-shadow(0 0 16px ${GOLD})`;
+						if (nb.has(n.id)) return `drop-shadow(0 0 5px ${planetColor(n, i)})`;
+						return 'none';
 					});
+				labels.attr('opacity', (n) => (n.id === d.id ? 1 : nb.has(n.id) ? 0.8 : 0));
+				drawLinks();
 			})
 			.on('mouseout', () => {
+				highlightedNodeId = null;
+				highlightedNeighbors = new Set();
 				node
-					.attr('opacity', 0.85)
-					.attr('fill', (n, i) => (n.size >= medianSize ? planetColor(n, i) : OFF_WHITE));
-				glow.attr('opacity', 0.12).attr('fill', (n, i) => planetColor(n, i));
+					.attr('opacity', (n) => (n.size >= medianSize ? 0.95 : 0.8))
+					.attr('fill', (n, i) => (n.size >= medianSize ? planetColor(n, i) : OFF_WHITE))
+					.style('filter', (n, i) => n.size >= medianSize ? `drop-shadow(0 0 ${2 + Math.sqrt(n.size) * 0.5}px ${planetColor(n, i)})` : 'none');
 				labels.attr('opacity', (d) => (d.size >= labelThreshold ? 0.7 : 0));
-				link.attr('stroke-opacity', 0.2).attr('stroke', LINK_COLOR);
+				drawLinks();
 			});
 	}
 
@@ -585,6 +594,7 @@
 	class="relative w-full overflow-hidden"
 	style="height: 60vh; min-height: 350px; background: {BG};"
 >
-	<svg bind:this={svgContainer} class="h-full w-full"></svg>
+	<canvas bind:this={linkCanvas} class="absolute inset-0 h-full w-full" style="z-index: 1;"></canvas>
+	<svg bind:this={svgContainer} class="absolute inset-0 h-full w-full" style="z-index: 2;"></svg>
 	<OrbitalLoader visible={loading} />
 </div>
