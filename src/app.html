@@ -8,6 +8,28 @@
 		%sveltekit.head%
 	</head>
 	<body>
+		<script>
+			// Apply theme BEFORE render to prevent flash of wrong theme.
+			// Reads the same localStorage key used by the Svelte theme store.
+			(function () {
+				try {
+					var stored = localStorage.getItem('theme');
+					var dark;
+					if (stored != null) {
+						dark = JSON.parse(stored) === true;
+					} else {
+						dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+					}
+					if (dark) {
+						document.documentElement.classList.add('dark');
+						document.documentElement.setAttribute('saved-theme', 'dark');
+					} else {
+						document.documentElement.classList.remove('dark');
+						document.documentElement.setAttribute('saved-theme', 'light');
+					}
+				} catch (e) {}
+			})();
+		</script>
 		<div id="svelte">%sveltekit.body%</div>
 	</body>
 </html>

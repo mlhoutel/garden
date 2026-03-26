@@ -5,6 +5,7 @@
 	import { onMount } from 'svelte';
 	import seedrandom from 'seedrandom';
 	import IFrame from '$components/global/IFrame.svelte';
+	import AuthorBadge from '$components/global/AuthorBadge.svelte';
 
 	let { data }: { data: PageLoadReturn } = $props();
 
@@ -220,13 +221,15 @@
 	<h1>{data.title}</h1>
 
 	<!-- Meta -->
-	<div class="mt-3 flex flex-col gap-1 px-4 md:flex-row md:items-center md:justify-between md:px-0" style="color: var(--color-text-muted); font-size: 0.82rem;">
-		<div class="flex items-center gap-2">
-			<a href="https://github.com/mlhoutel" class="transition-colors duration-200 hover:text-[--color-accent]">mlhoutel</a>
-			<span style="opacity: 0.3;">·</span>
-			<span>{new Date(data.date || '').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span>
+	<div class="mt-4 flex flex-col gap-2 px-4 md:flex-row md:items-center md:justify-between md:px-0">
+		<div class="flex items-center gap-3">
+			<AuthorBadge />
+			<span style="opacity: 0.2; color: var(--color-text-muted);">·</span>
+			<span style="color: var(--color-text-muted); font-size: 0.8rem;">
+				{new Date(data.date || '').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+			</span>
 		</div>
-		<div style="opacity: 0.6; font-family: var(--font-mono); font-size: 0.72rem;">
+		<div style="opacity: 0.5; font-family: var(--font-mono); font-size: 0.68rem; color: var(--color-text-muted);">
 			{data.words?.toLocaleString()} words · {Math.ceil((data.time || 0) / 60000)} min read
 		</div>
 	</div>

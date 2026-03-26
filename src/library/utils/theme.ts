@@ -43,4 +43,10 @@ function storage<T>(key: string, initValue: T): Writable<T> {
 }
 
 // Theme store: false = light, true = dark
-export const themeStore = storage<boolean>('theme', false);
+// Falls back to system preference when no localStorage value exists.
+function getSystemPrefersDark(): boolean {
+	if (typeof window === 'undefined') return false;
+	return window.matchMedia('(prefers-color-scheme: dark)').matches;
+}
+
+export const themeStore = storage<boolean>('theme', getSystemPrefersDark());

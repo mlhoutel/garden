@@ -30,14 +30,6 @@
 			// Set up navigation loader
 			beforeNavigate(() => (loading = true));
 			afterNavigate(() => (loading = false));
-
-			// Apply initial theme
-			const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-			const stored = localStorage.getItem('theme');
-			const dark = stored === 'true' || (stored == null && prefersDark);
-
-			document.documentElement.classList.toggle('dark', dark);
-			localStorage.setItem('theme', String(dark));
 		}
 	});
 </script>

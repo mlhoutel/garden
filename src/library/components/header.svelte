@@ -20,9 +20,8 @@
 	onMount(() => {
 		if (!browser) return;
 
-		const savedTheme = localStorage.getItem('theme') === 'true';
-		themeStore.set(savedTheme);
-
+		// The themeStore already reads from localStorage (via the storage helper)
+		// and falls back to system preference. Just subscribe to keep DOM in sync.
 		const unsubscribe = themeStore.subscribe((value) => {
 			theme = value;
 			if (theme) {
@@ -39,7 +38,6 @@
 
 	function updateTheme() {
 		themeStore.set(!theme);
-		localStorage.setItem('theme', String(!theme));
 	}
 
 	function toggleMenu() {

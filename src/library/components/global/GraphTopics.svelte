@@ -13,13 +13,14 @@
 
 	let wrapperEl: HTMLDivElement;
 	let svgContainer: SVGSVGElement;
+	let linkCanvas: HTMLCanvasElement;
 	let simulation: d3.Simulation<SimulationNode, SimulationLink>;
 	// loading is a $bindable prop
 	let shootingStarTimer: ReturnType<typeof setTimeout>;
 	let shootingStarsActive = false;
 
-	const nodeMinRadius = 1.5;
-	const nodeScale = 2.2;
+	const nodeMinRadius = 0.6;
+	const nodeScale = 2.5;
 
 	const GOLD = '#D4A017';
 	const GOLD_BRIGHT = '#F5E6B8';
@@ -226,110 +227,237 @@
 		const hw = width / 2,
 			hh = height / 2;
 
-		const dLinks: SimulationLink[] = edges.map((e) => ({
+		// Size lookup for edge pruning (before dNodes exists)
+		const nodeSize = new Map(nodes.map((n) => [n.id, n.size || 1]));
+		const allNodeSizes = [...nodeSize.values()].sort((a, b) => a - b);
+		const medianSizeForPrune = allNodeSizes[Math.floor(allNodeSizes.length * 0.6)] || 1;
+
+		// Edge pruning: keep spanning tree + topology-aware extras
+		// Small-small edges kept aggressively (constellation wires); hub edges pruned hard
+		const pruneRng = seedrandom('edge-prune');
+		const allLinks: SimulationLink[] = edges.map((e) => ({
 			...e,
 			source: e.source_id,
 			target: e.target_id
 		}));
 
-		// Initial positions: big nodes AT center, small ones spread outward
-		const initRng = seedrandom('graph-init');
-		const spreadX = Math.min(width * 0.4, 400);
-		const spreadY = Math.min(height * 0.35, 300);
-		const maxNodeSize = Math.max(...nodes.map((n) => n.size || 1));
-		const dNodes: SimulationNode[] = nodes.map((n) => {
-			const angle = initRng() * Math.PI * 2;
-			const sizeRatio = (n.size || 1) / maxNodeSize; // 0..1
-			// Big nodes start at/near (0,0). Small nodes start far out.
-			const radiusFactor = Math.sqrt(initRng()) * (1 - sizeRatio * 0.95);
-			return {
-				...n,
-				x: Math.cos(angle) * radiusFactor * spreadX,
-				y: Math.sin(angle) * radiusFactor * spreadY
-			};
+		// Build spanning tree with Union-Find
+		const parent = new Map<string, string>();
+		function find(x: string): string {
+			if (!parent.has(x)) parent.set(x, x);
+			if (parent.get(x) !== x) parent.set(x, find(parent.get(x)!));
+			return parent.get(x)!;
+		}
+		function union(a: string, b: string): boolean {
+			const ra = find(a), rb = find(b);
+			if (ra === rb) return false;
+			parent.set(ra, rb);
+			return true;
+		}
+
+		const sorted = [...allLinks].sort((a, b) => (b.size || 1) - (a.size || 1));
+		const treeEdges: SimulationLink[] = [];
+		const extraEdges: SimulationLink[] = [];
+
+		for (const link of sorted) {
+			const src = typeof link.source === 'string' ? link.source : link.source.id;
+			const tgt = typeof link.target === 'string' ? link.target : link.target.id;
+			if (union(src, tgt)) {
+				treeEdges.push(link);
+			} else {
+				extraEdges.push(link);
+			}
+		}
+
+		const keptExtras = extraEdges.filter((l) => {
+			const ss = nodeSize.get(l.source as string) || 1;
+			const ts = nodeSize.get(l.target as string) || 1;
+			const avg = (ss + ts) / 2;
+			// Small-small: keep most (forms constellation wires); hubs: prune hard
+			return pruneRng() < (avg < medianSizeForPrune ? 0.65 : 0.15);
+		});
+		const dLinks = [...treeEdges, ...keptExtras];
+
+		// Community detection via Union-Find on kept links
+		const compParent = new Map<string, string>();
+		function compFind(x: string): string {
+			if (!compParent.has(x)) compParent.set(x, x);
+			const p = compParent.get(x)!;
+			if (p !== x) compParent.set(x, compFind(p));
+			return compParent.get(x)!;
+		}
+		for (const l of dLinks) {
+			const s = l.source as string, t = l.target as string;
+			const rs = compFind(s), rt = compFind(t);
+			if (rs !== rt) compParent.set(rs, rt);
+		}
+
+		const componentMap = new Map<string, string[]>();
+		for (const n of nodes) {
+			const root = compFind(n.id);
+			if (!componentMap.has(root)) componentMap.set(root, []);
+			componentMap.get(root)!.push(n.id);
+		}
+
+		// Sort components largest-first (largest = main hub cluster → goes to center)
+		const components = [...componentMap.values()].sort(
+			(a, b) =>
+				b.reduce((s, id) => s + (nodeSize.get(id) || 1), 0) -
+				a.reduce((s, id) => s + (nodeSize.get(id) || 1), 0)
+		);
+
+		const nodeToComp = new Map<string, number>();
+		components.forEach((comp, ci) => comp.forEach((id) => nodeToComp.set(id, ci)));
+
+		// Sector-based initial placement in a 45°-tilted ellipse orbit
+		// Aspect ratio mirrors the container so wide screens get wide layouts
+		const placeRng = seedrandom('graph-placement');
+		const orbitA = Math.min(width * 0.52, 500);   // major semi-axis of cluster orbit
+		const orbitB = Math.min(height * 0.46, 330);  // minor semi-axis (compressed)
+		const orbitTilt = -Math.PI / 4;                // -45° tilt for the whole orbit
+		const cos45 = Math.SQRT1_2, sin45 = Math.SQRT1_2;
+
+		const dNodes: SimulationNode[] = nodes.map((n) => ({ ...n, x: 0, y: 0 }));
+		const nodeById = new Map(dNodes.map((n) => [n.id, n]));
+
+		components.forEach((compIds, ci) => {
+			const isMain = ci === 0;
+			const nOther = Math.max(components.length - 1, 1);
+			// Spread non-main components evenly around the tilted orbit ellipse
+			const θ = isMain ? 0 : ((ci - 1) / nOther) * Math.PI * 2;
+			const distFactor = isMain ? 0 : 0.3 + 0.4 * Math.sqrt((ci - 1) / Math.max(nOther - 1, 1));
+			// Ellipse point at θ, then rotate orbit by 45°
+			const ex = Math.cos(θ) * orbitA * distFactor;
+			const ey = Math.sin(θ) * orbitB * distFactor;
+			const sectorCx = isMain ? 0 : ex * Math.cos(orbitTilt) - ey * Math.sin(orbitTilt);
+			const sectorCy = isMain ? 0 : ex * Math.sin(orbitTilt) + ey * Math.cos(orbitTilt);
+
+			const compMax = Math.max(...compIds.map((id) => nodeSize.get(id) || 1));
+			const compSpread = Math.min(70, 14 + compIds.length * 4);
+
+			for (const id of compIds) {
+				const n = nodeById.get(id)!;
+				const norm = (n.size || 1) / compMax;
+				// Each cluster scattered in its own 45°-tilted oval (1.8:0.85 major:minor)
+				const spread = (1 - norm * 0.85) * compSpread;
+				const a = placeRng() * Math.PI * 2;
+				const jitter = 0.35 + placeRng() * 0.65;
+				const localX = Math.cos(a) * spread * 1.8 * jitter;
+				const localY = Math.sin(a) * spread * 0.85 * jitter;
+				// Rotate local oval by -45°
+				n.x = sectorCx + localX * cos45 + localY * sin45;
+				n.y = sectorCy - localX * sin45 + localY * cos45;
+			}
 		});
 
 		const sizes = dNodes.map((n) => n.size).sort((a, b) => a - b);
+		const maxSize = Math.max(...sizes);
 		const medianSize = sizes[Math.floor(sizes.length * 0.6)] || 1;
-		const labelThreshold = sizes[Math.floor(sizes.length * 0.65)] || 1;
+		const labelThreshold = sizes[Math.floor(sizes.length * 0.60)] || 1;
+		const labelFaintThreshold = sizes[Math.floor(sizes.length * 0.35)] || 1;
+
+		// sqrt-rank decay: fast initial drop (hubs clearly larger) + gradual tail (small nodes
+		// still visibly different from each other, no pile-up at a uniform floor)
+		// pow(0.72, sqrt(rank)): rank 0→10.5px, rank 5→6px, rank 15→4.3px, rank 29→3.4px
+		const nodeRadius = (size: number): number => {
+			let lo = 0, hi = sizes.length - 1;
+			while (lo < hi) { const mid = (lo + hi) >> 1; if (sizes[mid] < (size || 1)) lo = mid + 1; else hi = mid; }
+			const rank = (sizes.length - 1) - lo; // 0 = highest importance
+			return 2.0 + Math.pow(0.72, Math.sqrt(rank)) * 8.5;
+		};
 
 		const svg = d3
 			.select(svgContainer)
 			.attr('viewBox', [-hw, -hh, width, height])
 			.style('max-width', '100%')
 			.style('height', 'auto')
-			.style('background', BG);
+			.style('background', 'transparent');
 
-		// Glow filter
-		const defs = svg.append('defs');
-		const gf = defs
-			.append('filter')
-			.attr('id', 'glow')
-			.attr('width', '200%')
-			.attr('height', '200%')
-			.attr('x', '-50%')
-			.attr('y', '-50%');
-		gf.append('feGaussianBlur').attr('stdDeviation', '2.5').attr('result', 'blur');
-		const fm = gf.append('feMerge');
-		fm.append('feMergeNode').attr('in', 'blur');
-		fm.append('feMergeNode').attr('in', 'SourceGraphic');
+		// Canvas for links (much faster than SVG line elements)
+		linkCanvas.width = width;
+		linkCanvas.height = height;
+		const ctx = linkCanvas.getContext('2d')!;
 
 		drawGeometricBackground(svg, width, height);
 
 		// Shooting stars layer -organic random timing
 		const starsGroup = svg.append('g').attr('class', 'shooting-stars');
 		shootingStarsActive = true;
+		let lastStarTime = Date.now();
 		function scheduleNextStar() {
 			if (!shootingStarsActive) return;
-			// Faster: short delays with occasional bursts, rare long pauses
 			const delay = 80 + Math.random() * 900 + (Math.random() < 0.1 ? 1500 : 0);
 			shootingStarTimer = setTimeout(() => {
 				if (!shootingStarsActive) return;
-				spawnShootingStar(starsGroup, width, height);
-				// Often spawn 1-2 extras close behind
-				if (Math.random() < 0.4) {
-					setTimeout(() => spawnShootingStar(starsGroup, width, height), 30 + Math.random() * 150);
-				}
-				if (Math.random() < 0.15) {
-					setTimeout(() => spawnShootingStar(starsGroup, width, height), 80 + Math.random() * 250);
+				// Skip burst if tab was hidden (timers queued up while backgrounded)
+				const now = Date.now();
+				const elapsed = now - lastStarTime;
+				lastStarTime = now;
+				if (elapsed < 3000) {
+					spawnShootingStar(starsGroup, width, height);
+					if (Math.random() < 0.4) {
+						setTimeout(() => spawnShootingStar(starsGroup, width, height), 30 + Math.random() * 150);
+					}
+					if (Math.random() < 0.15) {
+						setTimeout(() => spawnShootingStar(starsGroup, width, height), 80 + Math.random() * 250);
+					}
 				}
 				scheduleNextStar();
 			}, delay);
 		}
 		scheduleNextStar();
 
-		// Links
-		const link = svg
-			.append('g')
-			.selectAll<SVGLineElement, SimulationLink>('line')
-			.data(dLinks)
-			.join('line')
-			.attr('stroke', LINK_COLOR)
-			.attr('stroke-opacity', 0.2)
-			.attr('stroke-width', 0.5);
+		// Links drawn on canvas in tick handler (no SVG elements needed)
 
-		// Glow (large nodes only)
-		const largeNodes = dNodes.filter((d) => d.size >= medianSize);
-		const glow = svg
-			.append('g')
-			.selectAll<SVGCircleElement, SimulationNode>('circle')
-			.data(largeNodes)
-			.join('circle')
-			.attr('r', (d) => nodeMinRadius + Math.sqrt(d.size || 1) * nodeScale + 2)
-			.attr('fill', (d, i) => planetColor(d, i))
-			.attr('opacity', 0.12)
-			.attr('filter', 'url(#glow)');
+		// Track highlight state for canvas link drawing
+		let highlightedNodeId: string | null = null;
+		let highlightedNeighbors: Set<string> = new Set();
 
-		// Nodes
+		function drawLinks() {
+			if (!ctx) return;
+			ctx.clearRect(0, 0, width, height);
+			ctx.lineWidth = 0.5;
+			ctx.lineCap = 'round';
+
+			for (const l of dLinks) {
+				const s = typeof l.source === 'object' ? l.source : null;
+				const t = typeof l.target === 'object' ? l.target : null;
+				if (!s || !t) continue;
+
+				const sx = (s.x ?? 0) + hw, sy = (s.y ?? 0) + hh;
+				const tx = (t.x ?? 0) + hw, ty = (t.y ?? 0) + hh;
+
+				// Highlight connected links on hover
+				const isConstellation = Math.max(s.size || 1, t.size || 1) < medianSize;
+				if (highlightedNodeId) {
+					const isConnected = s.id === highlightedNodeId || t.id === highlightedNodeId;
+					ctx.strokeStyle = isConnected ? 'rgba(212,160,23,0.5)' : 'rgba(58,58,58,0.04)';
+					ctx.lineWidth = isConnected ? 1 : 0.25;
+				} else {
+					ctx.strokeStyle = isConstellation ? 'rgba(110,104,88,0.2)' : 'rgba(80,75,65,0.06)';
+					ctx.lineWidth = isConstellation ? 0.55 : 0.35;
+				}
+
+				ctx.beginPath();
+				ctx.moveTo(sx, sy);
+				ctx.lineTo(tx, ty);
+				ctx.stroke();
+			}
+		}
+
+		// Nodes — large nodes get CSS glow (much cheaper than SVG filter)
 		const node = svg
 			.append('g')
 			.selectAll<SVGCircleElement, SimulationNode>('circle')
 			.data(dNodes)
 			.join('circle')
-			.attr('r', (d) => nodeMinRadius + Math.sqrt(d.size || 1) * nodeScale)
+			.attr('r', (d) => nodeRadius(d.size))
 			.attr('fill', (d, i) => (d.size >= medianSize ? planetColor(d, i) : OFF_WHITE))
-			.attr('opacity', 0.85)
-			.style('cursor', 'pointer');
+			.attr('opacity', (d) => (d.size >= medianSize ? 0.95 : 0.8))
+			.style('cursor', 'pointer')
+			.style('filter', (d, i) => d.size >= medianSize
+				? `drop-shadow(0 0 ${1 + (d.size / maxSize) * 5}px ${planetColor(d, i)})`
+				: 'none');
 
 		// Labels
 		const labels = svg
@@ -339,11 +467,16 @@
 			.join('text')
 			.text((d) => d.label)
 			.attr('font-family', 'Cormorant Garamond, Georgia, serif')
-			.attr('font-size', 11)
+			.attr('font-size', (d) => {
+				let lo = 0, hi = sizes.length - 1;
+				while (lo < hi) { const mid = (lo + hi) >> 1; if (sizes[mid] < (d.size || 1)) lo = mid + 1; else hi = mid; }
+				const p = sizes.length > 1 ? lo / (sizes.length - 1) : 1;
+				return Math.round(9 + Math.pow(p, 2) * 5);
+			})
 			.attr('dy', '-1.2em')
 			.attr('fill', OFF_WHITE)
 			.attr('text-anchor', 'middle')
-			.attr('opacity', (d) => (d.size >= labelThreshold ? 0.7 : 0))
+			.attr('opacity', (d) => (d.size >= labelThreshold ? 0.75 : d.size >= labelFaintThreshold ? 0.38 : 0))
 			.style('pointer-events', 'none');
 
 		// Drag
@@ -369,12 +502,11 @@
 		// Adapt forces to container size -keep all nodes visible but organic
 		const area = width * height;
 		const n = dNodes.length;
-		const density = n / (area / 10000); // nodes per 10k px²
-		const chargeStr = Math.max(-150, Math.min(-30, -area / (n * 8)));
+		const chargeStr = Math.max(-200, Math.min(-40, -area / (n * 6)));
 
 		// Jagged sinusoidal boundary -organic, non-linear edges
-		const baseBoundX = hw * 0.88;
-		const baseBoundY = hh * 0.88;
+		const baseBoundX = hw * 0.80;
+		const baseBoundY = hh * 0.80;
 		// Each edge wobbles with layered sin waves so nodes never line up
 		function jaggedBoundX(y: number): number {
 			return (
@@ -393,30 +525,85 @@
 			);
 		}
 
-		// Size-dependent forces: big = strong pull to center, small = weak pull + pushed outward
-		const maxSize = Math.max(...dNodes.map((d) => d.size || 1));
-
-		// Custom force: big nodes pinned to center, small ones pushed outward
+		// All nodes get a weak universal center pull to prevent outliers from drifting off;
+		// big hub nodes get an additional stronger pull to stay near the core
 		function radialSizeForce(alpha: number) {
 			for (const d of dNodes) {
-				const normalized = (d.size || 1) / maxSize; // 0..1
-				const x = d.x ?? 0,
-					y = d.y ?? 0;
-				const dist = Math.sqrt(x * x + y * y) || 1;
+				const normalized = (d.size || 1) / maxSize;
+				// Universal baseline pull — keeps isolated/small nodes from escaping
+				const basePull = 0.012 * alpha;
+				d.vx = (d.vx ?? 0) - (d.x ?? 0) * basePull;
+				d.vy = (d.vy ?? 0) - (d.y ?? 0) * basePull;
+				// Additional pull for large hub nodes toward center
+				if (normalized > 0.3) {
+					const pullStrength = normalized * normalized * normalized * 0.20 * alpha;
+					d.vx = (d.vx ?? 0) - (d.x ?? 0) * pullStrength;
+					d.vy = (d.vy ?? 0) - (d.y ?? 0) * pullStrength;
+				}
+			}
+		}
 
-				// Two-part force:
-				// 1. Big nodes: directly pull toward (0,0) proportional to their size
-				// 2. Small nodes: push outward
-				if (normalized > 0.4) {
-					// Pull inward -directly reduce position toward center
-					const pullStrength = normalized * normalized * 0.15 * alpha;
-					d.vx = (d.vx ?? 0) - x * pullStrength;
-					d.vy = (d.vy ?? 0) - y * pullStrength;
-				} else {
-					// Push outward
-					const pushStrength = (1 - normalized * 2) * 0.2 * alpha;
-					d.vx = (d.vx ?? 0) + (x / dist) * pushStrength;
-					d.vy = (d.vy ?? 0) + (y / dist) * pushStrength;
+		// Anisotropic cluster force: shapes each cluster into a 45°-tilted ovaloid
+		// Weak spring along 45° major axis (allows elongation), strong along 135° minor (compresses)
+		// Small nodes feel 3× more force → tighter sub-clusters within constellations
+		function clusterForce(alpha: number) {
+			const centroids = new Map<number, { x: number; y: number; n: number }>();
+			for (const d of dNodes) {
+				const ci = nodeToComp.get(d.id) ?? 0;
+				if (!centroids.has(ci)) centroids.set(ci, { x: 0, y: 0, n: 0 });
+				const c = centroids.get(ci)!;
+				c.x += d.x ?? 0; c.y += d.y ?? 0; c.n++;
+			}
+			for (const c of centroids.values()) { c.x /= c.n; c.y /= c.n; }
+
+			for (const d of dNodes) {
+				const c = centroids.get(nodeToComp.get(d.id) ?? 0);
+				if (!c) continue;
+				const dx = (d.x ?? 0) - c.x;
+				const dy = (d.y ?? 0) - c.y;
+				// Project displacement onto -45° (major) and +45° (minor) axes
+				const axial = dx * cos45 - dy * sin45;   // along -45°: let it spread
+				const perp  = dx * sin45 + dy * cos45;   // along +45°: compress tight
+				const norm = (d.size || 1) / maxSize;
+				const base = (1 - norm * 0.65) * alpha;
+				// Gentle spring along major axis, strong spring along minor
+				const fAxial = axial * 0.038 * base;
+				const fPerp  = perp  * 0.11  * base;
+				// Back to x/y and apply
+				d.vx = (d.vx ?? 0) - (cos45 * fAxial - sin45 * fPerp);
+				d.vy = (d.vy ?? 0) - (sin45 * fAxial + cos45 * fPerp);
+			}
+		}
+
+		// Inter-cluster repulsion: push cluster centroids apart with a minimum separation
+		// Guarantees clear visual space between constellations
+		function interClusterRepulsion(alpha: number) {
+			const centroids = new Map<number, { x: number; y: number; n: number }>();
+			for (const d of dNodes) {
+				const ci = nodeToComp.get(d.id) ?? 0;
+				if (!centroids.has(ci)) centroids.set(ci, { x: 0, y: 0, n: 0 });
+				const c = centroids.get(ci)!;
+				c.x += d.x ?? 0; c.y += d.y ?? 0; c.n++;
+			}
+			for (const c of centroids.values()) { c.x /= c.n; c.y /= c.n; }
+
+			const entries = [...centroids.entries()];
+			const minSep = Math.min(width, height) * 0.2; // minimum distance between cluster centers
+
+			for (let i = 0; i < entries.length; i++) {
+				for (let j = i + 1; j < entries.length; j++) {
+					const [ci, ca] = entries[i];
+					const [cj, cb] = entries[j];
+					const dx = ca.x - cb.x, dy = ca.y - cb.y;
+					const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+					if (dist >= minSep * 2.8) continue; // already far enough
+					const force = Math.pow(minSep / dist, 2) * 0.55 * alpha;
+					const fx = (dx / dist) * force, fy = (dy / dist) * force;
+					for (const d of dNodes) {
+						const dc = nodeToComp.get(d.id) ?? 0;
+						if (dc === ci) { d.vx = (d.vx ?? 0) + fx; d.vy = (d.vy ?? 0) + fy; }
+						else if (dc === cj) { d.vx = (d.vx ?? 0) - fx; d.vy = (d.vy ?? 0) - fy; }
+					}
 				}
 			}
 		}
@@ -428,22 +615,40 @@
 				d3
 					.forceLink<SimulationNode, SimulationLink>(dLinks)
 					.id((d) => d.id)
-					.distance(40 + Math.min(width, height) * 0.04)
-					.strength(0.15)
+					.distance((l) => {
+						const s = l.source as SimulationNode;
+						const t = l.target as SimulationNode;
+						// Shorter distances → nodes sit closer together
+						return (Math.sqrt(s.size || 1) + Math.sqrt(t.size || 1)) * 9.0;
+					})
+					.strength((l) => {
+						const s = l.source as SimulationNode;
+						const t = l.target as SimulationNode;
+						const avg = ((s.size || 1) + (t.size || 1)) / 2;
+						// Stronger small-small springs → tight sub-clusters
+						return avg < medianSize ? 0.28 : 0.06;
+					})
 			)
-			.force('charge', d3.forceManyBody().strength(chargeStr).distanceMax(100))
+			// Short-range repulsion only: nodes only repel neighbours, not the whole canvas
+			// Inter-cluster separation is handled by interClusterRepulsion instead
+			.force('charge', d3.forceManyBody<SimulationNode>()
+				.strength((d) => chargeStr * (0.4 + ((d.size || 1) / maxSize) * 0.7))
+				.distanceMax(130)
+			)
 			.force('center', d3.forceCenter(0, 0).strength(0.01))
 			.force(
 				'collision',
 				d3
 					.forceCollide<SimulationNode>()
-					.radius((d) => nodeMinRadius + Math.sqrt(d.size || 1) * nodeScale + 1.5)
+					.radius((d) => nodeRadius(d.size) + 5)
 					.strength(0.5)
 					.iterations(1)
 			)
 			.force('radialSize', radialSizeForce)
-			.alphaDecay(0.035)
-			.velocityDecay(0.4);
+			.force('cluster', clusterForce)
+			.force('interCluster', interClusterRepulsion)
+			.alphaDecay(0.04)
+			.velocityDecay(0.42);
 
 		simulation.on('tick', () => {
 			// Jagged boundary: push back using non-linear wavy edges
@@ -452,20 +657,21 @@
 					y = d.y ?? 0;
 				const bx = jaggedBoundX(y);
 				const by = jaggedBoundY(x);
-				if (Math.abs(x) > bx) d.vx = (d.vx ?? 0) - (x - Math.sign(x) * bx) * 0.07;
-				if (Math.abs(y) > by) d.vy = (d.vy ?? 0) - (y - Math.sign(y) * by) * 0.07;
+				if (Math.abs(x) > bx) d.vx = (d.vx ?? 0) - (x - Math.sign(x) * bx) * 0.28;
+				if (Math.abs(y) > by) d.vy = (d.vy ?? 0) - (y - Math.sign(y) * by) * 0.28;
+				// Hard teleport: yank escaped outliers back immediately (tighter threshold)
+				if (Math.abs(x) > hw * 0.98) { d.x = Math.sign(x) * hw * 0.65; d.vx = 0; }
+				if (Math.abs(y) > hh * 0.98) { d.y = Math.sign(y) * hh * 0.65; d.vy = 0; }
 			}
 
-			link
-				.attr('x1', (d) => (typeof d.source === 'object' ? (d.source.x ?? 0) : 0))
-				.attr('y1', (d) => (typeof d.source === 'object' ? (d.source.y ?? 0) : 0))
-				.attr('x2', (d) => (typeof d.target === 'object' ? (d.target.x ?? 0) : 0))
-				.attr('y2', (d) => (typeof d.target === 'object' ? (d.target.y ?? 0) : 0));
+			// Canvas links (much faster than SVG attr updates)
+			drawLinks();
+
+			// SVG nodes + labels only
 			node.attr('cx', (d) => d.x ?? 0).attr('cy', (d) => d.y ?? 0);
-			glow.attr('cx', (d) => d.x ?? 0).attr('cy', (d) => d.y ?? 0);
 			labels
 				.attr('x', (d) => d.x ?? 0)
-				.attr('y', (d) => (d.y ?? 0) - (nodeMinRadius + Math.sqrt(d.size || 1) * nodeScale));
+				.attr('y', (d) => (d.y ?? 0) - nodeRadius(d.size));
 		});
 
 		// Hide loader once simulation has settled AND minimum time has passed
@@ -474,6 +680,11 @@
 		simulation.on('tick.loading', () => {
 			if (simulation.alpha() < 0.05 && loading && Date.now() - loadStart >= MIN_LOAD_MS) {
 				loading = false;
+			}
+			// Stop simulation completely once fully settled (zero ongoing CPU)
+			if (simulation.alpha() < 0.005) {
+				simulation.stop();
+				drawLinks(); // final frame
 			}
 		});
 
@@ -488,34 +699,34 @@
 			neighborMap.get(tid)!.add(sid);
 		}
 
-		// Hover
+		// Hover — update canvas links + SVG nodes/labels
 		node
 			.on('mouseover', (event, d) => {
 				const nb = neighborMap.get(d.id) || new Set();
+				highlightedNodeId = d.id;
+				highlightedNeighbors = nb;
 				node
 					.attr('opacity', (n) => (n.id === d.id || nb.has(n.id) ? 1 : 0.1))
-					.attr('fill', (n) => (n.id === d.id ? GOLD_BRIGHT : nb.has(n.id) ? GOLD : OFF_WHITE));
-				glow.attr('opacity', (n) => (nb.has(n.id) || n.id === d.id ? 0.2 : 0.02));
-				labels.attr('opacity', (n) => (n.id === d.id ? 1 : nb.has(n.id) ? 0.8 : 0));
-				link
-					.attr('stroke-opacity', (l) => {
-						const s = typeof l.source === 'object' ? l.source.id : l.source;
-						const t = typeof l.target === 'object' ? l.target.id : l.target;
-						return s === d.id || t === d.id ? 0.6 : 0.03;
-					})
-					.attr('stroke', (l) => {
-						const s = typeof l.source === 'object' ? l.source.id : l.source;
-						const t = typeof l.target === 'object' ? l.target.id : l.target;
-						return s === d.id || t === d.id ? GOLD : LINK_COLOR;
+					.attr('fill', (n) => (n.id === d.id ? GOLD_BRIGHT : nb.has(n.id) ? GOLD : OFF_WHITE))
+					.style('filter', (n, i) => {
+						if (n.id === d.id) return `drop-shadow(0 0 2px ${GOLD_BRIGHT})`;
+						if (nb.has(n.id)) return `drop-shadow(0 0 1.5px ${planetColor(n, i)})`;
+						return 'none';
 					});
+				labels.attr('opacity', (n) => (n.id === d.id ? 1 : nb.has(n.id) ? 0.8 : 0));
+				drawLinks();
 			})
 			.on('mouseout', () => {
+				highlightedNodeId = null;
+				highlightedNeighbors = new Set();
 				node
-					.attr('opacity', 0.85)
-					.attr('fill', (n, i) => (n.size >= medianSize ? planetColor(n, i) : OFF_WHITE));
-				glow.attr('opacity', 0.12).attr('fill', (n, i) => planetColor(n, i));
-				labels.attr('opacity', (d) => (d.size >= labelThreshold ? 0.7 : 0));
-				link.attr('stroke-opacity', 0.2).attr('stroke', LINK_COLOR);
+					.attr('opacity', (n) => (n.size >= medianSize ? 0.95 : 0.8))
+					.attr('fill', (n, i) => (n.size >= medianSize ? planetColor(n, i) : OFF_WHITE))
+					.style('filter', (n, i) => n.size >= medianSize
+					? `drop-shadow(0 0 ${1 + (n.size / maxSize) * 5}px ${planetColor(n, i)})`
+					: 'none');
+				labels.attr('opacity', (d) => (d.size >= labelThreshold ? 0.75 : d.size >= labelFaintThreshold ? 0.38 : 0));
+				drawLinks();
 			});
 	}
 
@@ -552,6 +763,7 @@
 	class="relative w-full overflow-hidden"
 	style="height: 60vh; min-height: 350px; background: {BG};"
 >
-	<svg bind:this={svgContainer} class="h-full w-full"></svg>
+	<canvas bind:this={linkCanvas} class="absolute inset-0 h-full w-full" style="z-index: 1;"></canvas>
+	<svg bind:this={svgContainer} class="absolute inset-0 h-full w-full" style="z-index: 2;"></svg>
 	<OrbitalLoader visible={loading} />
 </div>

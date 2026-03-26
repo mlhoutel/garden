@@ -116,7 +116,7 @@
 		width: 100vw;
 		position: relative;
 		left: 50%;
-		top: min(500px, 50vh);
+		top: min(300px, 34vh);
 		overflow: hidden;
 		/* Very slow, dreamy parallax -like heat shimmer over sand */
 		transition: transform 2.5s cubic-bezier(0.15, 0, 0.25, 1);
@@ -127,8 +127,14 @@
 
 	.dunes-inner :global(svg) {
 		width: 100%;
-		/* Taller on mobile for more visual presence, fixed on desktop */
-		height: clamp(400px, 80vh, 500px);
+		/* Taller on mobile for coverage, capped on desktop */
+		height: clamp(350px, 70vh, 500px);
 		display: block;
+	}
+
+	@media (max-width: 480px) {
+		.dunes-inner :global(svg) {
+			height: clamp(300px, 60vh, 400px);
+		}
 	}
 </style>

@@ -24,16 +24,16 @@
 	<GraphTopics nodes={data.nodes} edges={data.edges} bind:loading={graphLoading} />
 	<!-- Golden halo overlay -->
 	<DuneOverlay />
-	<!-- Sand dunes: absolute, no layout impact, just visual decoration -->
-	<div class="absolute right-0 bottom-0 left-0" style="z-index: 30; pointer-events: none;">
+	<!-- Sand dunes: absolute, pulled up to overlap graph bottom -->
+	<div class="absolute right-0 left-0" style="z-index: 30; pointer-events: none; bottom: -120px;">
 		<SandDunes lightSand="#FFFEF6" lightShadow="#E8C878" darkSand="#23201E" darkShadow="#151210" />
 	</div>
 </div>
 
-<!-- Hero text section -normal flow, right after graph -->
+<!-- Hero text section — pull up under dunes -->
 <div
-	class="relative mx-auto max-w-[680px] px-4 pt-8 pb-10 text-center md:pt-12"
-	style="z-index: 40;"
+	class="relative mx-auto max-w-[680px] px-4 pt-2 pb-4 text-center md:pt-4"
+	style="z-index: 40; margin-top: -50px;"
 >
 	<!-- Title with geometric ornaments and 3D shadow -->
 	<div class="relative inline-flex items-center justify-center gap-4 md:gap-6">

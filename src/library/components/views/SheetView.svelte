@@ -9,6 +9,24 @@
 	let tocItems: { id: string; text: string; level: number }[] = $state([]);
 	let activeHeading = $state('');
 
+	let ignoreObserver = false;
+	let ignoreTimer: ReturnType<typeof setTimeout>;
+
+	function cancelIgnore() {
+		ignoreObserver = false;
+		clearTimeout(ignoreTimer);
+	}
+
+	function handleTocClick(e: MouseEvent, id: string) {
+		e.preventDefault();
+		activeHeading = id;
+		ignoreObserver = true;
+		clearTimeout(ignoreTimer);
+		ignoreTimer = setTimeout(cancelIgnore, 1000);
+		const el = document.getElementById(id);
+		if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+	}
+
 	const rng = seedrandom(`sheet-${data.title}`);
 	const stars: { cx: number; cy: number; r: number; opacity: number }[] = [];
 	for (let i = 0; i < 60; i++) {
@@ -24,9 +42,12 @@
 			.filter((h) => h.id)
 			.map((h) => ({ id: h.id, text: h.textContent?.trim() || '', level: parseInt(h.tagName[1]) }));
 
+		if (tocItems.length > 0) activeHeading = tocItems[0].id;
+
 		// Scroll spy: highlight current heading in TOC
 		const observer = new IntersectionObserver(
 			(entries) => {
+				if (ignoreObserver) return;
 				for (const entry of entries) {
 					if (entry.isIntersecting) {
 						activeHeading = entry.target.id;
@@ -37,7 +58,15 @@
 		);
 
 		headings.forEach((h) => observer.observe(h));
-		return () => observer.disconnect();
+
+		window.addEventListener('wheel', cancelIgnore, { passive: true });
+		window.addEventListener('touchstart', cancelIgnore, { passive: true });
+
+		return () => {
+			observer.disconnect();
+			window.removeEventListener('wheel', cancelIgnore);
+			window.removeEventListener('touchstart', cancelIgnore);
+		};
 	});
 </script>
 
@@ -75,17 +104,18 @@
 	<!-- Sidebar TOC (desktop only) -->
 	{#if tocItems.length > 1}
 		<aside class="hidden w-[200px] shrink-0 lg:block">
-			<nav class="sticky top-14" aria-label="Table of contents">
+			<nav class="sticky top-[80px] pt-2" aria-label="Table of contents">
 				<h4 class="mb-3 font-mono text-[0.6rem] tracking-[0.12em] uppercase" style="color: var(--color-text-muted);">
 					On this page
 				</h4>
-				<ul class="list-none space-y-0.5" style="border-left: 1px solid var(--color-border);">
+				<ul class="list-none" style="border-left: 1px solid var(--color-border);">
 					{#each tocItems as item (item.id)}
-						<li style="padding-left: {4 + (item.level - 2) * 10}px;">
+						<li style="padding-left: {4 + (item.level - 2) * 10}px; margin-left: -1px; border-left: 2px solid {activeHeading === item.id ? 'var(--color-accent)' : 'transparent'}; transition: border-color 0.15s;">
 							<a
 								href="#{item.id}"
-								class="block py-0.5 text-[0.72rem] leading-snug transition-colors duration-150"
-								style="color: {activeHeading === item.id ? 'var(--color-accent)' : 'var(--color-text-muted)'}; border-left: 2px solid {activeHeading === item.id ? 'var(--color-accent)' : 'transparent'}; padding-left: 8px; margin-left: -1px;"
+								onclick={(e) => handleTocClick(e, item.id)}
+								class="block py-0.5 truncate text-[0.72rem] leading-snug transition-colors duration-150"
+								style="color: {activeHeading === item.id ? 'var(--color-accent)' : 'var(--color-text-muted)'}; padding-left: 8px;"
 							>
 								{item.text}
 							</a>
