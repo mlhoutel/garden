@@ -326,7 +326,7 @@
 					letter-spacing: 0.03em;
 				"
 			>
-				<span style="opacity: 0.5; font-size: 0.8em;">{node.size}</span>
+				<span style="opacity: 0.5; font-size: 0.8em;">{node.meta.pages}</span>
 				{node.label}
 			</a>
 		{/each}
