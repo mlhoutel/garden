@@ -686,6 +686,18 @@
 		overflow-x: clip;
 	}
 
+	@media (max-width: 768px) {
+		article .embed-sticky-wrapper {
+			width: 100vw;
+			left: 0;
+			transform: none;
+			margin-left: calc(-50vw + 50%);
+			display: flex;
+			justify-content: center;
+			padding-top: 1rem;
+		}
+	}
+
 	/* Default state: smaller with rounded corners, mechanical easing */
 	article .embed-sticky-wrapper .embed-fullwidth {
 		z-index: 20;
@@ -695,10 +707,20 @@
 		border-radius: 14px;
 		background: #1A1A1A;
 		box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+		will-change: transform;
 		transition: transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1),
 					box-shadow 0.5s cubic-bezier(0.25, 0.1, 0.25, 1),
 					border-radius 0.4s cubic-bezier(0.25, 0.1, 0.25, 1),
 					border 0.3s ease;
+	}
+
+	@media (max-width: 768px) {
+		article .embed-sticky-wrapper .embed-fullwidth {
+			transform: none;
+			width: calc(100% - 16px);
+			border-radius: 6px;
+			left: auto;
+		}
 	}
 
 	/* Hover when not yet sticky — steady pull toward full size */
@@ -741,6 +763,14 @@
 		margin-right: 0;
 		box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
 		overflow: hidden;
+	}
+
+	@media (max-width: 768px) {
+		article .embed-fullwidth {
+			width: calc(100vw - 32px);
+			max-width: calc(100vw - 32px);
+			border-radius: 6px;
+		}
 	}
 
 	/* Fullscreen mode: fill entire screen with no gaps */

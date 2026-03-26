@@ -44,7 +44,8 @@
 
 				const TRAVEL = Math.round(window.innerHeight * 1.5);
 				const header = document.querySelector('nav');
-				const HEADER_H = header ? header.offsetHeight : 50;
+				const isMobile = window.innerWidth <= 768;
+				const HEADER_H = isMobile ? 0 : (header ? header.offsetHeight : 50);
 				const embedH = embed.offsetHeight;
 				w.style.minHeight = (embedH + TRAVEL) + 'px';
 
@@ -60,7 +61,7 @@
 
 					if (shouldFix && state !== 'fixed') {
 						state = 'fixed';
-						const vw = document.documentElement.clientWidth;
+						const vw = window.innerWidth;
 						embed.style.position = 'fixed';
 						embed.style.top = HEADER_H + 'px';
 						embed.style.bottom = '';
@@ -70,11 +71,6 @@
 						embed.style.transform = 'none';
 						embed.style.zIndex = '20';
 						embed.classList.add('embed-in-view');
-					} else if (shouldFix && state === 'fixed') {
-						const vw = document.documentElement.clientWidth;
-						embed.style.left = '0';
-						embed.style.width = vw + 'px';
-						embed.style.maxWidth = 'none';
 					} else if (pastEnd && state !== 'bottom') {
 						state = 'bottom';
 						embed.style.position = 'absolute';
@@ -176,7 +172,7 @@
 
 <!-- Iframe at absolute top if present -->
 {#if data.iframe}
-	<div style="height: 100vh; width: 100%; border: none">
+	<div style="height: 100vh; width: 100%; border: none; padding: 0; margin: 0;">
 		<IFrame src={data.iframe} title="iframe" />
 	</div>
 {/if}

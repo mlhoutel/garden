@@ -268,7 +268,7 @@
 							})}
 						</span>
 						<span
-							class="font-serif text-[1.15rem] font-medium transition-colors duration-200 group-hover:text-[--color-accent]"
+							class="font-serif text-[1.25rem] font-bold transition-colors duration-200 group-hover:text-[--color-accent]"
 							style="color: var(--color-text);"
 						>
 							{article.meta.title}
