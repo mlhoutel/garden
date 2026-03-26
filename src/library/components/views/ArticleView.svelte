@@ -64,9 +64,10 @@
 						const vw = window.innerWidth;
 						embed.style.position = 'fixed';
 						embed.style.top = HEADER_H + 'px';
-						embed.style.bottom = '';
+						embed.style.bottom = '0';
 						embed.style.left = '0';
 						embed.style.width = vw + 'px';
+						embed.style.height = `calc(100vh - ${HEADER_H}px)`;
 						embed.style.maxWidth = 'none';
 						embed.style.transform = 'none';
 						embed.style.zIndex = '20';
@@ -78,6 +79,7 @@
 						embed.style.bottom = '0';
 						embed.style.left = '0';
 						embed.style.width = '100%';
+						embed.style.height = '';
 						embed.style.maxWidth = '100%';
 						embed.style.transform = '';
 						embed.style.zIndex = '';
@@ -89,6 +91,7 @@
 						embed.style.bottom = '';
 						embed.style.left = '';
 						embed.style.width = '';
+						embed.style.height = '';
 						embed.style.maxWidth = '';
 						embed.style.transform = '';
 						embed.style.zIndex = '';
@@ -104,6 +107,7 @@
 					embed.style.bottom = '';
 					embed.style.left = '';
 					embed.style.width = '';
+					embed.style.height = '';
 					embed.style.maxWidth = '';
 					embed.style.transform = '';
 					embed.classList.remove('embed-in-view');
@@ -124,6 +128,7 @@
 							embed.style.bottom = '';
 							embed.style.left = '';
 							embed.style.width = '';
+							embed.style.height = '';
 							embed.style.maxWidth = '';
 							embed.style.transform = '';
 							embed.style.zIndex = '';
