@@ -36,6 +36,25 @@ function rehypeExternalLinks() {
 	};
 }
 
+/**
+ * Rehype plugin: wrap <table> elements in a scrollable .table-wrapper div
+ * so wide tables don't cause horizontal overflow on mobile.
+ */
+function rehypeTableWrapper() {
+	return (tree: Root) => {
+		visit(tree, 'element', (node: Element, index, parent) => {
+			if (node.tagName !== 'table' || !parent || index === undefined) return;
+			const wrapper: Element = {
+				type: 'element',
+				tagName: 'div',
+				properties: { className: ['table-wrapper'] },
+				children: [node]
+			};
+			(parent as Element).children[index] = wrapper;
+		});
+	};
+}
+
 function mergeClasses(
 	existing: string | number | boolean | (string | number)[],
 	...classes: string[]
@@ -131,6 +150,7 @@ export async function renderMarkdown(
 		.use(rehypeCitation, { path })
 		.use(rehypeMermaid)
 		.use(rehypeExternalLinks)
+		.use(rehypeTableWrapper)
 		.use(rehypeStringify)
 		.process(markdown);
 

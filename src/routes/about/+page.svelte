@@ -9,7 +9,10 @@
 
 	function toggleLang() {
 		lang = lang === 'en' ? 'fr' : 'en';
+		cvLoaded = false;
 	}
+
+	let cvLoaded = $state(false);
 
 	let iframeSrc = $derived(
 		lang === 'en'
@@ -213,7 +216,7 @@
 <!-- CV section: mandala + title bar + iframe.
      clip-path clips top/bottom so mandala doesn't bleed into header/footer,
      but horizontal overflow is free (clipped only by html overflow-x:hidden). -->
-<div class="relative mx-auto" style="max-width: 260mm; clip-path: inset(0 -100vw); overflow: visible;">
+<div class="relative mx-auto" style="max-width: 260mm; clip-path: inset(0 0); overflow-x: clip;">
 	<!-- Esoteric mandala: zero-height wrapper so it doesn't push content down.
 	     Overflows horizontally (clipped by html overflow-x:hidden).
 	     Overflows vertically within this wrapper (clipped by overflow-y:clip above). -->
@@ -424,9 +427,9 @@
 	<container id="cv" class="relative md:flex md:justify-center" style="z-index: 2;">
 		<div
 			class="A4 relative font-thin tracking-wider"
-			style="background: white; box-shadow: 0 4px 32px rgba(0,0,0,0.08), 0 1px 4px rgba(0,0,0,0.04);"
+			style="background: {cvLoaded ? 'white' : '#1A1A1A'}; box-shadow: 0 4px 32px rgba(0,0,0,0.08), 0 1px 4px rgba(0,0,0,0.04); transition: background 0.3s ease;"
 		>
-			<IFrame title="curriculum" src={iframeSrc} />
+			<IFrame title="curriculum" src={iframeSrc} onload={() => { cvLoaded = true; }} />
 		</div>
 	</container>
 </div>
@@ -480,6 +483,7 @@
 	.A4 {
 		overflow: hidden;
 		width: 230mm;
+		max-width: 100%;
 		height: 325mm;
 		line-height: 1.2em !important;
 		text-align: justify;

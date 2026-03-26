@@ -99,7 +99,7 @@
 	});
 </script>
 
-<div class="pointer-events-none relative w-full {className}" style="margin-top: -{overlap};">
+<div class="pointer-events-none relative w-full {className}" style="margin-top: -{overlap}; overflow: hidden;">
 	{#if svgContent}
 		<div
 			bind:this={innerEl}
@@ -116,7 +116,7 @@
 		width: 100vw;
 		position: relative;
 		left: 50%;
-		top: min(300px, 34vh);
+		top: 0;
 		overflow: hidden;
 		/* Very slow, dreamy parallax -like heat shimmer over sand */
 		transition: transform 2.5s cubic-bezier(0.15, 0, 0.25, 1);

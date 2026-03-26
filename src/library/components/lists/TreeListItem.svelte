@@ -18,13 +18,13 @@
 				{new Date(item.meta.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
 			</span>
 		{/if}
-		<span class="font-serif text-[1.15rem] transition-colors duration-200 group-hover:text-[--color-accent]" style="color: var(--color-text);">
+		<span class="font-serif text-[1.2rem] font-medium transition-colors duration-200 group-hover:text-[--color-accent]" style="color: var(--color-text);">
 			{item?.meta.title}
 		</span>
 	</div>
 
 	{#if item?.meta.short}
-		<p class="mt-1 text-base leading-relaxed" style="color: var(--color-text);">
+		<p class="mt-1 text-[0.88rem] leading-relaxed" style="color: var(--color-text-muted);">
 			{item.meta.short}
 		</p>
 	{/if}

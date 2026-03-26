@@ -176,7 +176,7 @@
 
 <!-- Iframe at absolute top if present -->
 {#if data.iframe}
-	<div style="height: 100vh; width: 100vw; border: none">
+	<div style="height: 100vh; width: 100%; border: none">
 		<IFrame src={data.iframe} title="iframe" />
 	</div>
 {/if}

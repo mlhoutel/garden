@@ -190,7 +190,7 @@
 
 	.loading-message {
 		position: absolute;
-		bottom: 20%;
+		bottom: 28%;
 		left: 50%;
 		transform: translateX(-50%);
 		font-family: 'Cormorant Garamond', Georgia, serif;

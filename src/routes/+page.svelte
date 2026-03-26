@@ -19,21 +19,24 @@
 	}
 </script>
 
-<!-- Full-bleed dark graph hero with overlays + dunes as background decoration -->
-<div class="relative w-full">
+<!-- Shared wrapper: graph + dunes + title. z-index 2 so dunes (inside)
+     render above page content (z-index 1) that follows. -->
+<div class="relative w-full" style="z-index: 2;">
+	<!-- Graph hero -->
 	<GraphTopics nodes={data.nodes} edges={data.edges} bind:loading={graphLoading} />
-	<!-- Golden halo overlay -->
-	<DuneOverlay />
-	<!-- Sand dunes: absolute, pulled up to overlap graph bottom -->
-	<div class="absolute right-0 left-0" style="z-index: 30; pointer-events: none; bottom: -120px;">
+	<!-- Golden halo overlay — above graph and loading overlay -->
+	<DuneOverlay loading={graphLoading} />
+	<!-- Sand dunes: absolutely positioned at bottom of graph, overflows downward.
+	     z-index 10 puts it above the page content (z-index 5) that follows. -->
+	<div class="absolute right-0 left-0" style="bottom: -390px; z-index: 10; pointer-events: none;">
 		<SandDunes lightSand="#FFFEF6" lightShadow="#E8C878" darkSand="#23201E" darkShadow="#151210" />
 	</div>
 </div>
 
-<!-- Hero text section — pull up under dunes -->
+<!-- Hero text section — sits at graph/page boundary, above dunes -->
 <div
 	class="relative mx-auto max-w-[680px] px-4 pt-2 pb-4 text-center md:pt-4"
-	style="z-index: 40; margin-top: -50px;"
+	style="z-index: 3; margin-top: -50px;"
 >
 	<!-- Title with geometric ornaments and 3D shadow -->
 	<div class="relative inline-flex items-center justify-center gap-4 md:gap-6">
@@ -229,6 +232,10 @@
 	</div>
 </div>
 
+<!-- Page content: z-index 1, below the graph wrapper (z-index 2) so dunes render above.
+     padding-top creates space where dunes are visible above the content background. -->
+<div class="relative" style="z-index: 1;">
+
 <!-- Separator -->
 <div class="separator mx-auto max-w-[680px] px-4">
 	<span class="separator-glyph">◆</span>
@@ -261,7 +268,7 @@
 							})}
 						</span>
 						<span
-							class="font-serif text-[1.1rem] transition-colors duration-200 group-hover:text-[--color-accent]"
+							class="font-serif text-[1.15rem] font-medium transition-colors duration-200 group-hover:text-[--color-accent]"
 							style="color: var(--color-text);"
 						>
 							{article.meta.title}
@@ -302,7 +309,7 @@
 	<span class="separator-glyph">◆</span>
 </div>
 
-<!-- Topics -tiered pills -->
+<!-- Topics — tiered pills -->
 <div class="mx-auto max-w-[680px] px-4 pt-6 pb-16">
 	<h2
 		class="mb-6 font-serif text-[1.75rem] md:text-[2.25rem]"
@@ -332,3 +339,4 @@
 		{/each}
 	</div>
 </div>
+</div><!-- end page content wrapper -->

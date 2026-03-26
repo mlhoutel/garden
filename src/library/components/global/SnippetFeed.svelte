@@ -19,13 +19,17 @@
 	const langMap: Record<string, string> = {
 		javascript: 'JS', js: 'JS', typescript: 'TS', python: 'PY',
 		rust: 'RS', cpp: 'C++', java: 'JAVA', haskell: 'HS',
-		maths: 'MATH', functions: 'FN', graphs: 'GRAPH', solving: 'ALG'
+		maths: 'MATH', functions: 'FN', graphs: 'GRAPH', solving: 'ALG',
+		analysis: 'ALG', sorting: 'SORT', searching: 'SRCH',
+		structures: 'DS', number: 'NUM', strings: 'STR',
+		compression: 'COMP', encoding: 'ENC', combinatorics: 'COMB',
+		interpolation: 'INTP', iteration: 'ITER'
 	};
 
 	function langBadge(page: Page): string {
 		const topics = page.meta.topic?.split(' ').filter(Boolean) || [];
 		const match = topics.find((t) => langMap[t.toLowerCase()]);
-		return match ? langMap[match.toLowerCase()] : page.meta.subsection?.toUpperCase().slice(0, 4) || 'CODE';
+		return match ? langMap[match.toLowerCase()] : page.meta.subsection?.toUpperCase().slice(0, 6) || 'CODE';
 	}
 
 	import { onMount, onDestroy } from 'svelte';
@@ -91,7 +95,7 @@
 			<!-- Card header -->
 			<div class="flex items-center justify-between px-3 py-2" style="border-bottom: 1px solid var(--color-border);">
 				<div class="min-w-0 flex-1">
-					<span class="truncate font-serif text-[0.92rem] transition-colors duration-200 group-hover:text-[--color-accent]" style="color: var(--color-text);">
+					<span class="font-serif text-[0.92rem] transition-colors duration-200 group-hover:text-[--color-accent]" style="color: var(--color-text);">
 						{page.meta.title}
 					</span>
 				</div>
@@ -116,8 +120,8 @@
 			{#if page.meta.topic}
 				<div class="mt-auto flex flex-wrap gap-1 px-3 py-2" style="border-top: 1px solid var(--color-border);">
 					{#each page.meta.topic.split(' ').filter(Boolean).slice(0, 4) as topic}
-						<span class="font-mono text-[0.6rem]" style="color: var(--color-text-muted); opacity: 0.6;">
-							#{topic}
+						<span class="font-mono text-[0.55rem]" style="color: var(--color-text-muted); opacity: 0.5;">
+							{topic}
 						</span>
 					{/each}
 				</div>
