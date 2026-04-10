@@ -130,7 +130,7 @@
 		/* Taller on mobile for coverage, capped on desktop */
 		height: clamp(350px, 70vh, 500px);
 		display: block;
-		transform: rotate(-3deg);
+		transform: rotate(-1deg);
 		transform-origin: center center;
 	}
 
