@@ -26,7 +26,11 @@ export async function load({
 	if (!loader) throw error(404, `Page not found: ${key}`);
 
 	const markdown = await loader();
+	const mdImgCount = (markdown.match(/!\[/g) || []).length;
 	let content = await renderMarkdown(markdown, { path: key });
+	const htmlImgCount = (content.match(/<img/g) || []).length;
+	const figureCount = (content.match(/article-figure/g) || []).length;
+	console.log(`[render-debug] ${slug}: md_images=${mdImgCount} html_img=${htmlImgCount} figures=${figureCount} content_len=${content.length}`);
 
 	// Extract hero embed from content so it can render directly in the hero
 	// slot without a JS-driven DOM move (which causes a visible flash).

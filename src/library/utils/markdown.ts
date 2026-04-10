@@ -210,9 +210,20 @@ export async function renderMarkdown(
 		.use(remarkSmartypants)
 		.use(remarkMermaidAscii)
 		.use(remarkRehype, { allowDangerousHtml: true }) // convert to rehype AST
+		.use(() => (tree: Root) => {
+			let imgCount = 0;
+			visit(tree, 'element', (node: Element) => { if (node.tagName === 'img') imgCount++; });
+			console.log(`[rehype-debug] after remarkRehype: img_count=${imgCount}`);
+		})
 		.use(rehypeKatex, { minRuleThickness: 0.07 }) // render math nodes
 		.use(rehypeKatexFractionSpacing) // add breathing room to fractions
 		.use(rehypeRaw) // allow inline HTML
+		.use(() => (tree: Root) => {
+			// Debug: count img elements after rehypeRaw
+			let imgCount = 0;
+			visit(tree, 'element', (node: Element) => { if (node.tagName === 'img') imgCount++; });
+			console.log(`[rehype-debug] after rehypeRaw: img_count=${imgCount}`);
+		})
 		.use(rehypeEmbeds) // transform data-embed divs into rendered components
 		.use(rehypeSlug)
 		.use(rehypeAutolinkHeadings, { behavior: 'wrap' })
