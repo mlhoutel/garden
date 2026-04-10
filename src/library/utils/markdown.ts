@@ -202,6 +202,12 @@ export async function renderMarkdown(
 
 	const file = await unified()
 		.use(remarkParse)
+		.use(() => (tree: any) => {
+			let imgCount = 0;
+			visit(tree, 'image', () => { imgCount++; });
+			const md5 = markdown.substring(0, 200).replace(/\n/g, '\\n');
+			console.log(`[remark-debug] after remarkParse: image_nodes=${imgCount} md_start="${md5}"`);
+		})
 		.use(remarkFrontmatter, ['yaml', 'toml'])
 		.use(remarkGfm)
 		.use(remarkMath) // parse $...$ and $$...$$
@@ -209,6 +215,11 @@ export async function renderMarkdown(
 		.use(remarkBreaks)
 		.use(remarkSmartypants)
 		.use(remarkMermaidAscii)
+		.use(() => (tree: any) => {
+			let imgCount = 0;
+			visit(tree, 'image', () => { imgCount++; });
+			console.log(`[remark-debug] before remarkRehype: image_nodes=${imgCount}`);
+		})
 		.use(remarkRehype, { allowDangerousHtml: true }) // convert to rehype AST
 		.use(() => (tree: Root) => {
 			let imgCount = 0;
