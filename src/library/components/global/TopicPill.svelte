@@ -45,14 +45,14 @@
 	.topic-pill {
 		display: inline-flex;
 		align-items: center;
-		border: 1px solid var(--color-border);
+		border: 1px solid var(--color-border-strong);
 		font-family: var(--font-mono);
 		font-size: 0.7rem;
 		padding: 2px 8px;
 		border-radius: 2px;
 		color: var(--color-text-muted);
 		letter-spacing: 0.03em;
-		background: transparent;
+		background: var(--color-surface);
 		cursor: pointer;
 	}
 

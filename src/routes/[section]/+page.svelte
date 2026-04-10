@@ -140,7 +140,7 @@
 		style="max-width: 800px; height: 24px;"
 		preserveAspectRatio="xMidYMid meet"
 	>
-		<line x1="0" y1="12" x2="300" y2="12" stroke="#D4A017" stroke-width="0.7" opacity="0.3" />
+		<line x1="0" y1="12" x2="300" y2="12" stroke="#D4A017" stroke-width="0.7" opacity="0.5" />
 		<polygon points="304,12 308,9 312,12 308,15" fill="#D4A017" opacity="0.45" />
 		<circle cx="325" cy="12" r="2" fill="none" stroke="#D4A017" stroke-width="0.5" opacity="0.4" />
 		<line x1="330" y1="12" x2="370" y2="12" stroke="#D4A017" stroke-width="0.7" opacity="0.4" />
@@ -155,7 +155,7 @@
 		<line x1="430" y1="12" x2="470" y2="12" stroke="#D4A017" stroke-width="0.7" opacity="0.4" />
 		<circle cx="475" cy="12" r="2" fill="none" stroke="#D4A017" stroke-width="0.5" opacity="0.4" />
 		<polygon points="488,12 492,9 496,12 492,15" fill="#D4A017" opacity="0.45" />
-		<line x1="500" y1="12" x2="800" y2="12" stroke="#D4A017" stroke-width="0.7" opacity="0.3" />
+		<line x1="500" y1="12" x2="800" y2="12" stroke="#D4A017" stroke-width="0.7" opacity="0.5" />
 	</svg>
 	<!-- Quote (keyed on section so it re-picks on navigation) -->
 	<div class="mx-auto flex max-w-[680px] justify-end px-4 pt-0">

@@ -26,7 +26,7 @@
 	<DuneOverlay loading={graphLoading} />
 	<!-- Sand dunes: absolutely positioned at bottom of graph, overflows downward.
 	     z-index 10 puts it above the page content that follows. -->
-	<div class="absolute right-0 left-0" style="top: 100%; margin-top: -60px; z-index: 25; pointer-events: none;">
+	<div class="absolute right-0 left-0" style="top: 100%; margin-top: -80px; z-index: 25; pointer-events: none;">
 		<SandDunes lightSand="#FFFEF6" lightShadow="#E8C878" darkSand="#23201E" darkShadow="#151210" />
 	</div>
 </div>
@@ -34,7 +34,7 @@
 <!-- Hero text section — sits at graph/page boundary, above dunes -->
 <div
 	class="relative mx-auto max-w-[680px] px-4 pt-2 pb-4 text-center md:pt-4"
-	style="z-index: 3; margin-top: -50px;"
+	style="z-index: 3; margin-top: -20px;"
 >
 	<!-- Title with geometric ornaments and 3D shadow -->
 	<div class="relative inline-flex items-center justify-center gap-4 md:gap-6">
@@ -185,7 +185,7 @@
 			class="group flex flex-col items-center gap-1 transition-all"
 			data-sveltekit-preload-code="hover"
 		>
-			<span class="font-serif text-3xl md:text-4xl" style="color: var(--color-accent);"
+			<span class="font-serif text-3xl md:text-4xl" style="color: var(--color-accent); text-shadow: 0 1px 2px rgba(0,0,0,0.08);"
 				>{data.sections.articles}</span
 			>
 			<span
@@ -201,7 +201,7 @@
 			class="group flex flex-col items-center gap-1 transition-all"
 			data-sveltekit-preload-code="hover"
 		>
-			<span class="font-serif text-3xl md:text-4xl" style="color: var(--color-accent);"
+			<span class="font-serif text-3xl md:text-4xl" style="color: var(--color-accent); text-shadow: 0 1px 2px rgba(0,0,0,0.08);"
 				>{data.sections.sheets}</span
 			>
 			<span
@@ -217,7 +217,7 @@
 			class="group flex flex-col items-center gap-1 transition-all"
 			data-sveltekit-preload-code="hover"
 		>
-			<span class="font-serif text-3xl md:text-4xl" style="color: var(--color-accent);"
+			<span class="font-serif text-3xl md:text-4xl" style="color: var(--color-accent); text-shadow: 0 1px 2px rgba(0,0,0,0.08);"
 				>{data.sections.snippets}</span
 			>
 			<span

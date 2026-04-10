@@ -140,19 +140,19 @@
 	<!-- Error content: centered, above dunes -->
 	<div class="relative z-20 mt-auto mb-[12vh] flex flex-col items-center px-4 text-center md:mb-[15vh]">
 		<span class="inline-flex items-center justify-center">
-			<h1 class="text-5xl md:text-8xl" style="font-family: var(--font-display); color: #FFFEF6; text-shadow: 0 2px 20px rgba(212,160,23,0.3);">
+			<h1 class="text-5xl md:text-8xl" style="font-family: var(--font-display); color: var(--color-text); text-shadow: 0 2px 20px rgba(212,160,23,0.3);">
 				{status}
 			</h1>
 			<p class="mx-3 h-[40px] w-[2px] md:mx-8 md:h-[80px]" style="background-color: #D4A017; opacity: 0.5;"></p>
-			<h2 class="font-serif text-lg md:text-3xl" style="color: #E8E0D4; opacity: 0.8;">{short}</h2>
+			<h2 class="font-serif text-lg md:text-3xl" style="color: var(--color-text); opacity: 0.8;">{short}</h2>
 		</span>
 
-		<p class="mt-4 max-w-[28em] text-sm md:text-base" style="color: #9A928A;">{message}</p>
+		<p class="mt-4 max-w-[28em] text-sm md:text-base" style="color: var(--color-text-muted);">{message}</p>
 
 		<div class="mt-6 flex flex-wrap justify-center gap-4">
-			<a class="font-serif text-sm transition-colors duration-200 hover:underline md:text-base" style="color: #D4A017;" href="{base}/" data-sveltekit-preload-code="hover">&larr; Return Home</a>
-			<a href="{base}/search" class="font-serif text-sm transition-colors duration-200 hover:underline md:text-base" style="color: #D4A017;" data-sveltekit-preload-code="hover">Search</a>
-			<a href="https://github.com/mlhoutel/garden/issues" class="font-serif text-sm transition-colors duration-200 hover:underline md:text-base" style="color: #D4A017;" target="_blank" rel="noreferrer">Report issue &rarr;</a>
+			<a class="font-serif text-sm transition-colors duration-200 underline decoration-1 underline-offset-4 hover:decoration-2 md:text-base" style="color: var(--color-accent);" href="{base}/" data-sveltekit-preload-code="hover">&larr; Return Home</a>
+			<a href="{base}/search" class="font-serif text-sm transition-colors duration-200 underline decoration-1 underline-offset-4 hover:decoration-2 md:text-base" style="color: var(--color-accent);" data-sveltekit-preload-code="hover">Search</a>
+			<a href="https://github.com/mlhoutel/garden/issues" class="font-serif text-sm transition-colors duration-200 underline decoration-1 underline-offset-4 hover:decoration-2 md:text-base" style="color: var(--color-accent);" target="_blank" rel="noreferrer">Report issue &rarr;</a>
 		</div>
 	</div>
 </div>
