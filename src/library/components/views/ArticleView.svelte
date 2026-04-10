@@ -12,6 +12,7 @@
 	let readingProgress = $state(0);
 	let tocItems: { id: string; text: string; level: number }[] = $state([]);
 	let tocOpen = $state(false);
+	let heroEmbedEl: HTMLElement | undefined = $state(undefined);
 
 	const rng = seedrandom(`article-${data.title}`);
 	const stars: { cx: number; cy: number; r: number; opacity: number }[] = [];
@@ -28,15 +29,44 @@
 		window.addEventListener('scroll', updateProgress, { passive: true });
 
 		const stickyCleanups: (() => void)[] = [];
-		const article = document.querySelector('article');
-		if (article) {
+
+		// Defer all DOM queries and measurements to after the browser has
+		// completed layout of the {@html data.content} block. Without this,
+		// offsetHeight / getBoundingClientRect return stale values on first
+		// navigation and the embeds render in the wrong position.
+		const rafId = requestAnimationFrame(() => {
+			const article = document.querySelector('article');
+			if (!article) return;
+
 			const headings = article.querySelectorAll('h2, h3');
 			tocItems = Array.from(headings)
 				.filter((h) => h.id)
 				.map((h) => ({ id: h.id, text: h.textContent?.trim() || '', level: parseInt(h.tagName[1]) }));
 
-			// Sticky iframe logic
-			const stickyWrappers = article.querySelectorAll('.embed-sticky-wrapper');
+			// Wire up minimize button for the hero embed (rendered directly
+			// in the hero slot via data.heroEmbed — no DOM move needed).
+			if (heroEmbedEl) {
+				const heroEmbed = heroEmbedEl.querySelector('.embed-fullwidth') as HTMLElement | null;
+				const heroMinBtn = heroEmbed?.querySelector('.embed-minimize-btn');
+				if (heroEmbed && heroMinBtn) {
+					let heroMinimized = false;
+					heroMinBtn.addEventListener('click', () => {
+						heroMinimized = !heroMinimized;
+						if (heroMinimized) {
+							heroEmbed.classList.add('embed-minimized');
+							heroMinBtn.textContent = '\u25A1';
+							heroMinBtn.setAttribute('title', 'Restore');
+						} else {
+							heroEmbed.classList.remove('embed-minimized');
+							heroMinBtn.textContent = '\u2500';
+							heroMinBtn.setAttribute('title', 'Minimize');
+						}
+					});
+				}
+			}
+
+			// Sticky iframe logic (skip hero wrappers, they're handled above)
+			const stickyWrappers = article.querySelectorAll('.embed-sticky-wrapper:not(.embed-hero-wrapper)');
 			stickyWrappers.forEach((wrapper) => {
 				const w = wrapper as HTMLElement;
 				const embed = w.querySelector('.embed-fullwidth') as HTMLElement | null;
@@ -44,10 +74,10 @@
 
 				const TRAVEL = Math.round(window.innerHeight * 1.5);
 				const header = document.querySelector('nav');
-				const isMobile = window.innerWidth <= 768;
-				const HEADER_H = isMobile ? 0 : (header ? header.offsetHeight : 50);
+				const HEADER_H = header ? header.offsetHeight : 0;
 				const embedH = embed.offsetHeight;
 				w.style.minHeight = (embedH + TRAVEL) + 'px';
+				w.setAttribute('data-ready', '');
 
 				let state: 'normal' | 'fixed' | 'bottom' = 'normal';
 				let minimized = false;
@@ -61,17 +91,23 @@
 
 					if (shouldFix && state !== 'fixed') {
 						state = 'fixed';
-						const vw = window.innerWidth;
+						const vw = document.documentElement.clientWidth;
 						embed.style.position = 'fixed';
 						embed.style.top = HEADER_H + 'px';
-						embed.style.bottom = '0';
+						embed.style.bottom = '';
 						embed.style.left = '0';
 						embed.style.width = vw + 'px';
+						embed.style.maxWidth = vw + 'px';
 						embed.style.height = `calc(100vh - ${HEADER_H}px)`;
-						embed.style.maxWidth = 'none';
+						embed.style.margin = '0';
 						embed.style.transform = 'none';
 						embed.style.zIndex = '20';
 						embed.classList.add('embed-in-view');
+					} else if (shouldFix && state === 'fixed') {
+						const vw = document.documentElement.clientWidth;
+						embed.style.left = '0';
+						embed.style.width = vw + 'px';
+						embed.style.maxWidth = vw + 'px';
 					} else if (pastEnd && state !== 'bottom') {
 						state = 'bottom';
 						embed.style.position = 'absolute';
@@ -81,6 +117,7 @@
 						embed.style.width = '100%';
 						embed.style.height = '';
 						embed.style.maxWidth = '100%';
+						embed.style.margin = '';
 						embed.style.transform = '';
 						embed.style.zIndex = '';
 						embed.classList.remove('embed-in-view');
@@ -93,6 +130,7 @@
 						embed.style.width = '';
 						embed.style.height = '';
 						embed.style.maxWidth = '';
+						embed.style.margin = '';
 						embed.style.transform = '';
 						embed.style.zIndex = '';
 						embed.classList.remove('embed-in-view');
@@ -109,6 +147,7 @@
 					embed.style.width = '';
 					embed.style.height = '';
 					embed.style.maxWidth = '';
+					embed.style.margin = '';
 					embed.style.transform = '';
 					embed.classList.remove('embed-in-view');
 					state = 'normal';
@@ -130,6 +169,7 @@
 							embed.style.width = '';
 							embed.style.height = '';
 							embed.style.maxWidth = '';
+							embed.style.margin = '';
 							embed.style.transform = '';
 							embed.style.zIndex = '';
 							embed.classList.remove('embed-in-view');
@@ -155,9 +195,10 @@
 
 				stickyCleanups.push(() => window.removeEventListener('scroll', updateSticky));
 			});
-		}
+		});
 
 		return () => {
+			cancelAnimationFrame(rafId);
 			window.removeEventListener('scroll', updateProgress);
 			stickyCleanups.forEach((fn) => fn());
 		};
@@ -179,6 +220,13 @@
 {#if data.iframe}
 	<div style="height: 100vh; width: 100%; border: none; padding: 0; margin: 0;">
 		<IFrame src={data.iframe} title="iframe" />
+	</div>
+{/if}
+
+<!-- Hero iframe: rendered directly from page data, no JS DOM move needed -->
+{#if data.heroEmbed}
+	<div bind:this={heroEmbedEl} class="hero-iframe-slot">
+		{@html data.heroEmbed}
 	</div>
 {/if}
 

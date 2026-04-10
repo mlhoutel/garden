@@ -24,6 +24,10 @@ src/content/*
 static/assets/*
 !static/assets/.gitkeep
 
+# Generated images (built from database submodule by content:images)
+static/images/*
+!static/images/desert.svg
+
 # Vite
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*

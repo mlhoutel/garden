@@ -22,13 +22,11 @@
 <!-- Shared wrapper: graph + dunes + title. z-index 2 so dunes (inside)
      render above page content (z-index 1) that follows. -->
 <div class="relative w-full" style="z-index: 2;">
-	<!-- Graph hero -->
 	<GraphTopics nodes={data.nodes} edges={data.edges} bind:loading={graphLoading} />
-	<!-- Golden halo overlay — above graph and loading overlay -->
 	<DuneOverlay loading={graphLoading} />
 	<!-- Sand dunes: absolutely positioned at bottom of graph, overflows downward.
-	     z-index 10 puts it above the page content (z-index 5) that follows. -->
-	<div class="absolute right-0 left-0" style="bottom: -390px; z-index: 10; pointer-events: none;">
+	     z-index 10 puts it above the page content that follows. -->
+	<div class="absolute right-0 left-0" style="top: 100%; margin-top: -60px; z-index: 25; pointer-events: none;">
 		<SandDunes lightSand="#FFFEF6" lightShadow="#E8C878" darkSand="#23201E" darkShadow="#151210" />
 	</div>
 </div>
@@ -235,96 +233,98 @@
 <!-- Page content: z-index 1, below the graph wrapper (z-index 2) so dunes render above.
      padding-top creates space where dunes are visible above the content background. -->
 <div class="relative" style="z-index: 1;">
+	<!-- Separator -->
+	<div class="separator mx-auto max-w-[680px] px-4">
+		<span class="separator-glyph">◆</span>
+	</div>
 
-<!-- Separator -->
-<div class="separator mx-auto max-w-[680px] px-4">
-	<span class="separator-glyph">◆</span>
-</div>
+	<!-- Latest Writings -->
+	{#if data.latestArticles?.length}
+		<div class="mx-auto max-w-[680px] px-4 pt-6 pb-8">
+			<h2
+				class="mb-6 font-serif text-[1.75rem] md:text-[2.25rem]"
+				style="font-variant: small-caps; letter-spacing: 0.05em; color: var(--color-text); border-bottom: 1px solid var(--color-border); padding-bottom: 0.5rem;"
+			>
+				Latest Writings
+			</h2>
 
-<!-- Latest Writings -->
-{#if data.latestArticles?.length}
-	<div class="mx-auto max-w-[680px] px-4 pt-6 pb-8">
+			<div class="flex flex-col">
+				{#each data.latestArticles as article, i (i)}
+					<a
+						href="{base}/{article.path.replace('.md', '')}"
+						class="group block py-4 transition-colors duration-200"
+						style="border-bottom: 1px solid var(--color-border);"
+						data-sveltekit-preload-code="hover"
+					>
+						<div class="flex flex-col gap-1 md:flex-row md:items-baseline md:gap-4">
+							<span
+								class="shrink-0 font-mono text-[0.75rem]"
+								style="color: var(--color-text-muted);"
+							>
+								{new Date(article.meta.date).toLocaleDateString('en-US', {
+									month: 'short',
+									day: 'numeric',
+									year: 'numeric'
+								})}
+							</span>
+							<span
+								class="font-serif text-[1.25rem] font-bold transition-colors duration-200 group-hover:text-[--color-accent]"
+								style="color: var(--color-text);"
+							>
+								{article.meta.title}
+							</span>
+						</div>
+						{#if article.meta.short}
+							<p
+								class="mt-1 text-[0.85rem] leading-relaxed md:ml-[calc(8ch+1rem)]"
+								style="color: var(--color-text-muted);"
+							>
+								{article.meta.short}
+							</p>
+						{/if}
+						{#if article.meta.topic}
+							<div class="mt-2 flex flex-wrap gap-1.5 md:ml-[calc(8ch+1rem)]">
+								{#each article.meta.topic.split(' ').filter(Boolean).slice(0, 4) as topic}
+									<span class="pill">{topic}</span>
+								{/each}
+							</div>
+						{/if}
+					</a>
+				{/each}
+			</div>
+
+			<a
+				href="{base}/articles"
+				class="mt-4 inline-block font-serif text-sm transition-colors duration-200 hover:underline"
+				style="color: var(--color-accent);"
+				data-sveltekit-preload-code="hover"
+			>
+				View all articles &rarr;
+			</a>
+		</div>
+	{/if}
+
+	<!-- Separator -->
+	<div class="separator mx-auto max-w-[680px] px-4">
+		<span class="separator-glyph">◆</span>
+	</div>
+
+	<!-- Topics — tiered pills -->
+	<div class="mx-auto max-w-[680px] px-4 pt-6 pb-16">
 		<h2
 			class="mb-6 font-serif text-[1.75rem] md:text-[2.25rem]"
 			style="font-variant: small-caps; letter-spacing: 0.05em; color: var(--color-text); border-bottom: 1px solid var(--color-border); padding-bottom: 0.5rem;"
 		>
-			Latest Writings
+			Topics
 		</h2>
 
-		<div class="flex flex-col">
-			{#each data.latestArticles as article, i (i)}
+		<div class="flex flex-wrap gap-2">
+			{#each sortedTopics as node, i (i)}
+				{@const tier = topicTier(i)}
 				<a
-					href="{base}/{article.path.replace('.md', '')}"
-					class="group block py-4 transition-colors duration-200"
-					style="border-bottom: 1px solid var(--color-border);"
-					data-sveltekit-preload-code="hover"
-				>
-					<div class="flex flex-col gap-1 md:flex-row md:items-baseline md:gap-4">
-						<span class="shrink-0 font-mono text-[0.75rem]" style="color: var(--color-text-muted);">
-							{new Date(article.meta.date).toLocaleDateString('en-US', {
-								month: 'short',
-								day: 'numeric',
-								year: 'numeric'
-							})}
-						</span>
-						<span
-							class="font-serif text-[1.25rem] font-bold transition-colors duration-200 group-hover:text-[--color-accent]"
-							style="color: var(--color-text);"
-						>
-							{article.meta.title}
-						</span>
-					</div>
-					{#if article.meta.short}
-						<p
-							class="mt-1 text-[0.85rem] leading-relaxed md:ml-[calc(8ch+1rem)]"
-							style="color: var(--color-text-muted);"
-						>
-							{article.meta.short}
-						</p>
-					{/if}
-					{#if article.meta.topic}
-						<div class="mt-2 flex flex-wrap gap-1.5 md:ml-[calc(8ch+1rem)]">
-							{#each article.meta.topic.split(' ').filter(Boolean).slice(0, 4) as topic}
-								<span class="pill">{topic}</span>
-							{/each}
-						</div>
-					{/if}
-				</a>
-			{/each}
-		</div>
-
-		<a
-			href="{base}/articles"
-			class="mt-4 inline-block font-serif text-sm transition-colors duration-200 hover:underline"
-			style="color: var(--color-accent);"
-			data-sveltekit-preload-code="hover"
-		>
-			View all articles &rarr;
-		</a>
-	</div>
-{/if}
-
-<!-- Separator -->
-<div class="separator mx-auto max-w-[680px] px-4">
-	<span class="separator-glyph">◆</span>
-</div>
-
-<!-- Topics — tiered pills -->
-<div class="mx-auto max-w-[680px] px-4 pt-6 pb-16">
-	<h2
-		class="mb-6 font-serif text-[1.75rem] md:text-[2.25rem]"
-		style="font-variant: small-caps; letter-spacing: 0.05em; color: var(--color-text); border-bottom: 1px solid var(--color-border); padding-bottom: 0.5rem;"
-	>
-		Topics
-	</h2>
-
-	<div class="flex flex-wrap gap-2">
-		{#each sortedTopics as node, i (i)}
-			{@const tier = topicTier(i)}
-			<a
-				href="{base}/search?topics={node.label}"
-				class="inline-flex items-center gap-1 rounded-sm border transition-all duration-200 hover:border-[--color-accent] hover:text-[--color-accent]"
-				style="
+					href="{base}/search?topics={node.label}"
+					class="inline-flex items-center gap-1 rounded-sm border transition-all duration-200 hover:border-[--color-accent] hover:text-[--color-accent]"
+					style="
 					border-color: var(--color-border);
 					color: {tier === 'small' ? 'var(--color-text-muted)' : 'var(--color-text)'};
 					font-family: var(--font-mono);
@@ -332,11 +332,12 @@
 					padding: {tier === 'large' ? '4px 10px' : tier === 'medium' ? '3px 8px' : '2px 6px'};
 					letter-spacing: 0.03em;
 				"
-			>
-				<span style="opacity: 0.5; font-size: 0.8em;">{node.meta.pages}</span>
-				{node.label}
-			</a>
-		{/each}
+				>
+					<span style="opacity: 0.5; font-size: 0.8em;">{node.meta.pages}</span>
+					{node.label}
+				</a>
+			{/each}
+		</div>
 	</div>
 </div>
-</div><!-- end page content wrapper -->
+<!-- end page content wrapper -->

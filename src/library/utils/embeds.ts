@@ -114,6 +114,7 @@ function buildIframeEmbed(props: Record<string, string>, flags: Set<string>): El
 	const fullwidth = flags.has('fullwidth');
 	const fullheight = flags.has('fullheight');
 	const hasChrome = flags.has('chrome');
+	const isHero = flags.has('hero');
 
 	let height = props['height'] || '500';
 	if (fullheight) height = '100vh';
@@ -121,14 +122,17 @@ function buildIframeEmbed(props: Record<string, string>, flags: Set<string>): El
 
 	const classes = ['embed-container', 'embed-iframe'];
 	if (fullwidth) classes.push('embed-fullwidth');
+	if (isHero) classes.push('embed-hero');
 
 	const innerStyle = aspectRatio
 		? `position:relative; width:100%; aspect-ratio:${aspectRatio};`
 		: `position:relative; width:100%; height:${heightVal};`;
 
+	// The iframe is always rendered at 100vw so it never re-layouts when the
+	// container animates its visible width (overflow:hidden clips instead).
 	const iframeEl = h('iframe', {
 		src, title, loading: 'lazy', allowFullscreen: true,
-		style: 'position:absolute; top:0; left:0; width:100%; height:100%; border:none;'
+		style: 'position:absolute; top:0; left:0; width:100vw; height:100%; border:none;'
 	});
 
 	const innerWrapper = h('div', { className: ['embed-iframe-inner'], style: innerStyle }, [iframeEl]);
@@ -147,10 +151,31 @@ function buildIframeEmbed(props: Record<string, string>, flags: Set<string>): El
 	// - iframe sticks to top during that 200px, then scrolls away
 	// - starts at 94% width, expands to 100% when in view (via CSS .embed-in-view)
 	if (fullwidth) {
-		return h('div', {
-			className: ['embed-sticky-wrapper'],
-			style: `padding-top: 1.5rem;`
+		const wrapperClasses = ['embed-sticky-wrapper'];
+		if (isHero) wrapperClasses.push('embed-hero-wrapper');
+
+		const wrapper = h('div', {
+			className: wrapperClasses,
+			style: isHero ? '' : `padding-top: 1.5rem;`
 		}, [container]);
+
+		// Hero embeds are wrapped in comment markers so the page loader can
+		// extract them from the HTML and render them directly in the hero slot
+		// (avoids a JS-driven DOM move that causes a visible flash).
+		if (isHero) {
+			return {
+				type: 'element',
+				tagName: 'div',
+				properties: {},
+				children: [
+					{ type: 'comment', value: 'HERO_EMBED_START' } as any,
+					wrapper,
+					{ type: 'comment', value: 'HERO_EMBED_END' } as any,
+				]
+			} as Element;
+		}
+
+		return wrapper;
 	}
 
 	return h('div', { style: 'margin: 2rem 0;' }, [container]);
@@ -194,6 +219,38 @@ function buildChromeBar(title: string): Element {
 		minimizeBtn,
 		fullscreenBtn
 	]);
+}
+
+/** Gold ornament separator displayed below hero iframes */
+function buildHeroSeparator(): Element {
+	const svg = h('svg', {
+		viewBox: '0 0 800 16',
+		class: 'embed-hero-separator',
+		style: 'width:100%;height:16px;display:block;',
+		preserveAspectRatio: 'xMidYMid meet',
+		xmlns: 'http://www.w3.org/2000/svg'
+	}, [
+		// Left line
+		svgLine(0, 8, 340, 8, '#D4A017', 0.5, 0.15),
+		// Left diamond
+		svgPolygon('345,8 350,4 355,8 350,12', { fill: '#D4A017', opacity: '0.3' }),
+		// Center line
+		svgLine(360, 8, 440, 8, '#D4A017', 0.6, 0.25),
+		// Right diamond
+		svgPolygon('445,8 450,4 455,8 450,12', { fill: '#D4A017', opacity: '0.3' }),
+		// Right line
+		svgLine(460, 8, 800, 8, '#D4A017', 0.5, 0.15),
+		// Center dot
+		svgCircle(400, 8, 2, { fill: '#D4A017', opacity: '0.4' }),
+		// Outer dots
+		svgCircle(330, 8, 1, { fill: '#D4A017', opacity: '0.15' }),
+		svgCircle(470, 8, 1, { fill: '#D4A017', opacity: '0.15' }),
+	]);
+
+	return h('div', {
+		className: ['embed-hero-separator-wrapper'],
+		style: 'position:relative; z-index:25; background: var(--color-bg, #1a1a1a); padding: 0.5rem 0;'
+	}, [svg]);
 }
 
 // ─── GitHub Repo Card ────────────────────────────────────────────────────

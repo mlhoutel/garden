@@ -15,9 +15,116 @@ import rehypeCitation from 'rehype-citation';
 import rehypeStringify from 'rehype-stringify';
 import rehypeMermaid from './mermaid';
 import rehypeEmbeds from './embeds';
+import remarkMermaidAscii from './remark-mermaid-ascii';
+import rehypeFigures from './rehype-figures';
 import { transformerCopyButton } from '@rehype-pretty/transformers';
 import { visit } from 'unist-util-visit';
 import type { Root, Element } from 'hast';
+
+/**
+ * Remark plugin: promote single-line $$...$$ to display math.
+ *
+ * remark-math parses `$$x^2$$` on one line as inlineMath, not display math.
+ * This plugin finds inlineMath nodes that are the sole child of a paragraph
+ * and converts them to block-level `math` nodes so rehype-katex wraps them
+ * in `.katex-display`.
+ */
+function remarkDisplayMath() {
+	return (tree: any) => {
+		visit(tree, 'paragraph', (node: any, index: number | undefined, parent: any) => {
+			if (!parent || index === undefined) return;
+			if (node.children.length !== 1) return;
+			const child = node.children[0];
+			if (child.type !== 'inlineMath') return;
+			// Replace the paragraph with a display math node, including the
+			// data properties that remark-math normally sets so that
+			// remark-rehype and rehype-katex process it correctly.
+			parent.children[index] = {
+				type: 'math',
+				meta: null,
+				value: child.value,
+				data: {
+					hName: 'pre',
+					hChildren: [{
+						type: 'element',
+						tagName: 'code',
+						properties: { className: ['language-math', 'math-display'] },
+						children: [{ type: 'text', value: child.value }]
+					}]
+				},
+				position: node.position
+			};
+		});
+	};
+}
+
+/**
+ * Rehype plugin: add breathing room to KaTeX fractions.
+ * KaTeX bakes spacing into inline style="top:..." on .vlist spans.
+ * We shift the numerator up and denominator down by a fixed offset.
+ */
+function rehypeKatexFractionSpacing() {
+	const EXTRA_GAP = 0.35; // em to add above and below the fraction bar
+	return (tree: Root) => {
+		visit(tree, 'element', (node: Element) => {
+			// Target the .mfrac container
+			const cls = node.properties?.className;
+			if (!Array.isArray(cls) || !cls.includes('mfrac')) return;
+
+			// Walk into .vlist-t2 > .vlist-r > .vlist > span children
+			const vlistT2 = node.children.find(
+				(c): c is Element => c.type === 'element' && Array.isArray(c.properties?.className) && (c.properties.className as string[]).includes('vlist-t2')
+			);
+			if (!vlistT2) return;
+
+			const vlistR = vlistT2.children.find(
+				(c): c is Element => c.type === 'element' && Array.isArray(c.properties?.className) && (c.properties.className as string[]).includes('vlist-r')
+			);
+			if (!vlistR) return;
+
+			const vlist = vlistR.children.find(
+				(c): c is Element => c.type === 'element' && Array.isArray(c.properties?.className) && (c.properties.className as string[]).includes('vlist')
+			);
+			if (!vlist) return;
+
+			// The vlist children are spans with style="top:Xem;"
+			// Typically 3 spans: denominator (most positive top), frac-line, numerator (most negative top)
+			for (const child of vlist.children) {
+				if (child.type !== 'element') continue;
+				const style = String(child.properties?.style || '');
+				const topMatch = style.match(/top:\s*([-\d.]+)em/);
+				if (!topMatch) continue;
+
+				const topVal = parseFloat(topMatch[1]);
+
+				// Check if this span contains the frac-line
+				const hasFracLine = child.children.some(
+					(c): c is Element => c.type === 'element' && Array.isArray(c.properties?.className) && (c.properties.className as string[]).includes('frac-line')
+				);
+
+				if (hasFracLine) continue; // don't move the bar itself
+
+				// Numerator has a more negative top, denominator has a less negative top
+				// Push them further apart from the bar
+				const adjusted = topVal < -3.0
+					? topVal - EXTRA_GAP  // numerator: push further up
+					: topVal + EXTRA_GAP; // denominator: push further down
+
+				child.properties = child.properties || {};
+				child.properties.style = style.replace(/top:\s*[-\d.]+em/, `top:${adjusted.toFixed(4)}em`);
+			}
+
+			// Also adjust the outer strut height to account for the extra space
+			const outerStyle = String(node.properties?.style || '');
+			if (!outerStyle) {
+				// Adjust the parent .vlist-t2 strut if needed
+				const strutSpan = vlistT2.children.find(
+					(c): c is Element => c.type === 'element' && c.tagName === 'span' && String(c.properties?.style || '').includes('height:')
+				);
+			}
+		});
+	};
+}
 
 /**
  * Rehype plugin: add target="_blank" and rel="noopener noreferrer" to external links
@@ -98,10 +205,13 @@ export async function renderMarkdown(
 		.use(remarkFrontmatter, ['yaml', 'toml'])
 		.use(remarkGfm)
 		.use(remarkMath) // parse $...$ and $$...$$
+		.use(remarkDisplayMath) // promote lone $$...$$ to display math
 		.use(remarkBreaks)
 		.use(remarkSmartypants)
+		.use(remarkMermaidAscii)
 		.use(remarkRehype, { allowDangerousHtml: true }) // convert to rehype AST
-		.use(rehypeKatex) // render math nodes
+		.use(rehypeKatex, { minRuleThickness: 0.07 }) // render math nodes
+		.use(rehypeKatexFractionSpacing) // add breathing room to fractions
 		.use(rehypeRaw) // allow inline HTML
 		.use(rehypeEmbeds) // transform data-embed divs into rendered components
 		.use(rehypeSlug)
@@ -149,6 +259,7 @@ export async function renderMarkdown(
 		})
 		.use(rehypeCitation, { path })
 		.use(rehypeMermaid)
+		.use(rehypeFigures)
 		.use(rehypeExternalLinks)
 		.use(rehypeTableWrapper)
 		.use(rehypeStringify)

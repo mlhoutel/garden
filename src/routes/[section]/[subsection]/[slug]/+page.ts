@@ -25,7 +25,24 @@ export async function load({
 	if (!loader) throw error(404, `Page not found: ${key}`);
 
 	const markdown = await loader();
-	const content = await renderMarkdown(markdown, { path: key });
+	let content = await renderMarkdown(markdown, { path: key });
+
+	// Extract hero embed from content so it can render directly in the hero
+	// slot without a JS-driven DOM move (which causes a visible flash).
+	let heroEmbed: string | undefined;
+	const heroStart = content.indexOf('<!--HERO_EMBED_START-->');
+	const heroEnd = content.indexOf('<!--HERO_EMBED_END-->');
+	if (heroStart !== -1 && heroEnd !== -1) {
+		const afterStart = heroStart + '<!--HERO_EMBED_START-->'.length;
+		heroEmbed = content.slice(afterStart, heroEnd).trim();
+		// Remove the entire marker wrapper (the outer <div> that wraps the comments + hero)
+		// Find the <div> that contains the markers
+		const wrapperStart = content.lastIndexOf('<div>', heroStart);
+		const wrapperEnd = content.indexOf('</div>', heroEnd + '<!--HERO_EMBED_END-->'.length);
+		if (wrapperStart !== -1 && wrapperEnd !== -1) {
+			content = content.slice(0, wrapperStart) + content.slice(wrapperEnd + '</div>'.length);
+		}
+	}
 
 	// Find index for navigation
 	const index = pages.findIndex((p) => p.meta.subsection === subsection && p.meta.slug == slug);
@@ -79,6 +96,7 @@ export async function load({
 
 	return {
 		content,
+		heroEmbed,
 		next,
 		related,
 		relatedRendered,
