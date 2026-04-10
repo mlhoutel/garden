@@ -1,4 +1,5 @@
 import { error } from '@sveltejs/kit';
+import { base } from '$app/paths';
 import { listPages } from '$utils/apis';
 import { renderMarkdown } from '$utils/markdown';
 import type { PageLoadReturn, Page } from '$types/types';
@@ -41,6 +42,17 @@ export async function load({
 		const wrapperEnd = content.indexOf('</div>', heroEnd + '<!--HERO_EMBED_END-->'.length);
 		if (wrapperStart !== -1 && wrapperEnd !== -1) {
 			content = content.slice(0, wrapperStart) + content.slice(wrapperEnd + '</div>'.length);
+		}
+	}
+
+	// Prepend base path to absolute image/asset URLs so they resolve
+	// correctly when deployed under a subpath (e.g. /garden/).
+	if (base) {
+		content = content.replace(/src="\/images\//g, `src="${base}/images/`);
+		content = content.replace(/src="\/assets\//g, `src="${base}/assets/`);
+		if (heroEmbed) {
+			heroEmbed = heroEmbed.replace(/src="\/images\//g, `src="${base}/images/`);
+			heroEmbed = heroEmbed.replace(/src="\/assets\//g, `src="${base}/assets/`);
 		}
 	}
 

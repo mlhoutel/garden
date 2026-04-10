@@ -230,9 +230,9 @@
 	</div>
 </div>
 
-<!-- Page content: z-index 1, below the graph wrapper (z-index 2) so dunes render above.
-     padding-top creates space where dunes are visible above the content background. -->
-<div class="relative" style="z-index: 1;">
+<!-- Page content: z-index 30, above graph wrapper and dunes so text is always readable.
+     Background color ensures content doesn't show through the dunes. -->
+<div class="relative" style="z-index: 30; background-color: var(--color-bg);">
 	<!-- Separator -->
 	<div class="separator mx-auto max-w-[680px] px-4">
 		<span class="separator-glyph">◆</span>
