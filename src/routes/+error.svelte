@@ -134,7 +134,7 @@
 
 	<!-- Dunes at bottom of sky -->
 	<div class="absolute bottom-0 left-0 right-0" style="z-index: 10; pointer-events: none;">
-		<SandDunes lightSand="#FFFEF6" lightShadow="#E8C878" darkSand="#23201E" darkShadow="#151210" />
+		<SandDunes />
 	</div>
 
 	<!-- Error content: centered, above dunes -->

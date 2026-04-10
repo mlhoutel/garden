@@ -49,6 +49,8 @@
 	--color-border: #e0d8cc;
 	--color-border-strong: #c6b89e;
 	--color-hero-bg: #1a1a1a;
+	--dune-sand: #FFFEF6;
+	--dune-shadow: #E8C878;
 
 	/* Legacy aliases for transition */
 	--color-black: #1f272d;
@@ -119,6 +121,8 @@
 		--color-surface: #252525;
 		--color-border: #3a3a3a;
 		--color-border-strong: #555;
+		--dune-sand: #23201E;
+		--dune-shadow: #151210;
 	}
 }
 

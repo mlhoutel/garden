@@ -139,7 +139,7 @@
 			draw();
 			return;
 		}
-		intensity += (target - intensity) * 0.025; // smooth ease toward target
+		intensity += (target - intensity) * 0.08; // smooth ease toward target
 		draw();
 		animFrame = requestAnimationFrame(animateIntensity);
 	}

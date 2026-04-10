@@ -1,6 +1,11 @@
 <script lang="ts">
 	import { onMount, onDestroy } from 'svelte';
-	import * as d3 from 'd3';
+	import { select } from 'd3-selection';
+	import { forceSimulation, forceLink, forceManyBody, forceCenter, forceCollide } from 'd3-force';
+	import { drag } from 'd3-drag';
+	import 'd3-transition';
+	import type { Simulation } from 'd3-force';
+	import type { Selection } from 'd3-selection';
 	import seedrandom from 'seedrandom';
 	import type { Node, Edge, SimulationNode, SimulationLink } from '$types/types';
 	import OrbitalLoader from './OrbitalLoader.svelte';
@@ -14,7 +19,7 @@
 	let wrapperEl: HTMLDivElement;
 	let svgContainer: SVGSVGElement;
 	let linkCanvas: HTMLCanvasElement;
-	let simulation: d3.Simulation<SimulationNode, SimulationLink>;
+	let simulation: Simulation<SimulationNode, SimulationLink>;
 	// loading is a $bindable prop
 	let shootingStarTimer: ReturnType<typeof setTimeout>;
 	let shootingStarsActive = false;
@@ -48,7 +53,7 @@
 	}
 
 	function drawGeometricBackground(
-		svg: d3.Selection<SVGSVGElement, unknown, null, undefined>,
+		svg: Selection<SVGSVGElement, unknown, null, undefined>,
 		width: number,
 		height: number
 	) {
@@ -171,7 +176,7 @@
 
 	/** Spawn a single shooting star with varied speed, length, direction and brightness */
 	function spawnShootingStar(
-		starsGroup: d3.Selection<SVGGElement, unknown, null, undefined>,
+		starsGroup: Selection<SVGGElement, unknown, null, undefined>,
 		width: number,
 		height: number
 	) {
@@ -353,8 +358,53 @@
 		const sizes = dNodes.map((n) => n.size).sort((a, b) => a - b);
 		const maxSize = Math.max(...sizes);
 		const medianSize = sizes[Math.floor(sizes.length * 0.6)] || 1;
-		const labelThreshold = sizes[Math.floor(sizes.length * 0.60)] || 1;
-		const labelFaintThreshold = sizes[Math.floor(sizes.length * 0.35)] || 1;
+		const labelThreshold = sizes[Math.floor(sizes.length * 0.75)] || 1;
+		const labelFaintThreshold = sizes[Math.floor(sizes.length * 0.50)] || 1;
+
+		// Rank-based label opacity: top labels bright, fast falloff for the rest.
+		// After simulation settles, overlapping labels get dimmed further.
+		function labelBaseOpacity(d: SimulationNode): number {
+			if (d.size >= labelThreshold) return 0.8;
+			if (d.size >= labelFaintThreshold) return 0.2;
+			return 0;
+		}
+
+		function resolveOverlaps(lbls: typeof labels) {
+			// Collect visible label bounding boxes, sorted by importance (size desc)
+			const entries: { node: SVGTextElement; d: SimulationNode; bbox: DOMRect }[] = [];
+			lbls.each(function(this: SVGTextElement, d: SimulationNode) {
+				if (labelBaseOpacity(d) > 0) {
+					entries.push({ node: this, d, bbox: this.getBBox() });
+				}
+			});
+			entries.sort((a, b) => (b.d.size || 0) - (a.d.size || 0));
+
+			const placed: DOMRect[] = [];
+			const targets = new Map<SVGTextElement, number>();
+			for (const e of entries) {
+				const b = e.bbox;
+				const overlaps = placed.some(p =>
+					b.x < p.x + p.width && b.x + b.width > p.x &&
+					b.y < p.y + p.height && b.y + b.height > p.y
+				);
+				if (overlaps) {
+					targets.set(e.node, Math.min(labelBaseOpacity(e.d) * 0.15, 0.08));
+				} else {
+					targets.set(e.node, labelBaseOpacity(e.d));
+					placed.push(b);
+				}
+			}
+
+			// Also set hidden labels to 0
+			lbls.each(function(this: SVGTextElement) {
+				if (!targets.has(this)) targets.set(this, 0);
+			});
+
+			// Apply with CSS transition (the transition style is already on the elements)
+			for (const [node, opacity] of targets) {
+				node.setAttribute('opacity', String(opacity));
+			}
+		}
 
 		// sqrt-rank decay: fast initial drop (hubs clearly larger) + gradual tail (small nodes
 		// still visibly different from each other, no pile-up at a uniform floor)
@@ -366,8 +416,7 @@
 			return 2.0 + Math.pow(0.72, Math.sqrt(rank)) * 8.5;
 		};
 
-		const svg = d3
-			.select(svgContainer)
+		const svg = select(svgContainer)
 			.attr('viewBox', [-hw, -hh, width, height])
 			.style('max-width', '100%')
 			.style('height', 'auto')
@@ -476,13 +525,13 @@
 			.attr('dy', '-1.2em')
 			.attr('fill', OFF_WHITE)
 			.attr('text-anchor', 'middle')
-			.attr('opacity', (d) => (d.size >= labelThreshold ? 0.75 : d.size >= labelFaintThreshold ? 0.38 : 0))
-			.style('pointer-events', 'none');
+			.attr('opacity', 0)
+			.style('pointer-events', 'none')
+			.style('transition', 'opacity 0.6s ease');
 
 		// Drag
 		node.call(
-			d3
-				.drag<SVGCircleElement, SimulationNode>()
+			drag<SVGCircleElement, SimulationNode>()
 				.on('start', (event, d) => {
 					if (!event.active) simulation.alphaTarget(0.3).restart();
 					d.fx = d.x;
@@ -608,12 +657,10 @@
 			}
 		}
 
-		simulation = d3
-			.forceSimulation<SimulationNode>(dNodes)
+		simulation = forceSimulation<SimulationNode>(dNodes)
 			.force(
 				'link',
-				d3
-					.forceLink<SimulationNode, SimulationLink>(dLinks)
+				forceLink<SimulationNode, SimulationLink>(dLinks)
 					.id((d) => d.id)
 					.distance((l) => {
 						const s = l.source as SimulationNode;
@@ -631,15 +678,14 @@
 			)
 			// Short-range repulsion only: nodes only repel neighbours, not the whole canvas
 			// Inter-cluster separation is handled by interClusterRepulsion instead
-			.force('charge', d3.forceManyBody<SimulationNode>()
+			.force('charge', forceManyBody<SimulationNode>()
 				.strength((d) => chargeStr * (0.4 + ((d.size || 1) / maxSize) * 0.7))
 				.distanceMax(130)
 			)
-			.force('center', d3.forceCenter(0, 0).strength(0.01))
+			.force('center', forceCenter(0, 0).strength(0.01))
 			.force(
 				'collision',
-				d3
-					.forceCollide<SimulationNode>()
+				forceCollide<SimulationNode>()
 					.radius((d) => nodeRadius(d.size) + 5)
 					.strength(0.5)
 					.iterations(1)
@@ -647,7 +693,7 @@
 			.force('radialSize', radialSizeForce)
 			.force('cluster', clusterForce)
 			.force('interCluster', interClusterRepulsion)
-			.alphaDecay(0.04)
+			.alphaDecay(0.06)
 			.velocityDecay(0.42);
 
 		simulation.on('tick', () => {
@@ -676,7 +722,7 @@
 
 		// Hide loader once simulation has settled AND minimum time has passed
 		const loadStart = Date.now();
-		const MIN_LOAD_MS = 1000;
+		const MIN_LOAD_MS = 300;
 		simulation.on('tick.loading', () => {
 			if (simulation.alpha() < 0.05 && loading && Date.now() - loadStart >= MIN_LOAD_MS) {
 				loading = false;
@@ -685,6 +731,7 @@
 			if (simulation.alpha() < 0.005) {
 				simulation.stop();
 				drawLinks(); // final frame
+				resolveOverlaps(labels); // dim overlapping labels
 			}
 		});
 
@@ -725,7 +772,7 @@
 					.style('filter', (n, i) => n.size >= medianSize
 					? `drop-shadow(0 0 ${1 + (n.size / maxSize) * 5}px ${planetColor(n, i)})`
 					: 'none');
-				labels.attr('opacity', (d) => (d.size >= labelThreshold ? 0.75 : d.size >= labelFaintThreshold ? 0.38 : 0));
+				resolveOverlaps(labels);
 				drawLinks();
 			});
 	}

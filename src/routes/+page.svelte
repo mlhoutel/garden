@@ -27,7 +27,7 @@
 	<!-- Sand dunes: absolutely positioned at bottom of graph, overflows downward.
 	     z-index 10 puts it above the page content that follows. -->
 	<div class="absolute right-0 left-0" style="top: 100%; margin-top: -80px; z-index: 25; pointer-events: none;">
-		<SandDunes lightSand="#FFFEF6" lightShadow="#E8C878" darkSand="#23201E" darkShadow="#151210" />
+		<SandDunes />
 	</div>
 </div>
 
@@ -232,7 +232,7 @@
 
 <!-- Page content: z-index 30, above graph wrapper and dunes so text is always readable.
      Background color ensures content doesn't show through the dunes. -->
-<div class="relative" style="z-index: 30; background-color: var(--color-bg);">
+<div class="relative" style="z-index: 30; background-color: var(--color-bg); content-visibility: auto; contain-intrinsic-size: auto 800px;">
 	<!-- Separator -->
 	<div class="separator mx-auto max-w-[680px] px-4">
 		<span class="separator-glyph">◆</span>

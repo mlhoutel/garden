@@ -1,53 +1,37 @@
 <script lang="ts">
-	import { base } from '$app/paths';
 	import { onMount, onDestroy } from 'svelte';
+	import rawDesertSvg from '$library/assets/desert.svg?raw';
 
 	let {
 		overlap = '0px',
-		lightSand = '#FFFEF6',
-		lightShadow = '#E8C878',
-		darkSand = '#23201E',
-		darkShadow = '#151210',
 		class: className = ''
 	}: {
 		overlap?: string;
-		lightSand?: string;
-		lightShadow?: string;
-		darkSand?: string;
-		darkShadow?: string;
 		class?: string;
 	} = $props();
 
-	let svgContent = $state('');
-	let rawSvg = '';
-	let observer: MutationObserver;
 	let parallaxX = $state(0);
 	let parallaxY = $state(0);
+	let mounted = $state(false);
 	let innerEl: HTMLDivElement;
 
-	const svgCache =
-		typeof window !== 'undefined'
-			? ((window as any).__dunesSvgCache as { raw?: string }) ||
-				((window as any).__dunesSvgCache = {})
-			: {};
-
-	function isDark(): boolean {
-		return document.documentElement.classList.contains('dark');
+	// Process SVG at module scope (runs during SSR and client).
+	// Replace hardcoded fills with CSS custom properties so dark/light
+	// mode is handled purely by CSS, no JS color-swapping needed.
+	function prepareSvg(raw: string): string {
+		raw = raw.replace(/\s*width="[^"]*"/, '');
+		raw = raw.replace(/\s*height="[^"]*"/, '');
+		raw = raw.replace(/preserveAspectRatio="[^"]*"/g, '');
+		raw = raw.replace(/viewBox="[^"]*"/, 'viewBox="0 20 165.63 72.60"');
+		raw = raw.replace(/<svg/, '<svg preserveAspectRatio="xMidYMin slice"');
+		raw = raw.replace(/fill:#ffffff/gi, 'fill:var(--dune-sand)');
+		raw = raw.replace(/fill:#fff(?![\da-f])/gi, 'fill:var(--dune-sand)');
+		raw = raw.replace(/fill:#000000/gi, 'fill:var(--dune-shadow)');
+		raw = raw.replace(/fill:#000(?![\da-f])/gi, 'fill:var(--dune-shadow)');
+		return raw;
 	}
 
-	function applyColors() {
-		if (!rawSvg) return;
-		const dark = isDark();
-		const sand = dark ? darkSand : lightSand;
-		const shadow = dark ? darkShadow : lightShadow;
-
-		let svg = rawSvg;
-		svg = svg.replace(/fill:#ffffff/gi, `fill:${sand}`);
-		svg = svg.replace(/fill:#fff(?![\da-f])/gi, `fill:${sand}`);
-		svg = svg.replace(/fill:#000000/gi, `fill:${shadow}`);
-		svg = svg.replace(/fill:#000(?![\da-f])/gi, `fill:${shadow}`);
-		svgContent = svg;
-	}
+	const processedSvg = prepareSvg(rawDesertSvg);
 
 	function handleMouseMove(e: MouseEvent) {
 		const nx = (e.clientX / window.innerWidth - 0.5) * 2;
@@ -55,43 +39,20 @@
 	}
 
 	function handleScroll() {
-		// Dunes drift down slightly as you scroll down (inverted, very slow)
 		parallaxY = -(window.scrollY * 0.015);
 	}
 
-	onMount(async () => {
-		try {
-			if (svgCache.raw) {
-				rawSvg = svgCache.raw;
-			} else {
-				const res = await fetch(`${base}/images/desert.svg`);
-				if (!res.ok) return; // SVG not found — silently skip
-				let raw = await res.text();
-				// Verify it's actually SVG, not a 404 HTML page
-				if (!raw.includes('<svg')) return;
-				raw = raw.replace(/\s*width="[^"]*"/, '');
-				raw = raw.replace(/\s*height="[^"]*"/, '');
-				raw = raw.replace(/preserveAspectRatio="[^"]*"/g, '');
-				raw = raw.replace(/viewBox="[^"]*"/, 'viewBox="0 20 165.63 72.60"');
-				raw = raw.replace(/<svg/, '<svg preserveAspectRatio="xMidYMin slice"');
-				rawSvg = raw;
-				svgCache.raw = raw;
-			}
-			applyColors();
-		} catch (e) {
-			console.error('Failed to load desert SVG:', e);
-		}
-
-		observer = new MutationObserver(() => applyColors());
-		observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+	onMount(() => {
+		// Enable transition only after mount so the initial SSR position
+		// doesn't trigger a 2.5s slide animation during hydration.
+		mounted = true;
 
 		window.addEventListener('mousemove', handleMouseMove, { passive: true });
 		window.addEventListener('scroll', handleScroll, { passive: true });
-		handleScroll(); // initial position
+		handleScroll();
 	});
 
 	onDestroy(() => {
-		observer?.disconnect();
 		if (typeof window !== 'undefined') {
 			window.removeEventListener('mousemove', handleMouseMove);
 			window.removeEventListener('scroll', handleScroll);
@@ -100,34 +61,33 @@
 </script>
 
 <div class="pointer-events-none relative w-full {className}" style="margin-top: -{overlap}; overflow: hidden;">
-	{#if svgContent}
-		<div
-			bind:this={innerEl}
-			class="dunes-inner"
-			style="transform: translateX(calc(-50% + {parallaxX}px)) translateY({parallaxY}px);"
-		>
-			{@html svgContent}
-		</div>
-	{/if}
+	<div
+		bind:this={innerEl}
+		class="dunes-inner"
+		class:has-transition={mounted}
+		style="transform: translateX(calc(-50% + {parallaxX}px)) translateY({parallaxY}px);"
+	>
+		{@html processedSvg}
+	</div>
 </div>
 
 <style>
 	.dunes-inner {
-		width: 100vw;
+		width: calc(100vw + 20px);
 		position: relative;
 		left: 50%;
 		top: 0;
 		overflow: hidden;
-		/* Very slow, dreamy parallax -like heat shimmer over sand */
-		transition: transform 2.5s cubic-bezier(0.15, 0, 0.25, 1);
-		/* Slight extra width so parallax shift doesn't reveal edges */
-		width: calc(100vw + 20px);
 		margin-left: -10px;
+		will-change: transform;
+	}
+
+	.dunes-inner.has-transition {
+		transition: transform 2.5s cubic-bezier(0.15, 0, 0.25, 1);
 	}
 
 	.dunes-inner :global(svg) {
 		width: 100%;
-		/* Taller on mobile for coverage, capped on desktop */
 		height: clamp(350px, 70vh, 500px);
 		display: block;
 		transform: rotate(-1deg);

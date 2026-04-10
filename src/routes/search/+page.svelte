@@ -312,7 +312,7 @@
 
 	<!-- Dunes at bottom, overflow onto page -->
 	<div class="absolute right-0 bottom-0 left-0" style="z-index: 10; pointer-events: none;">
-		<SandDunes lightSand="#FFFEF6" lightShadow="#E8C878" darkSand="#23201E" darkShadow="#151210" />
+		<SandDunes />
 	</div>
 </div>
 
