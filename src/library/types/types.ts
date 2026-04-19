@@ -160,6 +160,7 @@ export interface PageLoadReturn {
 	section: string;
 	subsection: string;
 	related?: Page[];
+	relatedSheets?: Page[];
 	relatedRendered?: { meta: any; content: string; path: string }[];
 	date?: string;
 	time?: number;

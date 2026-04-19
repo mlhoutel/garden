@@ -89,6 +89,19 @@ export async function load({
 
 	const related = [...sameSubsection, ...byTopic, ...rest];
 
+	// Cross-section sheet recommendations for articles: surface sheets that
+	// share at least one topic with this article so readers can dig deeper.
+	let relatedSheets: Page[] = [];
+	if (section === 'articles' && currentTopics.size > 0) {
+		const allSheets: Page[] = await listPages('sheets');
+		relatedSheets = allSheets
+			.filter((p) => {
+				const pTopics = p.meta.topic?.split(' ').filter(Boolean) || [];
+				return pTopics.some((t: string) => currentTopics.has(t));
+			})
+			.slice(0, 6);
+	}
+
 	// For snippets: pre-render related content for infinite scroll feed
 	let relatedRendered: { meta: any; content: string; path: string }[] | undefined;
 	if (section === 'snippets') {
@@ -115,6 +128,7 @@ export async function load({
 		heroEmbed,
 		next,
 		related,
+		relatedSheets,
 		relatedRendered,
 		...page.meta,
 		section,

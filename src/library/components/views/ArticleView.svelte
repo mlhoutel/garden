@@ -2,7 +2,7 @@
 	import type { PageLoadReturn } from '$types/types';
 	import { base } from '$app/paths';
 	import { browser } from '$app/environment';
-	import { onMount } from 'svelte';
+	import { onMount, tick } from 'svelte';
 	import seedrandom from 'seedrandom';
 	import IFrame from '$components/global/IFrame.svelte';
 	import AuthorBadge from '$components/global/AuthorBadge.svelte';
@@ -27,14 +27,34 @@
 			readingProgress = docHeight > 0 ? Math.min((scrollTop / docHeight) * 100, 100) : 0;
 		}
 		window.addEventListener('scroll', updateProgress, { passive: true });
+		return () => window.removeEventListener('scroll', updateProgress);
+	});
+
+	// Re-wire embeds (TOC, hero minimize, sticky iframes) every time the
+	// rendered content changes. The component instance is reused when
+	// navigating between articles, so onMount only fires once — but each new
+	// article's embed wrappers start with `visibility: hidden` and need JS
+	// to set `data-ready` and attach handlers, otherwise they never appear.
+	$effect(() => {
+		// Track on rendered content so this re-runs on navigation
+		void data.content;
+		void data.heroEmbed;
+
+		// Reset state so previous article's TOC doesn't linger on navigation
+		tocItems = [];
+		tocOpen = false;
 
 		const stickyCleanups: (() => void)[] = [];
+		let cancelled = false;
+		let rafId = 0;
 
-		// Defer all DOM queries and measurements to after the browser has
-		// completed layout of the {@html data.content} block. Without this,
-		// offsetHeight / getBoundingClientRect return stale values on first
-		// navigation and the embeds render in the wrong position.
-		const rafId = requestAnimationFrame(() => {
+		(async () => {
+			// Wait for Svelte to render the new {@html data.content} into the DOM
+			await tick();
+			if (cancelled) return;
+
+			rafId = requestAnimationFrame(() => {
+				if (cancelled) return;
 			const article = document.querySelector('article');
 			if (!article) return;
 
@@ -195,11 +215,12 @@
 
 				stickyCleanups.push(() => window.removeEventListener('scroll', updateSticky));
 			});
-		});
+			});
+		})();
 
 		return () => {
+			cancelled = true;
 			cancelAnimationFrame(rafId);
-			window.removeEventListener('scroll', updateProgress);
 			stickyCleanups.forEach((fn) => fn());
 		};
 	});
@@ -333,15 +354,62 @@
 		</svg>
 	</div>
 
-	<!-- Bottom navigation -->
-	<div class="flex w-full items-center gap-4 px-4 pt-3 pb-8 md:px-0">
-		<a href="{base}/{data.section}" class="flex-1 py-2 text-left font-serif text-sm transition-colors duration-200 hover:text-[--color-accent]" style="color: var(--color-text-muted);" data-sveltekit-preload-code="hover">
+	<!-- Related articles (same section, prioritised by subsection then topic) -->
+	{#if data.related && data.related.length > 0}
+		<div class="px-4 pt-4 pb-2 md:px-0">
+			<h3 class="mb-3 font-serif text-[1.1rem]" style="font-variant: small-caps; letter-spacing: 0.05em; color: var(--color-text);">
+				More in {data.section}
+			</h3>
+			<div class="flex flex-col gap-0">
+				{#each data.related.slice(0, 6) as page (page.path)}
+					<a
+						href="{base}/{page.path.replace('.md', '')}"
+						class="group block py-2.5 transition-colors duration-200"
+						style="border-bottom: 1px solid var(--color-border);"
+						data-sveltekit-preload-code="hover"
+					>
+						<span class="font-serif text-[0.95rem] transition-colors duration-200 group-hover:text-[--color-accent]" style="color: var(--color-text);">
+							{page.meta.title}
+						</span>
+						{#if page.meta.short}
+							<p class="mt-0.5 text-[0.78rem]" style="color: var(--color-text-muted);">{page.meta.short}</p>
+						{/if}
+					</a>
+				{/each}
+			</div>
+		</div>
+	{/if}
+
+	<!-- Related sheets (cross-section, by shared topic) -->
+	{#if data.relatedSheets && data.relatedSheets.length > 0}
+		<div class="px-4 pt-6 pb-2 md:px-0">
+			<h3 class="mb-3 font-serif text-[1.1rem]" style="font-variant: small-caps; letter-spacing: 0.05em; color: var(--color-text);">
+				Related sheets
+			</h3>
+			<div class="flex flex-col gap-0">
+				{#each data.relatedSheets as page (page.path)}
+					<a
+						href="{base}/{page.path.replace('.md', '')}"
+						class="group block py-2.5 transition-colors duration-200"
+						style="border-bottom: 1px solid var(--color-border);"
+						data-sveltekit-preload-code="hover"
+					>
+						<span class="font-serif text-[0.95rem] transition-colors duration-200 group-hover:text-[--color-accent]" style="color: var(--color-text);">
+							{page.meta.title}
+						</span>
+						{#if page.meta.short}
+							<p class="mt-0.5 text-[0.78rem]" style="color: var(--color-text-muted);">{page.meta.short}</p>
+						{/if}
+					</a>
+				{/each}
+			</div>
+		</div>
+	{/if}
+
+	<!-- Back nav -->
+	<div class="flex w-full items-center gap-4 px-4 pt-4 pb-8 md:px-0">
+		<a href="{base}/{data.section}" class="font-serif text-sm transition-colors duration-200 hover:text-[--color-accent]" style="color: var(--color-text-muted);" data-sveltekit-preload-code="hover">
 			&larr; All {data.section}
 		</a>
-		{#if data.next}
-			<a href="{base}/{data.next.path.replace('.md', '')}" class="flex-1 truncate py-2 text-right font-serif text-sm transition-colors duration-200 hover:text-[--color-accent]" style="color: var(--color-text-muted);" data-sveltekit-preload-code="hover">
-				{data.next.meta.title} &rarr;
-			</a>
-		{/if}
 	</div>
 </article>

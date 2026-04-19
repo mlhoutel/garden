@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { PageLoadReturn } from '$types/types';
 	import { base } from '$app/paths';
-	import { onMount } from 'svelte';
+	import { tick } from 'svelte';
 	import seedrandom from 'seedrandom';
 
 	let { data }: { data: PageLoadReturn } = $props();
@@ -33,37 +33,49 @@
 		stars.push({ cx: rng() * 100, cy: rng() * 100, r: 0.02 + rng() * 0.05, opacity: 0.06 + rng() * 0.2 });
 	}
 
-	onMount(() => {
-		const article = document.querySelector('article');
-		if (!article) return;
+	// Rebuild TOC + scroll-spy whenever the rendered content changes (e.g. when
+	// navigating between sheets, the component instance is reused so onMount
+	// would only fire once and the TOC would stay stale).
+	$effect(() => {
+		// Track the rendered content so this re-runs on navigation
+		void data.content;
 
-		const headings = article.querySelectorAll('h2, h3');
-		tocItems = Array.from(headings)
-			.filter((h) => h.id)
-			.map((h) => ({ id: h.id, text: h.textContent?.trim() || '', level: parseInt(h.tagName[1]) }));
+		let observer: IntersectionObserver | null = null;
+		let cancelled = false;
 
-		if (tocItems.length > 0) activeHeading = tocItems[0].id;
+		(async () => {
+			await tick();
+			if (cancelled) return;
+			const article = document.querySelector('article');
+			if (!article) return;
 
-		// Scroll spy: highlight current heading in TOC
-		const observer = new IntersectionObserver(
-			(entries) => {
-				if (ignoreObserver) return;
-				for (const entry of entries) {
-					if (entry.isIntersecting) {
-						activeHeading = entry.target.id;
+			const headings = article.querySelectorAll('h2, h3');
+			tocItems = Array.from(headings)
+				.filter((h) => h.id)
+				.map((h) => ({ id: h.id, text: h.textContent?.trim() || '', level: parseInt(h.tagName[1]) }));
+
+			activeHeading = tocItems.length > 0 ? tocItems[0].id : '';
+
+			observer = new IntersectionObserver(
+				(entries) => {
+					if (ignoreObserver) return;
+					for (const entry of entries) {
+						if (entry.isIntersecting) {
+							activeHeading = entry.target.id;
+						}
 					}
-				}
-			},
-			{ rootMargin: '-60px 0px -70% 0px' }
-		);
-
-		headings.forEach((h) => observer.observe(h));
+				},
+				{ rootMargin: '-60px 0px -70% 0px' }
+			);
+			headings.forEach((h) => observer!.observe(h));
+		})();
 
 		window.addEventListener('wheel', cancelIgnore, { passive: true });
 		window.addEventListener('touchstart', cancelIgnore, { passive: true });
 
 		return () => {
-			observer.disconnect();
+			cancelled = true;
+			observer?.disconnect();
 			window.removeEventListener('wheel', cancelIgnore);
 			window.removeEventListener('touchstart', cancelIgnore);
 		};
