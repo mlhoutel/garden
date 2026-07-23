@@ -17,6 +17,8 @@ Thumbs.db
 .env.*
 !.env.example
 !.env.test
+.dev.vars*
+worker/worker-configuration.d.ts
 
 # Content
 src/content/*

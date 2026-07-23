@@ -177,3 +177,16 @@ export interface SectionLoadReturn {
 
 export type TreeNode = Record<string, any[]> | TreeNode[]; // Recursive structure
 export type ConvertedNode = { label: string; items: ConvertedNode[] | any[] };
+
+export interface MediaEntry {
+	id: string;
+	title: string;
+	type: string;
+	author: string;
+	url: string;
+	year: number | null;
+	topics: string[];
+	rating: number | null;
+	note: string;
+	added_at: string;
+}

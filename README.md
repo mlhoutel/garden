@@ -174,6 +174,26 @@ git push
 
 ---
 
+## Media Log (private)
+
+A private log of consumed media (articles, books, papers, films...) lives at `/media` (unlisted, not in the nav). Data is stored in a Cloudflare D1 database behind the `garden-media` Worker (`worker/` directory), fetched client-side at runtime, so the static build never touches it.
+
+- **Viewing** requires the read token (entered once on the page, kept in `localStorage`).
+- **Adding, editing and deleting** requires the admin token, which unlocks the `+ add` panel and the per-entry edit/delete buttons. The `fetch metadata` button prefills title/author from a pasted URL (extraction happens on the Worker).
+- Tokens are Worker secrets (`wrangler secret put READ_TOKEN` / `ADMIN_TOKEN` in `worker/`); local copies live in `worker/.dev.vars*` (gitignored).
+
+Add an entry from the command line (or an agent):
+
+```bash
+curl -X POST https://garden-media.mlhoutel.workers.dev/entries \
+  -H "Authorization: Bearer $GARDEN_ADMIN_TOKEN" -H "Content-Type: application/json" \
+  -d '{"title":"Zero-cost abstractions","type":"article","author":"Ruud van Asseldonk","url":"https://...","year":2024,"topics":["rust","performance"],"rating":5,"note":"How the compiler erases the cost."}'
+```
+
+The site always talks to the deployed Worker, including `npm run start` on localhost. To develop against a local worker instead: `cd worker && npm install && npm run migrate:local && npm run dev` (API on `http://localhost:8787`, dev tokens in `worker/.dev.vars`), then start the site with `VITE_MEDIA_API=http://localhost:8787 npm run start`. Deploy with `npm run deploy`; apply schema changes with `npm run migrate:remote`.
+
+---
+
 ## Notes
 
 - Local development uses `.env` with plain HTTPS URL; no token required.  
