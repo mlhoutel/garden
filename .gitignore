@@ -19,6 +19,7 @@ Thumbs.db
 !.env.test
 .dev.vars*
 worker/worker-configuration.d.ts
+worker/backups/
 
 # Content
 src/content/*
