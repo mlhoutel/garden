@@ -1,2 +1,5 @@
 User-agent: *
-Disallow: /about.html
+Allow: /
+Disallow: /media
+
+Sitemap: https://maellhoutellier.com/sitemap.xml

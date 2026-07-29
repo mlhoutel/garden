@@ -19,6 +19,20 @@
 	}
 </script>
 
+<svelte:head>
+	<title>Garden - Maël Lhoutellier</title>
+	<meta
+		name="description"
+		content="A digital garden of thoughts, notes, and reference guides on software engineering, math, and more."
+	/>
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="Garden - Maël Lhoutellier" />
+	<meta
+		property="og:description"
+		content="A digital garden of thoughts, notes, and reference guides."
+	/>
+</svelte:head>
+
 <!-- Shared wrapper: graph + dunes + title. z-index 2 so dunes (inside)
      render above page content (z-index 1) that follows. -->
 <div class="relative w-full" style="z-index: 2;">
@@ -26,7 +40,10 @@
 	<DuneOverlay loading={graphLoading} />
 	<!-- Sand dunes: absolutely positioned at bottom of graph, overflows downward.
 	     z-index 10 puts it above the page content that follows. -->
-	<div class="absolute right-0 left-0" style="top: 100%; margin-top: -80px; z-index: 25; pointer-events: none;">
+	<div
+		class="absolute right-0 left-0"
+		style="top: 100%; margin-top: -80px; z-index: 25; pointer-events: none;"
+	>
 		<SandDunes />
 	</div>
 </div>
@@ -185,7 +202,9 @@
 			class="group flex flex-col items-center gap-1 transition-all"
 			data-sveltekit-preload-code="hover"
 		>
-			<span class="font-serif text-3xl md:text-4xl" style="color: var(--color-accent); text-shadow: 0 1px 2px rgba(0,0,0,0.08);"
+			<span
+				class="font-serif text-3xl md:text-4xl"
+				style="color: var(--color-accent); text-shadow: 0 1px 2px rgba(0,0,0,0.08);"
 				>{data.sections.articles}</span
 			>
 			<span
@@ -201,7 +220,9 @@
 			class="group flex flex-col items-center gap-1 transition-all"
 			data-sveltekit-preload-code="hover"
 		>
-			<span class="font-serif text-3xl md:text-4xl" style="color: var(--color-accent); text-shadow: 0 1px 2px rgba(0,0,0,0.08);"
+			<span
+				class="font-serif text-3xl md:text-4xl"
+				style="color: var(--color-accent); text-shadow: 0 1px 2px rgba(0,0,0,0.08);"
 				>{data.sections.sheets}</span
 			>
 			<span
@@ -217,7 +238,9 @@
 			class="group flex flex-col items-center gap-1 transition-all"
 			data-sveltekit-preload-code="hover"
 		>
-			<span class="font-serif text-3xl md:text-4xl" style="color: var(--color-accent); text-shadow: 0 1px 2px rgba(0,0,0,0.08);"
+			<span
+				class="font-serif text-3xl md:text-4xl"
+				style="color: var(--color-accent); text-shadow: 0 1px 2px rgba(0,0,0,0.08);"
 				>{data.sections.snippets}</span
 			>
 			<span
@@ -232,7 +255,10 @@
 
 <!-- Page content: z-index 30, above graph wrapper and dunes so text is always readable.
      Background color ensures content doesn't show through the dunes. -->
-<div class="relative" style="z-index: 30; background-color: var(--color-bg); content-visibility: auto; contain-intrinsic-size: auto 800px;">
+<div
+	class="relative"
+	style="z-index: 30; background-color: var(--color-bg); content-visibility: auto; contain-intrinsic-size: auto 800px;"
+>
 	<!-- Separator -->
 	<div class="separator mx-auto max-w-[680px] px-4">
 		<span class="separator-glyph">◆</span>

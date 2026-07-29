@@ -1,10 +1,10 @@
 import pagesManifest from '$meta/manifest.json';
+import { SITE_URL } from '$utils/site';
 import type { Page } from '$types/types';
 
 // Emitted as a static file at build time, like the rest of the site.
 export const prerender = true;
 
-const SITE_URL = 'https://maellhoutellier.com';
 const SITE_TITLE = 'Garden - Maël Lhoutellier';
 const SITE_DESCRIPTION =
 	'A digital garden of thoughts, notes, and reference guides on software engineering, math, and more.';
