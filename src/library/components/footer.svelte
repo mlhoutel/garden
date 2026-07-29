@@ -192,15 +192,14 @@
 				<ul class="list-none" style="display: flex; flex-direction: column; gap: 0.35rem;">
 					{#each linksItems as item (`footer_${item.link}`)}
 						<li>
-							<a
-								class="footer-link"
-								href={item.link}
-								data-sveltekit-preload-code="hover"
-							>
+							<a class="footer-link" href={item.link} data-sveltekit-preload-code="hover">
 								{item.label}
 							</a>
 						</li>
 					{/each}
+					<li>
+						<a class="footer-link" href="{base}/rss.xml">rss</a>
+					</li>
 				</ul>
 
 				<h4
@@ -328,7 +327,7 @@
 	/* Footer link with sweep underline */
 	.footer-link {
 		position: relative;
-		color: #9A928A;
+		color: #9a928a;
 		font-size: 0.875rem;
 		transition: color 0.2s;
 		text-decoration: none;
@@ -341,12 +340,12 @@
 		bottom: -1px;
 		width: 0;
 		height: 1px;
-		background-color: #D4A017;
+		background-color: #d4a017;
 		transition: width 0.3s ease;
 	}
 
 	.footer-link:hover {
-		color: #D4A017;
+		color: #d4a017;
 	}
 
 	.footer-link:hover::after {

@@ -15,7 +15,10 @@
 
 	import type { Snippet } from 'svelte';
 
-	let { data, children }: {
+	let {
+		data,
+		children
+	}: {
 		data: {
 			headerLinks: LinkItem[];
 			footerLinks: LinkItem[];
@@ -36,6 +39,12 @@
 
 <svelte:head>
 	<link rel="icon" href="{base}/favicon/favicon.png" />
+	<link
+		rel="alternate"
+		type="application/rss+xml"
+		title="Garden - Maël Lhoutellier"
+		href="{base}/rss.xml"
+	/>
 	<link rel="preconnect" href="https://fonts.googleapis.com" />
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
 	<link
@@ -44,16 +53,25 @@
 		crossorigin="anonymous"
 	/>
 	<title>Garden - Maël Lhoutellier</title>
-	<meta name="description" content="A digital garden of thoughts, notes, and reference guides on software engineering, math, and more." />
+	<meta
+		name="description"
+		content="A digital garden of thoughts, notes, and reference guides on software engineering, math, and more."
+	/>
 	<meta name="author" content="Maël Lhoutellier" />
 	<meta property="og:type" content="website" />
 	<meta property="og:site_name" content="Garden" />
 	<meta property="og:title" content="Garden - Maël Lhoutellier" />
-	<meta property="og:description" content="A digital garden of thoughts, notes, and reference guides." />
+	<meta
+		property="og:description"
+		content="A digital garden of thoughts, notes, and reference guides."
+	/>
 	<meta name="twitter:card" content="summary" />
 </svelte:head>
 
-<div class="flex min-h-screen flex-col" style="background-color: var(--color-bg); color: var(--color-text);">
+<div
+	class="flex min-h-screen flex-col"
+	style="background-color: var(--color-bg); color: var(--color-text);"
+>
 	<a
 		href="#main-content"
 		class="sr-only focus:not-sr-only focus:fixed focus:top-0 focus:left-0 focus:z-50 focus:px-4 focus:py-2"
