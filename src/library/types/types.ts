@@ -178,6 +178,12 @@ export interface SectionLoadReturn {
 export type TreeNode = Record<string, any[]> | TreeNode[]; // Recursive structure
 export type ConvertedNode = { label: string; items: ConvertedNode[] | any[] };
 
+export interface MediaComment {
+	id: string;
+	body: string;
+	created_at: string;
+}
+
 export interface MediaEntry {
 	id: string;
 	title: string;
@@ -188,5 +194,20 @@ export interface MediaEntry {
 	topics: string[];
 	rating: number | null;
 	note: string;
+	status: 'todo' | 'done';
 	added_at: string;
+	comments: MediaComment[];
+}
+
+export type MediaSortKey = 'added' | 'year' | 'rating' | 'title';
+
+export interface MediaMeta {
+	title: string;
+	author: string;
+	site: string;
+	url: string;
+	type: string;
+	description: string;
+	published: string;
+	warning?: string;
 }
