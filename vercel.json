@@ -10,11 +10,6 @@
   },
   "buildCommand": "npm run build",
   "installCommand": "npm run setup",
-  "routes": [
-    { "handle": "filesystem" },
-    { "src": "/about", "dest": "/about.html" },
-    { "src": "/search", "dest": "/search.html" },
-    { "src": "/media", "dest": "/media.html" },
-    { "src": "/(.*)", "dest": "/error.html" }
-  ]
+  "cleanUrls": true,
+  "trailingSlash": false
 }

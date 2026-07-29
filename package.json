@@ -16,10 +16,9 @@
 		"content:status": "git submodule status",
 		"content:build": "ts-node --skip-project scripts/build-content.ts",
 		"content:manifest": "ts-node --skip-project scripts/build-manifest.ts",
-		"content:searchindex": "ts-node --skip-project scripts/build-searchindex.ts",
 		"content:images": "ts-node --skip-project scripts/build-images.ts",
 		"content:submodule": "ts-node --skip-project scripts/setup-submodule.ts",
-		"preprocess": "npm run content:update && npm run content:build && npm run content:images && npm run content:manifest && npm run content:searchindex",
+		"preprocess": "npm run content:update && npm run content:build && npm run content:images && npm run content:manifest",
 		"setup": "npm install && npm run content:init && npm run preprocess"
 	},
 	"devDependencies": {

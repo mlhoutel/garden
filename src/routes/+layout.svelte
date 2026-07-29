@@ -8,6 +8,8 @@
 	import { beforeNavigate, afterNavigate } from '$app/navigation';
 	import { base } from '$app/paths';
 	import { browser } from '$app/environment';
+	import { page } from '$app/stores';
+	import { SITE_URL } from '$utils/site';
 
 	import Header from '$components/header.svelte';
 	import Footer from '$components/footer.svelte';
@@ -27,6 +29,11 @@
 	} = $props();
 
 	let loading = $state(false);
+
+	// Pages own their title and description tags. Duplicated meta tags are not
+	// deduplicated by the browser and the first one wins, so the layout only
+	// carries what is identical on every page.
+	let canonical = $derived(`${SITE_URL}${$page.url.pathname.replace(/\/$/, '') || '/'}`);
 
 	onMount(() => {
 		if (browser) {
@@ -52,19 +59,10 @@
 		href="https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex.min.css"
 		crossorigin="anonymous"
 	/>
-	<title>Garden - Maël Lhoutellier</title>
-	<meta
-		name="description"
-		content="A digital garden of thoughts, notes, and reference guides on software engineering, math, and more."
-	/>
+	<link rel="canonical" href={canonical} />
 	<meta name="author" content="Maël Lhoutellier" />
-	<meta property="og:type" content="website" />
 	<meta property="og:site_name" content="Garden" />
-	<meta property="og:title" content="Garden - Maël Lhoutellier" />
-	<meta
-		property="og:description"
-		content="A digital garden of thoughts, notes, and reference guides."
-	/>
+	<meta property="og:url" content={canonical} />
 	<meta name="twitter:card" content="summary" />
 </svelte:head>
 

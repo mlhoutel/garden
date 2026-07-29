@@ -24,7 +24,6 @@ export function contentReload(): Plugin {
 		try {
 			execSync('npm run content:build', { stdio: 'pipe', cwd: path.resolve('.') });
 			execSync('npm run content:manifest', { stdio: 'pipe', cwd: path.resolve('.') });
-			execSync('npm run content:searchindex', { stdio: 'pipe', cwd: path.resolve('.') });
 
 			const elapsed = Date.now() - start;
 			console.log(`\x1b[32m   ✓ Rebuilt in ${elapsed}ms\x1b[0m`);
@@ -43,8 +42,7 @@ export function contentReload(): Plugin {
 					if (
 						url.includes('src/content/') ||
 						url.includes('src/meta/') ||
-						url.includes('manifest.json') ||
-						url.includes('search-index.json')
+						url.includes('manifest.json')
 					) {
 						graph.invalidateModule(mod);
 					}
