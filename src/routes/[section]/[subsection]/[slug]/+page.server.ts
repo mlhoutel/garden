@@ -1,8 +1,21 @@
 import { error } from '@sveltejs/kit';
 import { base } from '$app/paths';
+import pagesManifest from '$meta/manifest.json';
 import { listPages } from '$utils/apis';
 import { renderMarkdown } from '$utils/markdown';
 import type { PageLoadReturn, Page } from '$types/types';
+
+// Enumerate every content page so the static adapter prerenders all of them.
+// Relying on the crawler is not enough: the snippets index only renders its
+// first 12 cards (the rest load on scroll), so the remaining snippets were
+// never linked from any prerendered HTML and shipped as 404s.
+export function entries(): { section: string; subsection: string; slug: string }[] {
+	return (pagesManifest as Page[])
+		.filter((p) => p.meta.published !== false)
+		.map((p) => p.path.replace(/\.md$/, '').split('/'))
+		.filter((parts) => parts.length === 3)
+		.map(([section, subsection, slug]) => ({ section, subsection, slug }));
+}
 
 export async function load({
 	params
